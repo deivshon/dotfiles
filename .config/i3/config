@@ -23,6 +23,8 @@ for_window [class=".*"] border pixel 2
 gaps inner 5
 gaps outer 5
 
+smart_gaps on
+
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 #font pango:DejaVu Sans Mono 8
