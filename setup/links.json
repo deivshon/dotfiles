@@ -1,0 +1,22 @@
+{
+    "i3status": {
+        "source": "$(setupDir)/../etc/i3status.conf",
+        "target": "/etc/i3status.conf",
+        "needSudo": true
+    },
+    "i3": {
+        "source": "$(setupDir)/../.config/i3/config",
+        "target": "~/.config/i3/config",
+        "needSudo": false
+    },
+    "kitty": {
+        "source": "$(setupDir)/../.config/kitty/kitty.conf",
+        "target": "~/.config/kitty/kitty.conf",
+        "needSudo": false
+    },
+    "rofi": {
+        "source": "$(setupDir)/../.config/rofi/config.rasi",
+        "target": "~/.config/rofi/config.rasi",
+        "needSudo": false
+    }
+}
