@@ -23,5 +23,10 @@
         "source": "$(setupDir)/../.config/rofi/config.rasi",
         "target": "~/.config/rofi/config.rasi",
         "needSudo": false
+    },
+    "ranger": {
+        "source": "$(setupDir)/../.config/ranger/rc.conf",
+        "target": "~/.config/ranger/rc.conf",
+        "needSudo": false
     }
 }
