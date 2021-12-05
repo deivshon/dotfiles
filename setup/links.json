@@ -1,6 +1,6 @@
 {
     "bash": {
-        "source": "$(setupDir)/.bashrc",
+        "source": "$(setupDir)/../.bashrc",
         "target": "~/.bashrc",
         "needSudo": true
     },
