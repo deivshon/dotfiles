@@ -220,4 +220,4 @@ client.background       #000000
 hide_edge_borders both
 
 # Sets the wallpaper
-exec_always --no-startup-id feh --bg-scale ~/Pictures/mountains_bw3.jpg
+exec_always --no-startup-id feh --bg-scale ~/Pictures/wallpaper
