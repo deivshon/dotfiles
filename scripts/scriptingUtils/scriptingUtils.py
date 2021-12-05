@@ -17,3 +17,6 @@ def pipeline(commandList, printLastOutput = False, printError = True):
     if(printLastOutput):
         print(result)
     return result
+
+def whitelistChars(string, whitelist):
+    return ''.join([char for char in string if char in whitelist])
