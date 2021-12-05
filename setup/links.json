@@ -1,4 +1,9 @@
 {
+    "bash": {
+        "source": "$(setupDir)/.bashrc",
+        "target": "~/.bashrc",
+        "needSudo": true
+    },
     "i3status": {
         "source": "$(setupDir)/../etc/i3status.conf",
         "target": "/etc/i3status.conf",
