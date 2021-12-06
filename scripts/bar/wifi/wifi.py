@@ -12,20 +12,24 @@ sys.path.insert(1, scriptDir + "/../../scriptingUtils")
 import scriptingUtils
 
 wirelessInterface = ""
-output = "睊"
-quality =""
+icon = "睊"
+hasIw = False
+
+quality = ""
+ssid = ""
 
 for interface in os.listdir("/sys/class/net/"):
     if(interface.startswith("wlp") or interface.startswith("wlan")):
         stateFile = open("/sys/class/net/" + interface + "/operstate", "r")
         isUp = True if stateFile.read().strip() == "up" else False
         if(isUp):
-            output = "直"
+            icon = "直"
             if(os.path.isfile("/usr/bin/iw")):
-                quality = subprocess.run(["iw", "dev", interface, "link"], capture_output=True)
-                quality = (quality.stdout.decode()).split("\n")
+                hasIw = True
+                iwOutput = subprocess.run(["iw", "dev", interface, "link"], capture_output=True)
+                iwOutput = (iwOutput.stdout.decode()).split("\n")
                 
-                for line in quality:
+                for line in iwOutput:
                     if("dBm" in line):
                         quality = int(scriptingUtils.whitelistChars(line.strip(),"0123456789-"))
                         if(quality > -50):
@@ -34,11 +38,16 @@ for interface in os.listdir("/sys/class/net/"):
                             quality= 0
                         else:
                             quality = (quality + 100) * 2
-                        break
+                    elif("SSID" in line):
+                        ssid = line.strip().removeprefix("SSID: ")
 
+                
+        if("-n" in sys.argv):
+            icon = ""
+        
         if(isUp == "down"):
-            print(output)
-        elif(isUp and quality != ""):
-            print(output + str(quality) + "%")
+            print(icon)
+        elif(isUp and hasIw):
+            print(icon + str(quality) + "%", ssid)
         else:
-            print(output)
+            print(icon)
