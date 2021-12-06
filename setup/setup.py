@@ -24,6 +24,9 @@ if(currentUser == "/root"):
 
 setupDir = os.path.dirname(os.path.realpath(__file__))
 
+if(setupDir != os.path.expanduser("~/dotfiles/setup")):
+    sys.exit("The dotfiles folder needs to be placed in your home folder!")
+
 f = open("links.json")
 linksList = json.loads(f.read())
 f.close()
