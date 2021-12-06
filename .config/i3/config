@@ -221,3 +221,6 @@ hide_edge_borders both
 
 # Sets the wallpaper
 exec_always --no-startup-id feh --bg-scale ~/Pictures/wallpaper
+
+# Executes startup scripts, if present
+exec ~/startup/*.sh
