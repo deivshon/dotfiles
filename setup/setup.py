@@ -18,15 +18,15 @@ def makeDirs(pathToFile):
             print("Directory", dir, "doesn't exist, creating it")
             os.mkdir(dir)
 
+currentUser = os.path.expanduser("~")
+if(currentUser == "/root"):
+    sys.exit("Don't run the script as root!")
+
 setupDir = os.path.dirname(os.path.realpath(__file__))
 
 f = open("links.json")
 linksList = json.loads(f.read())
 f.close()
-
-currentUser = os.path.expanduser("~")
-if(currentUser == "/root"):
-    sys.exit("Don't run the script as root!")
 
 forceLinks = False
 if(len(sys.argv) > 1 and sys.argv[1] == "-f"):
