@@ -9,6 +9,11 @@
         "target": "/etc/i3status.conf",
         "needSudo": true
     },
+    "i3blocks": {
+        "source": "$(setupDir)/../etc/i3blocks.conf",
+        "target": "/etc/i3blocks.conf",
+        "needSudo": true
+    },
     "i3": {
         "source": "$(setupDir)/../.config/i3/config",
         "target": "~/.config/i3/config",
