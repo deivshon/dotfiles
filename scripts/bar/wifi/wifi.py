@@ -18,8 +18,8 @@ quality =""
 for interface in os.listdir("/sys/class/net/"):
     if(interface.startswith("wlp") or interface.startswith("wlan")):
         stateFile = open("/sys/class/net/" + interface + "/operstate", "r")
-        state = stateFile.read().strip()
-        if(state == "up"):
+        isUp = True if stateFile.read().strip() == "up" else False
+        if(isUp):
             output = "直"
             if(os.path.isfile("/usr/bin/iw")):
                 quality = subprocess.run(["iw", "dev", interface, "link"], capture_output=True)
@@ -34,11 +34,11 @@ for interface in os.listdir("/sys/class/net/"):
                             quality= 0
                         else:
                             quality = (quality + 100) * 2
-
                         break
-        if(state == "down"):
+
+        if(isUp == "down"):
             print(output)
-        elif(state == "up" and quality != ""):
+        elif(isUp and quality != ""):
             print(output + str(quality) + "%")
         else:
             print(output)
