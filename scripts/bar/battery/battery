@@ -13,7 +13,7 @@ acpiProc = subprocess.run(["acpi", "-b"], capture_output = True)
 acpiOut = acpiProc.stdout.decode().strip()
 
 if("unavailable" in acpiOut):
-    print("NO BAT")
+    print("/")
 else:
     acpiOut = acpiOut.split(",")
 
@@ -28,5 +28,4 @@ else:
             charge = scriptingUtils.whitelistChars(section, "0123456789%")
         if("remaining" in section):
             remaining = scriptingUtils.whitelistChars(section, "0123456789:")
-
-print(charging, charge, " ", remaining, sep = "")
+    print(charging, charge, " ", remaining, sep = "")
