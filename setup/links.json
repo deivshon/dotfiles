@@ -2,36 +2,37 @@
     "bash": {
         "source": "$(setupDir)/../.bashrc",
         "target": "~/.bashrc",
-        "needSudo": true
+        "setupFlags": []
+        
     },
     "i3status": {
         "source": "$(setupDir)/../etc/i3status.conf",
         "target": "/etc/i3status.conf",
-        "needSudo": true
+        "setupFlags": ["needSudo"]
     },
     "i3blocks": {
         "source": "$(setupDir)/../etc/i3blocks.conf",
         "target": "/etc/i3blocks.conf",
-        "needSudo": true
+        "setupFlags": ["needSudo"]
     },
     "i3": {
         "source": "$(setupDir)/../.config/i3/config",
         "target": "~/.config/i3/config",
-        "needSudo": false
+        "setupFlags": []
     },
     "kitty": {
         "source": "$(setupDir)/../.config/kitty/kitty.conf",
         "target": "~/.config/kitty/kitty.conf",
-        "needSudo": false
+        "setupFlags": []
     },
     "rofi": {
         "source": "$(setupDir)/../.config/rofi/config.rasi",
         "target": "~/.config/rofi/config.rasi",
-        "needSudo": false
+        "setupFlags": []
     },
     "ranger": {
         "source": "$(setupDir)/../.config/ranger/rc.conf",
         "target": "~/.config/ranger/rc.conf",
-        "needSudo": false
+        "setupFlags": []
     }
 }

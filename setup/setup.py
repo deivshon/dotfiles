@@ -38,16 +38,21 @@ if(len(sys.argv) > 1 and sys.argv[1] == "-f"):
 for link in linksList:
     linkSource = linksList[link]["source"].replace("$(setupDir)", setupDir)
     linkTarget = linksList[link]["target"].replace("~", currentUser)
-    needSudo = linksList[link]["needSudo"]
+    setupFlags = linksList[link]["setupFlags"]
+    action = "Linking"
 
     # Creates the directory where the target file needs to be in
     makeDirs(linkTarget)
 
-    flags = "-sf" if forceLinks else "-si"
-    command = ["ln", flags, linkSource, linkTarget]
+    linkFlags = "-sf" if forceLinks else "-si"
+    command = ["ln", linkFlags, linkSource, linkTarget]
 
-    print("Linking", linkSource, "to", linkTarget)
-    if(needSudo):
+    if("copy" in setupFlags):
+        command = ["cp", linkSource, linkTarget]
+        action = "Copying"
+
+    print(action, linkSource, "to", linkTarget)
+    if("needSudo" in setupFlags):
         subprocess.run(["sudo"] + command)
     else:
         subprocess.run(command)
