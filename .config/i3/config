@@ -223,4 +223,4 @@ hide_edge_borders both
 exec_always --no-startup-id feh --bg-scale ~/Pictures/wallpaper
 
 # Executes startup scripts, if present
-exec ~/startup/*.sh
+exec --no-startup-id ~/startup/startup.sh
