@@ -10,9 +10,9 @@ sys.path.insert(1, scriptDir + "/../../scriptingUtils")
 import scriptingUtils
 
 acpiProc = subprocess.run(["acpi", "-b"], capture_output = True)
-acpiOut = acpiProc.stdout.decode().strip()
+acpiOut = (acpiProc.stdout.decode() + acpiProc.stderr.decode()).strip().lower()
 
-if("unavailable" in acpiOut):
+if("unavailable" in acpiOut or "no support" in acpiOut):
     print("/")
 else:
     acpiOut = acpiOut.split(",")
