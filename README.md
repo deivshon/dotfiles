@@ -1,6 +1,6 @@
 # dotfiles
 ## **Setup**
-Run the following commands as a normal user, **not** as root.
+Run the following commands as a normal user, **not** as root
 ```bash
 cd ~
 git clone https://github.com/deivshon/dotfiles
@@ -18,7 +18,7 @@ cd dotfiles/setup
 ### **i3blocks**
 + [curl](https://archlinux.org/packages/core/x86_64/curl/)
 + [ttf-ms-fonts](https://aur.archlinux.org/packages/ttf-ms-fonts/)
-### **kitty**
+### **Kitty**
 + [sudo](https://archlinux.org/packages/core/x86_64/sudo/)
 + [exa](https://archlinux.org/packages/community/x86_64/exa/)
 + [cbonsai](https://aur.archlinux.org/packages/cbonsai/)
