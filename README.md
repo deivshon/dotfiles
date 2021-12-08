@@ -26,6 +26,11 @@ git clone https://github.com/deivshon/dotfiles
 cd dotfiles/setup
 ./setup.py
 ```
+### Important
+The i3 configuration file contains a line that executes (if existing) the script located at ~/startup/startup.sh . This is needed by me to easily run small machine specific scripts at startup, but anyone who uses the configuration file should be aware of that.
+
+The i3 configuration file also runs a feh command at startup and every i3 reload that draws the image located in ~/Pictures/wallpaper as the wallpaper.
+
 ## **Packages**
 ### **i3-gaps**
 + [i3-gaps](https://archlinux.org/packages/community/x86_64/i3-gaps/) [window manager]
