@@ -22,10 +22,10 @@ else:
     remaining = ""
 
     for section in acpiOut:
-        if("Charging" in section):
+        if("charging" in section):
             charging = "CHR "
         if("%" in section):
             charge = scriptingUtils.whitelistChars(section, "0123456789%")
-        if("remaining" in section):
+        if("remaining" in section or "until" in section):
             remaining = scriptingUtils.whitelistChars(section, "0123456789:")[:5]
     print(charging, charge, " ", remaining, sep = "")
