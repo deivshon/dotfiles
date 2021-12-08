@@ -15,14 +15,16 @@ cd dotfiles/setup
 + [kitty](https://archlinux.org/packages/community/x86_64/kitty/)
 + [rofi](https://archlinux.org/packages/community/x86_64/rofi/)
 + [feh](https://archlinux.org/packages/extra/x86_64/feh/)
++ [dunst](https://archlinux.org/packages/community/x86_64/dunst/)
 ### **i3blocks**
 + [curl](https://archlinux.org/packages/core/x86_64/curl/)
 + [ttf-ms-fonts](https://aur.archlinux.org/packages/ttf-ms-fonts/)
 ### **Kitty**
 + [sudo](https://archlinux.org/packages/core/x86_64/sudo/)
 + [exa](https://archlinux.org/packages/community/x86_64/exa/)
-+ [cbonsai](https://aur.archlinux.org/packages/cbonsai/)
++ [ranger](https://archlinux.org/packages/community/any/ranger/)
 + [afetch](https://aur.archlinux.org/packages/afetch/)
++ [cbonsai](https://aur.archlinux.org/packages/cbonsai/)
 + [adobe-source-code-pro-fonts](https://archlinux.org/packages/extra/any/adobe-source-code-pro-fonts/)
 ### **Battery script**
 + [acpi](https://archlinux.org/packages/community/x86_64/acpi/)
@@ -30,8 +32,8 @@ cd dotfiles/setup
 + [iw](https://archlinux.org/packages/core/x86_64/iw/)
 ### **CPU usage script**
 + [sysstat](https://archlinux.org/packages/community/x86_64/sysstat/)
-### **Other software for which config is present in this repository**
-+ [ranger](https://archlinux.org/packages/community/any/ranger/)
+### **Ranger**
++ [w3m](https://archlinux.org/packages/extra/x86_64/w3m/)
 ## **Tweaking**
 ### **i3bar**
 Install [ttf-ms-fonts](https://aur.archlinux.org/packages/ttf-ms-fonts/) to fix vertically misaligned text in i3bar
@@ -42,6 +44,6 @@ Install [ttf-droid](https://archlinux.org/packages/community/any/ttf-droid/) to 
 ## **Package installation**
 To install all the necessary packages use these two commands
 ```bash
-pacman -S i3-gaps i3blocks i3status kitty feh curl sudo exa adobe-source-code-pro-fonts acpi iw sysstat ranger ttf-droid
+pacman -S i3-gaps i3blocks i3status rofi dunst kitty feh curl sudo exa adobe-source-code-pro-fonts acpi iw sysstat ranger w3m ttf-droid
 yay -S afetch cbonsai ttf-ms-fonts
 ```
