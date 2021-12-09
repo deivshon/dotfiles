@@ -22,7 +22,7 @@ else:
     remaining = ""
 
     for section in acpiOut:
-        if("charging" in section):
+        if(not "discharging" in section and "charging" in section):
             charging = "CHR "
         if("%" in section):
             charge = scriptingUtils.whitelistChars(section, "0123456789%")
