@@ -12,7 +12,7 @@ import scriptingUtils
 acpiProc = subprocess.run(["acpi", "-b"], capture_output = True)
 acpiOut = (acpiProc.stdout.decode() + acpiProc.stderr.decode()).strip().lower()
 
-if("unavailable" in acpiOut or "no support" in acpiOut):
+if("unavailable" in acpiOut or "no support" in acpiOut or acpiOut == ""):
     print("/")
 else:
     acpiOut = acpiOut.split(",")
