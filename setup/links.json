@@ -10,6 +10,11 @@
         "target": "/etc/i3status.conf",
         "setupFlags": ["needSudo"]
     },
+    "alacritty": {
+        "source": "$(setupDir)/../.config/alacritty/alacritty.yml",
+        "target": "~/.config/alacritty/alacritty.yml",
+        "setupFlags": []
+    },
     "i3blocks": {
         "source": "$(setupDir)/../etc/i3blocks.conf",
         "target": "/etc/i3blocks.conf",
