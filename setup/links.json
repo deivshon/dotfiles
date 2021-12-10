@@ -3,7 +3,6 @@
         "source": "$(setupDir)/../.bashrc",
         "target": "~/.bashrc",
         "setupFlags": []
-        
     },
     "i3status": {
         "source": "$(setupDir)/../etc/i3status.conf",
