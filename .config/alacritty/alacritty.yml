@@ -1,5 +1,6 @@
 # Font configuration
 env:
+  # Make font size consistent across screens with different DPI values
   WINIT_X11_SCALE_FACTOR: "1"
 
 font:
@@ -33,4 +34,3 @@ colors:
    magenta: '#ff55ff'
    cyan:    '#55ffff'
    white:   '#ffffff'
-
