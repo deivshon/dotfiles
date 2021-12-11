@@ -14,7 +14,7 @@ Everything can probably work in other distributions too, but some of the softwar
 To install all the necessary packages use these two commands
 ```bash
 pacman -S i3-gaps i3blocks i3status rofi dunst kitty alacritty feh curl sudo exa adobe-source-code-pro-fonts acpi iw sysstat ranger w3m ttf-droid
-yay -S afetch cbonsai ttf-ms-fonts
+yay -S afetch cbonsai ttf-ms-fonts polkit-dumb-agent
 ```
 ## **Setup**
 The dotfiles directory **must** be located in the home folder.
@@ -61,3 +61,4 @@ The i3 configuration file also runs a feh command at startup and every i3 reload
 ### **Other**
 + [ttf-droid](https://archlinux.org/packages/community/any/ttf-droid/) [default VS Code font]
 + [kitty](https://archlinux.org/packages/community/x86_64/kitty/) [alternative terminal emulator]
++ [polkit-dumb-agent](https://aur.archlinux.org/packages/polkit-dumb-agent-git/) [polkit agent]
