@@ -133,8 +133,9 @@ alias ll='exa -laF'
 alias grep='grep --colour=auto'
 alias egrep='egrep --colour=auto'
 alias fgrep='fgrep --colour=auto'
-alias cp="cp -i" 		# confirm before overwriting something
+alias cp='cp -i' 		# confirm before overwriting something
 alias df='df -h' 		# human-readable sizes
+alias ip='ip -c'		# coloured output for ip commands
 
 # Always clears scrollback buffer
 alias clear="printf '\033[2J\033[3J\033[1;1H' && afetch"
