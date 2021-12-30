@@ -13,7 +13,7 @@ Everything can probably work in other distributions too, but some of the softwar
 ## **Package installation**
 To install all the necessary packages use these two commands
 ```bash
-pacman -S i3-gaps i3blocks i3status rofi dunst kitty alacritty feh curl sudo exa adobe-source-code-pro-fonts acpi iw sysstat ranger w3m ttf-droid
+pacman -S i3-gaps i3blocks i3status rofi dunst kitty alacritty feh curl sudo exa adobe-source-code-pro-fonts acpi iw sysstat ranger ueberzug ttf-droid
 yay -S afetch cbonsai ttf-ms-fonts polkit-dumb-agent
 ```
 ## **Setup**
@@ -51,7 +51,7 @@ The i3 configuration file also runs a feh command at startup and every i3 reload
 + [cbonsai](https://aur.archlinux.org/packages/cbonsai/) [ASCII art bonsai drawing]
 + [adobe-source-code-pro-fonts](https://archlinux.org/packages/extra/any/adobe-source-code-pro-fonts/)
 ### **Ranger**
-+ [w3m](https://archlinux.org/packages/extra/x86_64/w3m/) [used by ranger to display images in the terminal]
++ [ueberzug](https://archlinux.org/packages/community/x86_64/ueberzug/) [used by ranger to display images in the terminal]
 ### **Battery script**
 + [acpi](https://archlinux.org/packages/community/x86_64/acpi/) [system information]
 ### **WiFi script**
