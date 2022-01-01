@@ -1,5 +1,5 @@
 * {
-    selected-normal-foreground:  rgba ( 0, 0, 0, 100 % );
+    selected-normal-foreground:  rgba ( 255, 255, 255, 100 % );
     foreground:                  rgba ( 255, 255, 255, 100 % );
     normal-foreground:           @foreground;
     alternate-normal-background: rgba ( 0, 0, 0, 0 % );
@@ -14,10 +14,10 @@
     bordercolor:                 rgba ( 255, 255, 255, 100 % );
     alternate-normal-foreground: @foreground;
     normal-background:           rgba ( 0, 0, 208, 0 % );
-    selected-normal-background:  rgba ( 255, 255, 255, 100 % );
-    border-color:                @foreground;
+    selected-normal-background:  rgba ( 204, 150, 012, 100 % );
+    border-color:                rgba ( 204, 150, 012, 100 % );
     spacing:                     2;
-    separatorcolor:              rgba ( 255, 255, 255, 100 % );
+    separatorcolor:              rgba ( 204, 150, 12, 100 % );
     urgent-background:           rgba ( 0, 0, 0, 0 % );
     selected-urgent-background:  rgba ( 255, 0, 0, 100 % );
     alternate-urgent-foreground: rgba ( 255, 255, 255, 100 % );
@@ -45,7 +45,7 @@
 }
 #listview {
     fixed-height: 0;
-    border:       2px 0px 0px ;
+    border:       1px 0px 0px ;
     border-color: @separatorcolor;
     spacing:      2px ;
     scrollbar:    true;
@@ -95,6 +95,7 @@
     width:        5px ;
     border:       0;
     handle-width: 10px ;
+    handle-color: @separatorcolor;
     padding:      0;
 }
 #mode-switcher {
