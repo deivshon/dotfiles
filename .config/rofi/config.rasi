@@ -26,6 +26,7 @@
     active-background:           rgba ( 0, 0, 208, 0 % );
     selected-active-background:  rgba ( 255, 255, 255, 100 % );
 }
+
 #window {
     background-color: @background;
     border:           1;
