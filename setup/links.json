@@ -38,5 +38,20 @@
         "source": "$(setupDir)/../.config/ranger/rc.conf",
         "target": "~/.config/ranger/rc.conf",
         "setupFlags": []
+    },
+    "dwm-flexipatch-config": {
+        "source": "$(setupDir)/../.config/dwm-flexipatch/config.h",
+        "target": "~/.config/dwm-flexipatch/config.h",
+        "setupFlags": ["copy"]
+    },
+    "dwm-flexipatch-patches": {
+        "source": "$(setupDir)/../.config/dwm-flexipatch/patches.h",
+        "target": "~/.config/dwm-flexipatch/patches.h",
+        "setupFlags": ["copy"]
+    },
+    "xmonad": {
+        "source": "$(setupDir)/../.xmonad/xmonad.hs",
+        "target": "~/.xmonad/xmonad.hs",
+        "setupFlags": []
     }
 }
