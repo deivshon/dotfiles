@@ -52,6 +52,6 @@
     "xmonad": {
         "source": "$(setupDir)/../.xmonad/xmonad.hs",
         "target": "~/.xmonad/xmonad.hs",
-        "setupFlags": []
+        "setupFlags": ["copy"]
     }
 }
