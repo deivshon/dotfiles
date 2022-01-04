@@ -49,6 +49,11 @@
         "target": "~/.config/dwm-flexipatch/patches.h",
         "setupFlags": ["copy"]
     },
+    "slstatus": {
+        "source": "$(setupDir)/../.config/slstatus/config.h",
+        "target": "~/.config/slstatus/config.h",
+        "setupFlags": ["copy"]
+    },
     "xmonad": {
         "source": "$(setupDir)/../.xmonad/xmonad.hs",
         "target": "~/.xmonad/xmonad.hs",
