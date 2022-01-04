@@ -27,6 +27,8 @@ setupDir = os.path.dirname(os.path.realpath(__file__))
 if(setupDir != os.path.expanduser("~/dotfiles/setup")):
     sys.exit("The dotfiles folder needs to be placed in your home folder!")
 
+subprocess.run([os.path.expanduser("~/dotfiles/setup/installs.sh"), "-d"])
+
 f = open("links.json")
 linksList = json.loads(f.read())
 f.close()
@@ -56,3 +58,5 @@ for link in linksList:
         subprocess.run(["sudo"] + command)
     else:
         subprocess.run(command)
+
+subprocess.run([os.path.expanduser("~/dotfiles/setup/installs.sh"), "-c"])
