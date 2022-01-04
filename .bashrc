@@ -141,7 +141,7 @@ alias ip='ip -c'		# coloured output for ip commands
 alias clear="printf '\033[2J\033[3J\033[1;1H' && afetch"
 alias clearall="printf '\033[2J\033[3J\033[1;1H'"
 
-#cbonsai
+# cbonsai
 alias cbonsai="cbonsai -li -w 1 -L 50"
 
 afetch
