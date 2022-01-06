@@ -18,14 +18,21 @@ def makeDirs(pathToFile):
             print("Directory", dir, "doesn't exist, creating it")
             os.mkdir(dir)
 
+# Check if the script is being run as root
 currentUser = os.path.expanduser("~")
 if(currentUser == "/root"):
     sys.exit("Don't run the script as root!")
 
+# Check dotfiles folder location
 setupDir = os.path.dirname(os.path.realpath(__file__))
 
 if(setupDir != os.path.expanduser("~/dotfiles/setup")):
     sys.exit("The dotfiles folder needs to be placed in your home folder!")
+
+# Import printingUtils (../../scripts/scriptingUtils/printingUtils.py)
+sys.path.insert(1, setupDir + "/../scripts/scriptingUtils/")
+
+import  printingUtils
 
 subprocess.run([os.path.expanduser("~/dotfiles/setup/installs.sh"), "-d"])
 
@@ -53,7 +60,7 @@ for link in linksList:
         command = ["cp", linkSource, linkTarget]
         action = "Copying"
 
-    print(action, linkSource, "to", linkTarget)
+    printingUtils.printCol(action + " ", "white", linkSource, "yellow", " to ", "white", linkTarget, "cyan")
     if("needSudo" in setupFlags):
         subprocess.run(["sudo"] + command)
     else:
