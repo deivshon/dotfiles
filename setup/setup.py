@@ -32,7 +32,7 @@ if(setupDir != os.path.expanduser("~/dotfiles/setup")):
 # Import printingUtils (../../scripts/scriptingUtils/printingUtils.py)
 sys.path.insert(1, setupDir + "/../scripts/scriptingUtils/")
 
-import  printingUtils
+import printingUtils
 
 subprocess.run([os.path.expanduser("~/dotfiles/setup/installs.sh"), "-d"])
 
