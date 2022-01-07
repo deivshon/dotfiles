@@ -6,14 +6,13 @@ These dotfiles were created for (my) personal use, and are therefore **NOT** tes
 ### General
 These dotfiles are intended to be used on Arch or Arch based distributions, therefore every package link directs to an archlinux.org page and the installation commands use [pacman](https://archlinux.org/packages/core/x86_64/pacman/) and [yay](https://aur.archlinux.org/packages/yay/).
 
-
 It goes without saying that AUR packages can be installed without yay or any other helper.
 
 Everything can probably work in other distributions too, but some of the software will need to be built from source because not packaged.
 ## **Package installation**
 To install all the necessary packages use these two commands
 ```bash
-pacman -S i3-gaps i3blocks i3status rofi dunst kitty alacritty feh curl sudo exa adobe-source-code-pro-fonts acpi iw sysstat ranger ueberzug ttf-droid
+pacman -S i3-gaps i3blocks i3status rofi dunst kitty alacritty feh curl sudo exa adobe-source-code-pro-fonts acpi iw sysstat ranger ueberzug ttf-droid bc
 yay -S afetch cbonsai ttf-ms-fonts polkit-dumb-agent
 ```
 ## **Setup**
@@ -58,6 +57,8 @@ The i3 configuration file also runs a feh command at startup and every i3 reload
 + [iw](https://archlinux.org/packages/core/x86_64/iw/) [wireless information and configuration]
 ### **CPU usage script**
 + [sysstat](https://archlinux.org/packages/community/x86_64/sysstat/) [system information]
+### **RAM usage script**
++ [bc](https://archlinux.org/packages/extra/x86_64/bc/)
 ### **Other**
 + [ttf-droid](https://archlinux.org/packages/community/any/ttf-droid/) [default VS Code font]
 + [kitty](https://archlinux.org/packages/community/x86_64/kitty/) [alternative terminal emulator]
