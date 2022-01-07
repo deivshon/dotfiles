@@ -31,14 +31,13 @@ The i3 configuration file contains a line that executes (if existing) the script
 The i3 configuration file also runs a feh command at startup and every i3 reload that draws the image located in ~/Pictures/wallpaper as the wallpaper.
 
 ## **Packages**
-### **i3-gaps**
+### **General**
 + [i3-gaps](https://archlinux.org/packages/community/x86_64/i3-gaps/) [window manager]
 + [i3blocks](https://archlinux.org/packages/community/x86_64/i3blocks/) [i3bar output]
 + [i3status](https://archlinux.org/packages/community/x86_64/i3status/) [alternative i3bar output]
 + [alacritty](https://archlinux.org/packages/community/x86_64/alacritty/) [terminal emulator]
 + [rofi](https://archlinux.org/packages/community/x86_64/rofi/) [application launcher]
 + [feh](https://archlinux.org/packages/extra/x86_64/feh/) [wallpaper drawing]
-### **i3blocks**
 + [curl](https://archlinux.org/packages/core/x86_64/curl/)
 + [ttf-ms-fonts](https://aur.archlinux.org/packages/ttf-ms-fonts/)
 + [dunst](https://archlinux.org/packages/community/x86_64/dunst/) [notification daemon]
