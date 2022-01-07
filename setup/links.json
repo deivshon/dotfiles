@@ -42,17 +42,17 @@
     "dwm-flexipatch-config": {
         "source": "$(setupDir)/../.config/dwm-flexipatch/config.h",
         "target": "~/.config/dwm-flexipatch/config.h",
-        "setupFlags": ["copy"]
+        "setupFlags": ["copy", "needSudo"]
     },
     "dwm-flexipatch-patches": {
         "source": "$(setupDir)/../.config/dwm-flexipatch/patches.h",
         "target": "~/.config/dwm-flexipatch/patches.h",
-        "setupFlags": ["copy"]
+        "setupFlags": ["copy", "needSudo"]
     },
     "slstatus": {
         "source": "$(setupDir)/../.config/slstatus/config.h",
         "target": "~/.config/slstatus/config.h",
-        "setupFlags": ["copy"]
+        "setupFlags": ["copy", "needSudo"]
     },
     "xmonad": {
         "source": "$(setupDir)/../.xmonad/xmonad.hs",
