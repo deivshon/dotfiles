@@ -3,4 +3,4 @@
 idle=$(mpstat 1 1 | grep Average | awk '{print $12}')
 idle=${idle%.*}
 
-echo $((100 - idle))
+echo $((100 - idle))%
