@@ -36,11 +36,14 @@ The i3 configuration file also runs a feh command at startup and every i3 reload
 + [i3blocks](https://archlinux.org/packages/community/x86_64/i3blocks/) [i3bar output]
 + [i3status](https://archlinux.org/packages/community/x86_64/i3status/) [alternative i3bar output]
 + [alacritty](https://archlinux.org/packages/community/x86_64/alacritty/) [terminal emulator]
++ [kitty](https://archlinux.org/packages/community/x86_64/kitty/) [alternative terminal emulator]
 + [rofi](https://archlinux.org/packages/community/x86_64/rofi/) [application launcher]
++ [polkit-dumb-agent](https://aur.archlinux.org/packages/polkit-dumb-agent-git/) [polkit agent]
 + [feh](https://archlinux.org/packages/extra/x86_64/feh/) [wallpaper drawing]
 + [curl](https://archlinux.org/packages/core/x86_64/curl/)
-+ [ttf-ms-fonts](https://aur.archlinux.org/packages/ttf-ms-fonts/)
 + [dunst](https://archlinux.org/packages/community/x86_64/dunst/) [notification daemon]
++ [ttf-ms-fonts](https://aur.archlinux.org/packages/ttf-ms-fonts/)
++ [ttf-droid](https://archlinux.org/packages/community/any/ttf-droid/) [default VS Code font]
 ### **Alacritty**
 + [sudo](https://archlinux.org/packages/core/x86_64/sudo/)
 + [exa](https://archlinux.org/packages/community/x86_64/exa/) [ls replacement]
@@ -58,7 +61,3 @@ The i3 configuration file also runs a feh command at startup and every i3 reload
 + [sysstat](https://archlinux.org/packages/community/x86_64/sysstat/) [system information]
 ### **RAM usage script**
 + [bc](https://archlinux.org/packages/extra/x86_64/bc/) [floating point operations in shell scripts]
-### **Other**
-+ [ttf-droid](https://archlinux.org/packages/community/any/ttf-droid/) [default VS Code font]
-+ [kitty](https://archlinux.org/packages/community/x86_64/kitty/) [alternative terminal emulator]
-+ [polkit-dumb-agent](https://aur.archlinux.org/packages/polkit-dumb-agent-git/) [polkit agent]
