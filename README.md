@@ -58,7 +58,7 @@ The i3 configuration file also runs a feh command at startup and every i3 reload
 ### **CPU usage script**
 + [sysstat](https://archlinux.org/packages/community/x86_64/sysstat/) [system information]
 ### **RAM usage script**
-+ [bc](https://archlinux.org/packages/extra/x86_64/bc/)
++ [bc](https://archlinux.org/packages/extra/x86_64/bc/) [floating point operations in shell scripts]
 ### **Other**
 + [ttf-droid](https://archlinux.org/packages/community/any/ttf-droid/) [default VS Code font]
 + [kitty](https://archlinux.org/packages/community/x86_64/kitty/) [alternative terminal emulator]
