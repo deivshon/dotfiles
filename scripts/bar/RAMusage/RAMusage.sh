@@ -18,4 +18,4 @@ memTot=$(echo "$memTot" / 1000000 | bc -l)
 memAvail=$(echo "$memAvail" / 1000000 | bc -l)
 
 memInUse=$(echo "$memTot - $memAvail" | bc -l)
-printf "%.2fG/%.2fG (%.1f%%)" "$memInUse" "$memTot" "$memPerc"
+printf "%.2fG/%.2fG (%.1f%%)\n" "$memInUse" "$memTot" "$memPerc"
