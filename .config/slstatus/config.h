@@ -1,5 +1,5 @@
 /* interval between updates (in ms) */
-const unsigned int interval = 1000;
+const unsigned int interval = 100;
 
 /* text to show if no value can be retrieved */
 static const char unknown_str[] = "n/a";
@@ -73,7 +73,7 @@ static const struct arg args[] = {
 	{ separator, 	    "%s", 		"|"	},
 	{ run_command,	    "WIFI %s",			"~/dotfiles/scripts/bar/wifi/wifi.py -n"		},
 	{ separator, 	    "%s", 		"|"	},
-	{ run_command,	    "%s",				"curl https://am.i.mullvad.net/country"			},
+	{ run_command,	    "%s",				"~/dotfiles/scripts/bar/country/country.sh 10"		},
 	{ separator, 	    "%s", 		"|"	},
 	{ run_command,		"CPU: %s",			"~/dotfiles/scripts/bar/cpuUsage/cpuUsage.sh"	},
 	{ separator, 	    "%s", 		"|"	},
