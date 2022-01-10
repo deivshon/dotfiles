@@ -1,6 +1,8 @@
 #!/bin/sh
 
-idle=$(mpstat 1 1 | grep Average | awk '{print $12}')
-idle=${idle%.*}
+# $2 -> usr
+# $4 -> sys
+# $8 -> idle
+usage=$(top -bn1 | grep '%Cpu' | awk '{cpuUsage=($2+$4)/($2+$4+$8)*100} END {print cpuUsage}')
 
-echo $((100 - idle))%
+printf "%.1f%%" "$usage"
