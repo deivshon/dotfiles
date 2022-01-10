@@ -15,4 +15,4 @@ memTotal, memAvailable = meminfoOutput[0], meminfoOutput[1]
 
 inUse = (memTotal - memAvailable)
 percentageInUse = (inUse / memTotal) * 100
-print(str(round(inUse / 1000000, 2)), "G / ", str(round(memTotal / 1000000, 2)), "G (" + str(round(percentageInUse, 2)) + "%)", sep="")
+print(str(round(inUse / 1000000, 2)), "G/", str(round(memTotal / 1000000, 2)), "G (" + str(round(percentageInUse, 2)) + "%)", sep="")
