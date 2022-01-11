@@ -9,9 +9,9 @@ downloads() {
     printf "%sStarting downloads%s\n" "${green}" "${normal}"
 
     # Install dwm-flexipatch
-    if ! [ -d ~/.config/dwm-flexipatch ]; then
+    if ! [ -d ~/.config/dwm ]; then
         printf "%sStarting dwm-flexipatch download%s\n" "${cyan}" "${normal}"
-        git clone https://github.com/bakkeby/dwm-flexipatch ~/.config/dwm-flexipatch/
+        git clone https://github.com/deivshon/dwm-flexipatch ~/.config/dwm
     else
         printf "%sdwm-flexipatch: ~/.config/dwm-flexipatch already exists%s\n" "${red}" "${normal}"
     fi
@@ -19,7 +19,7 @@ downloads() {
     # Install slstatus
     if ! [ -d ~/.config/slstatus ]; then
         printf "%sStarting slstatus download%s\n" "${cyan}" "${normal}"
-        git clone https://github.com/drkhsh/slstatus ~/.config/slstatus/
+        git clone https://github.com/deivshon/slstatus ~/.config/slstatus/
     else
         printf "%sslstatus: ~/.config/slstatus already exists%s\n" "${red}" "${normal}"
     fi    
@@ -31,7 +31,7 @@ compilations() {
     printf "Starting compilations%s\n" "${green}" "${normal}"
 
     # dwm-flexipatch compilation
-    cd ~/.config/dwm-flexipatch || exit
+    cd ~/.config/dwm || exit
     printf "%sStarting dwm-flexipatch compilation%s\n" "${cyan}" "${normal}"
     sudo make clean install
 
