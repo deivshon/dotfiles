@@ -1,7 +1,7 @@
 # dotfiles
 ## Important information
 ### Disclaimer
-These dotfiles were created for (my) personal use, and are therefore **NOT** tested on systems with different software/hardware configurations. I usually set them up after installing Arch on an otherwise nearly empty system. It is therefore important that, if you come across this repository and for some reason are interested in using it, know beforehand that it could cause your system to misbehave. It is important that you review the code that could cause said misbehaviour before trying to use it.
+Don't use if you don't know what you're doing.
 
 ### General
 These dotfiles are intended to be used on Arch or Arch based distributions, therefore every package link directs to an archlinux.org page and the installation commands use [pacman](https://archlinux.org/packages/core/x86_64/pacman/) and [yay](https://aur.archlinux.org/packages/yay/).
