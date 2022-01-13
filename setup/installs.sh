@@ -8,12 +8,15 @@ normal=$(tput sgr0)
 downloads() {
     printf "%sStarting downloads%s\n" "${green}" "${normal}"
 
-    # Install dwm-flexipatch
+    # Install /updates dwm-flexipatch
     if ! [ -d ~/.config/dwm ]; then
         printf "%sStarting dwm-flexipatch download%s\n" "${cyan}" "${normal}"
         git clone https://github.com/deivshon/dwm-flexipatch ~/.config/dwm
     else
-        printf "%sdwm-flexipatch: ~/.config/dwm-flexipatch already exists%s\n" "${red}" "${normal}"
+        printf "%sdwm-flexipatch: ~/.config/dwm-flexipatch already exists, pulling%s\n" "${red}" "${normal}"
+        cd ~/.config/dwm || exit
+        git pull
+        cd ~ || exit
     fi
 
     # Install slstatus
@@ -21,7 +24,10 @@ downloads() {
         printf "%sStarting slstatus download%s\n" "${cyan}" "${normal}"
         git clone https://github.com/deivshon/slstatus ~/.config/slstatus/
     else
-        printf "%sslstatus: ~/.config/slstatus already exists%s\n" "${red}" "${normal}"
+        printf "%sslstatus: ~/.config/slstatus already exists, pulling%s\n" "${red}" "${normal}"
+        cd ~/.config/slstatus || exit
+        git pull
+        cd ~ || exit
     fi    
 
     printf "%sDownloads over, exiting%s\n" "${green}" "${normal}"
