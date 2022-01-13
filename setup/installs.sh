@@ -8,7 +8,7 @@ normal=$(tput sgr0)
 downloads() {
     printf "%sStarting downloads%s\n" "${green}" "${normal}"
 
-    # Install /updates dwm-flexipatch
+    # Install/Update dwm-flexipatch
     if ! [ -d ~/.config/dwm ]; then
         printf "%sStarting dwm-flexipatch download%s\n" "${cyan}" "${normal}"
         git clone https://github.com/deivshon/dwm-flexipatch ~/.config/dwm
@@ -19,7 +19,7 @@ downloads() {
         cd ~ || exit
     fi
 
-    # Install slstatus
+    # Install/Update slstatus
     if ! [ -d ~/.config/slstatus ]; then
         printf "%sStarting slstatus download%s\n" "${cyan}" "${normal}"
         git clone https://github.com/deivshon/slstatus ~/.config/slstatus/
