@@ -135,7 +135,7 @@ alias egrep='egrep --colour=auto'
 alias fgrep='fgrep --colour=auto'
 alias cp='cp -i' 		# confirm before overwriting something
 alias ip='ip -c'		# coloured output for ip commands
-alias sysup="sudo pacman -Syu && yay -Sua"
+alias update="sudo pacman -Syu && yay -Sua"
 
 # Always clears scrollback buffer
 alias clear="printf '\033[2J\033[3J\033[1;1H' && afetch"
