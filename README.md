@@ -12,7 +12,7 @@ Everything can probably work in other distributions too, but some of the softwar
 ## **Package installation**
 To install all the necessary packages use these two commands
 ```bash
-pacman -S i3-gaps i3blocks i3status rofi dunst kitty alacritty feh curl sudo exa adobe-source-code-pro-fonts acpi iw sysstat ranger ueberzug ttf-droid bc
+pacman -S i3-gaps i3blocks i3status rofi dunst kitty alacritty feh curl sudo exa adobe-source-code-pro-fonts acpi iw sysstat ranger ueberzug ttf-droid bc polkit
 yay -S afetch cbonsai ttf-ms-fonts polkit-dumb-agent
 ```
 ## **Setup**
@@ -38,6 +38,7 @@ The i3 configuration file also runs a feh command at startup and every i3 reload
 + [alacritty](https://archlinux.org/packages/community/x86_64/alacritty/) [terminal emulator]
 + [kitty](https://archlinux.org/packages/community/x86_64/kitty/) [alternative terminal emulator]
 + [rofi](https://archlinux.org/packages/community/x86_64/rofi/) [application launcher]
++ [polkit](https://archlinux.org/packages/extra/x86_64/polkit/)
 + [polkit-dumb-agent](https://aur.archlinux.org/packages/polkit-dumb-agent-git/) [polkit agent]
 + [feh](https://archlinux.org/packages/extra/x86_64/feh/) [wallpaper drawing]
 + [curl](https://archlinux.org/packages/core/x86_64/curl/)
