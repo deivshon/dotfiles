@@ -4,6 +4,11 @@
         "target": "~/.bashrc",
         "setupFlags": []
     },
+    "dunst": {
+        "source": "$(setupDir)/../etc/dunst/dunstrc",
+        "target": "/etc/dunst/dunstrc",
+        "setupFlags": ["needSudo"]
+    },
     "i3status": {
         "source": "$(setupDir)/../etc/i3status.conf",
         "target": "/etc/i3status.conf",
