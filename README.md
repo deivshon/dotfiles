@@ -72,6 +72,6 @@ Color packages are a basic way to generalize the setup script for different colo
 + wallpaperLink
 + wallpaperName
 
-... all names quite self explanatory.
+... all quite self explanatory names.
 
 The values of the fields are then copied where appropriate in the configuration files, substituting their identifiers. The resulting configuration file is placed in a temporary folder and from there copied to the final destination.
