@@ -18,6 +18,9 @@ def makeDirs(pathToFile):
             print("Directory", dir, "doesn't exist, creating it")
             os.mkdir(dir)
 
+def getLastNode(path):
+    return path[::-1][0:path[::-1].index("/")][::-1]
+
 # Check if the script is being run as root
 currentUser = os.path.expanduser("~")
 if(currentUser == "/root"):
@@ -28,6 +31,25 @@ setupDir = os.path.dirname(os.path.realpath(__file__))
 
 if(setupDir != os.path.expanduser("~/dotfiles/setup")):
     sys.exit("The dotfiles folder needs to be placed in your home folder!")
+
+colorPackagePath = "defaultColorPackage.json"
+forceLinks = False
+for i in range(0, len(sys.argv)):
+    if(sys.argv[i] == "-f"): # -f -> force
+        forceLinks = True
+    if(sys.argv[i] == "-s"): # -s -> style (color package path)
+        if(i + 1 >= len(sys.argv)):
+            # No color package path provided after -s flag, quit
+            print("Provide a path to the color package file")
+            quit()
+        if(not os.path.isfile(sys.argv[i + 1])):
+            print("Path to color package file is not valid")
+            quit()
+        # Color package argument checks done, path can be saved safely
+        colorPackagePath = sys.argv[i + 1]
+
+with open(colorPackagePath, "r") as f:
+    colorPackage = json.loads(f.read())
 
 # Import printingUtils (../../scripts/scriptingUtils/printingUtils.py)
 sys.path.insert(1, setupDir + "/../scripts/scriptingUtils/")
@@ -40,10 +62,6 @@ f = open("links.json")
 linksList = json.loads(f.read())
 f.close()
 
-forceLinks = False
-if("-f" in sys.argv):
-    forceLinks = True
-
 for link in linksList:
     linkSource = linksList[link]["source"].replace("$(setupDir)", setupDir)
     linkTarget = linksList[link]["target"].replace("~", currentUser)
@@ -55,6 +73,20 @@ for link in linksList:
 
     linkFlags = "-sf" if forceLinks else "-si"
     command = ["ln", linkFlags, linkSource, linkTarget]
+
+    if("needsSubstitution" in setupFlags):
+        if("copy" not in setupFlags): setupFlags.append("copy")
+
+        # If the temporary directory has not yet been created, create it
+        if(not os.path.isdir("../colorsTmp/")):
+            os.mkdir("../colorsTmp/")
+
+        subprocess.run(["cp", linkSource, "../colorsTmp/"])
+        linkSource = "../colorsTmp/" + getLastNode(linkSource)
+
+        # Perform the necessary substitutions using sed
+        subprocess.run(["sed", "-i", "s/mainColor/" + colorPackage["mainColor"] + "/g", linkSource])
+        subprocess.run(["sed", "-i", "s/secondaryColor/" + colorPackage["secondaryColor"] + "/g", linkSource])
 
     if("copy" in setupFlags):
         command = ["cp", linkSource, linkTarget]
