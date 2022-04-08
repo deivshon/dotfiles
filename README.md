@@ -70,6 +70,7 @@ Color packages are a basic way to generalize the setup script for different colo
 + mainColor
 + secondaryColor
 + wallpaperLink
++ wallpaperName
 
 ... all names quite self explanatory.
 
