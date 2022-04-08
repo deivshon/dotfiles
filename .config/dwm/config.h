@@ -21,33 +21,33 @@ static char c000000[]                    = "#000000"; // placeholder value
 
 static char normfgcolor[]                = "#ffffff";
 static char normbgcolor[]                = "#000000";
-static char normbordercolor[]            = "$(secondaryColor)";
-static char normfloatcolor[]             = "$(mainColor)";
+static char normbordercolor[]            = "secondaryColor";
+static char normfloatcolor[]             = "mainColor";
 
 static char selfgcolor[]                 = "#ffffff";
-static char selbgcolor[]                 = "$(mainColor)";
-static char selbordercolor[]             = "$(mainColor)";
-static char selfloatcolor[]              = "$(mainColor)";
+static char selbgcolor[]                 = "mainColor";
+static char selbordercolor[]             = "mainColor";
+static char selfloatcolor[]              = "mainColor";
 
 static char titlenormfgcolor[]           = "#ffffff";
 static char titlenormbgcolor[]           = "#000000";
-static char titlenormbordercolor[]       = "$(secondaryColor)";
-static char titlenormfloatcolor[]        = "$(mainColor)";
+static char titlenormbordercolor[]       = "secondaryColor";
+static char titlenormfloatcolor[]        = "mainColor";
 
 static char titleselfgcolor[]            = "#ffffff";
-static char titleselbgcolor[]            = "$(mainColor)";
-static char titleselbordercolor[]        = "$(mainColor)";
-static char titleselfloatcolor[]         = "$(mainColor)";
+static char titleselbgcolor[]            = "mainColor";
+static char titleselbordercolor[]        = "mainColor";
+static char titleselfloatcolor[]         = "mainColor";
 
 static char tagsnormfgcolor[]            = "#ffffff";
 static char tagsnormbgcolor[]            = "#000000";
-static char tagsnormbordercolor[]        = "$(secondaryColor)";
-static char tagsnormfloatcolor[]         = "$(mainColor)";
+static char tagsnormbordercolor[]        = "secondaryColor";
+static char tagsnormfloatcolor[]         = "mainColor";
 
 static char tagsselfgcolor[]             = "#ffffff";
-static char tagsselbgcolor[]             = "$(mainColor)";
-static char tagsselbordercolor[]         = "$(mainColor)";
-static char tagsselfloatcolor[]          = "$(mainColor)";
+static char tagsselbgcolor[]             = "mainColor";
+static char tagsselbordercolor[]         = "mainColor";
+static char tagsselfloatcolor[]          = "mainColor";
 
 static char hidnormfgcolor[]             = "#005577";
 static char hidselfgcolor[]              = "#227799";
