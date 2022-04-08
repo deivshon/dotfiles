@@ -41,7 +41,7 @@ linksList = json.loads(f.read())
 f.close()
 
 forceLinks = False
-if(len(sys.argv) > 1 and sys.argv[1] == "-f"):
+if("-f" in sys.argv):
     forceLinks = True
 
 for link in linksList:
@@ -61,7 +61,7 @@ for link in linksList:
         action = "Copying"
 
     printingUtils.printCol(action + " ", "white", linkSource, "yellow", " to ", "white", linkTarget, "cyan")
-    if("needSudo" in setupFlags):
+    if("needsSudo" in setupFlags):
         subprocess.run(["sudo"] + command)
     else:
         subprocess.run(command)
