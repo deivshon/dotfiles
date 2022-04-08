@@ -66,9 +66,8 @@ import printingUtils
 subprocess.run([os.path.expanduser("~/dotfiles/setup/installs.sh"), "-d"])
 
 # Read and store link/copy data from links.json
-f = open("links.json")
-linksList = json.loads(f.read())
-f.close()
+with open("links.json", "r") as f:
+    linksList = json.loads(f.read())
 
 # Handle each link/copy
 for link in linksList:
