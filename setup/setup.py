@@ -33,6 +33,7 @@ setupDir = os.path.dirname(os.path.realpath(__file__))
 if(setupDir != os.path.expanduser("~/dotfiles/setup")):
     sys.exit("The dotfiles folder needs to be placed in your home folder!")
 
+# Arguments handling
 colorPackagePath = "defaultColorPackage.json"
 forceLinks = False
 keepColorsTmpDir = False
@@ -52,6 +53,7 @@ for i in range(0, len(sys.argv)):
         # Color package argument checks done, path can be saved safely
         colorPackagePath = sys.argv[i + 1]
 
+# Read and store color package content
 with open(colorPackagePath, "r") as f:
     colorPackage = json.loads(f.read())
 
@@ -60,19 +62,22 @@ sys.path.insert(1, setupDir + "/../scripts/scriptingUtils/")
 
 import printingUtils
 
+# Download the dwm and slstatus builds using the installs.sh script
 subprocess.run([os.path.expanduser("~/dotfiles/setup/installs.sh"), "-d"])
 
+# Read and store link/copy data from links.json
 f = open("links.json")
 linksList = json.loads(f.read())
 f.close()
 
+# Handle each link/copy
 for link in linksList:
     linkSource = linksList[link]["source"].replace("$(setupDir)", setupDir)
     linkTarget = linksList[link]["target"].replace("~", currentUser)
     setupFlags = linksList[link]["setupFlags"]
     action = "Linking"
 
-    # Creates the directory where the target file needs to be in
+    # Create the directory where the target file needs to be in
     makeDirs(linkTarget)
 
     linkFlags = "-sf" if forceLinks else "-si"
@@ -115,4 +120,5 @@ if(not os.path.isfile(wallpaperPath)):
     subprocess.run(["wget", colorPackage["wallpaperLink"], "-O", wallpaperPath])
 subprocess.run(["cp", wallpaperPath, currentUser + "/Pictures/wallpaper"])
 
+# Compile dwm and slstatus using the installs.sh script
 subprocess.run([os.path.expanduser("~/dotfiles/setup/installs.sh"), "-c"])
