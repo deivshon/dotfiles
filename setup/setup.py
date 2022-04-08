@@ -4,6 +4,7 @@ import os
 import sys
 import subprocess
 import json
+import shutil
 
 # Assumes the path parameter starts with / and is a path to a file
 def makeDirs(pathToFile):
@@ -34,9 +35,12 @@ if(setupDir != os.path.expanduser("~/dotfiles/setup")):
 
 colorPackagePath = "defaultColorPackage.json"
 forceLinks = False
+keepColorsTmpDir = False
 for i in range(0, len(sys.argv)):
     if(sys.argv[i] == "-f"): # -f -> force
         forceLinks = True
+    if(sys.argv[i] == "-k"): # -k -> keep
+        keepColorsTmpDir = True
     if(sys.argv[i] == "-s"): # -s -> style (color package path)
         if(i + 1 >= len(sys.argv)):
             # No color package path provided after -s flag, quit
@@ -97,5 +101,8 @@ for link in linksList:
         subprocess.run(["sudo"] + command)
     else:
         subprocess.run(command)
+
+if(not keepColorsTmpDir and os.path.isdir("../colorsTmp/")):
+    shutil.rmtree("../colorsTmp/")
 
 subprocess.run([os.path.expanduser("~/dotfiles/setup/installs.sh"), "-c"])
