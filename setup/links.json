@@ -37,7 +37,7 @@
     "rofi": {
         "source": "$(setupDir)/../.config/rofi/config.rasi",
         "target": "~/.config/rofi/config.rasi",
-        "setupFlags": ["copy", "needsSubstitution"]
+        "setupFlags": ["needsSubstitution"]
     },
     "ranger": {
         "source": "$(setupDir)/../.config/ranger/rc.conf",
