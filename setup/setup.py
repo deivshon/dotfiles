@@ -102,7 +102,17 @@ for link in linksList:
     else:
         subprocess.run(command)
 
+# Delete temporary directory unless the user specified not to
 if(not keepColorsTmpDir and os.path.isdir("../colorsTmp/")):
     shutil.rmtree("../colorsTmp/")
+
+# Download wallpaper and place it in ~/Pictures/wallpaper
+if(not os.path.isdir(os.path.expanduser("~/Pictures"))):
+    os.mkdir(os.path.expanduser("~/Pictures/"))
+
+wallpaperPath = currentUser + "/Pictures/" + colorPackage["wallpaperName"]
+if(not os.path.isfile(wallpaperPath)):
+    subprocess.run(["wget", colorPackage["wallpaperLink"], "-O", wallpaperPath])
+subprocess.run(["cp", wallpaperPath, currentUser + "/Pictures/wallpaper"])
 
 subprocess.run([os.path.expanduser("~/dotfiles/setup/installs.sh"), "-c"])
