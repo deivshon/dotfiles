@@ -64,3 +64,13 @@ The i3 configuration file also runs a feh command at startup and every i3 reload
 + [sysstat](https://archlinux.org/packages/community/x86_64/sysstat/) [system information]
 ### **RAM usage script**
 + [bc](https://archlinux.org/packages/extra/x86_64/bc/) [floating point operations in shell scripts]
+
+## **Color packages**
+Color packages are a basic way to generalize the setup script for different color styles. They are JavaScript objects that (currently) contain three fields
++ mainColor
++ secondaryColor
++ wallpaperLink
+
+... all names quite self explanatory.
+
+The values of the fields are then copied where appropriate in the configuration files, substituting their identifiers. The resulting configuration file is placed in a temporary folder and from there copied to the final destination.
