@@ -7,12 +7,12 @@
     "dunst": {
         "source": "$(setupDir)/../etc/dunst/dunstrc",
         "target": "/etc/dunst/dunstrc",
-        "setupFlags": ["needSudo"]
+        "setupFlags": ["needsSudo", "needsSubstitution"]
     },
     "i3status": {
         "source": "$(setupDir)/../etc/i3status.conf",
         "target": "/etc/i3status.conf",
-        "setupFlags": ["needSudo"]
+        "setupFlags": ["needsSudo"]
     },
     "alacritty": {
         "source": "$(setupDir)/../.config/alacritty/alacritty.yml",
@@ -22,7 +22,7 @@
     "i3blocks": {
         "source": "$(setupDir)/../etc/i3blocks.conf",
         "target": "/etc/i3blocks.conf",
-        "setupFlags": ["needSudo"]
+        "setupFlags": ["needsSudo"]
     },
     "i3": {
         "source": "$(setupDir)/../.config/i3/config",
@@ -37,7 +37,7 @@
     "rofi": {
         "source": "$(setupDir)/../.config/rofi/config.rasi",
         "target": "~/.config/rofi/config.rasi",
-        "setupFlags": []
+        "setupFlags": ["needsSubstitution"]
     },
     "ranger": {
         "source": "$(setupDir)/../.config/ranger/rc.conf",
@@ -48,5 +48,10 @@
         "source": "$(setupDir)/../.xmonad/xmonad.hs",
         "target": "~/.xmonad/xmonad.hs",
         "setupFlags": ["copy"]
+    },
+    "dwm": {
+        "source": "$(setupDir)/../.config/dwm/config.h",
+        "target": "~/.config/dwm/config.h",
+        "setupFlags": ["needsSubstitution"]
     }
 }
