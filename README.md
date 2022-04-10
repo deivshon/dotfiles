@@ -12,7 +12,7 @@ Everything can probably work in other distributions too, but some of the softwar
 ## **Package installation**
 To install all the necessary packages use these two commands
 ```bash
-pacman -S i3-gaps i3blocks i3status rofi dunst kitty alacritty feh curl sudo exa adobe-source-code-pro-fonts acpi iw sysstat ranger ueberzug ttf-droid bc polkit network-manager-applet noto-fonts
+pacman -S rofi dunst alacritty feh curl sudo exa adobe-source-code-pro-fonts acpi iw sysstat ranger ueberzug ttf-droid bc polkit network-manager-applet noto-fonts
 yay -S afetch cbonsai ttf-ms-fonts polkit-dumb-agent
 ```
 ## **Setup**
@@ -25,18 +25,10 @@ git clone https://github.com/deivshon/dotfiles
 cd dotfiles/setup
 ./setup.py
 ```
-### Important
-The i3 configuration file contains a line that executes (if existing) the script located at ~/startup/startup.sh when i3 starts. This is needed by me to easily run small machine specific scripts at startup, but anyone who uses the configuration file should be aware of that.
-
-The i3 configuration file also runs a feh command at startup and every i3 reload that draws the image located in ~/Pictures/wallpaper as the wallpaper.
 
 ## **Packages**
 ### **General**
-+ [i3-gaps](https://archlinux.org/packages/community/x86_64/i3-gaps/) [window manager]
-+ [i3blocks](https://archlinux.org/packages/community/x86_64/i3blocks/) [i3bar output]
-+ [i3status](https://archlinux.org/packages/community/x86_64/i3status/) [alternative i3bar output]
 + [alacritty](https://archlinux.org/packages/community/x86_64/alacritty/) [terminal emulator]
-+ [kitty](https://archlinux.org/packages/community/x86_64/kitty/) [alternative terminal emulator]
 + [rofi](https://archlinux.org/packages/community/x86_64/rofi/) [application launcher]
 + [polkit](https://archlinux.org/packages/extra/x86_64/polkit/)
 + [polkit-dumb-agent](https://aur.archlinux.org/packages/polkit-dumb-agent-git/) [polkit agent]
