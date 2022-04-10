@@ -6,6 +6,22 @@ import subprocess
 import json
 import shutil
 
+# Check if the script is being run as root
+currentUser = os.path.expanduser("~")
+if(currentUser == "/root"):
+    sys.exit("Don't run the script as root!")
+
+# Check dotfiles folder location
+setupDir = os.path.dirname(os.path.realpath(__file__))
+
+if(setupDir != os.path.expanduser("~/dotfiles/setup")):
+    sys.exit("The dotfiles folder needs to be placed in your home folder!")
+
+# Import printingUtils (../../scripts/scriptingUtils/printingUtils.py)
+sys.path.insert(1, setupDir + "/../scripts/scriptingUtils/")
+
+import printingUtils
+
 # Assumes the path parameter starts with / and is a path to a file
 def makeDirs(pathToFile):
     dirNames = pathToFile.split("/")
@@ -29,18 +45,11 @@ def removeConfigs(linksList):
 
         removeCommand = ["rm", linkTarget]
         if(needsSudo): removeCommand.insert(0, "sudo")
-        subprocess.run(removeCommand)
-
-# Check if the script is being run as root
-currentUser = os.path.expanduser("~")
-if(currentUser == "/root"):
-    sys.exit("Don't run the script as root!")
-
-# Check dotfiles folder location
-setupDir = os.path.dirname(os.path.realpath(__file__))
-
-if(setupDir != os.path.expanduser("~/dotfiles/setup")):
-    sys.exit("The dotfiles folder needs to be placed in your home folder!")
+        if(os.path.isfile(linkTarget)):
+            printingUtils.printCol("Removing ", "white", linkTarget, "red")
+            subprocess.run(removeCommand)
+        else:
+            printingUtils.printCol("Can't find ", "white", linkTarget, "red")
 
 # Read and store link/copy data from links.json
 with open("links.json", "r") as f:
@@ -51,11 +60,14 @@ colorPackagePath = "defaultColorPackage.json"
 forceLinks = False
 keepColorsTmpDir = False
 for i in range(0, len(sys.argv)):
-    if(sys.argv[i] == "-f"): # -f -> force
+    if(sys.argv[i] == "-f"):    # -f -> force
         forceLinks = True
-    if(sys.argv[i] == "-k"): # -k -> keep
+    elif(sys.argv[i] == "-k"):  # -k -> keep
         keepColorsTmpDir = True
-    if(sys.argv[i] == "-s"): # -s -> style (color package path)
+    elif(sys.argv[i] == "-rm"): # -rm -> remove configs
+        removeConfigs(linksList)
+        quit()
+    elif(sys.argv[i] == "-s"):  # -s -> style (color package path)
         if(i + 1 >= len(sys.argv)):
             # No color package path provided after -s flag, quit
             print("Provide a path to the color package file")
@@ -65,18 +77,10 @@ for i in range(0, len(sys.argv)):
             quit()
         # Color package argument checks done, path can be saved safely
         colorPackagePath = sys.argv[i + 1]
-    if(sys.argv[i] == "-rm"): # -rm -> remove configs
-        removeConfigs(linksList)
-        quit()
 
 # Read and store color package content
 with open(colorPackagePath, "r") as f:
     colorPackage = json.loads(f.read())
-
-# Import printingUtils (../../scripts/scriptingUtils/printingUtils.py)
-sys.path.insert(1, setupDir + "/../scripts/scriptingUtils/")
-
-import printingUtils
 
 # Download the dwm and slstatus builds using the installs.sh script
 subprocess.run([os.path.expanduser("~/dotfiles/setup/installs.sh"), "-d"])
