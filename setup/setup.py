@@ -22,6 +22,15 @@ def makeDirs(pathToFile):
 def getLastNode(path):
     return path[::-1][0:path[::-1].index("/")][::-1]
 
+def removeConfigs(linksList):
+    for link in linksList:
+        linkTarget = linksList[link]["target"].replace("~", currentUser)
+        needsSudo = "needsSudo" in linksList[link]["setupFlags"]
+
+        removeCommand = ["rm", linkTarget]
+        if(needsSudo): removeCommand.insert(0, "sudo")
+        subprocess.run(removeCommand)
+
 # Check if the script is being run as root
 currentUser = os.path.expanduser("~")
 if(currentUser == "/root"):
@@ -32,6 +41,10 @@ setupDir = os.path.dirname(os.path.realpath(__file__))
 
 if(setupDir != os.path.expanduser("~/dotfiles/setup")):
     sys.exit("The dotfiles folder needs to be placed in your home folder!")
+
+# Read and store link/copy data from links.json
+with open("links.json", "r") as f:
+    linksList = json.loads(f.read())
 
 # Arguments handling
 colorPackagePath = "defaultColorPackage.json"
@@ -52,6 +65,9 @@ for i in range(0, len(sys.argv)):
             quit()
         # Color package argument checks done, path can be saved safely
         colorPackagePath = sys.argv[i + 1]
+    if(sys.argv[i] == "-rm"): # -rm -> remove configs
+        removeConfigs(linksList)
+        quit()
 
 # Read and store color package content
 with open(colorPackagePath, "r") as f:
@@ -64,10 +80,6 @@ import printingUtils
 
 # Download the dwm and slstatus builds using the installs.sh script
 subprocess.run([os.path.expanduser("~/dotfiles/setup/installs.sh"), "-d"])
-
-# Read and store link/copy data from links.json
-with open("links.json", "r") as f:
-    linksList = json.loads(f.read())
 
 # Handle each link/copy
 for link in linksList:
