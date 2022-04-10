@@ -58,7 +58,7 @@ cd dotfiles/setup
 + [bc](https://archlinux.org/packages/extra/x86_64/bc/) [floating point operations in shell scripts]
 
 ## **Color packages**
-Color packages are a basic way to generalize the setup script for different color styles. They are JavaScript objects that (currently) contain three fields
+Color packages are a basic way to generalize the setup script for different color styles. They are JavaScript objects that (currently) contain four fields
 + mainColor
 + secondaryColor
 + wallpaperLink
