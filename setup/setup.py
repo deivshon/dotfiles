@@ -56,7 +56,7 @@ with open("links.json", "r") as f:
     linksList = json.loads(f.read())
 
 # Arguments handling
-colorPackagePath = "defaultColorPackage.json"
+colorPackagePath = "./colorPackages/sunsetDigital.json"
 forceLinks = False
 keepColorsTmpDir = False
 for i in range(0, len(sys.argv)):
