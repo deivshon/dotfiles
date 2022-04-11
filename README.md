@@ -12,8 +12,8 @@ Everything can probably work in other distributions too, but some of the softwar
 ## **Package installation**
 To install all the necessary packages use these two commands
 ```bash
-pacman -S rofi dunst alacritty feh curl sudo exa adobe-source-code-pro-fonts acpi iw sysstat ranger ueberzug ttf-droid bc polkit network-manager-applet noto-fonts
-yay -S afetch cbonsai ttf-ms-fonts polkit-dumb-agent
+pacman -S rofi dunst alacritty feh curl sudo exa adobe-source-code-pro-fonts acpi iw sysstat ranger ueberzug ttf-droid bc polkit network-manager-applet noto-fonts wget python-requests gnome-keyring firefox gnome-themes-extra nemo lxappearance --needed
+yay -S afetch cbonsai ttf-ms-fonts polkit-dumb-agent visual-studio-code-bin --needed
 ```
 ## **Setup**
 The dotfiles directory **must** be located in the home folder.
@@ -39,6 +39,13 @@ cd dotfiles/setup
 + [ttf-ms-fonts](https://aur.archlinux.org/packages/ttf-ms-fonts/)
 + [ttf-droid](https://archlinux.org/packages/community/any/ttf-droid/) [default VS Code font]
 + [noto-fonts](https://archlinux.org/packages/extra/any/noto-fonts/) [font for bar info]
++ [wget](https://archlinux.org/packages/extra/x86_64/wget/)
++ [gnome-keyring](https://archlinux.org/packages/extra/x86_64/gnome-keyring/)
++ [firefox](https://archlinux.org/packages/extra/x86_64/firefox/)
++ [visual-studio-code-bin](https://aur.archlinux.org/packages/visual-studio-code-bin)
++ [gnome-themes-extra](https://archlinux.org/packages/extra/x86_64/gnome-themes-extra/)
++ [nemo](https://archlinux.org/packages/community/x86_64/nemo/)
++ [lxappearance](https://archlinux.org/packages/community/x86_64/lxappearance/)
 ### **Alacritty**
 + [sudo](https://archlinux.org/packages/core/x86_64/sudo/)
 + [exa](https://archlinux.org/packages/community/x86_64/exa/) [ls replacement]
@@ -56,7 +63,8 @@ cd dotfiles/setup
 + [sysstat](https://archlinux.org/packages/community/x86_64/sysstat/) [system information]
 ### **RAM usage script**
 + [bc](https://archlinux.org/packages/extra/x86_64/bc/) [floating point operations in shell scripts]
-
+### **VPN/country script**
++ [python-requests](https://archlinux.org/packages/extra/any/python-requests/)
 ## **Color packages**
 Color packages are a basic way to generalize the setup script for different color styles. They are JavaScript objects that (currently) contain four fields
 + mainColor
