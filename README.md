@@ -12,7 +12,7 @@ Everything can probably work in other distributions too, but some of the softwar
 ## **Package installation**
 To install all the necessary packages use these two commands
 ```bash
-pacman -S rofi dunst alacritty feh curl sudo exa adobe-source-code-pro-fonts acpi iw sysstat ranger ueberzug ttf-droid bc polkit network-manager-applet noto-fonts wget python-requests gnome-keyring firefox gnome-themes-extra nemo lxappearance --needed
+pacman -S xorg xorg-xinit rofi dunst alacritty feh curl sudo exa adobe-source-code-pro-fonts acpi iw sysstat ranger ueberzug ttf-droid bc polkit network-manager-applet noto-fonts wget python-requests gnome-keyring firefox gnome-themes-extra nemo lxappearance --needed
 yay -S afetch cbonsai ttf-ms-fonts polkit-dumb-agent visual-studio-code-bin --needed
 ```
 ## **Setup**
@@ -28,6 +28,8 @@ cd dotfiles/setup
 
 ## **Packages**
 ### **General**
++ [xorg](https://archlinux.org/groups/x86_64/xorg/)
++ [xorg-xinit](https://archlinux.org/packages/extra/x86_64/xorg-xinit/)
 + [alacritty](https://archlinux.org/packages/community/x86_64/alacritty/) [terminal emulator]
 + [rofi](https://archlinux.org/packages/community/x86_64/rofi/) [application launcher]
 + [polkit](https://archlinux.org/packages/extra/x86_64/polkit/)
