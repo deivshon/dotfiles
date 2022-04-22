@@ -27,5 +27,5 @@ else:
         if("%" in section):
             charge = scriptingUtils.whitelistChars(section, "0123456789%")
         if("remaining" in section or "until" in section):
-            remaining = scriptingUtils.whitelistChars(section, "0123456789:")[:5]
-    print(charging, charge, " ", remaining, sep = "")
+            remaining = " " + scriptingUtils.whitelistChars(section, "0123456789:")[:5]
+    print(charging, charge, remaining, sep = "")
