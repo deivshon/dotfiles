@@ -144,4 +144,8 @@ alias clearall="printf '\033[2J\033[3J\033[1;1H'"
 # cbonsai
 alias cbonsai="cbonsai -li -w 1 -L 50"
 
+# Mullvad
+alias muldown="mullvad always-require-vpn set off && mullvad disconnect"
+alias mulup="mullvad always-require-vpn set on && mullvad connect"
+
 afetch
