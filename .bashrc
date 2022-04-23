@@ -126,22 +126,31 @@ extract ()
   fi
 }
 
-### Aliases ###
+# Aliases
 
+# Exa
 alias ls='exa'
 alias ll='exa -laF'
+
+# Grep
 alias grep='grep --colour=auto'
 alias egrep='egrep --colour=auto'
 alias fgrep='fgrep --colour=auto'
-alias cp='cp -i' 		# confirm before overwriting something
-alias ip='ip -c'		# coloured output for ip commands
+
+# Copy (confirm before overwriting)
+alias cp='cp -i'
+
+# IP (color output)
+alias ip='ip -c'
+
+# Update
 alias update="sudo pacman -Syu && yay -Sua"
 
 # Always clears scrollback buffer
 alias clear="printf '\033[2J\033[3J\033[1;1H' && afetch"
 alias clearall="printf '\033[2J\033[3J\033[1;1H'"
 
-# cbonsai
+# Cbonsai
 alias cbonsai="cbonsai -li -w 1 -L 50"
 
 # Mullvad
