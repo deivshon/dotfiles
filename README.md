@@ -10,21 +10,12 @@ It goes without saying that AUR packages can be installed without yay or any oth
 
 Everything can probably work in other distributions too, but some of the software will need to be built from source because not packaged.
 ## **Package installation**
-To install all the necessary packages use these two commands
 ```bash
 pacman -S xorg xorg-xinit rofi dunst alacritty feh curl sudo exa adobe-source-code-pro-fonts acpi iw sysstat ranger ueberzug ttf-droid bc polkit network-manager-applet noto-fonts wget python-requests gnome-keyring firefox gnome-themes-extra nemo lxappearance --needed
 yay -S afetch cbonsai ttf-ms-fonts polkit-dumb-agent visual-studio-code-bin --needed
 ```
 ## **Setup**
-The dotfiles directory **must** be located in the home folder.
-
-Run the following commands as a normal user, **not** as root.
-```bash
-cd
-git clone https://github.com/deivshon/dotfiles
-cd dotfiles/setup
-./setup.py
-```
+Clone the repository in the home directory, `cd` into the setup directory and run the `setup.py` script
 
 ## **Packages**
 ### **General**
