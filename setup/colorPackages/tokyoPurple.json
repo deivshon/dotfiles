@@ -1,6 +1,8 @@
 {
-    "mainColor": "#D25EFF",
-    "secondaryColor": "#67088C",
+    "substitutions": {
+        "mainColor": "#D25EFF",
+        "secondaryColor": "#67088C"
+    },
     "wallpaperLink": "https://upload.vaa.red/i/VWzdE.jpeg",
     "wallpaperName": "tokyoDigital.jpeg"
 }

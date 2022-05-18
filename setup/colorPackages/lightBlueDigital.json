@@ -1,6 +1,8 @@
 {
-    "mainColor": "#0CC0E8",
-    "secondaryColor": "#075078",
+    "substitutions": {
+        "mainColor": "#0CC0E8",
+        "secondaryColor": "#075078"
+    },
     "wallpaperLink": "https://upload.vaa.red/i/Gbr2T.jpeg",
     "wallpaperName": "lightBlueDigital.jpeg"
 }

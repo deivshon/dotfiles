@@ -109,8 +109,9 @@ for link in linksList:
         linkSource = "../colorsTmp/" + getLastNode(linkSource)
 
         # Perform the necessary substitutions using sed
-        subprocess.run(["sed", "-i", "s/mainColor/" + colorPackage["mainColor"] + "/g", linkSource])
-        subprocess.run(["sed", "-i", "s/secondaryColor/" + colorPackage["secondaryColor"] + "/g", linkSource])
+        substitutions = colorPackage["substitutions"]
+        for identifier in substitutions:
+            subprocess.run(["sed", "-i", "s/" + identifier + "/" + substitutions[identifier] + "/g", linkSource])
 
     if("copy" in setupFlags):
         command = ["cp", linkSource, linkTarget]

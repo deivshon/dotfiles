@@ -59,12 +59,9 @@ Clone the repository in the home directory, `cd` into the setup directory and ru
 ### **VPN/country script**
 + [python-requests](https://archlinux.org/packages/extra/any/python-requests/)
 ## **Color packages**
-Color packages are a basic way to generalize the setup script for different color styles. They are JavaScript objects that (currently) contain four fields
-+ mainColor
-+ secondaryColor
+Color packages are a basic way to generalize the setup script for different color styles. They are JavaScript objects that (currently) contain three fields
++ substitutions
 + wallpaperLink
 + wallpaperName
 
-... all quite self explanatory names.
-
-The values of the fields are then copied where appropriate in the configuration files, substituting their identifiers. The resulting configuration file is placed in a temporary folder and from there copied to the final destination.
+The respective values in the `substitutions` field are pasted where appropriate in the configuration files, substituting their identifiers. The resulting configuration files are then placed in a temporary folder (that one can choose to keep using the `-k` flag when launching the `setup.py` script) and from there copied to the final destination.
