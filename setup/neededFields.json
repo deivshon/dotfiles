@@ -1,0 +1,10 @@
+{
+    "substitutions": [
+        "mainColor",
+        "secondaryColor"
+    ],
+    "other": [
+        "wallpaperLink",
+        "wallpaperName"
+    ]
+}

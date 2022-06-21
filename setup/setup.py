@@ -82,6 +82,24 @@ for i in range(0, len(sys.argv)):
 with open(colorPackagePath, "r") as f:
     colorPackage = json.loads(f.read())
 
+# Check the selected color package contains all the needed fields
+with open("neededFields.json", "r") as f:
+    neededFields = json.loads(f.read())
+
+colorPackageKeys = colorPackage.keys()
+if "substitutions" not in colorPackageKeys:
+    sys.exit("Substitutions field missing in color package")
+
+for field in neededFields["other"]:
+    if field not in colorPackageKeys:
+        sys.exit("Field missing in color package: " + field)
+
+colorPackageSubstitutionKeys = colorPackage["substitutions"].keys()
+
+for field in neededFields["substitutions"]:
+    if field not in colorPackageSubstitutionKeys:
+        sys.exit("Sub-field missing in substitutions field: " + field)
+
 # Download the dwm and slstatus builds using the installs.sh script
 subprocess.run([os.path.expanduser("~/dotfiles/setup/installs.sh"), "-d"])
 
