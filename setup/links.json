@@ -5,8 +5,8 @@
         "setupFlags": []
     },
     "dunst": {
-        "source": "$(setupDir)/../etc/dunst/dunstrc",
-        "target": "/etc/dunst/dunstrc",
+        "source": "$(setupDir)/../.config/dunst/dunstrc",
+        "target": "~/.config/dunst/dunstrc",
         "setupFlags": ["needsSudo", "needsSubstitution"]
     },
     "alacritty": {
