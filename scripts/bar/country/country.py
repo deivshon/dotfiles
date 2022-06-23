@@ -7,8 +7,10 @@ def update():
     data = requests.get('https://am.i.mullvad.net/json').json()
     with open(auxFilePath, "w") as fp:
         if(data["mullvad_exit_ip"]):
-            fp.write(data["mullvad_exit_ip_hostname"] + " - " + data["country"] + "\n0\n")
-            print(data["mullvad_exit_ip_hostname"] + " - " + data["country"])
+            if "wireguard" in data["mullvad_exit_ip_hostname"]:
+                data["mullvad_exit_ip_hostname"] = data["mullvad_exit_ip_hostname"].replace("wireguard", "wg")
+            fp.write(data["mullvad_exit_ip_hostname"] + " - " + data["city"] + "\n0\n")
+            print(data["mullvad_exit_ip_hostname"] + " - " + data["city"])
         else:
             fp.write("N/C - " + data["country"] + "\n0\n")
             print("N/C - " + data["country"])
