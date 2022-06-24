@@ -56,7 +56,10 @@ yay_install() {
         cd yay || exit
         makepkg -si
     else
-        printf "%sA yay directory in the home folder already exists%s\n" "${red}" "${normal}"
+        printf "%syay: ~/yay already exists, pulling%s\n" "${red}" "${normal}"
+        cd ~/yay || exit
+        git pull
+        makepkg -si --needed
     fi
 }
 
