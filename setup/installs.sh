@@ -5,7 +5,7 @@ red=$(tput setaf 1 bold)
 green=$(tput setaf 2 bold)
 normal=$(tput sgr0)
 
-downloads() {
+dwm_slstatus_downloads() {
     printf "%sStarting downloads%s\n" "${green}" "${normal}"
 
     # Install/Update dwm-flexipatch
@@ -33,7 +33,7 @@ downloads() {
     printf "%sDownloads over, exiting%s\n" "${green}" "${normal}"
 }
 
-compilations() {
+dwm_slstatus_compilations() {
     printf "Starting compilations%s\n" "${green}" "${normal}"
 
     # dwm-flexipatch compilation
@@ -49,12 +49,26 @@ compilations() {
     printf "%sCompilations over, exiting%s\n" "${green}" "${normal}"
 }
 
+yay_install() {
+    cd ~ || exit
+    if ! [ -d ~/yay ]; then
+        git clone https://aur.archlinux.org/yay.git
+        cd yay || exit
+        makepkg -si
+    else
+        printf "%sA yay directory in the home folder already exists%s\n" "${red}" "${normal}"
+    fi
+}
+
 if [ "$1" = "-d" ]; then
-    downloads
+    dwm_slstatus_downloads
 elif [ "$1" = "-c" ]; then
-    compilations
+    dwm_slstatus_compilations
+elif [ "$1" = "-y" ]; then
+    yay_install
 else
     echo "Provide an acceptable argument:
-        -d -> perform downloads
-        -c -> perform compilations"
+        -d -> perform dwm and slstatus downloads
+        -c -> perform dwm and slstatus compilations
+        -y -> perform yay installation"
 fi
