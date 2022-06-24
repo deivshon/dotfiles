@@ -5,6 +5,7 @@ import sys
 import subprocess
 import json
 import shutil
+from time import time as currentTimestamp
 
 # Check if the script is being run as root
 currentUser = os.path.expanduser("~")
@@ -59,6 +60,7 @@ with open("links.json", "r") as f:
 colorPackagePath = "./colorPackages/sunsetDigital.json"
 forceLinks = False
 keepColorsTmpDir = False
+forcePackageInstall = False
 for i in range(0, len(sys.argv)):
     if(sys.argv[i] == "-f"):    # -f -> force
         forceLinks = True
@@ -67,6 +69,8 @@ for i in range(0, len(sys.argv)):
     elif(sys.argv[i] == "-rm"): # -rm -> remove configs
         removeConfigs(linksList)
         quit()
+    elif(sys.argv[i] == "-p"):  # -p -> packages
+        forcePackageInstall = True
     elif(sys.argv[i] == "-s"):  # -s -> style (color package path)
         if(i + 1 >= len(sys.argv)):
             # No color package path provided after -s flag, quit
@@ -156,3 +160,37 @@ subprocess.run(["cp", wallpaperPath, currentUser + "/Pictures/wallpaper"])
 
 # Compile dwm and slstatus using the installs.sh script
 subprocess.run([os.path.expanduser("~/dotfiles/setup/installs.sh"), "-c"])
+
+# Package installation if it's the first time the script is ran
+firstRunDetectionFile = "../.notFirstRun"
+
+if(not os.path.isfile(firstRunDetectionFile) or forcePackageInstall):
+    # Install yay
+    subprocess.run([os.path.expanduser("~/dotfiles/setup/installs.sh"), "-y"])
+
+    # Install packages
+    with open("packages.json", "r") as f:
+        packages = json.loads(f.read())
+
+    pacmanPackages = packages["pacman"]
+    yayPackages = packages["yay"]
+
+    pacmanPackages.insert(0, "-S")
+    pacmanPackages.insert(0, "pacman")
+    pacmanPackages.insert(0, "sudo")
+    pacmanPackages.append("--needed")
+
+    yayPackages.insert(0, "-S")
+    yayPackages.insert(0, "yay")
+    yayPackages.append("--needed")
+
+    subprocess.run(pacmanPackages)
+    subprocess.run(yayPackages)
+
+    # Create a file containing the current timestamp to mark that the script
+    # has been run at least once in the past. In the case of successive setup
+    # runs, the script will not try to install all the packages (unless
+    # otherwise specified with the -i flag), since they are likey to be
+    # already installed
+    with open(firstRunDetectionFile, "w") as f:
+        f.write(str(currentTimestamp()))
