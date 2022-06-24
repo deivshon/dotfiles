@@ -104,6 +104,40 @@ for field in neededFields["substitutions"]:
     if field not in colorPackageSubstitutionKeys:
         sys.exit("Sub-field missing in substitutions field: " + field)
 
+# Package installation if it's the first time the script is ran
+firstRunDetectionFile = "../.notFirstRun"
+
+if(not os.path.isfile(firstRunDetectionFile) or forcePackageInstall):
+    # Install yay
+    subprocess.run([os.path.expanduser("~/dotfiles/setup/installs.sh"), "-y"])
+
+    # Install packages
+    with open("packages.json", "r") as f:
+        packages = json.loads(f.read())
+
+    pacmanPackages = packages["pacman"]
+    yayPackages = packages["yay"]
+
+    pacmanPackages.insert(0, "-S")
+    pacmanPackages.insert(0, "pacman")
+    pacmanPackages.insert(0, "sudo")
+    pacmanPackages.append("--needed")
+
+    yayPackages.insert(0, "-S")
+    yayPackages.insert(0, "yay")
+    yayPackages.append("--needed")
+
+    subprocess.run(pacmanPackages)
+    subprocess.run(yayPackages)
+
+    # Create a file containing the current timestamp to mark that the script
+    # has been run at least once in the past. In the case of successive setup
+    # runs, the script will not try to install all the packages (unless
+    # otherwise specified with the -i flag), since they are likey to be
+    # already installed
+    with open(firstRunDetectionFile, "w") as f:
+        f.write(str(currentTimestamp()))
+
 # Download the dwm and slstatus builds using the installs.sh script
 subprocess.run([os.path.expanduser("~/dotfiles/setup/installs.sh"), "-d"])
 
@@ -160,37 +194,3 @@ subprocess.run(["cp", wallpaperPath, currentUser + "/Pictures/wallpaper"])
 
 # Compile dwm and slstatus using the installs.sh script
 subprocess.run([os.path.expanduser("~/dotfiles/setup/installs.sh"), "-c"])
-
-# Package installation if it's the first time the script is ran
-firstRunDetectionFile = "../.notFirstRun"
-
-if(not os.path.isfile(firstRunDetectionFile) or forcePackageInstall):
-    # Install yay
-    subprocess.run([os.path.expanduser("~/dotfiles/setup/installs.sh"), "-y"])
-
-    # Install packages
-    with open("packages.json", "r") as f:
-        packages = json.loads(f.read())
-
-    pacmanPackages = packages["pacman"]
-    yayPackages = packages["yay"]
-
-    pacmanPackages.insert(0, "-S")
-    pacmanPackages.insert(0, "pacman")
-    pacmanPackages.insert(0, "sudo")
-    pacmanPackages.append("--needed")
-
-    yayPackages.insert(0, "-S")
-    yayPackages.insert(0, "yay")
-    yayPackages.append("--needed")
-
-    subprocess.run(pacmanPackages)
-    subprocess.run(yayPackages)
-
-    # Create a file containing the current timestamp to mark that the script
-    # has been run at least once in the past. In the case of successive setup
-    # runs, the script will not try to install all the packages (unless
-    # otherwise specified with the -i flag), since they are likey to be
-    # already installed
-    with open(firstRunDetectionFile, "w") as f:
-        f.write(str(currentTimestamp()))
