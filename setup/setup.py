@@ -52,9 +52,13 @@ def removeConfigs(linksList):
         else:
             printingUtils.printCol("Can't find ", "white", linkTarget, "red")
 
-# Read and store link/copy data from links.json
-with open("links.json", "r") as f:
-    linksList = json.loads(f.read())
+# Store necessary data
+with open("data.json", "r") as f:
+    data = json.loads(f.read())
+
+linksList = data["links"]
+packages = data["packages"]
+neededFields = data["neededFields"]
 
 # Arguments handling
 colorPackagePath = "./colorPackages/sunsetDigital.json"
@@ -87,9 +91,6 @@ with open(colorPackagePath, "r") as f:
     colorPackage = json.loads(f.read())
 
 # Check the selected color package contains all the needed fields
-with open("neededFields.json", "r") as f:
-    neededFields = json.loads(f.read())
-
 colorPackageKeys = colorPackage.keys()
 if "substitutions" not in colorPackageKeys:
     sys.exit("Substitutions field missing in color package")
@@ -112,9 +113,6 @@ if(not os.path.isfile(firstRunDetectionFile) or forcePackageInstall):
     subprocess.run([os.path.expanduser("~/dotfiles/setup/installs.sh"), "-y"])
 
     # Install packages
-    with open("packages.json", "r") as f:
-        packages = json.loads(f.read())
-
     pacmanPackages = packages["pacman"]
     yayPackages = packages["yay"]
 
