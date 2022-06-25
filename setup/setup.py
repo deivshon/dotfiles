@@ -118,12 +118,12 @@ if(not os.path.isfile(firstRunDetectionFile) or forcePackageInstall):
     pacmanPackages = packages["pacman"]
     yayPackages = packages["yay"]
 
-    pacmanPackages.insert(0, "-S")
+    pacmanPackages.insert(0, "-Syu")
     pacmanPackages.insert(0, "pacman")
     pacmanPackages.insert(0, "sudo")
     pacmanPackages.append("--needed")
 
-    yayPackages.insert(0, "-S")
+    yayPackages.insert(0, "-Sua")
     yayPackages.insert(0, "yay")
     yayPackages.append("--needed")
 
@@ -136,7 +136,7 @@ if(not os.path.isfile(firstRunDetectionFile) or forcePackageInstall):
     # otherwise specified with the -i flag), since they are likey to be
     # already installed
     with open(firstRunDetectionFile, "w") as f:
-        f.write(str(currentTimestamp()))
+        f.write(str(currentTimestamp()) + "\n")
 
 # Download the dwm and slstatus builds using the installs.sh script
 subprocess.run([os.path.expanduser("~/dotfiles/setup/installs.sh"), "-d"])
