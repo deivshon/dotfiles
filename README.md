@@ -9,12 +9,10 @@ These dotfiles are intended to be used on Arch or Arch based distributions, ther
 It goes without saying that AUR packages can be installed without yay or any other helper.
 
 Everything can probably work in other distributions too, but some of the software will need to be built from source because not packaged.
-## **Package installation**
-```bash
-pacman -S xorg xorg-xinit rofi dunst alacritty feh curl sudo exa adobe-source-code-pro-fonts acpi iw sysstat ranger ueberzug ttf-droid bc polkit network-manager-applet noto-fonts wget python-requests gnome-keyring firefox gnome-themes-extra nemo lxappearance --needed
-yay -S afetch cbonsai ttf-ms-fonts polkit-dumb-agent visual-studio-code-bin --needed
-```
 ## **Setup**
+If you want to use the setup you need to be using a Arch based distro and yay as your AUR helper.
+
+
 Clone the repository in the home directory, `cd` into the setup directory and run the `setup.py` script
 
 ## **Packages**
