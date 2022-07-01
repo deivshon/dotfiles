@@ -27,14 +27,16 @@
             "firefox",
             "gnome-themes-extra",
             "nemo",
-            "lxappearance"
+            "lxappearance",
+            "wireshark-qt"
         ],
         "yay": [
             "afetch",
             "cbonsai",
             "ttf-ms-fonts",
             "polkit-dumb-agent",
-            "visual-studio-code-bin"
+            "visual-studio-code-bin",
+            "gksu"
         ]
     },
     "neededFields": {

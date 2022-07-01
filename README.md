@@ -37,6 +37,8 @@ Clone the repository in the home directory, `cd` into the setup directory and ru
 + [gnome-themes-extra](https://archlinux.org/packages/extra/x86_64/gnome-themes-extra/)
 + [nemo](https://archlinux.org/packages/community/x86_64/nemo/)
 + [lxappearance](https://archlinux.org/packages/community/x86_64/lxappearance/)
++ [gksu](https://aur.archlinux.org/packages/gksu) [sudo privileges for rofi launched applications]
++ [wireshark](https://archlinux.org/packages/community/x86_64/wireshark-qt/)
 ### **Alacritty**
 + [sudo](https://archlinux.org/packages/core/x86_64/sudo/)
 + [exa](https://archlinux.org/packages/community/x86_64/exa/) [ls replacement]
