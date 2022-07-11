@@ -43,3 +43,4 @@ for interface in os.listdir("/sys/class/net/"):
             print(str(quality) + "%", ssid)
         else:
             print("UP")
+        quit()
