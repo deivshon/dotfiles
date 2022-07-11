@@ -1,7 +1,5 @@
 #!/bin/python3
 
-# Outputs the nf-mdi-wifi nerd font char if the wifi is up, followed by the quality of the signal, and nf-mdi-wifi_off if thw wifi is down
-
 import os
 import sys
 import subprocess
@@ -12,7 +10,6 @@ sys.path.insert(1, scriptDir + "/../../scriptingUtils")
 import scriptingUtils
 
 wirelessInterface = ""
-icon = "睊"
 hasIw = False
 
 quality = ""
@@ -23,7 +20,6 @@ for interface in os.listdir("/sys/class/net/"):
         stateFile = open("/sys/class/net/" + interface + "/operstate", "r")
         isUp = True if stateFile.read().strip() == "up" else False
         if(isUp):
-            icon = "直"
             if(os.path.isfile("/usr/bin/iw")):
                 hasIw = True
                 iwOutput = subprocess.run(["iw", "dev", interface, "link"], capture_output=True)
@@ -41,13 +37,9 @@ for interface in os.listdir("/sys/class/net/"):
                     elif("SSID" in line):
                         ssid = line.strip().removeprefix("SSID: ")
 
-                
-        if("-n" in sys.argv):
-            icon = ""
-        
         if(isUp == "down"):
-            print(icon)
+            print("DOWN")
         elif(isUp and hasIw):
-            print(icon + str(quality) + "%", ssid)
+            print(str(quality) + "%", ssid)
         else:
-            print(icon)
+            print("UP")
