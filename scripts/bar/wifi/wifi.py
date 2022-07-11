@@ -37,7 +37,7 @@ for interface in os.listdir("/sys/class/net/"):
                     elif("SSID" in line):
                         ssid = line.strip().removeprefix("SSID: ")
 
-        if(isUp == "down"):
+        if(not isUp):
             print("DOWN|")
         elif(isUp and hasIw):
             print(str(quality) + "%", ssid + "|")
