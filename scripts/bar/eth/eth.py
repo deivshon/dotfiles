@@ -7,5 +7,5 @@ for interface in os.listdir("/sys/class/net/"):
         stateFile = open("/sys/class/net/" + interface + "/operstate", "r")
         status = "UP" if stateFile.read().strip() == "up" else "DOWN"
 
-        print(status)
+        print(status + "|")
         quit()
