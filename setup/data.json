@@ -28,7 +28,8 @@
             "gnome-themes-extra",
             "nemo",
             "lxappearance",
-            "wireshark-qt"
+            "wireshark-qt",
+            "tmux"
         ],
         "yay": [
             "afetch",
