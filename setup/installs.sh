@@ -56,7 +56,7 @@ yay_install() {
         cd yay || exit
         makepkg -si
     else
-        printf "%syay: ~/yay already exists, pulling%s\n" "${red}" "${normal}"
+        printf "%syay: ~/yay already exists%s\n" "${red}" "${normal}"
     fi
 }
 
