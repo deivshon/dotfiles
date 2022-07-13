@@ -5,4 +5,4 @@
 # $8 -> idle
 usage=$(top -bn1 | grep '%Cpu' | awk '{cpuUsage=($2+$4)/($2+$4+$8)*100} END {print cpuUsage}')
 
-printf "%.1f%%|" "$usage"
+printf "CPU %.1f%%|" "$usage"

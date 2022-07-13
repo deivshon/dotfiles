@@ -2,10 +2,12 @@
 
 import os
 
+label = "ETH "
+
 for interface in os.listdir("/sys/class/net/"):
     if "enp" in interface or "eth" in interface:
         stateFile = open("/sys/class/net/" + interface + "/operstate", "r")
         status = "UP" if stateFile.read().strip() == "up" else "DOWN"
 
-        print(status + "|")
+        print(label + status + "|")
         quit()
