@@ -5,6 +5,7 @@ import sys
 import subprocess
 
 label = "BAT "
+suffix = "|" if "--separator" in sys.argv else ""
 
 scriptDir = os.path.abspath(os.path.dirname(sys.argv[0]))
 sys.path.insert(1, scriptDir + "/../../scriptingUtils")
@@ -30,4 +31,4 @@ else:
             charge = scriptingUtils.whitelistChars(section, "0123456789%")
         if("remaining" in section or "until" in section):
             remaining = " " + scriptingUtils.whitelistChars(section, "0123456789:")[:5]
-    print(label + charging, charge, remaining, "|", sep = "")
+    print(label + charging, charge, remaining, suffix, sep = "")

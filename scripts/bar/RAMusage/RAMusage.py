@@ -4,6 +4,7 @@ import sys
 import os
 
 label = "RAM "
+suffix = "|" if "--separator" in sys.argv else ""
 
 scriptDir = os.path.abspath(os.path.dirname(sys.argv[0]))
 sys.path.insert(1, scriptDir + "/../../scriptingUtils")
@@ -17,4 +18,4 @@ memTotal, memAvailable = meminfoOutput[0], meminfoOutput[1]
 
 inUse = (memTotal - memAvailable)
 percentageInUse = (inUse / memTotal) * 100
-print(label + str(round(inUse / 1000000, 2)), "G/", str(round(memTotal / 1000000, 2)), "G (" + str(round(percentageInUse, 2)) + "%)" + "|", sep="")
+print(label + str(round(inUse / 1000000, 2)), "G/", str(round(memTotal / 1000000, 2)), "G (" + str(round(percentageInUse, 2)) + "%)" + suffix, sep="")

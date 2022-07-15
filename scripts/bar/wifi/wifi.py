@@ -5,6 +5,7 @@ import sys
 import subprocess
 
 label = "WIFI "
+suffix = "|" if "--separator" in sys.argv else ""
 
 scriptDir = os.path.abspath(os.path.dirname(sys.argv[0]))
 sys.path.insert(1, scriptDir + "/../../scriptingUtils")
@@ -40,9 +41,9 @@ for interface in os.listdir("/sys/class/net/"):
                         ssid = line.strip().removeprefix("SSID: ")
 
         if(not isUp):
-            print(label + "DOWN|")
+            print(label + "DOWN" + suffix)
         elif(isUp and hasIw):
-            print(label + str(quality) + "%", ssid + "|")
+            print(label + str(quality) + "%", ssid + suffix)
         else:
-            print(label + "UP|")
+            print(label + "UP" + suffix)
         quit()

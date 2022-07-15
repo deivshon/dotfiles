@@ -1,5 +1,10 @@
 #!/bin/sh
 
+suffix=""
+if [ "$1" = "--separator" ]; then
+    suffix="|"
+fi
+
 memInfo=$(grep -e MemTotal -e MemAvailable < /proc/meminfo)
 
 while IFS= read -r line; do
@@ -18,4 +23,4 @@ memTot=$(echo "$memTot" / 1000000 | bc -l)
 memAvail=$(echo "$memAvail" / 1000000 | bc -l)
 
 memInUse=$(echo "$memTot - $memAvail" | bc -l)
-printf "RAM %.2fG/%.2fG (%.1f%%)|\n" "$memInUse" "$memTot" "$memPerc"
+printf "RAM %.2fG/%.2fG (%.1f%%)%s\n" "$memInUse" "$memTot" "$memPerc" "$suffix"
