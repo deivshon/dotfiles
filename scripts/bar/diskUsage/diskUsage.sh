@@ -10,7 +10,7 @@ while IFS= read -r line; do
     if [ "$currentCol" = "/" ]; then
         printf "DISK "
         printf "%s" "$line" | awk '{printf $4}'
-        printf "%s" "$suffix"
+        printf "%s\n" "$suffix"
         exit
     fi
 done << EOF
