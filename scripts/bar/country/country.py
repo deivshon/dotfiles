@@ -10,7 +10,7 @@ def update():
     try:
         data = requests.get('https://am.i.mullvad.net/json', timeout = 3).json()
     except:
-        print("TIMED OUT")
+        print("TIMED OUT" + suffix)
         quit()
     with open(auxFilePath, "w") as fp:
         if(data["mullvad_exit_ip"]):
