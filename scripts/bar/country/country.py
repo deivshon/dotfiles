@@ -7,7 +7,11 @@ import sys
 suffix = "|" if "--separator" in sys.argv else ""
 
 def update():
-    data = requests.get('https://am.i.mullvad.net/json').json()
+    try:
+        data = requests.get('https://am.i.mullvad.net/json', timeout = 3).json()
+    except:
+        print("TIMED OUT")
+        quit()
     with open(auxFilePath, "w") as fp:
         if(data["mullvad_exit_ip"]):
             if "wireguard" in data["mullvad_exit_ip_hostname"]:
