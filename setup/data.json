@@ -29,7 +29,8 @@
             "nemo",
             "lxappearance",
             "wireshark-qt",
-            "tmux"
+            "tmux",
+            "btop"
         ],
         "yay": [
             "afetch",
@@ -64,6 +65,11 @@
         "alacritty": {
             "source": "$(setupDir)/../.config/alacritty/alacritty.yml",
             "target": "~/.config/alacritty/alacritty.yml",
+            "setupFlags": []
+        },
+        "btop": {
+            "source": "$(setupDir)/../.config/btop/btop.conf",
+            "target": "~/.config/btop/btop.conf",
             "setupFlags": []
         },
         "rofi": {
