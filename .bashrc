@@ -133,9 +133,9 @@ alias ls='exa'
 alias ll='exa -laF'
 
 # Grep
-alias grep='grep --colour=auto'
-alias egrep='egrep --colour=auto'
-alias fgrep='fgrep --colour=auto'
+alias grep='grep --colour=always'
+alias egrep='egrep --colour=always'
+alias fgrep='fgrep --colour=always'
 
 # Copy (confirm before overwriting)
 alias cp='cp -i'
