@@ -36,7 +36,7 @@
             "afetch",
             "cbonsai",
             "ttf-ms-fonts",
-            "polkit-dumb-agent",
+            "polkit-dumb-agent-git",
             "visual-studio-code-bin",
             "gksu"
         ]
