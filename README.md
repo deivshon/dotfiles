@@ -58,8 +58,8 @@ Clone the repository in the home directory, `cd` into the setup directory and ru
 + [bc](https://archlinux.org/packages/extra/x86_64/bc/) [floating point operations in shell scripts]
 ### **VPN/country script**
 + [python-requests](https://archlinux.org/packages/extra/any/python-requests/)
-## **Color packages**
-Color packages are a basic way to generalize the setup script for different color styles. They are JSONs that (currently) contain three fields
+## **Color styles**
+Color styles are a basic way to generalize the setup script for different color styles. They are JSONs that (currently) contain three fields
 + substitutions
 + wallpaperLink
 + wallpaperName
