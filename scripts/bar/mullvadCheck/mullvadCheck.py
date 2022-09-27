@@ -16,8 +16,8 @@ def update():
         if(data["mullvad_exit_ip"]):
             if "wireguard" in data["mullvad_exit_ip_hostname"]:
                 data["mullvad_exit_ip_hostname"] = data["mullvad_exit_ip_hostname"].replace("wireguard", "wg")
-            fp.write(data["mullvad_exit_ip_hostname"] + " - " + data["city"] + "\n0\n")
-            print(data["mullvad_exit_ip_hostname"] + " - " + data["city"] + suffix)
+            fp.write(data["mullvad_exit_ip_hostname"] + "\n0\n")
+            print(data["mullvad_exit_ip_hostname"] + suffix)
         else:
             fp.write("N/C - " + data["country"] + "\n0\n")
             print("N/C - " + data["country"] + suffix)
