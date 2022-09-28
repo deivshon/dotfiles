@@ -34,7 +34,7 @@ dwm_slstatus_downloads() {
 }
 
 dwm_slstatus_compilations() {
-    printf "Starting compilations%s\n" "${green}" "${normal}"
+    printf "%sStarting compilations%s\n" "${green}" "${normal}"
 
     # dwm-flexipatch compilation
     cd ~/.config/dwm || exit
