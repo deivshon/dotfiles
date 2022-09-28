@@ -26,11 +26,7 @@ int main(int argc, char **argv) {
     char *sep = "";
     int isUp = 0;
     
-    for(int i = 0; i < argc; i++) {
-        if(streq("--separator", argv[i])) {
-            sep = "|";
-        }
-    }
+    get_separator(&sep, argc, argv);
 
     struct dirent *d;
     DIR *interfaces;

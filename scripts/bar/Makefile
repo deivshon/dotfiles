@@ -1,8 +1,8 @@
 UTILS_PATH = ../scriptingUtils/cutils
 
-.SECONDARY: $(UTILS_PATH)/cutils.o eth/eth.o
+.SECONDARY: $(UTILS_PATH)/cutils.o eth/eth.o diskUsage/diskUsage.o
 
-all: eth/eth.out
+all: eth/eth.out diskUsage/diskUsage.out
 
 %.out: %.o $(UTILS_PATH)/cutils.o
 	gcc -o $@ $^
