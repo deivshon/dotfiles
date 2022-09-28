@@ -22,7 +22,6 @@ int operstate_up(char *path) {
 }
 
 int main(int argc, char **argv) {
-    char *label = "ETH";
     char *sep = "";
     int isUp = 0;
     
