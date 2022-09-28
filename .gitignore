@@ -130,3 +130,7 @@ dmypy.json
 
 colorsTmp
 .notFirstRun
+
+*.o
+*.out
+.vscode
