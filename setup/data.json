@@ -60,7 +60,7 @@
         "dunst": {
             "source": "$(setupDir)/../.config/dunst/dunstrc",
             "target": "~/.config/dunst/dunstrc",
-            "setupFlags": ["needsSudo", "needsSubstitution"]
+            "setupFlags": ["needsSubstitution"]
         },
         "alacritty": {
             "source": "$(setupDir)/../.config/alacritty/alacritty.yml",
