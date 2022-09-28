@@ -24,11 +24,11 @@ void get_cmd_output(char *dest, int dest_size, char *cmd, char **cmd_args) {
         char buf[1024] = "";
         close(piped[1]);    // close write end of parent
 
-        while(c = read(piped[0], buf, sizeof(buf) - 1)) {
+        while((c = read(piped[0], buf, sizeof(buf) - 1))) {
             // Sets the byte after the last one read to '\0', terminating the string
             buf[c] = '\0';
 
-            if(strlen(dest) + strlen(buf) >= dest_size)
+            if(strlen(dest) + strlen(buf) >= (size_t) dest_size)
                 break;
 
             strcat(dest, buf);
@@ -43,4 +43,23 @@ void get_separator(char **dest, int argc, char **argv) {
             (*dest) = SEPARATOR;
         }
     }
+}
+
+int to_formatted_bytes(char *dest, double bytes) {
+    char *suffixes[7] = {"B", "K", "M", "G", "T", "P", "E"};
+
+    double approx_bytes = bytes;
+    unsigned int divisions = 0;
+
+    while(approx_bytes > 1e3 && divisions <= 7) {
+        approx_bytes /= 1024;
+        divisions++;
+    }
+
+    if(divisions == 0)
+        sprintf(dest, "%.0lf%s", approx_bytes, suffixes[divisions]);
+    else
+        sprintf(dest, "%.2lf%s", approx_bytes, suffixes[divisions]);
+
+    return 1;
 }

@@ -14,5 +14,6 @@
 
 void get_separator(char **dest, int argc, char **argv);
 void get_cmd_output(char *dest, int dest_size, char *cmd, char **cmd_args);
+int to_formatted_bytes(char *dest, double bytes);
 
 #endif
