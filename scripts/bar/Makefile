@@ -2,9 +2,9 @@ UTILS_PATH = ../scriptingUtils/cutils
 
 CFLAGS = -O2 -Wall -Wextra
 
-.SECONDARY: $(UTILS_PATH)/cutils.o eth/eth.o diskUsage/diskUsage.o RAMusage/RAMusage.o cpuUsage/cpuUsage.o
+.SECONDARY: $(UTILS_PATH)/cutils.o eth/eth.o diskUsage/diskUsage.o RAMusage/RAMusage.o cpuUsage/cpuUsage.o mullvadCheck/mullvadCheck.o
 
-all: eth/eth.out diskUsage/diskUsage.out RAMusage/RAMusage.out cpuUsage/cpuUsage.out
+all: eth/eth.out diskUsage/diskUsage.out RAMusage/RAMusage.out cpuUsage/cpuUsage.out mullvadCheck/mullvadCheck.out
 
 %.out: %.o $(UTILS_PATH)/cutils.o
 	gcc $(CFLAGS) -o $@ $^
