@@ -42,14 +42,14 @@ int main(int argc, char **argv) {
     memAvail *= 1024;
 
     char memTotalStr[16];
-    char memAvailStr[16];
+    char inUseStr[16];
 
     inUse = memTotal - memAvail;
     percentageInUse = (inUse / memTotal) * 100;
 
     to_formatted_bytes(memTotalStr, memTotal);
-    to_formatted_bytes(memAvailStr, memAvail);
-    sprintf(result, "RAM %s/%s (%.2f%%)", memAvailStr, memTotalStr, percentageInUse);
+    to_formatted_bytes(inUseStr, inUse);
+    sprintf(result, "RAM %s/%s (%.2f%%)", inUseStr, memTotalStr, percentageInUse);
     strcat(result, sep);
     printf("%s\n", result);
 }
