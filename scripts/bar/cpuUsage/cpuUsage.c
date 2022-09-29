@@ -45,5 +45,5 @@ int main(int argc, char **argv) {
 
     double result_perc = get_cpu_usage_perc(result_cpu_usage);
 
-    printf("CPU %.2f%%%s", result_perc, sep);
+    printf("CPU %.2f%%%s\n", result_perc, sep);
 }
