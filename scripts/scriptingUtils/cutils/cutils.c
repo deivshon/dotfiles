@@ -71,7 +71,8 @@ int get_cpu_usage(unsigned long dest[CPU_TIME_FIELDS], char *dest_str, char *fil
 
     data_line[0] = '\0';
     if(!fgets(data_line, 256, fs)) return 0;
-    strcpy(dest_str, data_line);
+
+    if(dest_str != NULL) strcpy(dest_str, data_line);
 
     char *buf = strtok(data_line, " ");
     for(int i = 0; i < CPU_TIME_FIELDS; i++) {
