@@ -63,3 +63,24 @@ int to_formatted_bytes(char *dest, double bytes) {
 
     return 1;
 }
+
+int get_cpu_usage(unsigned long dest[CPU_TIME_FIELDS], char *dest_str, char *file_path) {
+    FILE *fs = fopen(file_path, "r");
+    if(fs == NULL) return 0;
+    char data_line[256];
+
+    data_line[0] = '\0';
+    if(!fgets(data_line, 256, fs)) return 0;
+    strcpy(dest_str, data_line);
+
+    char *buf = strtok(data_line, " ");
+    for(int i = 0; i < CPU_TIME_FIELDS; i++) {
+        buf = strtok(NULL, " ");
+        if(buf == NULL) break;
+
+        dest[i] = strtoul(buf, NULL, 10);
+    }
+    fclose(fs);
+
+    return 1;
+}
