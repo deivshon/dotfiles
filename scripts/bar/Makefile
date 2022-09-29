@@ -7,7 +7,7 @@ CFLAGS = -O2 -Wall -Wextra
 all: eth/eth.out diskUsage/diskUsage.out RAMusage/RAMusage.out
 
 %.out: %.o $(UTILS_PATH)/cutils.o
-	gcc -o $@ $^
+	gcc $(CFLAGS) -o $@ $^
 
 %.o: %.c $(UTILS_PATH)/cutils.c $(UTILS_PATH)/cutils.h
 	gcc $(CFLAGS) -c -o $@ $<
