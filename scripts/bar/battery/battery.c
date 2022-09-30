@@ -27,11 +27,15 @@ int main(int argc, char **argv) {
     char *charging = "";
     char *charge = "";
     char *remaining = "";
-    if(contains_substr(acpi_output, "charging") && !contains_substr(acpi_output, "discharging")) {
+    char *to_end = NULL;
+    if((contains_substr(acpi_output, "charging") && !contains_substr(acpi_output, "discharging"))   ||
+       (contains_substr(acpi_output, "full") && !contains_substr(acpi_output, "discharging")))
+    {
         charging = "CHR";
     }
     if(contains_substr(acpi_output, "%")) {
         char *traverse = strstr(acpi_output, "%");
+        to_end = (traverse + sizeof(char));
 
         while(!isspace(*traverse)) {
             traverse -= sizeof(char);
@@ -67,6 +71,8 @@ int main(int argc, char **argv) {
     int remaining_exists = strcmp("", remaining);
 
     int space_after_charge = remaining_exists && !(charging_exists && !charge_exists);
+
+    if(to_end != NULL) (*to_end) = '\0';
 
     printf("BAT %s%*s%s%*s%s%s\n", charging, charging_exists ? 1 : 0, "", charge, space_after_charge ? 1 : 0, "", remaining, sep);
 }
