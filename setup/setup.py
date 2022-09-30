@@ -194,4 +194,4 @@ subprocess.run(["cp", wallpaperPath, currentUser + "/Pictures/wallpaper"])
 subprocess.run([os.path.expanduser("~/dotfiles/setup/installs.sh"), "-c"])
 
 # Compile C bar scripts
-subprocess.run(["make", "clean", "all", "-C", os.path.expanduser("~/dotfiles/scripts/bar")])
+subprocess.run(["make", "clean", "all", "-C", os.path.expanduser("~/dotfiles/scripts/bar"), "dbg=false"])
