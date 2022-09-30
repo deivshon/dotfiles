@@ -24,6 +24,7 @@ int main(int argc, char **argv) {
             break;
         }
     }
+    closedir(interfaces);
 
     if(!isUp) exit(EXIT_SUCCESS);
     
