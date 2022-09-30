@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
+#include <ctype.h>
 
 void get_cmd_output(char *dest, int dest_size, char *cmd, char **cmd_args) {
     int piped[2];
@@ -84,4 +85,10 @@ int get_cpu_usage(unsigned long dest[CPU_TIME_FIELDS], char *dest_str, char *fil
     fclose(fs);
 
     return 1;
+}
+
+void str_to_lower(char str[]) {
+    for(int i = 0; str[i]; i++) {
+        str[i] = tolower(str[i]);
+    }
 }
