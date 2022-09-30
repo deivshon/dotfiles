@@ -92,3 +92,20 @@ void str_to_lower(char str[]) {
         str[i] = tolower(str[i]);
     }
 }
+
+int operstate_up(char *interface_path) {
+    char operstate_path[MAX_PATH_LENGTH];
+    sprintf(operstate_path, "%s/%s", interface_path, "operstate");
+
+    FILE *fs = fopen(operstate_path, "r");
+    if(fs == NULL) return 0;
+
+    char content[16];
+    fgets(content, 16, fs);
+
+    fclose(fs);
+
+    strip(content);
+
+    return streq("up", content);
+}

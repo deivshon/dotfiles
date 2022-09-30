@@ -31,5 +31,5 @@ void get_cmd_output(char *dest, int dest_size, char *cmd, char **cmd_args);
 int to_formatted_bytes(char *dest, double bytes);
 int get_cpu_usage(unsigned long cpu_data[CPU_TIME_FIELDS], char *dest_str, char *file_path);
 void str_to_lower(char str[]);
-
+int operstate_up(char *interface_path);
 #endif

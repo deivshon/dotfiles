@@ -4,23 +4,6 @@
 #include <stdlib.h>
 #include "../../scriptingUtils/cutils/cutils.h"
 
-int operstate_up(char *path) {
-    char operstate_path[MAX_PATH_LENGTH];
-    sprintf(operstate_path, "%s/%s", path, "operstate");
-
-    FILE *fs = fopen(operstate_path, "r");
-    if(fs == NULL) return 0;
-
-    char content[16];
-    fgets(content, 16, fs);
-
-    fclose(fs);
-
-    strip(content);
-
-    return streq("up", content);
-}
-
 int main(int argc, char **argv) {
     char *sep = "";
     int isUp = 0;
