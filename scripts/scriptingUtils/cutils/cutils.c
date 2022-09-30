@@ -18,7 +18,7 @@ void get_cmd_output(char *dest, int dest_size, char *cmd, char **cmd_args) {
         execvp(cmd, cmd_args);
     }
     else {
-        strcpy(dest, "");
+        dest[0] = '\0';
 
         int c = 0; // Bytes read into buffer each time
         char buf[1024] = "";
