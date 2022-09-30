@@ -17,6 +17,7 @@ void get_cmd_output(char *dest, int dest_size, char *cmd, char **cmd_args) {
         close(piped[1]);    // close write end of child: no longer needed
 
         execvp(cmd, cmd_args);
+        exit(EXIT_FAILURE);
     }
     else {
         dest[0] = '\0';
