@@ -61,7 +61,7 @@ packages = data["packages"]
 neededFields = data["neededFields"]
 
 # Arguments handling
-colorPackagePath = "./colorPackages/sunsetDigital.json"
+colorPackagePath = "./colorStyles/sunsetDigital.json"
 forceLinks = False
 keepColorsTmpDir = False
 forcePackageInstall = False
