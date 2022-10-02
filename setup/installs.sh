@@ -14,9 +14,7 @@ dwm_slstatus_downloads() {
         git clone https://github.com/deivshon/dwm-flexipatch ~/.config/dwm
     else
         printf "%sdwm-flexipatch: ~/.config/dwm-flexipatch already exists, pulling%s\n" "${red}" "${normal}"
-        cd ~/.config/dwm || exit
-        git pull
-        cd ~ || exit
+        git -C ~/.config/dwm pull
     fi
 
     # Install/Update slstatus
@@ -25,9 +23,7 @@ dwm_slstatus_downloads() {
         git clone https://github.com/deivshon/slstatus ~/.config/slstatus/
     else
         printf "%sslstatus: ~/.config/slstatus already exists, pulling%s\n" "${red}" "${normal}"
-        cd ~/.config/slstatus || exit
-        git pull
-        cd ~ || exit
+        git -C ~/.config/slstatus pull
     fi    
 
     printf "%sDownloads over, exiting%s\n" "${green}" "${normal}"
@@ -37,14 +33,12 @@ dwm_slstatus_compilations() {
     printf "%sStarting compilations%s\n" "${green}" "${normal}"
 
     # dwm-flexipatch compilation
-    cd ~/.config/dwm || exit
     printf "%sStarting dwm-flexipatch compilation%s\n" "${cyan}" "${normal}"
-    sudo make clean install
+    sudo make -C ~/.config/dwm clean install
 
     # slstatus compilation
-    cd ~/.config/slstatus || exit
     printf "%sStarting slstatus compilation%s\n" "${cyan}" "${normal}"
-    sudo make clean install
+    sudo make -C ~/.config/slstatus clean install
 
     printf "%sCompilations over, exiting%s\n" "${green}" "${normal}"
 }
@@ -66,9 +60,7 @@ change_vol_pactl_install() {
         git clone https://github.com/deivshon/change-vol-pactl ~/.config/change-vol-pactl
     else
         printf "%schange-vol-pactl: ~/.config/change-vol-pactl already exists, pulling%s\n" "${red}" "${normal}"
-        cd ~/.config/change-vol-pactl || exit
-        git pull
-        cd ~ || exit
+        git -C ~/.config/change-vol-pactl pull
     fi
 
     printf "%sStarting change-vol-pactl compilation%s\n" "${cyan}" "${normal}"
