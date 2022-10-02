@@ -193,5 +193,8 @@ subprocess.run(["cp", wallpaperPath, currentUser + "/Pictures/wallpaper"])
 # Compile dwm and slstatus using the installs.sh script
 subprocess.run([os.path.expanduser("~/dotfiles/setup/installs.sh"), "-c"])
 
+# Download and compile change-vol-pactl
+subprocess.run([os.path.expanduser("~/dotfiles/setup/installs.sh"), "-cvp"])
+
 # Compile C bar scripts
 subprocess.run(["make", "clean", "all", "-C", os.path.expanduser("~/dotfiles/scripts/bar"), "dbg=false"])

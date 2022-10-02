@@ -60,12 +60,30 @@ yay_install() {
     fi
 }
 
+change_vol_pactl_install() {
+    if ! [ -d ~/.config/change-vol-pactl ]; then
+        printf "%sStarting change-vol-pactl download%s\n" "${cyan}" "${normal}"
+        git clone https://github.com/deivshon/change-vol-pactl ~/.config/change-vol-pactl
+    else
+        printf "%schange-vol-pactl: ~/.config/change-vol-pactl already exists, pulling%s\n" "${red}" "${normal}"
+        cd ~/.config/change-vol-pactl || exit
+        git pull
+        cd ~ || exit
+    fi
+
+    printf "%sStarting change-vol-pactl compilation%s\n" "${cyan}" "${normal}"
+    sudo make -C ~/.config/change-vol-pactl clean install
+    printf "%sCompilation over, exiting%s\n" "${green}" "${normal}"
+}
+
 if [ "$1" = "-d" ]; then
     dwm_slstatus_downloads
 elif [ "$1" = "-c" ]; then
     dwm_slstatus_compilations
 elif [ "$1" = "-y" ]; then
     yay_install
+elif [ $1 = "-cvp" ]; then
+    change_vol_pactl_install
 else
     echo "Provide an acceptable argument:
         -d -> perform dwm and slstatus downloads
