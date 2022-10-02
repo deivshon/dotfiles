@@ -110,7 +110,8 @@ firstRunDetectionFile = "../.notFirstRun"
 
 if(not os.path.isfile(firstRunDetectionFile) or forcePackageInstall):
     # Install yay
-    subprocess.run([os.path.expanduser("~/dotfiles/setup/installs.sh"), "yay", "i"])
+    if(not os.path.isdir(os.path.expanduser("~/yay"))):
+        subprocess.run([os.path.expanduser("~/dotfiles/setup/installs.sh"), "yay", "i"])
 
     # Install packages
     pacmanPackages = packages["pacman"]
