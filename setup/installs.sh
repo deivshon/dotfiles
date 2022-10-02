@@ -58,8 +58,7 @@ slstatus_download() {
 
 yay_download() {
     if ! [ -d ~/yay ]; then
-        git clone https://aur.archlinux.org/yay.git ~
-        cd yay || exit
+        git clone https://aur.archlinux.org/yay.git ~/yay
     else
         printf "%syay: ~/yay already exists%s\n" "${red}" "${normal}"
     fi
