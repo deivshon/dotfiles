@@ -78,7 +78,8 @@ elif [ $1 = "-cvp" ]; then
     change_vol_pactl_install
 else
     echo "Provide an acceptable argument:
-        -d -> perform dwm and slstatus downloads
-        -c -> perform dwm and slstatus compilations
-        -y -> perform yay installation"
+        -d      -> perform dwm and slstatus downloads
+        -c      -> perform dwm and slstatus compilations
+        -y      -> perform yay installation
+        -cvp    -> perform change-vol-pactl installation"
 fi
