@@ -137,7 +137,8 @@ if(not os.path.isfile(firstRunDetectionFile) or forcePackageInstall):
         f.write(str(currentTimestamp()) + "\n")
 
 # Download the dwm and slstatus builds using the installs.sh script
-subprocess.run([os.path.expanduser("~/dotfiles/setup/installs.sh"), "-d"])
+subprocess.run([os.path.expanduser("~/dotfiles/setup/installs.sh"), "dwm", "d"])
+subprocess.run([os.path.expanduser("~/dotfiles/setup/installs.sh"), "slstatus", "d"])
 
 # Handle each link/copy
 for link in linksList:
@@ -191,10 +192,11 @@ if(not os.path.isfile(wallpaperPath)):
 subprocess.run(["cp", wallpaperPath, currentUser + "/Pictures/wallpaper"])
 
 # Compile dwm and slstatus using the installs.sh script
-subprocess.run([os.path.expanduser("~/dotfiles/setup/installs.sh"), "-c"])
+subprocess.run([os.path.expanduser("~/dotfiles/setup/installs.sh"), "dwm", "c"])
+subprocess.run([os.path.expanduser("~/dotfiles/setup/installs.sh"), "slstatus", "c"])
 
 # Download and compile change-vol-pactl
-subprocess.run([os.path.expanduser("~/dotfiles/setup/installs.sh"), "-cvp"])
+subprocess.run([os.path.expanduser("~/dotfiles/setup/installs.sh"), "change_vol_pactl", "i"])
 
 # Compile C bar scripts
 subprocess.run(["make", "clean", "all", "-C", os.path.expanduser("~/dotfiles/scripts/bar"), "dbg=false"])
