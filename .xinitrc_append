@@ -1,0 +1,7 @@
+~/startup/startup.sh &
+slstatus &
+nm-applet &
+polkit-dumb-agent &
+dunst &
+feh --bg-scale ~/Pictures/wallpaper &
+exec dwm

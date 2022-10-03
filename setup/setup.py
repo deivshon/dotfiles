@@ -2,6 +2,7 @@
 
 import os
 import sys
+import stat
 import subprocess
 import json
 import shutil
@@ -98,6 +99,26 @@ def installPackages(packages, firstRunDetectionFile):
     # already installed
     with open(firstRunDetectionFile, "w") as f:
         f.write(str(currentTimestamp()) + "\n")
+
+def handleXinitrc():
+    if(not os.path.isfile("/etc/X11/xinit/xinitrc")):
+        printingUtils.printCol("Couldn't handle xinitrc: default xinitrc not found", "red")
+        return
+
+    with open("/etc/X11/xinit/xinitrc") as f:
+        xinitrc = f.read().splitlines()
+
+    if("twm &" not in xinitrc):
+        printingUtils.printCol("Couldn't handle xinitrc: malformed default xinitrc", "red")
+        return
+
+    xinitrc = xinitrc[0:xinitrc.index("twm &")]
+
+    with open("../.xinitrc_append", "r") as f:
+        xinitrc_append = f.read()
+
+    with open(os.path.expanduser("~/.xinitrc"), "w") as f:
+        f.write("\n".join(xinitrc) + "\n" + xinitrc_append)
 
 ########## MAIN ##########
 
@@ -212,3 +233,19 @@ installs("change_vol_pactl", "i")
 
 # Compile C bar scripts
 subprocess.run(["make", "clean", "all", "-C", os.path.expanduser("~/dotfiles/scripts/bar"), "dbg=false"])
+
+# Use the default xinitrc file to create the final one using .xinitrc_append
+if(not os.path.isfile(os.path.expanduser("~/.xinitrc"))):
+    handleXinitrc()
+
+# Create the setup folder and script in the home directory
+# This script is ran every time the X server starts
+subprocess.run(["mkdir", "-p", os.path.expanduser("~/startup")])
+
+startupFilePath = os.path.expanduser("~/startup/startup.sh")
+if(not os.path.isfile(startupFilePath)):
+    with open(startupFilePath, "w") as f:
+        f.write("#!/bin/sh\n")
+
+    # This line is the equivalent of chmod +x ~/startup/startup.sh
+    os.chmod(startupFilePath, os.stat(startupFilePath).st_mode | stat.S_IEXEC)
