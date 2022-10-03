@@ -52,6 +52,9 @@ def removeConfigs(linksList):
         else:
             printingUtils.printCol("Can't find ", "white", linkTarget, "red")
 
+def installs(program, action):
+    subprocess.run([os.path.expanduser("~/dotfiles/setup/installs.sh"), program, action])
+
 # Store necessary data
 with open("data.json", "r") as f:
     data = json.loads(f.read())
@@ -111,7 +114,7 @@ firstRunDetectionFile = "../.notFirstRun"
 if(not os.path.isfile(firstRunDetectionFile) or forcePackageInstall):
     # Install yay
     if(not os.path.isdir(os.path.expanduser("~/yay"))):
-        subprocess.run([os.path.expanduser("~/dotfiles/setup/installs.sh"), "yay", "i"])
+        installs("yay", "i")
 
     # Install packages
     pacmanPackages = packages["pacman"]
@@ -138,8 +141,8 @@ if(not os.path.isfile(firstRunDetectionFile) or forcePackageInstall):
         f.write(str(currentTimestamp()) + "\n")
 
 # Download the dwm and slstatus builds using the installs.sh script
-subprocess.run([os.path.expanduser("~/dotfiles/setup/installs.sh"), "dwm", "d"])
-subprocess.run([os.path.expanduser("~/dotfiles/setup/installs.sh"), "slstatus", "d"])
+installs("dwm", "d")
+installs("slstatus", "d")
 
 # Handle each link/copy
 for link in linksList:
@@ -193,11 +196,11 @@ if(not os.path.isfile(wallpaperPath)):
 subprocess.run(["cp", wallpaperPath, currentUser + "/Pictures/wallpaper"])
 
 # Compile dwm and slstatus using the installs.sh script
-subprocess.run([os.path.expanduser("~/dotfiles/setup/installs.sh"), "dwm", "c"])
-subprocess.run([os.path.expanduser("~/dotfiles/setup/installs.sh"), "slstatus", "c"])
+installs("dwm", "c")
+installs("slstatus", "c")
 
 # Download and compile change-vol-pactl
-subprocess.run([os.path.expanduser("~/dotfiles/setup/installs.sh"), "change_vol_pactl", "i"])
+installs("change_vol_pactl", "i")
 
 # Compile C bar scripts
 subprocess.run(["make", "clean", "all", "-C", os.path.expanduser("~/dotfiles/scripts/bar"), "dbg=false"])
