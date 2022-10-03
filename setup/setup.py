@@ -71,6 +71,36 @@ def checkColorStyle(colorStyle, neededFields):
 def installs(program, action):
     subprocess.run([os.path.expanduser("~/dotfiles/setup/installs.sh"), program, action])
 
+def installYay():
+    if(not os.path.isdir(os.path.expanduser("~/yay"))):
+        installs("yay", "i")
+
+def installPackages(packages, firstRunDetectionFile):
+    pacmanPackages = packages["pacman"]
+    yayPackages = packages["yay"]
+
+    pacmanPackages.insert(0, "-Syu")
+    pacmanPackages.insert(0, "pacman")
+    pacmanPackages.insert(0, "sudo")
+    pacmanPackages.append("--needed")
+
+    yayPackages.insert(0, "-Sua")
+    yayPackages.insert(0, "yay")
+    yayPackages.append("--needed")
+
+    subprocess.run(pacmanPackages)
+    subprocess.run(yayPackages)
+
+    # Create a file containing the current timestamp to mark that the script
+    # has been run at least once in the past. In the case of successive setup
+    # runs, the script will not try to install all the packages (unless
+    # otherwise specified with the -p flag), since they are likey to be
+    # already installed
+    with open(firstRunDetectionFile, "w") as f:
+        f.write(str(currentTimestamp()) + "\n")
+
+########## MAIN ##########
+
 # Store necessary data
 with open("data.json", "r") as f:
     data = json.loads(f.read())
@@ -115,33 +145,8 @@ checkColorStyle(colorStyle, neededFields)
 firstRunDetectionFile = "../.notFirstRun"
 
 if(not os.path.isfile(firstRunDetectionFile) or forcePackageInstall):
-    # Install yay
-    if(not os.path.isdir(os.path.expanduser("~/yay"))):
-        installs("yay", "i")
-
-    # Install packages
-    pacmanPackages = packages["pacman"]
-    yayPackages = packages["yay"]
-
-    pacmanPackages.insert(0, "-Syu")
-    pacmanPackages.insert(0, "pacman")
-    pacmanPackages.insert(0, "sudo")
-    pacmanPackages.append("--needed")
-
-    yayPackages.insert(0, "-Sua")
-    yayPackages.insert(0, "yay")
-    yayPackages.append("--needed")
-
-    subprocess.run(pacmanPackages)
-    subprocess.run(yayPackages)
-
-    # Create a file containing the current timestamp to mark that the script
-    # has been run at least once in the past. In the case of successive setup
-    # runs, the script will not try to install all the packages (unless
-    # otherwise specified with the -p flag), since they are likey to be
-    # already installed
-    with open(firstRunDetectionFile, "w") as f:
-        f.write(str(currentTimestamp()) + "\n")
+    installYay()
+    installPackages(packages, firstRunDetectionFile)
 
 # Download the dwm and slstatus builds using the installs.sh script
 installs("dwm", "d")
