@@ -52,6 +52,22 @@ def removeConfigs(linksList):
         else:
             printingUtils.printCol("Can't find ", "white", linkTarget, "red")
 
+def checkColorStyle(colorStyle, neededFields):
+    # Check the selected color style contains all the needed fields
+    colorStyleKeys = colorStyle.keys()
+    if "substitutions" not in colorStyleKeys:
+        sys.exit("Substitutions field missing in color style")
+
+    for field in neededFields["other"]:
+        if field not in colorStyleKeys:
+            sys.exit("Field missing in color style: " + field)
+
+    colorStyleSubstitutionKeys = colorStyle["substitutions"].keys()
+
+    for field in neededFields["substitutions"]:
+        if field not in colorStyleSubstitutionKeys:
+            sys.exit("Sub-field missing in substitutions field: " + field)
+
 def installs(program, action):
     subprocess.run([os.path.expanduser("~/dotfiles/setup/installs.sh"), program, action])
 
@@ -64,7 +80,7 @@ packages = data["packages"]
 neededFields = data["neededFields"]
 
 # Arguments handling
-colorPackagePath = "./colorStyles/sunsetDigital.json"
+colorStylePath = "./colorStyles/sunsetDigital.json"
 forceLinks = False
 keepColorsTmpDir = False
 forcePackageInstall = False
@@ -78,35 +94,22 @@ for i in range(0, len(sys.argv)):
         quit()
     elif(sys.argv[i] == "-p"):  # -p -> packages
         forcePackageInstall = True
-    elif(sys.argv[i] == "-s"):  # -s -> style (color package path)
+    elif(sys.argv[i] == "-s"):  # -s -> style (color style path)
         if(i + 1 >= len(sys.argv)):
-            # No color package path provided after -s flag, quit
-            print("Provide a path to the color package file")
+            # No color style path provided after -s flag, quit
+            print("Provide a path to the color style file")
             quit()
         if(not os.path.isfile(sys.argv[i + 1])):
-            print("Path to color package file is not valid")
+            print("Path to color style file is not valid")
             quit()
-        # Color package argument checks done, path can be saved safely
-        colorPackagePath = sys.argv[i + 1]
+        # Color style argument checks done, path can be saved safely
+        colorStylePath = sys.argv[i + 1]
 
-# Read and store color package content
-with open(colorPackagePath, "r") as f:
-    colorPackage = json.loads(f.read())
+# Read and store color style content
+with open(colorStylePath, "r") as f:
+    colorStyle = json.loads(f.read())
 
-# Check the selected color package contains all the needed fields
-colorPackageKeys = colorPackage.keys()
-if "substitutions" not in colorPackageKeys:
-    sys.exit("Substitutions field missing in color package")
-
-for field in neededFields["other"]:
-    if field not in colorPackageKeys:
-        sys.exit("Field missing in color package: " + field)
-
-colorPackageSubstitutionKeys = colorPackage["substitutions"].keys()
-
-for field in neededFields["substitutions"]:
-    if field not in colorPackageSubstitutionKeys:
-        sys.exit("Sub-field missing in substitutions field: " + field)
+checkColorStyle(colorStyle, neededFields)
 
 # Package installation if it's the first time the script is ran
 firstRunDetectionFile = "../.notFirstRun"
@@ -135,7 +138,7 @@ if(not os.path.isfile(firstRunDetectionFile) or forcePackageInstall):
     # Create a file containing the current timestamp to mark that the script
     # has been run at least once in the past. In the case of successive setup
     # runs, the script will not try to install all the packages (unless
-    # otherwise specified with the -i flag), since they are likey to be
+    # otherwise specified with the -p flag), since they are likey to be
     # already installed
     with open(firstRunDetectionFile, "w") as f:
         f.write(str(currentTimestamp()) + "\n")
@@ -168,7 +171,7 @@ for link in linksList:
         linkSource = "../colorsTmp/" + getLastNode(linkSource)
 
         # Perform the necessary substitutions using sed
-        substitutions = colorPackage["substitutions"]
+        substitutions = colorStyle["substitutions"]
         for identifier in substitutions:
             subprocess.run(["sed", "-i", "s/" + identifier + "/" + substitutions[identifier] + "/g", linkSource])
 
@@ -190,9 +193,9 @@ if(not keepColorsTmpDir and os.path.isdir("../colorsTmp/")):
 if(not os.path.isdir(os.path.expanduser("~/Pictures"))):
     os.mkdir(os.path.expanduser("~/Pictures/"))
 
-wallpaperPath = currentUser + "/Pictures/" + colorPackage["wallpaperName"]
+wallpaperPath = currentUser + "/Pictures/" + colorStyle["wallpaperName"]
 if(not os.path.isfile(wallpaperPath)):
-    subprocess.run(["wget", colorPackage["wallpaperLink"], "-O", wallpaperPath])
+    subprocess.run(["wget", colorStyle["wallpaperLink"], "-O", wallpaperPath])
 subprocess.run(["cp", wallpaperPath, currentUser + "/Pictures/wallpaper"])
 
 # Compile dwm and slstatus using the installs.sh script
