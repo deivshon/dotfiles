@@ -24,18 +24,17 @@ sys.path.insert(1, setupDir + "/../scripts/scriptingUtils/")
 
 import printingUtils
 
+def dirFromFile(pathToFile):
+    splitPath = pathToFile.split("/")
+    while(splitPath[len(splitPath) - 1] == ""):
+        splitPath.pop()
+
+    splitPath.pop()
+    return "/".join(splitPath)
+
 # Assumes the path parameter starts with / and is a path to a file
 def makeDirs(pathToFile):
-    dirNames = pathToFile.split("/")
-    dirNames = [dirNames[i] for i in range(0, len(dirNames)) if dirNames[i] != ""]
-    
-    # Loop skips first and last element as the first is empty and the last is the file name
-    # At the end of the loop, the directory where to put the file exists
-    for i in range(1, len(dirNames)):
-        dir = "/" + "/".join(dirNames[0:i])
-        if(not os.path.isdir(dir)):
-            print("Directory", dir, "doesn't exist, creating it")
-            os.mkdir(dir)
+    subprocess.run(["mkdir", "-p", dirFromFile(pathToFile)])
 
 def getLastNode(path):
     return path[::-1][0:path[::-1].index("/")][::-1]
