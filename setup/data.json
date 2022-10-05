@@ -50,7 +50,7 @@
             "wallpaperLink",
             "wallpaperName"
         ]
-    },    
+    },
     "links": {
         "bash": {
             "source": "$(setupDir)/../.bashrc",
@@ -87,5 +87,5 @@
             "target": "~/.config/dwm/config.h",
             "setupFlags": ["needsSubstitution"]
         }
-    }    
+    }
 }
