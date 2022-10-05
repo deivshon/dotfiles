@@ -87,5 +87,16 @@
             "target": "~/.config/dwm/config.h",
             "setupFlags": ["needsSubstitution"]
         }
+    },
+    "config-data": {
+        "enhancer-for-youtube": {
+            "--main-color": "#A52C2C",
+            "--main-background": "#130202",
+            "--second-background": "#220C0C",
+            "--hover-background": "#1A0505",
+            "--main-text": "#FFFFFF",
+            "--dimmer-text": "#FFFFFF",
+            "--shadow": "#1A0505"
+        }
     }
 }

@@ -7,6 +7,7 @@ import subprocess
 import json
 import shutil
 from time import time as currentTimestamp
+from matplotlib.colors import hex2color, hsv_to_rgb, rgb_to_hsv, rgb2hex
 
 # Check if the script is being run as root
 currentUser = os.path.expanduser("~")
@@ -119,6 +120,43 @@ def handleXinitrc():
     with open(os.path.expanduser("~/.xinitrc"), "w") as f:
         f.write("\n".join(xinitrc) + "\n" + xinitrc_append)
 
+def hex_to_hsv(hex):
+    return rgb_to_hsv(hex2color(hex))
+
+def hsv_to_hex(hsv):
+    return rgb2hex(hsv_to_rgb(hsv))
+
+def hex_to_divided_hsv(hex):
+    hsv = rgb_to_hsv(hex2color(hex))
+    return hsv[0], hsv[1], hsv[2]
+
+def apply_hue(s, v, color):
+    h = hex_to_hsv(color)[0]
+    return hsv_to_hex((h, s, v))
+
+def handle_efy_config(colorStyle):
+    mainColor = colorStyle["substitutions"]["mainColor"]
+    
+    with open("../.config/enhancer-for-youtube/efy.json", "r") as f:
+        efyConfig = json.loads(f.read())
+    
+    with open("data.json", "r") as f:
+        efyFields = json.loads(f.read())["config-data"]["enhancer-for-youtube"]
+    
+    newFields = {}
+
+    for col in efyFields.keys():
+        _, s, v = hex_to_divided_hsv(efyFields[col])
+        newFields[col] = apply_hue(s, v, mainColor)    
+
+    for field in newFields:
+        efyConfig["settings"]["customcolors"][field] = newFields[field]
+    
+    makeDirs(os.path.expanduser("~/.config/enhancer-for-youtube/efy.json"))
+    with open(os.path.expanduser("~/.config/enhancer-for-youtube/efy.json"), "w") as f:
+        json.dump(efyConfig, f)
+        f.write("\n")
+
 ########## MAIN ##########
 
 # Store necessary data
@@ -213,6 +251,9 @@ for link in linksList:
 # Delete temporary directory unless the user specified not to
 if(not keepColorsTmpDir and os.path.isdir("../colorsTmp/")):
     shutil.rmtree("../colorsTmp/")
+
+# Generate enhancer-for-youtube configuration with matching colors and save it
+handle_efy_config(colorStyle)
 
 # Download wallpaper and place it in ~/Pictures/wallpaper
 if(not os.path.isdir(os.path.expanduser("~/Pictures"))):
