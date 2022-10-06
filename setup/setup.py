@@ -68,6 +68,10 @@ def checkColorStyle(colorStyle, neededFields):
     for field in neededFields["substitutions"]:
         if field not in colorStyleSubstitutionKeys:
             sys.exit("Sub-field missing in substitutions field: " + field)
+    
+    for field in neededFields["setup-expanded-substitutions"]:
+        if field not in colorStyleSubstitutionKeys:
+            sys.exit("Sub-field missing in substitutions field: " + field + "\nThis is an automatically generated field, so something has gone wrong during the setup")
 
 def installs(program, action):
     subprocess.run([os.path.expanduser("~/dotfiles/setup/installs.sh"), program, action])
@@ -120,6 +124,9 @@ def handleXinitrc():
     with open(os.path.expanduser("~/.xinitrc"), "w") as f:
         f.write("\n".join(xinitrc) + "\n" + xinitrc_append)
 
+def expandColorStyle(colorStyle, data):
+    expand_efy(colorStyle, data)
+
 def hex_to_hsv(hex):
     return rgb_to_hsv(hex2color(hex))
 
@@ -134,15 +141,13 @@ def apply_hue(s, v, color):
     h = hex_to_hsv(color)[0]
     return hsv_to_hex((h, s, v))
 
-def handle_efy_config(colorStyle):
+def expand_efy(colorStyle, data):
     mainColor = colorStyle["substitutions"]["mainColor"]
-    
+
     with open("../.config/enhancer-for-youtube/efy.json", "r") as f:
         efyConfig = json.loads(f.read())
     
-    with open("data.json", "r") as f:
-        efyFields = json.loads(f.read())["config-data"]["enhancer-for-youtube"]
-    
+    efyFields = data["expansion-data"]["enhancer-for-youtube"]
     newFields = {}
 
     for col in efyFields.keys():
@@ -150,12 +155,8 @@ def handle_efy_config(colorStyle):
         newFields[col] = apply_hue(s, v, mainColor)    
 
     for field in newFields:
-        efyConfig["settings"]["customcolors"][field] = newFields[field]
-    
-    makeDirs(os.path.expanduser("~/.config/enhancer-for-youtube/efy.json"))
-    with open(os.path.expanduser("~/.config/enhancer-for-youtube/efy.json"), "w") as f:
-        json.dump(efyConfig, f)
-        f.write("\n")
+        if(field not in colorStyle["substitutions"]):
+            colorStyle["substitutions"][field] = newFields[field]
 
 ########## MAIN ##########
 
@@ -197,6 +198,7 @@ for i in range(0, len(sys.argv)):
 with open(colorStylePath, "r") as f:
     colorStyle = json.loads(f.read())
 
+expandColorStyle(colorStyle, data)
 checkColorStyle(colorStyle, neededFields)
 
 # Package installation if it's the first time the script is ran
@@ -251,9 +253,6 @@ for link in linksList:
 # Delete temporary directory unless the user specified not to
 if(not keepColorsTmpDir and os.path.isdir("../colorsTmp/")):
     shutil.rmtree("../colorsTmp/")
-
-# Generate enhancer-for-youtube configuration with matching colors and save it
-handle_efy_config(colorStyle)
 
 # Download wallpaper and place it in ~/Pictures/wallpaper
 if(not os.path.isdir(os.path.expanduser("~/Pictures"))):
