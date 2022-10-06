@@ -7,7 +7,6 @@ import subprocess
 import json
 import shutil
 from time import time as currentTimestamp
-from matplotlib.colors import hex2color, hsv_to_rgb, rgb_to_hsv, rgb2hex
 
 # Check if the script is being run as root
 currentUser = os.path.expanduser("~")
@@ -20,10 +19,11 @@ setupDir = os.path.dirname(os.path.realpath(__file__))
 if(setupDir != os.path.expanduser("~/dotfiles/setup")):
     sys.exit("The dotfiles folder needs to be placed in your home folder!")
 
-# Import printingUtils (../../scripts/scriptingUtils/printingUtils.py)
+# Import utils (../../scripts/scriptingUtils/[...]utils.py)
 sys.path.insert(1, setupDir + "/../scripts/scriptingUtils/")
 
 import printingUtils
+import scriptingUtils
 
 def dirFromFile(pathToFile):
     splitPath = pathToFile.split("/")
@@ -127,32 +127,15 @@ def handleXinitrc():
 def expandColorStyle(colorStyle, data):
     expand_efy(colorStyle, data)
 
-def hex_to_hsv(hex):
-    return rgb_to_hsv(hex2color(hex))
-
-def hsv_to_hex(hsv):
-    return rgb2hex(hsv_to_rgb(hsv))
-
-def hex_to_divided_hsv(hex):
-    hsv = rgb_to_hsv(hex2color(hex))
-    return hsv[0], hsv[1], hsv[2]
-
-def apply_hue(s, v, color):
-    h = hex_to_hsv(color)[0]
-    return hsv_to_hex((h, s, v))
-
 def expand_efy(colorStyle, data):
     mainColor = colorStyle["substitutions"]["mainColor"]
-
-    with open("../.config/enhancer-for-youtube/efy.json", "r") as f:
-        efyConfig = json.loads(f.read())
     
     efyFields = data["expansion-data"]["enhancer-for-youtube"]
     newFields = {}
 
     for col in efyFields.keys():
-        _, s, v = hex_to_divided_hsv(efyFields[col])
-        newFields[col] = apply_hue(s, v, mainColor)    
+        _, s, v = scriptingUtils.hex_to_divided_hsv(efyFields[col])
+        newFields[col] = scriptingUtils.apply_hue(s, v, mainColor)    
 
     for field in newFields:
         if(field not in colorStyle["substitutions"]):

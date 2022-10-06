@@ -23,4 +23,4 @@ def printCol(*args):
     for i in range(0, len(args), 2):
         resultStr += printColAux(args[i], args[i + 1])
     print(resultStr)
-        
+
