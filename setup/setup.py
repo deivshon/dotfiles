@@ -194,6 +194,7 @@ if(not os.path.isfile(firstRunDetectionFile) or forcePackageInstall):
 # Download the dwm and slstatus builds using the installs.sh script
 installs("dwm", "d")
 installs("slstatus", "d")
+installs("st", "d")
 
 # Handle each link/copy
 for link in linksList:
@@ -249,6 +250,7 @@ subprocess.run(["cp", wallpaperPath, currentUser + "/Pictures/wallpaper"])
 # Compile dwm and slstatus using the installs.sh script
 installs("dwm", "c")
 installs("slstatus", "c")
+installs("st", "c")
 
 # Download and compile change-vol-pactl
 installs("change_vol_pactl", "i")

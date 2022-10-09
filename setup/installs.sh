@@ -11,7 +11,8 @@ usage() {
     dwm
     slstatus
     change_pactl_volume
-    
+    st
+
 Accepted second arguments (actions):
     d -> download
     c -> compilation
@@ -64,6 +65,15 @@ yay_download() {
     fi
 }
 
+st_download() {
+    if ! [ -d ~/.config/st ]; then
+        git clone https://github.com/deivshon/st ~/.config/st
+    else
+        printf "%sst: ~/.config/st already exists, pulling%s\n" "${red}" "${normal}"
+        git -C ~/.config/st pull
+    fi
+}
+
 change_vol_pactl_download() {
     if ! [ -d ~/.config/change-vol-pactl ]; then
         git clone https://github.com/deivshon/change-vol-pactl ~/.config/change-vol-pactl
@@ -90,6 +100,10 @@ yay_compilation() {
     else
         printf "%syay: ~/yay does not exist%s\n" "${red}" "${normal}"
     fi
+}
+
+st_compilation() {
+    sudo make -C ~/.config/st clean install
 }
 
 change_vol_pactl_compilation() {
