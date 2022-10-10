@@ -31,7 +31,8 @@
             "wireshark-qt",
             "tmux",
             "btop",
-            "xclip"
+            "xclip",
+            "python-matplotlib"
         ],
         "yay": [
             "afetch",
