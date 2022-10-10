@@ -47,7 +47,7 @@ git_download() {
         git clone "$2" "$1"
     else
         printf "%s$3: $1 already exists, pulling%s\n" "${red}" "${normal}"
-        git -C ~/.config/dwm pull
+        git -C "$1" pull
     fi
 }
 
@@ -60,11 +60,7 @@ slstatus_download() {
 }
 
 yay_download() {
-    if ! [ -d ~/yay ]; then
-        git clone https://aur.archlinux.org/yay.git ~/yay
-    else
-        printf "%syay: ~/yay already exists%s\n" "${red}" "${normal}"
-    fi
+    git_download ~/yay https://aur.archlinux.org/yay.git yay
 }
 
 st_download() {
