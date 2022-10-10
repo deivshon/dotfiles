@@ -8,6 +8,12 @@ import json
 import shutil
 from time import time as currentTimestamp
 
+
+###########################################
+#            INITIAL CHECKS               #
+###########################################
+
+
 # Check if the script is being run as root
 currentUser = os.path.expanduser("~")
 if(currentUser == "/root"):
@@ -25,6 +31,12 @@ sys.path.insert(1, setupDir + "/../scripts/scriptingUtils/")
 import printingUtils
 import scriptingUtils
 
+
+###########################################
+#            GENERIC UTILITIES            #
+###########################################
+
+
 def dirFromFile(pathToFile):
     splitPath = pathToFile.split("/")
     while(splitPath[len(splitPath) - 1] == ""):
@@ -39,19 +51,6 @@ def makeDirs(pathToFile):
 
 def getLastNode(path):
     return path[::-1][0:path[::-1].index("/")][::-1]
-
-def removeConfigs(linksList):
-    for link in linksList:
-        linkTarget = linksList[link]["target"].replace("~", currentUser)
-        needsSudo = "needsSudo" in linksList[link]["setupFlags"]
-
-        removeCommand = ["rm", linkTarget]
-        if(needsSudo): removeCommand.insert(0, "sudo")
-        if(os.path.isfile(linkTarget)):
-            printingUtils.printCol("Removing ", "white", linkTarget, "red")
-            subprocess.run(removeCommand)
-        else:
-            printingUtils.printCol("Can't find ", "white", linkTarget, "red")
 
 def checkColorStyle(colorStyle, neededFields):
     # Check the selected color style contains all the needed fields
@@ -73,8 +72,27 @@ def checkColorStyle(colorStyle, neededFields):
         if field not in colorStyleSubstitutionKeys:
             sys.exit("Sub-field missing in substitutions field: " + field + "\nThis is an automatically generated field, so something has gone wrong during the setup")
 
+
+###########################################
+#        SETUP SPECIFIC FUNCTIONS         #
+###########################################
+
+
 def installs(program, action):
     subprocess.run([os.path.expanduser("~/dotfiles/setup/installs.sh"), program, action])
+
+def removeConfigs(linksList):
+    for link in linksList:
+        linkTarget = linksList[link]["target"].replace("~", currentUser)
+        needsSudo = "needsSudo" in linksList[link]["setupFlags"]
+
+        removeCommand = ["rm", linkTarget]
+        if(needsSudo): removeCommand.insert(0, "sudo")
+        if(os.path.isfile(linkTarget)):
+            printingUtils.printCol("Removing ", "white", linkTarget, "red")
+            subprocess.run(removeCommand)
+        else:
+            printingUtils.printCol("Can't find ", "white", linkTarget, "red")
 
 def installYay():
     if(not os.path.isdir(os.path.expanduser("~/yay"))):
@@ -124,6 +142,12 @@ def handleXinitrc():
     with open(os.path.expanduser("~/.xinitrc"), "w") as f:
         f.write("\n".join(xinitrc) + "\n" + xinitrc_append)
 
+
+###########################################
+#      EXPANSION SPECIFIC FUNCTIONS       #
+###########################################
+
+
 def expandColorStyle(colorStyle, data):
     expand_efy(colorStyle, data)
 
@@ -141,7 +165,11 @@ def expand_efy(colorStyle, data):
         if(field not in colorStyle["substitutions"]):
             colorStyle["substitutions"][field] = newFields[field]
 
-########## MAIN ##########
+
+###########################################
+#                  MAIN                   #
+###########################################
+
 
 # Store necessary data
 with open("data.json", "r") as f:
