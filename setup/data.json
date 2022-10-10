@@ -30,7 +30,8 @@
             "lxappearance",
             "wireshark-qt",
             "tmux",
-            "btop"
+            "btop",
+            "xclip"
         ],
         "yay": [
             "afetch",

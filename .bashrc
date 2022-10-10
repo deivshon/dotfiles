@@ -160,4 +160,7 @@ alias muldown="mullvad always-require-vpn set off && mullvad disconnect"
 alias mulup="mullvad always-require-vpn set on && mullvad connect"
 alias mulreg="mullvad tunnel wireguard key regenerate"
 
+# Xclip
+alias clip="xclip -sel c <"
+
 afetch
