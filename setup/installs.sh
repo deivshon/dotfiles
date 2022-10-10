@@ -39,22 +39,24 @@ action_choice() {
 
 ########## Downloads ##########
 
-dwm_download() {
-    if ! [ -d ~/.config/dwm ]; then
-        git clone https://github.com/deivshon/dwm-flexipatch ~/.config/dwm
+# $1 -> Path to clone to
+# $2 -> Repository link
+# $3 -> Software name
+git_download() {
+    if ! [ -d "$1" ]; then
+        git clone "$2" "$1"
     else
-        printf "%sdwm: ~/.config/dwm already exists, pulling%s\n" "${red}" "${normal}"
+        printf "%s$3: $1 already exists, pulling%s\n" "${red}" "${normal}"
         git -C ~/.config/dwm pull
     fi
 }
 
+dwm_download() {
+    git_download ~/.config/dwm https://github.com/deivshon/dwm-flexipatch dwm
+}
+
 slstatus_download() {
-    if ! [ -d ~/.config/slstatus ]; then
-        git clone https://github.com/deivshon/slstatus ~/.config/slstatus/
-    else
-        printf "%sslstatus: ~/.config/slstatus already exists, pulling%s\n" "${red}" "${normal}"
-        git -C ~/.config/slstatus pull
-    fi    
+    git_download ~/.config/slstatus https://github.com/deivshon/slstatus slstatus
 }
 
 yay_download() {
@@ -66,21 +68,11 @@ yay_download() {
 }
 
 st_download() {
-    if ! [ -d ~/.config/st ]; then
-        git clone https://github.com/deivshon/st ~/.config/st
-    else
-        printf "%sst: ~/.config/st already exists, pulling%s\n" "${red}" "${normal}"
-        git -C ~/.config/st pull
-    fi
+    git_download ~/.config/st https://github.com/deivshon/st st
 }
 
 change_vol_pactl_download() {
-    if ! [ -d ~/.config/change-vol-pactl ]; then
-        git clone https://github.com/deivshon/change-vol-pactl ~/.config/change-vol-pactl
-    else
-        printf "%schange-vol-pactl: ~/.config/change-vol-pactl already exists, pulling%s\n" "${red}" "${normal}"
-        git -C ~/.config/change-vol-pactl pull
-    fi
+    git_download ~/.config/change-vol-pactl https://github.com/deivshon/change-vol-pactl change_vol_pactl
 }
 
 ########## Compilations ##########
