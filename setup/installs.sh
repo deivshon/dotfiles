@@ -95,7 +95,7 @@ slstatus_compilation() {
 
 yay_compilation() {
     if [ -d ~/yay ]; then
-        cd ~/yay
+        cd ~/yay || exit
         makepkg -si
     else
         printf "%syay: ~/yay does not exist%s\n" "${red}" "${normal}"
@@ -112,4 +112,4 @@ change_vol_pactl_compilation() {
 
 ########## Main ##########
 
-action_choice $1 $2
+action_choice "$1" "$2"
