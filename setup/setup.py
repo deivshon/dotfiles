@@ -219,7 +219,7 @@ if(not os.path.isfile(firstRunDetectionFile) or forcePackageInstall):
     installYay()
     installPackages(packages, firstRunDetectionFile)
 
-# Download the dwm and slstatus builds using the installs.sh script
+# Download the dwm, slstatus and st builds using the installs.sh script
 installs("dwm", "d")
 installs("slstatus", "d")
 installs("st", "d")
@@ -275,7 +275,7 @@ if(not os.path.isfile(wallpaperPath)):
     subprocess.run(["wget", colorStyle["wallpaperLink"], "-O", wallpaperPath])
 subprocess.run(["cp", wallpaperPath, currentUser + "/Pictures/wallpaper"])
 
-# Compile dwm and slstatus using the installs.sh script
+# Compile dwm, slstatus and st using the installs.sh script
 installs("dwm", "c")
 installs("slstatus", "c")
 installs("st", "c")
