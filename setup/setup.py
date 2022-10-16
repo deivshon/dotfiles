@@ -25,12 +25,6 @@ setupDir = os.path.dirname(os.path.realpath(__file__))
 if(setupDir != os.path.expanduser("~/dotfiles/setup")):
     sys.exit("The dotfiles folder needs to be placed in your home folder!")
 
-# Import utils (../../scripts/scriptingUtils/[...]utils.py)
-sys.path.insert(1, setupDir + "/../scripts/scriptingUtils/")
-
-import printingUtils
-import scriptingUtils
-
 
 ###########################################
 #            GENERIC UTILITIES            #
@@ -205,19 +199,26 @@ for i in range(0, len(sys.argv)):
         # Color style argument checks done, path can be saved safely
         colorStylePath = sys.argv[i + 1]
 
-# Read and store color style content
-with open(colorStylePath, "r") as f:
-    colorStyle = json.loads(f.read())
-
-expandColorStyle(colorStyle, data)
-checkColorStyle(colorStyle, neededFields)
-
 # Package installation if it's the first time the script is ran
 firstRunDetectionFile = "../.notFirstRun"
 
 if(not os.path.isfile(firstRunDetectionFile) or forcePackageInstall):
     installYay()
     installPackages(packages, firstRunDetectionFile)
+
+# Import utils (../../scripts/scriptingUtils/[...]utils.py)
+# Placed here because the utils files import libraries that need
+# to be installed with installPackages
+sys.path.insert(1, setupDir + "/../scripts/scriptingUtils/")
+import printingUtils
+import scriptingUtils
+
+# Read and store color style content
+with open(colorStylePath, "r") as f:
+    colorStyle = json.loads(f.read())
+
+expandColorStyle(colorStyle, data)
+checkColorStyle(colorStyle, neededFields)
 
 # Download the dwm, slstatus and st builds using the installs.sh script
 installs("dwm", "d")
