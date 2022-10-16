@@ -37,7 +37,6 @@
         "yay": [
             "afetch",
             "cbonsai",
-            "ttf-ms-fonts",
             "polkit-dumb-agent-git",
             "visual-studio-code-bin",
             "gksu"
