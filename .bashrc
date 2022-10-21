@@ -111,4 +111,6 @@ alias mulreg="mullvad tunnel wireguard key regenerate"
 # Xclip
 alias clip="xclip -sel c <"
 
+export EDITOR=nano
+
 afetch
