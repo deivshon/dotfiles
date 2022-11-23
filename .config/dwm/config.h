@@ -208,7 +208,7 @@ static const Layout layouts[] = {
 // 	NULL
 // };
 
-static const char *roficmd[] = { "rofi", "-show", "drun", NULL };
+static const char *roficmd[] = { "rofi", "-show", "drun", "-display-drun", "", NULL };
 static const char *termcmd[]  = { "st", NULL };
 
 static const Key keys[] = {
