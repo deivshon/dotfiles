@@ -220,10 +220,11 @@ with open(colorStylePath, "r") as f:
 expandColorStyle(colorStyle, data)
 checkColorStyle(colorStyle, neededFields)
 
-# Download the dwm, plstatus and st builds using the installs.sh script
+# Download the dwm, plstatus, st builds and status-scripts using the installs.sh script
 installs("dwm", "d")
 installs("plstatus", "d")
 installs("st", "d")
+installs("status_scripts", "d")
 
 # Handle each link/copy
 for link in linksList:
@@ -276,14 +277,14 @@ if(not os.path.isfile(wallpaperPath)):
     subprocess.run(["wget", colorStyle["wallpaperLink"], "-O", wallpaperPath])
 subprocess.run(["cp", wallpaperPath, currentUser + "/Pictures/wallpaper"])
 
-# Download and compile status scripts and change-vol-pactl
-installs("status_scripts", "i")
+# Download and compile change-vol-pactl
 installs("change_vol_pactl", "i")
 
 # Compile dwm, plstatus and st using the installs.sh script
 installs("dwm", "c")
 installs("plstatus", "c")
 installs("st", "c")
+installs("status_scripts", "c")
 
 # Use the default xinitrc file to create the final one using .xinitrc_append
 if(not os.path.isfile(os.path.expanduser("~/.xinitrc"))):
