@@ -100,7 +100,7 @@
         "plstatus": {
             "source": "$(setupDir)/../.config/plstatus/config.json",
             "target": "~/.config/plstatus/config.json",
-            "setupFlags": []
+            "setupFlags": ["copy"]
         },
         "enhancer-for-youtube": {
             "source": "$(setupDir)/../.config/enhancer-for-youtube/efy.json",
