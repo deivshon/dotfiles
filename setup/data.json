@@ -97,6 +97,11 @@
             "target": "~/.config/dwm/config.h",
             "setupFlags": ["needsSubstitution"]
         },
+        "plstatus": {
+            "source": "$(setupDir)/../.config/plstatus/config.json",
+            "target": "~/.config/plstatus/config.json",
+            "setupFlags": []
+        },
         "enhancer-for-youtube": {
             "source": "$(setupDir)/../.config/enhancer-for-youtube/efy.json",
             "target": "~/.config/enhancer-for-youtube/efy.json",

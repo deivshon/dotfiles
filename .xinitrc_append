@@ -1,5 +1,5 @@
 ~/startup/startup.sh &
-slstatus &
+plstatus &
 nm-applet &
 polkit-dumb-agent &
 dunst &

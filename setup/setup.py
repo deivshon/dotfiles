@@ -209,7 +209,7 @@ if(not os.path.isfile(firstRunDetectionFile) or forcePackageInstall):
 # Import utils (../../scripts/scriptingUtils/[...]utils.py)
 # Placed here because the utils files import libraries that need
 # to be installed with installPackages
-sys.path.insert(1, setupDir + "/../scripts/scriptingUtils/")
+sys.path.insert(1, setupDir + "/../scriptingUtils/")
 import printingUtils
 import scriptingUtils
 
@@ -220,9 +220,9 @@ with open(colorStylePath, "r") as f:
 expandColorStyle(colorStyle, data)
 checkColorStyle(colorStyle, neededFields)
 
-# Download the dwm, slstatus and st builds using the installs.sh script
+# Download the dwm, plstatus and st builds using the installs.sh script
 installs("dwm", "d")
-installs("slstatus", "d")
+installs("plstatus", "d")
 installs("st", "d")
 
 # Handle each link/copy
@@ -276,16 +276,14 @@ if(not os.path.isfile(wallpaperPath)):
     subprocess.run(["wget", colorStyle["wallpaperLink"], "-O", wallpaperPath])
 subprocess.run(["cp", wallpaperPath, currentUser + "/Pictures/wallpaper"])
 
-# Compile dwm, slstatus and st using the installs.sh script
-installs("dwm", "c")
-installs("slstatus", "c")
-installs("st", "c")
-
-# Download and compile change-vol-pactl
+# Download and compile status scripts and change-vol-pactl
+installs("status_scripts", "i")
 installs("change_vol_pactl", "i")
 
-# Compile C bar scripts
-subprocess.run(["make", "clean", "all", "-C", os.path.expanduser("~/dotfiles/scripts/bar"), "dbg=false"])
+# Compile dwm, plstatus and st using the installs.sh script
+installs("dwm", "c")
+installs("plstatus", "c")
+installs("st", "c")
 
 # Use the default xinitrc file to create the final one using .xinitrc_append
 if(not os.path.isfile(os.path.expanduser("~/.xinitrc"))):

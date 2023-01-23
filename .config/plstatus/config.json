@@ -1,0 +1,46 @@
+{
+    "max-status-length": 2048,
+    "status-period": 100,
+    "components": [
+        {
+            "command": "ram-status",
+            "args": "--separator",
+            "period": 100
+        },
+        {
+            "command": "disk-status",
+            "args": "--separator",
+            "period": 100
+        },
+        {
+            "command": "cpu-status",
+            "args": "--separator",
+            "period": 250
+        },
+        {
+            "command": "battery-status",
+            "args": "--separator",
+            "period": 100
+        },
+        {
+            "command": "eth-status",
+            "args": "--separator",
+            "period": 100
+        },
+        {
+            "command": "wifi-status",
+            "args": "--separator",
+            "period": 100
+        },
+        {
+            "command": "mullvad-check-status",
+            "args": "--separator",
+            "period": 30000
+        },
+        {
+            "command": "date",
+            "args": "+%Y-%m-%d - %H:%M:%S",
+            "period": 500
+        }
+    ]
+}

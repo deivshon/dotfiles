@@ -9,9 +9,10 @@ usage() {
     echo "Accepted first arguments (programs):
     yay
     dwm
-    slstatus
+    plstatus
     change_pactl_volume
     st
+    status_scripts
 
 Accepted second arguments (actions):
     d -> download
@@ -55,8 +56,8 @@ dwm_download() {
     git_download ~/.config/dwm https://github.com/deivshon/dwm-flexipatch dwm
 }
 
-slstatus_download() {
-    git_download ~/.config/slstatus https://github.com/deivshon/slstatus slstatus
+plstatus_download() {
+    git_download ~/.config/plstatus https://github.com/deivshon/plstatus plstatus
 }
 
 yay_download() {
@@ -71,14 +72,18 @@ change_vol_pactl_download() {
     git_download ~/.config/change-vol-pactl https://github.com/deivshon/change-vol-pactl change_vol_pactl
 }
 
+status_scripts_download() {
+    git_download ~/.config/status-scripts https://github.com/deivshon/status-scripts status-scripts
+}
+
 ########## Compilations ##########
 
 dwm_compilation() {
     sudo make -C ~/.config/dwm clean install
 }
 
-slstatus_compilation() {
-    sudo make -C ~/.config/slstatus clean install
+plstatus_compilation() {
+    make -C ~/.config/plstatus clean all && sudo make -C ~/.config/plstatus install
 }
 
 yay_compilation() {
@@ -96,6 +101,10 @@ st_compilation() {
 
 change_vol_pactl_compilation() {
     sudo make -C ~/.config/change-vol-pactl clean install
+}
+
+status_scripts_compilation() {
+    sudo make -C ~/.config/status-scripts clean install
 }
 
 ########## Main ##########
