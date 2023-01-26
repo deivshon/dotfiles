@@ -113,6 +113,9 @@ alias mulreg="mullvad tunnel wireguard key regenerate"
 # Xclip
 alias clip="xclip -sel c <"
 
+# Tmux
+alias tdo="tmux new-session"
+
 # Avoid Perl locale warnings
 export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
