@@ -62,9 +62,14 @@
         ]
     },
     "links": {
-        "bash": {
+        "bashrc": {
             "source": "$(setupDir)/../.bashrc",
             "target": "~/.bashrc",
+            "setupFlags": []
+        },
+        "bashProfile": {
+            "source": "$(setupDir)/../.bash_profile",
+            "target": "~/.bash_profile",
             "setupFlags": []
         },
         "dunst": {

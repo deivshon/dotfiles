@@ -1,3 +1,6 @@
+systemctl --user import-environment DISPLAY
+eval $(ssh-agent)
+
 ~/startup/startup.sh &
 plstatus &
 nm-applet &

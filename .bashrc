@@ -76,6 +76,17 @@ extract ()
   fi
 }
 
+tdo()
+{
+    cmd="$1"; shift
+    while [[ $# -gt 0 ]]; do
+        cmd="$cmd $1"
+        shift
+    done
+
+    tmux new-session bash -c "$cmd; exec bash"
+}
+
 # Aliases
 
 # Exa
@@ -112,16 +123,5 @@ alias mulreg="mullvad tunnel wireguard key regenerate"
 
 # Xclip
 alias clip="xclip -sel c <"
-
-# Tmux
-alias tdo="tmux new-session"
-
-# Avoid Perl locale warnings
-export LC_CTYPE=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
-
-export EDITOR=nano
-
-PATH=${PATH}:~/.local/scripts/:
 
 afetch
