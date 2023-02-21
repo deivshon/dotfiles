@@ -117,8 +117,8 @@ alias clearall="printf '\033[2J\033[3J\033[1;1H'"
 alias cbonsai="cbonsai -li -w 1 -L 50"
 
 # Mullvad
-alias muldown="mullvad always-require-vpn set off && mullvad disconnect"
-alias mulup="mullvad always-require-vpn set on && mullvad connect"
+alias muldown="mullvad lockdown-mode set off && mullvad disconnect"
+alias mulup="mullvad lockdown-mode set on && mullvad connect"
 alias mulreg="mullvad tunnel wireguard key regenerate"
 
 # Xclip
