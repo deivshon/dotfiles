@@ -4,38 +4,38 @@
     "components": [
         {
             "command": "ram-status",
-            "args": "--separator",
-            "period": 100
+            "period": 100,
+            "separator": "|"
         },
         {
             "command": "disk-status",
-            "args": "--separator",
-            "period": 100
+            "period": 100,
+            "separator": "|"
         },
         {
             "command": "cpu-status",
-            "args": "--separator",
-            "period": 250
+            "period": 250,
+            "separator": "|"
         },
         {
             "command": "battery-status",
-            "args": "--separator",
-            "period": 100
+            "period": 100,
+            "separator": "|"
         },
         {
             "command": "eth-status",
-            "args": "--separator",
-            "period": 100
+            "period": 100,
+            "separator": "|"
         },
         {
             "command": "wifi-status",
-            "args": "--separator",
-            "period": 100
+            "period": 100,
+            "separator": "|"
         },
         {
             "command": "mullvad-check-status",
-            "args": "--separator",
-            "period": 30000
+            "period": 30000,
+            "separator": "|"
         },
         {
             "command": "date",
