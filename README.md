@@ -1,6 +1,6 @@
 # dotfiles
 ## **Disclaimer**
-This repository is intended for my personal use, I only set it public for ease of cloning on new installations
+The configuration files in this repository and the relative setup scripts are tailored to my use cases, use at your own risk
 
 ## **Setup**
 Clone the repository in the home directory, `cd` into the setup directory and run the `setup.py` script
