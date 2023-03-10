@@ -29,22 +29,20 @@ def compile(program):
 	__script(program, "c")
 
 def packages(packages, firstRunDetectionFile):
-    pacmanCommand = packages[__PACMAN]
-    yayCommand = packages[__YAY]
+	pacmanCommand = \
+		["sudo", "pacman", "-Syu"] + \
+		packages[__PACMAN] + \
+		["--needed"]
 
-    pacmanCommand.insert(0, "-Syu")
-    pacmanCommand.insert(0, "pacman")
-    pacmanCommand.insert(0, "sudo")
-    pacmanCommand.append("--needed")
+	yayCommand = \
+		["yay", "-Sua"] + \
+		packages[__YAY] + \
+		["--needed"]
 
-    yayCommand.insert(0, "-Sua")
-    yayCommand.insert(0, "yay")
-    yayCommand.append("--needed")
+	subprocess.run(pacmanCommand)
+	subprocess.run(yayCommand)
 
-    subprocess.run(pacmanCommand)
-    subprocess.run(yayCommand)
-
-    # Create a file containing the current timestamp to mark that the script
-    # has been run at least once in the past and the packages have been installed
-    with open(firstRunDetectionFile, "w") as f:
-        f.write(str(currentTimestamp()) + "\n")
+	# Create a file containing the current timestamp to mark that the script
+	# has been run at least once in the past and the packages have been installed
+	with open(firstRunDetectionFile, "w") as f:
+		f.write(str(currentTimestamp()) + "\n")
