@@ -1,26 +1,17 @@
 import subprocess
 
+__termColors = {
+    "cyan": subprocess.run(["tput", "setaf", "6", "bold"], capture_output = True).stdout.decode(),
+    "red": subprocess.run(["tput", "setaf", "1", "bold"], capture_output = True).stdout.decode(),
+    "green": subprocess.run(["tput", "setaf", "2", "bold"], capture_output = True).stdout.decode(),
+    "yellow": subprocess.run(["tput", "setaf", "3", "bold"], capture_output = True).stdout.decode(),
+    "white": subprocess.run(["tput", "setaf", "7", "bold"], capture_output = True).stdout.decode()
+}
+__normalTermColor = subprocess.run(["tput", "sgr0"], capture_output = True).stdout.decode()
+
 # args format: [str, color, str, color ...]
-def printCol(*args):
-    def printColAux(s, col):
-        if(col == "cyan"):
-            colCode = subprocess.run(["tput", "setaf", "6", "bold"], capture_output = True).stdout.decode()
-        elif(col == "red"):
-            colCode = subprocess.run(["tput", "setaf", "1", "bold"], capture_output = True).stdout.decode()
-        elif(col == "green"):
-            colCode = subprocess.run(["tput", "setaf", "2", "bold"], capture_output = True).stdout.decode()
-        elif(col == "yellow"):
-            colCode = subprocess.run(["tput", "setaf", "3", "bold"], capture_output = True).stdout.decode()
-        elif(col == "white"):
-            colCode = subprocess.run(["tput", "setaf", "7", "bold"], capture_output = True).stdout.decode()
-        else:
-            return s
-
-        normal = subprocess.run(["tput", "sgr0"], capture_output = True).stdout.decode()
-        return colCode + s + normal
-
+def colorPrint(*args):
     resultStr = ""
     for i in range(0, len(args), 2):
-        resultStr += printColAux(args[i], args[i + 1])
+        resultStr += __termColors[args[i + 1]] + args[i] + __normalTermColor
     print(resultStr)
-

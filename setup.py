@@ -92,10 +92,10 @@ def removeConfigs(linksList):
         removeCommand = ["rm", linkTarget]
         if(needsSudo): removeCommand.insert(0, "sudo")
         if(os.path.isfile(linkTarget)):
-            printingUtils.printCol("Removing ", "white", linkTarget, "red")
+            printingUtils.colorPrint("Removing ", "white", linkTarget, "red")
             subprocess.run(removeCommand)
         else:
-            printingUtils.printCol("Can't find ", "white", linkTarget, "red")
+            printingUtils.colorPrint("Can't find ", "white", linkTarget, "red")
 
 def installYay():
     if(not os.path.isdir(os.path.expanduser("~/yay"))):
@@ -127,14 +127,14 @@ def installPackages(packages, firstRunDetectionFile):
 
 def handleXinitrc():
     if(not os.path.isfile("/etc/X11/xinit/xinitrc")):
-        printingUtils.printCol("Couldn't handle xinitrc: default xinitrc not found", "red")
+        printingUtils.colorPrint("Couldn't handle xinitrc: default xinitrc not found", "red")
         return
 
     with open("/etc/X11/xinit/xinitrc") as f:
         xinitrc = f.read().splitlines()
 
     if("twm &" not in xinitrc):
-        printingUtils.printCol("Couldn't handle xinitrc: malformed default xinitrc", "red")
+        printingUtils.colorPrint("Couldn't handle xinitrc: malformed default xinitrc", "red")
         return
 
     xinitrc = xinitrc[0:xinitrc.index("twm &")]
@@ -263,7 +263,7 @@ for link in linksList:
         command = ["cp", linkSource, linkTarget]
         action = "Copying"
 
-    printingUtils.printCol(action + " ", "white", linkSource, "yellow", " to ", "white", linkTarget, "cyan")
+    printingUtils.colorPrint(action + " ", "white", linkSource, "yellow", " to ", "white", linkTarget, "cyan")
     if("needsSudo" in setupFlags):
         subprocess.run(["sudo"] + command)
     else:
