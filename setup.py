@@ -10,7 +10,7 @@ from time import time as currentTimestamp
 
 # Import utils (./setup/lib/[...].py)
 sys.path.insert(1, "./setup/lib/")
-import printingUtils
+import printing
 
 DATA_FILE = "./setup/data/data.json"
 FIRST_RUN_FILE = ".notFirstRun"
@@ -92,10 +92,10 @@ def removeConfigs(linksList):
         removeCommand = ["rm", linkTarget]
         if(needsSudo): removeCommand.insert(0, "sudo")
         if(os.path.isfile(linkTarget)):
-            printingUtils.colorPrint("Removing ", "white", linkTarget, "red")
+            printing.colorPrint("Removing ", "white", linkTarget, "red")
             subprocess.run(removeCommand)
         else:
-            printingUtils.colorPrint("Can't find ", "white", linkTarget, "red")
+            printing.colorPrint("Can't find ", "white", linkTarget, "red")
 
 def installYay():
     if(not os.path.isdir(os.path.expanduser("~/yay"))):
@@ -127,14 +127,14 @@ def installPackages(packages, firstRunDetectionFile):
 
 def handleXinitrc():
     if(not os.path.isfile("/etc/X11/xinit/xinitrc")):
-        printingUtils.colorPrint("Couldn't handle xinitrc: default xinitrc not found", "red")
+        printing.colorPrint("Couldn't handle xinitrc: default xinitrc not found", "red")
         return
 
     with open("/etc/X11/xinit/xinitrc") as f:
         xinitrc = f.read().splitlines()
 
     if("twm &" not in xinitrc):
-        printingUtils.colorPrint("Couldn't handle xinitrc: malformed default xinitrc", "red")
+        printing.colorPrint("Couldn't handle xinitrc: malformed default xinitrc", "red")
         return
 
     xinitrc = xinitrc[0:xinitrc.index("twm &")]
@@ -161,8 +161,8 @@ def expand_efy(colorStyle, data):
     newFields = {}
 
     for col in efyFields.keys():
-        _, s, v = scriptingUtils.hex_to_divided_hsv(efyFields[col])
-        newFields[col] = scriptingUtils.apply_hue(s, v, mainColor)    
+        _, s, v = utils.hex_to_divided_hsv(efyFields[col])
+        newFields[col] = utils.apply_hue(s, v, mainColor)    
 
     for field in newFields:
         if(field not in colorStyle["substitutions"]):
@@ -214,9 +214,9 @@ if(not os.path.isfile(FIRST_RUN_FILE) or forcePackageInstall):
     installPackages(packages, FIRST_RUN_FILE)
 
 
-# Placed here because libraries imported by scriptingUtils
+# Placed here because libraries imported by utils
 # need to be installed first
-import scriptingUtils
+import utils
 
 # Read and store color style content
 with open(colorStylePath, "r") as f:
@@ -263,7 +263,7 @@ for link in linksList:
         command = ["cp", linkSource, linkTarget]
         action = "Copying"
 
-    printingUtils.colorPrint(action + " ", "white", linkSource, "yellow", " to ", "white", linkTarget, "cyan")
+    printing.colorPrint(action + " ", "white", linkSource, "yellow", " to ", "white", linkTarget, "cyan")
     if("needsSudo" in setupFlags):
         subprocess.run(["sudo"] + command)
     else:
