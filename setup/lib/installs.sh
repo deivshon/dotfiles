@@ -10,7 +10,7 @@ usage() {
     yay
     dwm
     plstatus
-    change_pactl_volume
+    change_vol_pactl
     st
     status_scripts
 
