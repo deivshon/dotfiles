@@ -1,0 +1,50 @@
+import sys
+import subprocess
+from time import time as currentTimestamp
+
+__PACMAN = "pacman"
+__YAY = "yay"
+__acceptedInstallPrograms = [
+	"yay",
+	"dwm",
+	"plstatus",
+	"change_vol_pactl",
+	"st",
+	"status_scripts",
+]
+
+def __script(program, action):
+	if program not in __acceptedInstallPrograms:
+		sys.exit(f"Program {program} can't be installed")
+
+	subprocess.run(["./setup/lib/installs.sh", program, action])
+
+def install(program):
+	__script(program, "i")
+
+def download(program):
+	__script(program, "d")
+
+def compile(program):
+	__script(program, "c")
+
+def packages(packages, firstRunDetectionFile):
+    pacmanCommand = packages[__PACMAN]
+    yayCommand = packages[__YAY]
+
+    pacmanCommand.insert(0, "-Syu")
+    pacmanCommand.insert(0, "pacman")
+    pacmanCommand.insert(0, "sudo")
+    pacmanCommand.append("--needed")
+
+    yayCommand.insert(0, "-Sua")
+    yayCommand.insert(0, "yay")
+    yayCommand.append("--needed")
+
+    subprocess.run(pacmanCommand)
+    subprocess.run(yayCommand)
+
+    # Create a file containing the current timestamp to mark that the script
+    # has been run at least once in the past and the packages have been installed
+    with open(firstRunDetectionFile, "w") as f:
+        f.write(str(currentTimestamp()) + "\n")

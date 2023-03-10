@@ -6,11 +6,11 @@ import stat
 import subprocess
 import json
 import shutil
-from time import time as currentTimestamp
 
 # Import utils (./setup/lib/[...].py)
 sys.path.insert(1, "./setup/lib/")
 import printing
+import install
 
 DATA_FILE = "./setup/data/data.json"
 FIRST_RUN_FILE = ".notFirstRun"
@@ -40,17 +40,9 @@ if(setupDir != os.path.expanduser("~/dotfiles")):
 ###########################################
 
 
-def dirFromFile(pathToFile):
-    splitPath = pathToFile.split("/")
-    while(splitPath[len(splitPath) - 1] == ""):
-        splitPath.pop()
-
-    splitPath.pop()
-    return "/".join(splitPath)
-
 # Assumes the path parameter starts with / and is a path to a file
-def makeDirs(pathToFile):
-    subprocess.run(["mkdir", "-p", dirFromFile(pathToFile)])
+def makeDirs(path):
+    subprocess.run(["mkdir", "-p", path])
 
 def getLastNode(path):
     return path[::-1][0:path[::-1].index("/")][::-1]
@@ -81,9 +73,6 @@ def checkColorStyle(colorStyle, neededFields):
 ###########################################
 
 
-def installs(program, action):
-    subprocess.run(["./setup/lib/installs.sh", program, action])
-
 def removeConfigs(linksList):
     for link in linksList:
         linkTarget = linksList[link]["target"].replace("~", currentUser)
@@ -96,34 +85,6 @@ def removeConfigs(linksList):
             subprocess.run(removeCommand)
         else:
             printing.colorPrint("Can't find ", "white", linkTarget, "red")
-
-def installYay():
-    if(not os.path.isdir(os.path.expanduser("~/yay"))):
-        installs("yay", "i")
-
-def installPackages(packages, firstRunDetectionFile):
-    pacmanPackages = packages["pacman"]
-    yayPackages = packages["yay"]
-
-    pacmanPackages.insert(0, "-Syu")
-    pacmanPackages.insert(0, "pacman")
-    pacmanPackages.insert(0, "sudo")
-    pacmanPackages.append("--needed")
-
-    yayPackages.insert(0, "-Sua")
-    yayPackages.insert(0, "yay")
-    yayPackages.append("--needed")
-
-    subprocess.run(pacmanPackages)
-    subprocess.run(yayPackages)
-
-    # Create a file containing the current timestamp to mark that the script
-    # has been run at least once in the past. In the case of successive setup
-    # runs, the script will not try to install all the packages (unless
-    # otherwise specified with the -p flag), since they are likey to be
-    # already installed
-    with open(firstRunDetectionFile, "w") as f:
-        f.write(str(currentTimestamp()) + "\n")
 
 def handleXinitrc():
     if(not os.path.isfile("/etc/X11/xinit/xinitrc")):
@@ -210,8 +171,9 @@ for i in range(0, len(sys.argv)):
 
 # Package installation if it's the first time the script is ran
 if(not os.path.isfile(FIRST_RUN_FILE) or forcePackageInstall):
-    installYay()
-    installPackages(packages, FIRST_RUN_FILE)
+    if not os.path.isdir(os.path.expanduser("~/yay")):
+        install.install("yay")
+    install.packages(packages, FIRST_RUN_FILE)
 
 
 # Placed here because libraries imported by utils
@@ -225,11 +187,11 @@ with open(colorStylePath, "r") as f:
 expandColorStyle(colorStyle, data)
 checkColorStyle(colorStyle, neededFields)
 
-# Download the dwm, plstatus, st builds and status-scripts using the installs.sh script
-installs("dwm", "d")
-installs("plstatus", "d")
-installs("st", "d")
-installs("status_scripts", "d")
+# Download the dwm, plstatus, st builds and status-scripts
+install.download("dwm")
+install.download("plstatus")
+install.download("st")
+install.download("status_scripts")
 
 # Handle each link/copy
 for link in linksList:
@@ -239,7 +201,7 @@ for link in linksList:
     action = "Linking"
 
     # Create the directory where the target file needs to be in
-    makeDirs(linkTarget)
+    makeDirs(os.path.dirname(linkTarget))
 
     linkFlags = "-sf" if forceLinks else "-si"
     command = ["ln", linkFlags, linkSource, linkTarget]
@@ -273,6 +235,15 @@ for link in linksList:
 if(not keepExpansionsDir and os.path.isdir(EXPANSIONS_DIR)):
     shutil.rmtree(EXPANSIONS_DIR)
 
+# Download and compile change-vol-pactl
+install.install("change_vol_pactl")
+
+# Compile dwm, plstatus, st and status-scripts
+install.compile("dwm")
+install.compile("plstatus")
+install.compile("st")
+install.compile("status_scripts")
+
 # Download wallpaper and place it in ~/Pictures/wallpaper
 if(not os.path.isdir(os.path.expanduser("~/Pictures"))):
     os.mkdir(os.path.expanduser("~/Pictures/"))
@@ -281,15 +252,6 @@ wallpaperPath = currentUser + "/Pictures/" + colorStyle["wallpaperName"]
 if(not os.path.isfile(wallpaperPath)):
     subprocess.run(["wget", colorStyle["wallpaperLink"], "-O", wallpaperPath])
 subprocess.run(["cp", wallpaperPath, currentUser + "/Pictures/wallpaper"])
-
-# Download and compile change-vol-pactl
-installs("change_vol_pactl", "i")
-
-# Compile dwm, plstatus and st using the installs.sh script
-installs("dwm", "c")
-installs("plstatus", "c")
-installs("st", "c")
-installs("status_scripts", "c")
 
 # Use the default xinitrc file to create the final one using .xinitrc_append
 if(not os.path.isfile(os.path.expanduser("~/.xinitrc"))):
