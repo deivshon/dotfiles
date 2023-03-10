@@ -8,6 +8,15 @@ import json
 import shutil
 from time import time as currentTimestamp
 
+# Import utils (./setup/lib/[...].py)
+sys.path.insert(1, "./setup/lib/")
+import printingUtils
+
+DATA_FILE = "./setup/data/data.json"
+FIRST_RUN_FILE = ".notFirstRun"
+DEFAULT_COLOR_STYLE = "./setup/data/colorStyles/sunsetDigital.json"
+EXPANSIONS_DIR = "./expansions/"
+
 
 ###########################################
 #            INITIAL CHECKS               #
@@ -22,7 +31,7 @@ if(currentUser == "/root"):
 # Check dotfiles folder location
 setupDir = os.path.dirname(os.path.realpath(__file__))
 
-if(setupDir != os.path.expanduser("~/dotfiles/setup")):
+if(setupDir != os.path.expanduser("~/dotfiles")):
     sys.exit("The dotfiles folder needs to be placed in your home folder!")
 
 
@@ -73,7 +82,7 @@ def checkColorStyle(colorStyle, neededFields):
 
 
 def installs(program, action):
-    subprocess.run([os.path.expanduser("~/dotfiles/setup/installs.sh"), program, action])
+    subprocess.run(["./setup/lib/installs.sh", program, action])
 
 def removeConfigs(linksList):
     for link in linksList:
@@ -166,7 +175,7 @@ def expand_efy(colorStyle, data):
 
 
 # Store necessary data
-with open("data.json", "r") as f:
+with open(DATA_FILE, "r") as f:
     data = json.loads(f.read())
 
 linksList = data["links"]
@@ -174,15 +183,15 @@ packages = data["packages"]
 neededFields = data["neededFields"]
 
 # Arguments handling
-colorStylePath = "./colorStyles/sunsetDigital.json"
+colorStylePath = DEFAULT_COLOR_STYLE
 forceLinks = False
-keepColorsTmpDir = False
+keepExpansionsDir = False
 forcePackageInstall = False
 for i in range(0, len(sys.argv)):
     if(sys.argv[i] == "-f"):    # -f -> force
         forceLinks = True
     elif(sys.argv[i] == "-k"):  # -k -> keep
-        keepColorsTmpDir = True
+        keepExpansionsDir = True
     elif(sys.argv[i] == "-rm"): # -rm -> remove configs
         removeConfigs(linksList)
         quit()
@@ -200,17 +209,13 @@ for i in range(0, len(sys.argv)):
         colorStylePath = sys.argv[i + 1]
 
 # Package installation if it's the first time the script is ran
-firstRunDetectionFile = "../.notFirstRun"
-
-if(not os.path.isfile(firstRunDetectionFile) or forcePackageInstall):
+if(not os.path.isfile(FIRST_RUN_FILE) or forcePackageInstall):
     installYay()
-    installPackages(packages, firstRunDetectionFile)
+    installPackages(packages, FIRST_RUN_FILE)
 
-# Import utils (../../scripts/scriptingUtils/[...]utils.py)
-# Placed here because the utils files import libraries that need
-# to be installed with installPackages
-sys.path.insert(1, setupDir + "/../scriptingUtils/")
-import printingUtils
+
+# Placed here because libraries imported by scriptingUtils
+# need to be installed first
 import scriptingUtils
 
 # Read and store color style content
@@ -243,11 +248,11 @@ for link in linksList:
         if("copy" not in setupFlags): setupFlags.append("copy")
 
         # If the temporary directory has not yet been created, create it
-        if(not os.path.isdir("../colorsTmp/")):
-            os.mkdir("../colorsTmp/")
+        if(not os.path.isdir(EXPANSIONS_DIR)):
+            os.mkdir(EXPANSIONS_DIR)
 
-        subprocess.run(["cp", linkSource, "../colorsTmp/"])
-        linkSource = "../colorsTmp/" + getLastNode(linkSource)
+        subprocess.run(["cp", linkSource, EXPANSIONS_DIR])
+        linkSource = EXPANSIONS_DIR + getLastNode(linkSource)
 
         # Perform the necessary substitutions using sed
         substitutions = colorStyle["substitutions"]
@@ -265,8 +270,8 @@ for link in linksList:
         subprocess.run(command)
 
 # Delete temporary directory unless the user specified not to
-if(not keepColorsTmpDir and os.path.isdir("../colorsTmp/")):
-    shutil.rmtree("../colorsTmp/")
+if(not keepExpansionsDir and os.path.isdir(EXPANSIONS_DIR)):
+    shutil.rmtree(EXPANSIONS_DIR)
 
 # Download wallpaper and place it in ~/Pictures/wallpaper
 if(not os.path.isdir(os.path.expanduser("~/Pictures"))):

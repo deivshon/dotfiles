@@ -64,52 +64,52 @@
     },
     "links": {
         "bashrc": {
-            "source": "$(setupDir)/../.bashrc",
+            "source": "$(setupDir)/.bashrc",
             "target": "~/.bashrc",
             "setupFlags": []
         },
         "bashProfile": {
-            "source": "$(setupDir)/../.bash_profile",
+            "source": "$(setupDir)/.bash_profile",
             "target": "~/.bash_profile",
             "setupFlags": []
         },
         "dunst": {
-            "source": "$(setupDir)/../.config/dunst/dunstrc",
+            "source": "$(setupDir)/.config/dunst/dunstrc",
             "target": "~/.config/dunst/dunstrc",
             "setupFlags": ["needsSubstitution"]
         },
         "alacritty": {
-            "source": "$(setupDir)/../.config/alacritty/alacritty.yml",
+            "source": "$(setupDir)/.config/alacritty/alacritty.yml",
             "target": "~/.config/alacritty/alacritty.yml",
             "setupFlags": []
         },
         "btop": {
-            "source": "$(setupDir)/../.config/btop/btop.conf",
+            "source": "$(setupDir)/.config/btop/btop.conf",
             "target": "~/.config/btop/btop.conf",
             "setupFlags": []
         },
         "rofi": {
-            "source": "$(setupDir)/../.config/rofi/config.rasi",
+            "source": "$(setupDir)/.config/rofi/config.rasi",
             "target": "~/.config/rofi/config.rasi",
             "setupFlags": ["needsSubstitution"]
         },
         "ranger": {
-            "source": "$(setupDir)/../.config/ranger/rc.conf",
+            "source": "$(setupDir)/.config/ranger/rc.conf",
             "target": "~/.config/ranger/rc.conf",
             "setupFlags": []
         },
         "dwm": {
-            "source": "$(setupDir)/../.config/dwm/config.h",
+            "source": "$(setupDir)/.config/dwm/config.h",
             "target": "~/.config/dwm/config.h",
             "setupFlags": ["needsSubstitution"]
         },
         "plstatus": {
-            "source": "$(setupDir)/../.config/plstatus/config.json",
+            "source": "$(setupDir)/.config/plstatus/config.json",
             "target": "~/.config/plstatus/config.json",
             "setupFlags": ["copy"]
         },
         "enhancer-for-youtube": {
-            "source": "$(setupDir)/../.config/enhancer-for-youtube/efy.json",
+            "source": "$(setupDir)/.config/enhancer-for-youtube/efy.json",
             "target": "~/.config/enhancer-for-youtube/efy.json",
             "setupFlags": ["needsSubstitution"]
         }
