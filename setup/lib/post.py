@@ -8,11 +8,11 @@ import setup.lib.printing as printing
 def install():
 	printing.colorPrint("Running post install operations...", "green")
 
-	printing.colorPrint("Handling xinitrc", "white")
 	__xinitrc()
+	printing.colorPrint(".xinitrc handled", "white")
 
-	printing.colorPrint("Handling startup script", "white")
 	__startup_script()
+	printing.colorPrint("Startup script handled", "white")
 
 # To be called every time the setup is run
 def change():
