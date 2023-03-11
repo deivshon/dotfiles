@@ -6,7 +6,7 @@ import setup.lib.printing as printing
 
 # To be called only the first time the setup is run
 def install():
-	printing.colorPrint("Starting post install operations...", "green")
+	printing.colorPrint("Starting post install operations...", "magenta")
 
 	__xinitrc()
 	printing.colorPrint(".xinitrc handled", "white")
@@ -18,7 +18,7 @@ def install():
 
 # To be called every time the setup is run
 def change(colorStyle):
-	printing.colorPrint("Starting post run operations...", "green")
+	printing.colorPrint("Starting post run operations...", "magenta")
 
 	__wallpaper(colorStyle)
 	printing.colorPrint("Wallpaper handled", "white")
