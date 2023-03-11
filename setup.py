@@ -6,15 +6,20 @@ import subprocess
 import json
 import shutil
 
-import setup.lib.printing as printing
-import setup.lib.install as install
-import setup.lib.expand as expand
-import setup.lib.post as post
-
 DATA_FILE = "./setup/data/data.json"
 FIRST_RUN_FILE = ".notFirstRun"
 DEFAULT_COLOR_STYLE = "./setup/data/colorStyles/sunsetDigital.json"
 EXPANSIONS_DIR = "./expansions/"
+
+firstRun = not os.path.isfile(FIRST_RUN_FILE)
+
+if firstRun:
+    install.packages(FIRST_RUN_FILE)
+
+import setup.lib.printing as printing
+import setup.lib.install as install
+import setup.lib.expand as expand
+import setup.lib.post as post
 
 
 ###########################################
@@ -96,7 +101,6 @@ with open(DATA_FILE, "r") as f:
     data = json.loads(f.read())
 
 linksList = data["links"]
-packages = data["packages"]
 neededFields = data["neededFields"]
 
 # Arguments handling
@@ -125,11 +129,10 @@ for i in range(0, len(sys.argv)):
         # Color style argument checks done, path can be saved safely
         colorStylePath = sys.argv[i + 1]
 
-# Package installation if it's the first time the script is ran
-if(not os.path.isfile(FIRST_RUN_FILE) or forcePackageInstall):
-    if not os.path.isdir(os.path.expanduser("~/yay")):
-        install.install("yay")
-    install.packages(packages, FIRST_RUN_FILE)
+# Package installation if it's been explicitly requested but not performed
+# because the setup has been run before
+if not firstRun and forcePackageInstall:
+    install.packages(FIRST_RUN_FILE)
 
 # Read and store color style content
 with open(colorStylePath, "r") as f:

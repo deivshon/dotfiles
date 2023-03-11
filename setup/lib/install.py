@@ -1,5 +1,7 @@
 import sys
 import subprocess
+import os
+import json
 from time import time as currentTimestamp
 
 __PACMAN = "pacman"
@@ -28,7 +30,13 @@ def download(program):
 def compile(program):
 	__script(program, "c")
 
-def packages(packages, firstRunDetectionFile):
+def packages(firstRunDetectionFile):
+	with open("./setup/data/packages.json") as f:
+		packages = json.loads(f.read())
+
+	if not os.path.isdir(os.path.expanduser("~/yay")):
+		install("yay")
+
 	pacmanCommand = \
 		["sudo", "pacman", "-Syu"] + \
 		packages[__PACMAN] + \
