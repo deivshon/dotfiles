@@ -6,6 +6,8 @@ import subprocess
 import json
 import shutil
 
+import setup.lib.install as install
+
 DATA_FILE = "./setup/data/data.json"
 FIRST_RUN_FILE = ".notFirstRun"
 DEFAULT_COLOR_STYLE = "./setup/data/colorStyles/sunsetDigital.json"
@@ -17,7 +19,6 @@ if firstRun:
     install.packages(FIRST_RUN_FILE)
 
 import setup.lib.printing as printing
-import setup.lib.install as install
 import setup.lib.expand as expand
 import setup.lib.post as post
 
