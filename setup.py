@@ -10,7 +10,7 @@ import setup.lib.install as install
 
 DATA_FILE = "./setup/data/data.json"
 FIRST_RUN_FILE = ".notFirstRun"
-DEFAULT_COLOR_STYLE = "./setup/data/colorStyles/sunsetDigital.json"
+DEFAULT_STYLE = "./setup/data/styles/sunsetDigital.json"
 EXPANSIONS_DIR = "./expansions/"
 
 firstRun = not os.path.isfile(FIRST_RUN_FILE)
@@ -19,7 +19,7 @@ if firstRun:
     install.packages(FIRST_RUN_FILE)
 
 import setup.lib.printing as printing
-import setup.lib.expand as expand
+import setup.lib.style as style
 import setup.lib.post as post
 
 
@@ -52,26 +52,6 @@ def makeDirs(path):
 def getLastNode(path):
     return path[::-1][0:path[::-1].index("/")][::-1]
 
-def checkColorStyle(colorStyle, neededFields):
-    # Check the selected color style contains all the needed fields
-    colorStyleKeys = colorStyle.keys()
-    if "substitutions" not in colorStyleKeys:
-        sys.exit("Substitutions field missing in color style")
-
-    for field in neededFields["other"]:
-        if field not in colorStyleKeys:
-            sys.exit("Field missing in color style: " + field)
-
-    colorStyleSubstitutionKeys = colorStyle["substitutions"].keys()
-
-    for field in neededFields["substitutions"]:
-        if field not in colorStyleSubstitutionKeys:
-            sys.exit("Sub-field missing in substitutions field: " + field)
-    
-    for field in neededFields["setup-expanded-substitutions"]:
-        if field not in colorStyleSubstitutionKeys:
-            sys.exit("Sub-field missing in substitutions field: " + field + "\nThis is an automatically generated field, so something has gone wrong during the setup")
-
 
 ###########################################
 #        SETUP SPECIFIC FUNCTIONS         #
@@ -102,10 +82,9 @@ with open(DATA_FILE, "r") as f:
     data = json.loads(f.read())
 
 linksList = data["links"]
-neededFields = data["neededFields"]
 
 # Arguments handling
-colorStylePath = DEFAULT_COLOR_STYLE
+colorStylePath = DEFAULT_STYLE
 forceLinks = False
 keepExpansionsDir = False
 forcePackageInstall = False
@@ -137,10 +116,10 @@ if not firstRun and forcePackageInstall:
 
 # Read and store color style content
 with open(colorStylePath, "r") as f:
-    colorStyle = json.loads(f.read())
+    selectedStyle = json.loads(f.read())
 
-expand.expandColorStyle(colorStyle, data)
-checkColorStyle(colorStyle, neededFields)
+style.expand(selectedStyle)
+style.check(selectedStyle)
 
 # Download the dwm, plstatus, st builds and status-scripts
 install.download("dwm")
@@ -172,7 +151,7 @@ for link in linksList:
         linkSource = EXPANSIONS_DIR + getLastNode(linkSource)
 
         # Perform the necessary substitutions using sed
-        substitutions = colorStyle["substitutions"]
+        substitutions = selectedStyle["substitutions"]
         for identifier in substitutions:
             subprocess.run(["sed", "-i", "s/" + identifier + "/" + substitutions[identifier] + "/g", linkSource])
 
@@ -199,7 +178,7 @@ install.compile("plstatus")
 install.compile("st")
 install.compile("status_scripts")
 
-post.change(colorStyle)
+post.change(selectedStyle)
 
 if firstRun:
     post.install()

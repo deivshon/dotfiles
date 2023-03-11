@@ -1,0 +1,11 @@
+{
+	"enhancer-for-youtube": {
+		"efy--main-color": "#A52C2C",
+		"efy--main-background": "#130202",
+		"efy--second-background": "#220C0C",
+		"efy--hover-background": "#1A0505",
+		"efy--main-text": "#FFFFFF",
+		"efy--dimmer-text": "#FFFFFF",
+		"efy--shadow": "#1A0505"
+	}
+}

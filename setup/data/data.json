@@ -1,23 +1,4 @@
 {
-    "neededFields": {
-        "substitutions": [
-            "mainColor",
-            "secondaryColor"
-        ],
-        "setup-expanded-substitutions": [
-            "efy--main-color",
-            "efy--main-background",
-            "efy--second-background",
-            "efy--hover-background",
-            "efy--main-text",
-            "efy--dimmer-text",
-            "efy--shadow"
-        ],
-        "other": [
-            "wallpaperLink",
-            "wallpaperName"
-        ]
-    },
     "links": {
         "bashrc": {
             "source": "$(setupDir)/.bashrc",
@@ -68,17 +49,6 @@
             "source": "$(setupDir)/.config/enhancer-for-youtube/efy.json",
             "target": "~/.config/enhancer-for-youtube/efy.json",
             "setupFlags": ["needsSubstitution"]
-        }
-    },
-    "expansion-data": {
-        "enhancer-for-youtube": {
-            "efy--main-color": "#A52C2C",
-            "efy--main-background": "#130202",
-            "efy--second-background": "#220C0C",
-            "efy--hover-background": "#1A0505",
-            "efy--main-text": "#FFFFFF",
-            "efy--dimmer-text": "#FFFFFF",
-            "efy--shadow": "#1A0505"
         }
     }
 }
