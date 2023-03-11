@@ -2,9 +2,8 @@
 
 import os
 import sys
-import subprocess
 import json
-import shutil
+import argparse
 
 import setup.lib.install as install
 
@@ -31,39 +30,55 @@ setupDir = os.path.dirname(os.path.realpath(__file__))
 if(setupDir != os.path.expanduser("~/dotfiles")):
     sys.exit("The dotfiles folder needs to be placed in your home folder!")
 
-# Arguments handling
-colorStylePath = DEFAULT_STYLE
-force = False
-keepExpansions = False
-forcePackageInstall = False
-for i in range(0, len(sys.argv)):
-    if(sys.argv[i] == "-f"):    # -f -> force
-        force = True
-    elif(sys.argv[i] == "-k"):  # -k -> keep
-        keepExpansions = True
-    elif(sys.argv[i] == "-rm"): # -rm -> remove configs
-        configs.remove(currentUser)
-        quit()
-    elif(sys.argv[i] == "-p"):  # -p -> packages
-        forcePackageInstall = True
-    elif(sys.argv[i] == "-s"):  # -s -> style (color style path)
-        if(i + 1 >= len(sys.argv)):
-            # No color style path provided after -s flag, quit
-            print("Provide a path to the color style file")
-            quit()
-        if(not os.path.isfile(sys.argv[i + 1])):
-            print("Path to color style file is not valid")
-            quit()
-        # Color style argument checks done, path can be saved safely
-        colorStylePath = sys.argv[i + 1]
+parser = argparse.ArgumentParser(
+    prog = "setup",
+    description = "Setup script for new installations or style changes"
+)
+
+parser.add_argument(
+    "-f", "--force",
+    action = "store_true",
+    help = "Overwrite existing configuration targets without asking"
+)
+parser.add_argument(
+    "-k", "--keep",
+    action = "store_true",
+    help = "Keep directory containing expanded configurations"
+)
+parser.add_argument(
+    "-rm", "--remove",
+    action = "store_true",
+    help = "Remove existing configuration files"
+)
+parser.add_argument(
+    "-p", "--packages",
+    action = "store_true",
+    help = "Force packages installation"
+)
+parser.add_argument(
+    "-s", "--style",
+    action = "store",
+    help = "Path to file describing the style to apply (./setup/data/styles/[...])",
+    default = DEFAULT_STYLE
+)
+
+args = parser.parse_args()
+
+if args.remove:
+    configs.remove(currentUser)
+    quit()
+
+if not os.path.isfile(args.style):
+    print(f"{args.style} does not exist")
+    quit()
 
 # Package installation if it's been explicitly requested but not performed
 # because the setup has been run before
-if not firstRun and forcePackageInstall:
+if not firstRun and args.packages:
     install.packages(FIRST_RUN_FILE)
 
 # Read and store color style content
-with open(colorStylePath, "r") as f:
+with open(args.style, "r") as f:
     selectedStyle = json.loads(f.read())
 
 style.expand(selectedStyle)
@@ -75,7 +90,7 @@ install.download("plstatus")
 install.download("st")
 install.download("status_scripts")
 
-configs.link(selectedStyle, currentUser, setupDir, keepExpansions = keepExpansions, force = force)
+configs.link(selectedStyle, currentUser, setupDir, keepExpansions = args.keep, force = args.force)
 
 # Download and compile change-vol-pactl
 install.install("change_vol_pactl")
