@@ -208,5 +208,5 @@ if(not os.path.isfile(wallpaperPath)):
     subprocess.run(["wget", colorStyle["wallpaperLink"], "-O", wallpaperPath])
 subprocess.run(["cp", wallpaperPath, currentUser + "/Pictures/wallpaper"])
 
-if not os.path.isfile(FIRST_RUN_FILE):
+if firstRun:
     post.install()
