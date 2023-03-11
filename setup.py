@@ -9,6 +9,7 @@ import shutil
 
 import setup.lib.printing as printing
 import setup.lib.install as install
+import setup.lib.expand as expand
 
 DATA_FILE = "./setup/data/data.json"
 FIRST_RUN_FILE = ".notFirstRun"
@@ -106,29 +107,6 @@ def handleXinitrc():
 
 
 ###########################################
-#      EXPANSION SPECIFIC FUNCTIONS       #
-###########################################
-
-
-def expandColorStyle(colorStyle, data):
-    expand_efy(colorStyle, data)
-
-def expand_efy(colorStyle, data):
-    mainColor = colorStyle["substitutions"]["mainColor"]
-    
-    efyFields = data["expansion-data"]["enhancer-for-youtube"]
-    newFields = {}
-
-    for col in efyFields.keys():
-        _, s, v = utils.hex_to_divided_hsv(efyFields[col])
-        newFields[col] = utils.apply_hue(s, v, mainColor)    
-
-    for field in newFields:
-        if(field not in colorStyle["substitutions"]):
-            colorStyle["substitutions"][field] = newFields[field]
-
-
-###########################################
 #                  MAIN                   #
 ###########################################
 
@@ -182,7 +160,7 @@ import setup.lib.utils as utils
 with open(colorStylePath, "r") as f:
     colorStyle = json.loads(f.read())
 
-expandColorStyle(colorStyle, data)
+expand.expandColorStyle(colorStyle, data)
 checkColorStyle(colorStyle, neededFields)
 
 # Download the dwm, plstatus, st builds and status-scripts
