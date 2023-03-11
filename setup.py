@@ -8,25 +8,17 @@ import shutil
 
 import setup.lib.install as install
 
-DATA_FILE = "./setup/data/data.json"
 FIRST_RUN_FILE = ".notFirstRun"
 DEFAULT_STYLE = "./setup/data/styles/sunsetDigital.json"
-EXPANSIONS_DIR = "./expansions/"
 
 firstRun = not os.path.isfile(FIRST_RUN_FILE)
 
 if firstRun:
     install.packages(FIRST_RUN_FILE)
 
-import setup.lib.printing as printing
+import setup.lib.configs as configs
 import setup.lib.style as style
 import setup.lib.post as post
-
-
-###########################################
-#            INITIAL CHECKS               #
-###########################################
-
 
 # Check if the script is being run as root
 currentUser = os.path.expanduser("~")
@@ -39,62 +31,18 @@ setupDir = os.path.dirname(os.path.realpath(__file__))
 if(setupDir != os.path.expanduser("~/dotfiles")):
     sys.exit("The dotfiles folder needs to be placed in your home folder!")
 
-
-###########################################
-#            GENERIC UTILITIES            #
-###########################################
-
-
-# Assumes the path parameter starts with / and is a path to a file
-def makeDirs(path):
-    subprocess.run(["mkdir", "-p", path])
-
-def getLastNode(path):
-    return path[::-1][0:path[::-1].index("/")][::-1]
-
-
-###########################################
-#        SETUP SPECIFIC FUNCTIONS         #
-###########################################
-
-
-def removeConfigs(linksList):
-    for link in linksList:
-        linkTarget = linksList[link]["target"].replace("~", currentUser)
-        needsSudo = "needsSudo" in linksList[link]["setupFlags"]
-
-        removeCommand = ["rm", linkTarget]
-        if(needsSudo): removeCommand.insert(0, "sudo")
-        if(os.path.isfile(linkTarget)):
-            printing.colorPrint("Removing ", "white", linkTarget, "red")
-            subprocess.run(removeCommand)
-        else:
-            printing.colorPrint("Can't find ", "white", linkTarget, "red")
-
-
-###########################################
-#                  MAIN                   #
-###########################################
-
-
-# Store necessary data
-with open(DATA_FILE, "r") as f:
-    data = json.loads(f.read())
-
-linksList = data["links"]
-
 # Arguments handling
 colorStylePath = DEFAULT_STYLE
-forceLinks = False
-keepExpansionsDir = False
+force = False
+keepExpansions = False
 forcePackageInstall = False
 for i in range(0, len(sys.argv)):
     if(sys.argv[i] == "-f"):    # -f -> force
-        forceLinks = True
+        force = True
     elif(sys.argv[i] == "-k"):  # -k -> keep
-        keepExpansionsDir = True
+        keepExpansions = True
     elif(sys.argv[i] == "-rm"): # -rm -> remove configs
-        removeConfigs(linksList)
+        configs.remove(currentUser)
         quit()
     elif(sys.argv[i] == "-p"):  # -p -> packages
         forcePackageInstall = True
@@ -127,47 +75,7 @@ install.download("plstatus")
 install.download("st")
 install.download("status_scripts")
 
-# Handle each link/copy
-for link in linksList:
-    linkSource = linksList[link]["source"].replace("$(setupDir)", setupDir)
-    linkTarget = linksList[link]["target"].replace("~", currentUser)
-    setupFlags = linksList[link]["setupFlags"]
-    action = "Linking"
-
-    # Create the directory where the target file needs to be in
-    makeDirs(os.path.dirname(linkTarget))
-
-    linkFlags = "-sf" if forceLinks else "-si"
-    command = ["ln", linkFlags, linkSource, linkTarget]
-
-    if("needsSubstitution" in setupFlags):
-        if("copy" not in setupFlags): setupFlags.append("copy")
-
-        # If the temporary directory has not yet been created, create it
-        if(not os.path.isdir(EXPANSIONS_DIR)):
-            os.mkdir(EXPANSIONS_DIR)
-
-        subprocess.run(["cp", linkSource, EXPANSIONS_DIR])
-        linkSource = EXPANSIONS_DIR + getLastNode(linkSource)
-
-        # Perform the necessary substitutions using sed
-        substitutions = selectedStyle["substitutions"]
-        for identifier in substitutions:
-            subprocess.run(["sed", "-i", "s/" + identifier + "/" + substitutions[identifier] + "/g", linkSource])
-
-    if("copy" in setupFlags):
-        command = ["cp", linkSource, linkTarget]
-        action = "Copying"
-
-    printing.colorPrint(action + " ", "white", linkSource, "yellow", " to ", "white", linkTarget, "cyan")
-    if("needsSudo" in setupFlags):
-        subprocess.run(["sudo"] + command)
-    else:
-        subprocess.run(command)
-
-# Delete temporary directory unless the user specified not to
-if(not keepExpansionsDir and os.path.isdir(EXPANSIONS_DIR)):
-    shutil.rmtree(EXPANSIONS_DIR)
+configs.link(selectedStyle, currentUser, setupDir, keepExpansions = keepExpansions, force = force)
 
 # Download and compile change-vol-pactl
 install.install("change_vol_pactl")
