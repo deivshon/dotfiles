@@ -151,11 +151,6 @@ if(not os.path.isfile(FIRST_RUN_FILE) or forcePackageInstall):
         install.install("yay")
     install.packages(packages, FIRST_RUN_FILE)
 
-
-# Placed here because libraries imported by utils
-# need to be installed first
-import setup.lib.utils as utils
-
 # Read and store color style content
 with open(colorStylePath, "r") as f:
     colorStyle = json.loads(f.read())
