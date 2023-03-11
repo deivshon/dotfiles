@@ -46,7 +46,13 @@ def link(style, user, setupDir, keepExpansions = False, force = False):
 			command = ["cp", linkSource, linkTarget]
 			action = "Copying"
 
-		printing.colorPrint(action + " ", "white", linkSource, "yellow", " to ", "white", linkTarget, "cyan")
+		printing.colorPrint(
+			action + " ", 	printing.WHITE,
+			linkSource, 	printing.YELLOW,
+			" to ", 		printing.WHITE,
+			linkTarget,		printing.CYAN
+		)
+
 		if("needsSudo" in setupFlags):
 			subprocess.run(["sudo"] + command)
 		else:
@@ -64,7 +70,13 @@ def remove(user):
         removeCommand = ["rm", linkTarget]
         if(needsSudo): removeCommand.insert(0, "sudo")
         if(os.path.isfile(linkTarget)):
-            printing.colorPrint("Removing ", "white", linkTarget, "red")
+            printing.colorPrint(
+				"Removing ",	printing.WHITE,
+				linkTarget,		printing.RED
+			)
             subprocess.run(removeCommand)
         else:
-            printing.colorPrint("Can't find ", "white", linkTarget, "red")
+            printing.colorPrint(
+				"Can't find ",	printing.WHITE,
+				linkTarget,		printing.RED
+			)

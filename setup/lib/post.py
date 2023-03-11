@@ -6,24 +6,24 @@ import setup.lib.printing as printing
 
 # To be called only the first time the setup is run
 def install():
-	printing.colorPrint("Starting post install operations...", "magenta")
+	printing.colorPrint("Starting post install operations...", printing.MAGENTA)
 
 	__xinitrc()
-	printing.colorPrint(".xinitrc handled", "white")
+	printing.colorPrint(".xinitrc handled", printing.WHITE)
 
 	__startup_script()
-	printing.colorPrint("Startup script handled", "white")
+	printing.colorPrint("Startup script handled", printing.WHITE)
 
-	printing.colorPrint("Ended post install operations...", "green")
+	printing.colorPrint("Ended post install operations...", printing.GREEN)
 
 # To be called every time the setup is run
 def change(colorStyle):
-	printing.colorPrint("Starting post run operations...", "magenta")
+	printing.colorPrint("Starting post run operations...", printing.MAGENTA)
 
 	__wallpaper(colorStyle)
-	printing.colorPrint("Wallpaper handled", "white")
+	printing.colorPrint("Wallpaper handled", printing.WHITE)
 
-	printing.colorPrint("Ended post run operations...", "green")
+	printing.colorPrint("Ended post run operations...", printing.GREEN)
 
 def __wallpaper(colorStyle):
 	user = os.path.expanduser("~")
@@ -40,14 +40,14 @@ def __wallpaper(colorStyle):
 
 def __xinitrc():
 	if not os.path.isfile("/etc/X11/xinit/xinitrc"):
-		printing.colorPrint("Couldn't handle xinitrc: default xinitrc not found", "red")
+		printing.colorPrint("Couldn't handle xinitrc: default xinitrc not found", printing.RED)
 		return
 
 	with open("/etc/X11/xinit/xinitrc") as f:
 		xinitrc = f.read().splitlines()
 
 	if "twm &" not in xinitrc:
-		printing.colorPrint("Couldn't handle xinitrc: malformed default xinitrc", "red")
+		printing.colorPrint("Couldn't handle xinitrc: malformed default xinitrc", printing.RED)
 		return
 
 	xinitrc = xinitrc[0:xinitrc.index("twm &")]
@@ -57,7 +57,7 @@ def __xinitrc():
 	
 	xinitrcPath = os.path.expanduser("~/.xinitrc")
 	if os.path.isfile(xinitrcPath):
-		printing.colorPrint(f"{xinitrcPath} already exists", "red")
+		printing.colorPrint(f"{xinitrcPath} already exists", printing.RED)
 
 	with open(xinitrcPath, "w") as f:
 		f.write("\n".join(xinitrc) + "\n" + xinitrc_append)
