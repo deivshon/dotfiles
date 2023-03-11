@@ -1,9 +1,9 @@
 #!/bin/sh
 
-cyan=$(tput setaf 6 bold)
-red=$(tput setaf 1 bold)
-green=$(tput setaf 2 bold)
-normal=$(tput sgr0)
+cyan=$(printf "\033[1m\033[36m")
+red=$(printf "\033[1m\033[31m")
+green=$(printf "\033[1m\033[32m")
+normal=$(printf "\033[0m\033[37m")
 
 usage() {
     echo "Accepted first arguments (programs):
