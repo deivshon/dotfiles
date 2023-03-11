@@ -199,14 +199,7 @@ install.compile("plstatus")
 install.compile("st")
 install.compile("status_scripts")
 
-# Download wallpaper and place it in ~/Pictures/wallpaper
-if(not os.path.isdir(os.path.expanduser("~/Pictures"))):
-    os.mkdir(os.path.expanduser("~/Pictures/"))
-
-wallpaperPath = currentUser + "/Pictures/" + colorStyle["wallpaperName"]
-if(not os.path.isfile(wallpaperPath)):
-    subprocess.run(["wget", colorStyle["wallpaperLink"], "-O", wallpaperPath])
-subprocess.run(["cp", wallpaperPath, currentUser + "/Pictures/wallpaper"])
+post.change(colorStyle)
 
 if firstRun:
     post.install()

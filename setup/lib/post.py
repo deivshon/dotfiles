@@ -6,7 +6,7 @@ import setup.lib.printing as printing
 
 # To be called only the first time the setup is run
 def install():
-	printing.colorPrint("Running post install operations...", "green")
+	printing.colorPrint("Starting post install operations...", "green")
 
 	__xinitrc()
 	printing.colorPrint(".xinitrc handled", "white")
@@ -14,9 +14,29 @@ def install():
 	__startup_script()
 	printing.colorPrint("Startup script handled", "white")
 
+	printing.colorPrint("Ended post install operations...", "green")
+
 # To be called every time the setup is run
-def change():
-	pass
+def change(colorStyle):
+	printing.colorPrint("Starting post run operations...", "green")
+
+	__wallpaper(colorStyle)
+	printing.colorPrint("Wallpaper handled", "white")
+
+	printing.colorPrint("Ended post run operations...", "green")
+
+def __wallpaper(colorStyle):
+	user = os.path.expanduser("~")
+	pictures = user + "/Pictures"
+
+	# Download wallpaper and place it in ~/Pictures/wallpaper
+	if not os.path.isdir(pictures):
+		os.mkdir(pictures)
+
+	wallpaperPath = user + "/Pictures/" + colorStyle["wallpaperName"]
+	if(not os.path.isfile(wallpaperPath)):
+		subprocess.run(["wget", colorStyle["wallpaperLink"], "-O", wallpaperPath])
+	subprocess.run(["cp", wallpaperPath, user + "/Pictures/wallpaper"])
 
 def __xinitrc():
 	if not os.path.isfile("/etc/X11/xinit/xinitrc"):
