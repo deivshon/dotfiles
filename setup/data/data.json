@@ -1,48 +1,4 @@
 {
-    "packages": {
-        "pacman": [
-            "xorg",
-            "xorg-xinit",
-            "rofi",
-            "dunst",
-            "alacritty",
-            "feh",
-            "curl",
-            "sudo",
-            "exa",
-            "adobe-source-code-pro-fonts",
-            "acpi",
-            "iw",
-            "sysstat",
-            "ranger",
-            "ueberzug",
-            "ttf-droid",
-            "bc",
-            "polkit",
-            "network-manager-applet",
-            "noto-fonts",
-            "wget",
-            "python-requests",
-            "gnome-keyring",
-            "firefox",
-            "gnome-themes-extra",
-            "nemo",
-            "lxappearance",
-            "wireshark-qt",
-            "tmux",
-            "btop",
-            "xclip",
-            "python-matplotlib",
-						"bash-completion"
-        ],
-        "yay": [
-            "afetch",
-            "cbonsai",
-            "polkit-dumb-agent-git",
-            "visual-studio-code-bin",
-            "gksu"
-        ]
-    },
     "neededFields": {
         "substitutions": [
             "mainColor",
