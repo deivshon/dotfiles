@@ -7,10 +7,8 @@ import subprocess
 import json
 import shutil
 
-# Import utils (./setup/lib/[...].py)
-sys.path.insert(1, "./setup/lib/")
-import printing
-import install
+import setup.lib.printing as printing
+import setup.lib.install as install
 
 DATA_FILE = "./setup/data/data.json"
 FIRST_RUN_FILE = ".notFirstRun"
@@ -178,7 +176,7 @@ if(not os.path.isfile(FIRST_RUN_FILE) or forcePackageInstall):
 
 # Placed here because libraries imported by utils
 # need to be installed first
-import utils
+import setup.lib.utils as utils
 
 # Read and store color style content
 with open(colorStylePath, "r") as f:
