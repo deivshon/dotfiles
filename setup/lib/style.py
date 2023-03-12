@@ -3,31 +3,39 @@ import json
 
 import setup.lib.utils as utils
 
+__STYLE_FILE = "./setup/data/styleFields.json"
+__EXPANSIONS_FILE = "./setup/data/expansions.json"
+__SUBSTITUTIONS = "substitutions"
+__EXPANDED_SUBSTITUTIONS = "setup-expanded-substitutions"
+
+__EFY = "enhancer-for-youtube"
+__MAIN_COLOR = "mainColor"
+
 def check(style):
-    with open("setup/data/styleFields.json", "r") as f:
+    with open(__STYLE_FILE, "r") as f:
         expectedFields = json.loads(f.read())
 
     # Check the selected color style contains all the needed fields
     colorStyleKeys = style.keys()
-    if "substitutions" not in colorStyleKeys:
+    if __SUBSTITUTIONS not in colorStyleKeys:
         sys.exit("Substitutions field missing in color style")
 
     for field in expectedFields["other"]:
         if field not in colorStyleKeys:
             sys.exit("Field missing in color style: " + field)
 
-    for field in expectedFields["substitutions"] + expectedFields["setup-expanded-substitutions"]:
-        if field not in style["substitutions"].keys():
+    for field in expectedFields[__SUBSTITUTIONS] + expectedFields[__EXPANDED_SUBSTITUTIONS]:
+        if field not in style[__SUBSTITUTIONS].keys():
             sys.exit("Sub-field missing in substitutions field: " + field)
 
 def expand(colorStyle):
-    with open("setup/data/expansions.json") as f:
+    with open(__EXPANSIONS_FILE) as f:
         expansionData = json.loads(f.read())
 
-    __expand_efy(colorStyle, expansionData["enhancer-for-youtube"])
+    __expand_efy(colorStyle, expansionData[__EFY])
 
 def __expand_efy(colorStyle, efyFields):
-    mainColor = colorStyle["substitutions"]["mainColor"]
+    mainColor = colorStyle[__SUBSTITUTIONS][__MAIN_COLOR]
     newFields = {}
 
     for col in efyFields.keys():
@@ -35,5 +43,5 @@ def __expand_efy(colorStyle, efyFields):
         newFields[col] = utils.apply_hue(s, v, mainColor)    
 
     for field in newFields:
-        if(field not in colorStyle["substitutions"]):
-            colorStyle["substitutions"][field] = newFields[field]
+        if(field not in colorStyle[__SUBSTITUTIONS]):
+            colorStyle[__SUBSTITUTIONS][field] = newFields[field]
