@@ -88,7 +88,6 @@ with open(args.style, "r") as f:
 style.expand(selectedStyle)
 style.check(selectedStyle)
 
-# Download the dwm, plstatus, st builds and status-scripts
 install.download("dwm")
 install.download("plstatus")
 install.download("st")
@@ -99,9 +98,7 @@ configs.link(selectedStyle, currentUser, setupDir, keepExpansions = args.keep, f
 # Download and compile change-vol-pactl
 install.install("change_vol_pactl")
 
-# Compile dwm, plstatus, st and status-scripts
 install.compile("dwm")
-install.compile("plstatus")
 install.compile("st")
 
 post.change(selectedStyle)
@@ -109,6 +106,11 @@ post.change(selectedStyle)
 if firstRun:
     post.install()
 
-# Compile status scripts last since rust needs to be configured,
-# which happens only after the post install operations
+# Compile status scripts after rust is configured,
+# which happens only during the post install operations
 install.compile("status_scripts")
+
+# Compile plstatus after status scripts are installed,
+# otherwise commands in plstatus configuration will not exists in PATH
+# at compile time and compilation will subsequently fail
+install.compile("plstatus")
