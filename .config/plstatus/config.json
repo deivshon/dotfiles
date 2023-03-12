@@ -33,7 +33,7 @@
             "separator": "|"
         },
         {
-            "command": "mullvad-check-status",
+            "command": "mullvad-status",
             "period": 30000,
             "separator": "|"
         },
