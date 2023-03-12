@@ -104,7 +104,7 @@ change_vol_pactl_compilation() {
 }
 
 status_scripts_compilation() {
-    make -C ~/.config/status-scripts clean install
+    make -C ~/.config/status-scripts install
 }
 
 ########## Main ##########
