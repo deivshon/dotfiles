@@ -10,13 +10,10 @@
 		"sudo",
 		"exa",
 		"adobe-source-code-pro-fonts",
-		"acpi",
 		"iw",
-		"sysstat",
 		"ranger",
 		"ueberzug",
 		"ttf-droid",
-		"bc",
 		"polkit",
 		"network-manager-applet",
 		"noto-fonts",
@@ -37,7 +34,6 @@
 	],
 	"yay": [
 		"afetch",
-		"cbonsai",
 		"polkit-dumb-agent-git",
 		"visual-studio-code-bin",
 		"gksu"
