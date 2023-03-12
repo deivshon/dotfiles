@@ -3,16 +3,22 @@ import stat
 import subprocess
 
 import setup.lib.printing as printing
+import setup.lib.utils as utils
+
+__DEFAULT_XINITRC = "/etc/X11/xinit/xinitrc"
+__USER_XINITRC = os.path.expanduser("~/.xinitrc")
+__STARTUP_SCRIPT = os.path.expanduser("~/startup/startup.sh")
+__XINITRC_APPEND = "./.xinitrc_append"
 
 # To be called only the first time the setup is run
 def install():
 	printing.colorPrint("Starting post install operations...", printing.MAGENTA)
 
 	__xinitrc()
-	printing.colorPrint(".xinitrc handled", printing.WHITE)
+	printing.colorPrint(f"{__USER_XINITRC} handled", printing.WHITE)
 
 	__startup_script()
-	printing.colorPrint("Startup script handled", printing.WHITE)
+	printing.colorPrint(f"{__STARTUP_SCRIPT} handled", printing.WHITE)
 
 	printing.colorPrint("Ended post install operations...", printing.GREEN)
 
@@ -34,16 +40,20 @@ def __wallpaper(colorStyle):
 		os.mkdir(pictures)
 
 	wallpaperPath = user + "/Pictures/" + colorStyle["wallpaperName"]
-	if(not os.path.isfile(wallpaperPath)):
+	if not os.path.isfile(wallpaperPath):
 		subprocess.run(["wget", colorStyle["wallpaperLink"], "-O", wallpaperPath])
 	subprocess.run(["cp", wallpaperPath, user + "/Pictures/wallpaper"])
 
 def __xinitrc():
-	if not os.path.isfile("/etc/X11/xinit/xinitrc"):
+	if os.path.isfile(__USER_XINITRC):
+		printing.colorPrint(f"{__USER_XINITRC} already exists", printing.RED)
+		return
+
+	if not os.path.isfile(__DEFAULT_XINITRC):
 		printing.colorPrint("Couldn't handle xinitrc: default xinitrc not found", printing.RED)
 		return
 
-	with open("/etc/X11/xinit/xinitrc") as f:
+	with open(__DEFAULT_XINITRC) as f:
 		xinitrc = f.read().splitlines()
 
 	if "twm &" not in xinitrc:
@@ -52,25 +62,22 @@ def __xinitrc():
 
 	xinitrc = xinitrc[0:xinitrc.index("twm &")]
 
-	with open(".xinitrc_append", "r") as f:
-		xinitrc_append = f.read()
-	
-	xinitrcPath = os.path.expanduser("~/.xinitrc")
-	if os.path.isfile(xinitrcPath):
-		printing.colorPrint(f"{xinitrcPath} already exists", printing.RED)
+	with open(__XINITRC_APPEND, "r") as f:
+		xinitrc_append = f.read()	
 
-	with open(xinitrcPath, "w") as f:
+	with open(__USER_XINITRC, "w") as f:
 		f.write("\n".join(xinitrc) + "\n" + xinitrc_append)
 
 def __startup_script():
 	# Create the startup folder and script in the home directory
 	# This script is ran every time the X server starts
-	subprocess.run(["mkdir", "-p", os.path.expanduser("~/startup")])
+	utils.make_dirs(os.path.dirname(__STARTUP_SCRIPT))
 
-	startupFilePath = os.path.expanduser("~/startup/startup.sh")
-	if not os.path.isfile(startupFilePath):
-		with open(startupFilePath, "w") as f:
+	if not os.path.isfile(__STARTUP_SCRIPT):
+		with open(__STARTUP_SCRIPT, "w") as f:
 			f.write("#!/bin/sh\n")
 
 		# This line is the equivalent of chmod +x ~/startup/startup.sh
-		os.chmod(startupFilePath, os.stat(startupFilePath).st_mode | stat.S_IEXEC)
+		os.chmod(__STARTUP_SCRIPT, os.stat(__STARTUP_SCRIPT).st_mode | stat.S_IEXEC)
+	else:
+		printing.colorPrint(f"{__STARTUP_SCRIPT} already exists", printing.RED)
