@@ -2,51 +2,51 @@
     "bashrc": {
         "source": "$(setupDir)/.bashrc",
         "target": "~/.bashrc",
-        "setupFlags": []
+        "flags": []
     },
     "bashProfile": {
         "source": "$(setupDir)/.bash_profile",
         "target": "~/.bash_profile",
-        "setupFlags": []
+        "flags": []
     },
     "dunst": {
         "source": "$(setupDir)/.config/dunst/dunstrc",
         "target": "~/.config/dunst/dunstrc",
-        "setupFlags": ["needsSubstitution"]
+        "flags": ["substitute"]
     },
     "alacritty": {
         "source": "$(setupDir)/.config/alacritty/alacritty.yml",
         "target": "~/.config/alacritty/alacritty.yml",
-        "setupFlags": []
+        "flags": []
     },
     "btop": {
         "source": "$(setupDir)/.config/btop/btop.conf",
         "target": "~/.config/btop/btop.conf",
-        "setupFlags": []
+        "flags": []
     },
     "rofi": {
         "source": "$(setupDir)/.config/rofi/config.rasi",
         "target": "~/.config/rofi/config.rasi",
-        "setupFlags": ["needsSubstitution"]
+        "flags": ["substitute"]
     },
     "ranger": {
         "source": "$(setupDir)/.config/ranger/rc.conf",
         "target": "~/.config/ranger/rc.conf",
-        "setupFlags": []
+        "flags": []
     },
     "dwm": {
         "source": "$(setupDir)/.config/dwm/config.h",
         "target": "~/.config/dwm/config.h",
-        "setupFlags": ["needsSubstitution"]
+        "flags": ["substitute"]
     },
     "plstatus": {
         "source": "$(setupDir)/.config/plstatus/config.json",
         "target": "~/.config/plstatus/config.json",
-        "setupFlags": ["copy"]
+        "flags": ["copy"]
     },
     "enhancer-for-youtube": {
         "source": "$(setupDir)/.config/enhancer-for-youtube/efy.json",
         "target": "~/.config/enhancer-for-youtube/efy.json",
-        "setupFlags": ["needsSubstitution"]
+        "flags": ["substitute"]
     }
 }

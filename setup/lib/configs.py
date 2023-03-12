@@ -9,6 +9,13 @@ import setup.lib.utils as utils
 __EXPANSIONS_DIR = "./expansions/"
 __LINKS_FILE = "./setup/data/links.json"
 
+__SOURCE = "source"
+__TARGET = "target"
+__FLAGS = "flags"
+__COPY_FLAG = "copy"
+__SUBSTITUTION_FLAG = "substitute"
+__SUDO_FLAG = "sudo"
+
 with open(__LINKS_FILE, "r") as f:
     __linksList = json.loads(f.read())
 
@@ -17,9 +24,9 @@ def link(style, user, setupDir, keepExpansions = False, force = False):
 
 	# Handle each link/copy
 	for link in __linksList:
-		linkSource = __linksList[link]["source"].replace("$(setupDir)", setupDir)
-		linkTarget = __linksList[link]["target"].replace("~", user)
-		setupFlags = __linksList[link]["setupFlags"]
+		linkSource = __linksList[link][__SOURCE].replace("$(setupDir)", setupDir)
+		linkTarget = __linksList[link][__TARGET].replace("~", user)
+		setupFlags = __linksList[link][__FLAGS]
 		action = "Linking"
 
 		# Create the directory where the target file needs to be in
@@ -27,11 +34,11 @@ def link(style, user, setupDir, keepExpansions = False, force = False):
 
 		command = ["ln", linkFlags, linkSource, linkTarget]
 
-		if("needsSubstitution" in setupFlags):
-			if("copy" not in setupFlags): setupFlags.append("copy")
+		if __SUBSTITUTION_FLAG in setupFlags:
+			if __COPY_FLAG not in setupFlags: setupFlags.append(__COPY_FLAG)
 
 	        # If the temporary directory has not yet been created, create it
-			if(not os.path.isdir(__EXPANSIONS_DIR)):
+			if not os.path.isdir(__EXPANSIONS_DIR):
 				os.mkdir(__EXPANSIONS_DIR)
 
 			subprocess.run(["cp", linkSource, __EXPANSIONS_DIR])
@@ -42,7 +49,7 @@ def link(style, user, setupDir, keepExpansions = False, force = False):
 			for identifier in substitutions:
 				subprocess.run(["sed", "-i", "s/" + identifier + "/" + substitutions[identifier] + "/g", linkSource])
 
-		if("copy" in setupFlags):
+		if __COPY_FLAG in setupFlags:
 			command = ["cp", linkSource, linkTarget]
 			action = "Copying"
 
@@ -53,23 +60,23 @@ def link(style, user, setupDir, keepExpansions = False, force = False):
 			linkTarget,		printing.CYAN
 		)
 
-		if("needsSudo" in setupFlags):
+		if __SUDO_FLAG in setupFlags:
 			subprocess.run(["sudo"] + command)
 		else:
 			subprocess.run(command)
 
 	# Delete temporary directory unless the user specified not to
-	if(not keepExpansions and os.path.isdir(__EXPANSIONS_DIR)):
+	if not keepExpansions and os.path.isdir(__EXPANSIONS_DIR):
 		shutil.rmtree(__EXPANSIONS_DIR)
 
 def remove(user):
     for link in __linksList:
-        linkTarget = __linksList[link]["target"].replace("~", user)
-        needsSudo = "needsSudo" in __linksList[link]["setupFlags"]
+        linkTarget = __linksList[link][__TARGET].replace("~", user)
+        needsSudo = __SUDO_FLAG in __linksList[link][__FLAGS]
 
         removeCommand = ["rm", linkTarget]
-        if(needsSudo): removeCommand.insert(0, "sudo")
-        if(os.path.isfile(linkTarget)):
+        if needsSudo: removeCommand.insert(0, "sudo")
+        if os.path.isfile(linkTarget):
             printing.colorPrint(
 				"Removing ",	printing.WHITE,
 				linkTarget,		printing.RED
