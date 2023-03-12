@@ -10,24 +10,6 @@ import setup.lib.install as install
 FIRST_RUN_FILE = ".notFirstRun"
 DEFAULT_STYLE = "./setup/data/styles/sunsetDigital.json"
 
-# Check if the script is being run as root
-if os.getuid() == 0:
-    sys.exit("Don't run the script as root!")
-
-currentUser = os.path.expanduser("~")
-startDir = os.getcwd()
-setupDir = os.path.dirname(os.path.realpath(__file__))
-os.chdir(setupDir)
-
-firstRun = not os.path.isfile(FIRST_RUN_FILE)
-
-if firstRun:
-    install.packages(FIRST_RUN_FILE)
-
-import setup.lib.configs as configs
-import setup.lib.style as style
-import setup.lib.post as post
-
 parser = argparse.ArgumentParser(
     prog = "setup",
     description = "Setup script for new installations or style changes"
@@ -61,6 +43,26 @@ parser.add_argument(
 )
 
 args = parser.parse_args()
+
+# Check if the script is being run as root
+if os.getuid() == 0:
+    sys.exit("Don't run the script as root!")
+
+currentUser = os.path.expanduser("~")
+startDir = os.getcwd()
+setupDir = os.path.dirname(os.path.realpath(__file__))
+os.chdir(setupDir)
+
+firstRun = not os.path.isfile(FIRST_RUN_FILE)
+
+if firstRun:
+    install.packages(FIRST_RUN_FILE)
+
+# Imported here because they use modules that are only installed
+# with install.packages
+import setup.lib.configs as configs
+import setup.lib.style as style
+import setup.lib.post as post
 
 if args.remove:
     configs.remove(currentUser)
