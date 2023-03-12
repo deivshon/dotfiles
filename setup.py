@@ -11,10 +11,10 @@ FIRST_RUN_FILE = ".notFirstRun"
 DEFAULT_STYLE = "./setup/data/styles/sunsetDigital.json"
 
 # Check if the script is being run as root
-currentUser = os.path.expanduser("~")
-if(currentUser == "/root"):
+if os.getuid() == 0:
     sys.exit("Don't run the script as root!")
 
+currentUser = os.path.expanduser("~")
 startDir = os.getcwd()
 setupDir = os.path.dirname(os.path.realpath(__file__))
 os.chdir(setupDir)
