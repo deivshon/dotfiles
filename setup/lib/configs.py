@@ -42,7 +42,7 @@ def link(style, user, setupDir, keepExpansions = False, force = False):
 				os.mkdir(__EXPANSIONS_DIR)
 
 			subprocess.run(["cp", linkSource, __EXPANSIONS_DIR])
-			linkSource = __EXPANSIONS_DIR + utils.get_last_node(linkSource)
+			linkSource = os.path.abspath(__EXPANSIONS_DIR + utils.get_last_node(linkSource))
 
 	        # Perform the necessary substitutions using sed
 			substitutions = style["substitutions"]
