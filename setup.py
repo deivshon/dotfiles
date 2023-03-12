@@ -10,6 +10,15 @@ import setup.lib.install as install
 FIRST_RUN_FILE = ".notFirstRun"
 DEFAULT_STYLE = "./setup/data/styles/sunsetDigital.json"
 
+# Check if the script is being run as root
+currentUser = os.path.expanduser("~")
+if(currentUser == "/root"):
+    sys.exit("Don't run the script as root!")
+
+startDir = os.getcwd()
+setupDir = os.path.dirname(os.path.realpath(__file__))
+os.chdir(setupDir)
+
 firstRun = not os.path.isfile(FIRST_RUN_FILE)
 
 if firstRun:
@@ -18,13 +27,6 @@ if firstRun:
 import setup.lib.configs as configs
 import setup.lib.style as style
 import setup.lib.post as post
-
-# Check if the script is being run as root
-currentUser = os.path.expanduser("~")
-if(currentUser == "/root"):
-    sys.exit("Don't run the script as root!")
-
-setupDir = os.path.dirname(os.path.realpath(__file__))
 
 parser = argparse.ArgumentParser(
     prog = "setup",
@@ -64,6 +66,12 @@ if args.remove:
     configs.remove(currentUser)
     quit()
 
+# Style file path is relative to caller's cwd (startDir)
+if args.style != None:
+    os.chdir(startDir)
+    args.style = os.path.abspath(os.path.expanduser(args.style))
+    os.chdir(setupDir)
+
 if not os.path.isfile(args.style):
     print(f"{args.style} does not exist")
     quit()
@@ -73,7 +81,7 @@ if not os.path.isfile(args.style):
 if not firstRun and args.packages:
     install.packages(FIRST_RUN_FILE)
 
-# Read and store color style content
+# Store style content
 with open(args.style, "r") as f:
     selectedStyle = json.loads(f.read())
 
