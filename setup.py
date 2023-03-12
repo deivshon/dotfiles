@@ -99,9 +99,12 @@ install.install("change_vol_pactl")
 install.compile("dwm")
 install.compile("plstatus")
 install.compile("st")
-install.compile("status_scripts")
 
 post.change(selectedStyle)
 
 if firstRun:
     post.install()
+
+# Compile status scripts last since rust needs to be configured,
+# which happens only after the post install operations
+install.compile("status_scripts")
