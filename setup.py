@@ -24,11 +24,7 @@ currentUser = os.path.expanduser("~")
 if(currentUser == "/root"):
     sys.exit("Don't run the script as root!")
 
-# Check dotfiles folder location
 setupDir = os.path.dirname(os.path.realpath(__file__))
-
-if(setupDir != os.path.expanduser("~/dotfiles")):
-    sys.exit("The dotfiles folder needs to be placed in your home folder!")
 
 parser = argparse.ArgumentParser(
     prog = "setup",
