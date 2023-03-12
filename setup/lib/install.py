@@ -15,11 +15,14 @@ __acceptedInstallPrograms = [
 	"status_scripts",
 ]
 
+__PACKAGES_FILE = "./setup/data/packages.json"
+__INSTALLS_SCRIPT = "./setup/lib/installs.sh"
+
 def __script(program, action):
 	if program not in __acceptedInstallPrograms:
 		sys.exit(f"Program {program} can't be installed")
 
-	subprocess.run(["./setup/lib/installs.sh", program, action])
+	subprocess.run([__INSTALLS_SCRIPT, program, action])
 
 def install(program):
 	__script(program, "i")
@@ -30,8 +33,8 @@ def download(program):
 def compile(program):
 	__script(program, "c")
 
-def packages(firstRunDetectionFile):
-	with open("./setup/data/packages.json") as f:
+def packages(firstRunFile):
+	with open(__PACKAGES_FILE) as f:
 		packages = json.loads(f.read())
 
 	if not os.path.isdir(os.path.expanduser("~/yay")):
@@ -52,5 +55,5 @@ def packages(firstRunDetectionFile):
 
 	# Create a file containing the current timestamp to mark that the script
 	# has been run at least once in the past and the packages have been installed
-	with open(firstRunDetectionFile, "w") as f:
+	with open(firstRunFile, "w") as f:
 		f.write(str(currentTimestamp()) + "\n")
