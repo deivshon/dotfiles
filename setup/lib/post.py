@@ -20,6 +20,9 @@ def install():
 	__startup_script()
 	printing.colorPrint(f"{__STARTUP_SCRIPT} handled", printing.WHITE)
 
+	__rustup()
+	printing.colorPrint("Rustup handled", printing.WHITE)
+
 	printing.colorPrint("Ended post install operations...", printing.GREEN)
 
 # To be called every time the setup is run
@@ -81,3 +84,6 @@ def __startup_script():
 		os.chmod(__STARTUP_SCRIPT, os.stat(__STARTUP_SCRIPT).st_mode | stat.S_IEXEC)
 	else:
 		printing.colorPrint(f"{__STARTUP_SCRIPT} already exists", printing.RED)
+
+def __rustup():
+	subprocess.run(["rustup", "default", "stable"])

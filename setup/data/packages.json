@@ -32,7 +32,8 @@
 		"btop",
 		"xclip",
 		"python-matplotlib",
-		"bash-completion"
+		"bash-completion",
+		"rustup"
 	],
 	"yay": [
 		"afetch",
