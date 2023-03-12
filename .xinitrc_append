@@ -6,6 +6,6 @@ plstatus &
 nm-applet &
 polkit-dumb-agent &
 dunst &
-feh --bg-scale ~/Pictures/wallpaper &
+feh --bg-fill ~/Pictures/wallpaper &
 xset -b &
 exec dwm
