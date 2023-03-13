@@ -16,7 +16,7 @@ __acceptedInstallPrograms = [
 ]
 
 __PACKAGES_FILE = "./setup/data/packages.json"
-__INSTALLS_SCRIPT = "./setup/lib/installs.sh"
+__INSTALLS_SCRIPT = "./setup/installs.sh"
 
 def __script(program, action):
 	if program not in __acceptedInstallPrograms:
