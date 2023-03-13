@@ -30,7 +30,8 @@
 		"xclip",
 		"python-matplotlib",
 		"bash-completion",
-		"rustup"
+		"rustup",
+		"reflector"
 	],
 	"yay": [
 		"afetch",

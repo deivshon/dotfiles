@@ -23,6 +23,9 @@ def install():
 	__rustup()
 	printing.colorPrint("Rustup handled", printing.WHITE)
 
+	__reflector()
+	printing.colorPrint("Reflector handled", printing.WHITE)
+
 	printing.colorPrint("Ended post install operations...", printing.GREEN)
 
 # To be called every time the setup is run
@@ -87,3 +90,6 @@ def __startup_script():
 
 def __rustup():
 	subprocess.run(["rustup", "default", "stable"])
+
+def __reflector():
+	subprocess.run(["sudo", "systemctl", "enable", "reflector.service"])

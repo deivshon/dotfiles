@@ -48,5 +48,10 @@
         "source": "$(setupDir)/.config/enhancer-for-youtube/efy.json",
         "target": "~/.config/enhancer-for-youtube/efy.json",
         "flags": ["substitute"]
+    },
+    "reflector": {
+        "source": "$(setupDir)/etc/xdg/reflector/reflector.conf",
+        "target": "/etc/xdg/reflector/reflector.conf",
+        "flags": ["sudo", "copy"]
     }
 }
