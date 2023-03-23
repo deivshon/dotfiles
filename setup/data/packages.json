@@ -31,12 +31,17 @@
 		"python-matplotlib",
 		"bash-completion",
 		"rustup",
-		"reflector"
+		"reflector",
+		"otf-font-awesome",
+		"wofi"
 	],
 	"yay": [
 		"afetch",
 		"polkit-dumb-agent-git",
 		"visual-studio-code-bin",
-		"gksu"
+		"gksu",
+		"hyprland",
+		"hyprpaper-git",
+		"waybar-hyprland-git"
 	]
 }

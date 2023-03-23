@@ -1,0 +1,79 @@
+{
+    // "layer": "top",
+    // "position": "bottom"
+    "height": 30, // Waybar height (to be removed for auto height)
+    // "width": 1280,
+    "spacing": 4,
+
+    "modules-left": ["wlr/workspaces"],
+    "modules-right": ["pulseaudio", "custom/ram", "custom/disk", "custom/cpu", "custom-battery", "custom/eth", "custom/wifi", "custom/mullvad", "clock", "tray"],
+    "wlr/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "on-click": "activate"
+    },
+    "tray": {
+        "spacing": 10
+    },
+    "clock": {
+        "format": "{:%Y-%m-%d - %H:%M:%S}",
+        "interval": 1
+    },
+    "cpu": {
+        "format": "{usage}% ",
+        "tooltip": false
+    },
+    "pulseaudio": {
+        "format": "{volume}% {icon} {format_source}",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": " {format_source}",
+        "format-source": "{volume}% ",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    },
+    "custom/mullvad": {
+        "format": "{}",
+        "exec": "mullvad-status",
+        "interval": 30
+    },
+    "custom/wifi": {
+        "format": "{}",
+        "exec": "wifi-status",
+        "interval": 1
+    },
+    "custom/cpu": {
+        "format": "{}",
+        "exec": "cpu-status",
+        "interval": 1
+    },
+    "custom/ram": {
+        "format": "{}",
+        "exec": "ram-status",
+        "interval": 1
+    },
+    "custom/disk": {
+        "format": "{}",
+        "exec": "disk-status",
+        "interval": 1
+    },
+    "custom/battery": {
+        "format": "{}",
+        "exec": "battery-status",
+        "interval": 1
+    },
+    "custom/eth": {
+        "format": "{}",
+        "exec": "eth-status",
+        "interval": 1
+    }
+}
