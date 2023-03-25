@@ -63,5 +63,20 @@
         "source": "$(setupDir)/etc/xdg/reflector/reflector.conf",
         "target": "/etc/xdg/reflector/reflector.conf",
         "flags": ["sudo", "copy"]
+    },
+    "hyprland": {
+        "source": "$(setupDir)/.config/hypr/hyprland.conf",
+        "target": "~/.config/hypr/hyprland.conf",
+        "subs": {
+            "mainColorNoHash": "hyprMainColor",
+            "secondaryColorNoHash": "hyprSecondaryColor"
+        }
+    },
+    "hyprpaper": {
+        "source": "$(setupDir)/.config/hypr/hyprpaper.conf",
+        "target": "~/.config/hypr/hyprpaper.conf",
+        "subs": {
+            "wallpaperPath": "hyprWallpaperPath"
+        }
     }
 }

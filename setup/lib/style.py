@@ -10,6 +10,10 @@ __EXPANDED_SUBSTITUTIONS = "setup-expanded-substitutions"
 
 __EFY = "enhancer-for-youtube"
 __MAIN_COLOR = "mainColor"
+__SECONDARY_COLOR = "secondaryColor"
+__MAIN_COLOR_NOHASH = "mainColorNoHash"
+__SECONDARY_COLOR_NOHASH = "secondaryColorNoHash"
+
 
 def check(style):
     with open(__STYLE_FILE, "r") as f:
@@ -36,6 +40,8 @@ def expand(colorStyle):
 
     __expand_wallpaper(colorStyle)
 
+    __expand_colors_no_hash(colorStyle)
+
 def __expand_efy(colorStyle, efyFields):
     mainColor = colorStyle[__SUBSTITUTIONS][__MAIN_COLOR]
     newFields = {}
@@ -49,4 +55,11 @@ def __expand_efy(colorStyle, efyFields):
             colorStyle[__SUBSTITUTIONS][field] = newFields[field]
 
 def __expand_wallpaper(colorStyle):
-    colorStyle[__SUBSTITUTIONS]["wallpaperPath"] = utils.get_wallpaper_path(colorStyle["wallpaperName"])
+    colorStyle[__SUBSTITUTIONS]["wallpaperPath"] = utils.sed_escape_path(
+        utils.get_wallpaper_path(colorStyle["wallpaperName"])
+    )
+
+def __expand_colors_no_hash(colorStyle):
+    colorStyle[__SUBSTITUTIONS][__MAIN_COLOR_NOHASH] = colorStyle[__SUBSTITUTIONS][__MAIN_COLOR][1:]
+    colorStyle[__SUBSTITUTIONS][__SECONDARY_COLOR_NOHASH] = colorStyle[__SUBSTITUTIONS][__SECONDARY_COLOR][1:]
+
