@@ -33,7 +33,7 @@
 		"rustup",
 		"reflector",
 		"otf-font-awesome",
-		"wofi"
+		"fuzzel"
 	],
 	"yay": [
 		"afetch",
