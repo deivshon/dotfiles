@@ -78,5 +78,12 @@
         "subs": {
             "wallpaperPath": "hyprWallpaperPath"
         }
+    },
+    "fuzzel": {
+        "source": "$(setupDir)/.config/fuzzel/fuzzel.ini",
+        "target": "~/.config/fuzzel/fuzzel.ini",
+        "subs": {
+            "mainColorNoHash": "fuzzelColor"
+        }
     }
 }
