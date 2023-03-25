@@ -1,6 +1,6 @@
 {
     "modules-left": ["wlr/workspaces"],
-    "modules-right": ["pulseaudio", "custom/ram", "custom/disk", "custom/cpu", "custom/battery", "custom/eth", "custom/wifi", "custom/mullvad", "clock", "tray"],
+    "modules-right": ["custom/ram", "custom/disk", "custom/cpu", "custom/battery", "custom/eth", "custom/wifi", "custom/mullvad", "clock", "tray"],
     "wlr/workspaces": {
         "disable-scroll": true,
         "all-outputs": true,
@@ -22,24 +22,6 @@
     "cpu": {
         "format": "{usage}% ",
         "tooltip": false
-    },
-    "pulseaudio": {
-        "format": "{volume}% {icon} {format_source}",
-        "format-bluetooth": "{volume}% {icon} {format_source}",
-        "format-bluetooth-muted": " {icon} {format_source}",
-        "format-muted": " {format_source}",
-        "format-source": "{volume}% ",
-        "format-source-muted": "",
-        "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", "", ""]
-        },
-        "on-click": "pavucontrol"
     },
     "custom/mullvad": {
         "format": "{}",
