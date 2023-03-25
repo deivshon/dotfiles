@@ -1,7 +1,8 @@
 {
 	"substitutions": [
 		"mainColor",
-		"secondaryColor"
+		"secondaryColor",
+		"wallpaperPath"
 	],
 	"setup-expanded-substitutions": [
 		"efy--main-color",
