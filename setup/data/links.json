@@ -1,13 +1,11 @@
 {
     "bashrc": {
         "source": "$(setupDir)/.bashrc",
-        "target": "~/.bashrc",
-        "flags": []
+        "target": "~/.bashrc"
     },
     "bashProfile": {
         "source": "$(setupDir)/.bash_profile",
-        "target": "~/.bash_profile",
-        "flags": []
+        "target": "~/.bash_profile"
     },
     "dunst": {
         "source": "$(setupDir)/.config/dunst/dunstrc",
@@ -16,13 +14,11 @@
     },
     "alacritty": {
         "source": "$(setupDir)/.config/alacritty/alacritty.yml",
-        "target": "~/.config/alacritty/alacritty.yml",
-        "flags": []
+        "target": "~/.config/alacritty/alacritty.yml"
     },
     "btop": {
         "source": "$(setupDir)/.config/btop/btop.conf",
-        "target": "~/.config/btop/btop.conf",
-        "flags": []
+        "target": "~/.config/btop/btop.conf"
     },
     "rofi": {
         "source": "$(setupDir)/.config/rofi/config.rasi",
@@ -31,8 +27,7 @@
     },
     "ranger": {
         "source": "$(setupDir)/.config/ranger/rc.conf",
-        "target": "~/.config/ranger/rc.conf",
-        "flags": []
+        "target": "~/.config/ranger/rc.conf"
     },
     "dwm": {
         "source": "$(setupDir)/.config/dwm/config.h",

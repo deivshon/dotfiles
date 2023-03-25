@@ -26,7 +26,7 @@ def link(style, user, setupDir, keepExpansions = False, force = False):
 	for link in __linksList:
 		linkSource = __linksList[link][__SOURCE].replace("$(setupDir)", setupDir)
 		linkTarget = __linksList[link][__TARGET].replace("~", user)
-		setupFlags = __linksList[link][__FLAGS]
+		setupFlags = __linksList[link][__FLAGS] if __FLAGS in __linksList[link] else []
 		action = "Linking"
 
 		# Create the directory where the target file needs to be in
