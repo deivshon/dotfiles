@@ -34,7 +34,12 @@ The configuration files in this repository and the relative setup scripts are ta
 + [python-matplotlib](https://archlinux.org/packages/community/x86_64/python-matplotlib/)
 + [bash-completion](https://archlinux.org/packages/extra/any/bash-completion/)
 + [rustup](https://archlinux.org/packages/community/x86_64/rustup/)
++ [otf-font-awesome](https://archlinux.org/packages/community/any/otf-font-awesome/)
++ [fuzzel](https://archlinux.org/packages/community/x86_64/fuzzel/)
 + [afetch](https://aur.archlinux.org/packages/afetch/)
 + [polkit-dumb-agent](https://aur.archlinux.org/packages/polkit-dumb-agent-git/)
 + [visual-studio-code-bin](https://aur.archlinux.org/packages/visual-studio-code-bin)
 + [gksu](https://aur.archlinux.org/packages/gksu) [root privileges for rofi launched applications]
++ [hyprland](https://aur.archlinux.org/packages/hyprland)
++ [hyprpaper-git](https://aur.archlinux.org/packages/hyprpaper-git)
++ [waybar-hyprland-git](https://aur.archlinux.org/packages/waybar-hyprland-git)
