@@ -34,6 +34,8 @@ def expand(colorStyle):
 
     __expand_efy(colorStyle, expansionData[__EFY])
 
+    __expand_wallpaper(colorStyle)
+
 def __expand_efy(colorStyle, efyFields):
     mainColor = colorStyle[__SUBSTITUTIONS][__MAIN_COLOR]
     newFields = {}
@@ -45,3 +47,6 @@ def __expand_efy(colorStyle, efyFields):
     for field in newFields:
         if(field not in colorStyle[__SUBSTITUTIONS]):
             colorStyle[__SUBSTITUTIONS][field] = newFields[field]
+
+def __expand_wallpaper(colorStyle):
+    colorStyle[__SUBSTITUTIONS]["wallpaperPath"] = utils.get_wallpaper_path(colorStyle["wallpaperName"])

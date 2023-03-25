@@ -1,3 +1,4 @@
+import os
 import subprocess
 from matplotlib.colors import hex2color, hsv_to_rgb, rgb_to_hsv, rgb2hex
 
@@ -41,3 +42,6 @@ def make_dirs(path):
 
 def get_last_node(path):
     return path[::-1][0:path[::-1].index("/")][::-1]
+
+def get_wallpaper_path(wallpaperName):
+    return f"{os.path.expanduser('~')}/Pictures/{wallpaperName}"

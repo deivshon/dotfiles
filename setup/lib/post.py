@@ -39,13 +39,12 @@ def change(colorStyle):
 
 def __wallpaper(colorStyle):
 	user = os.path.expanduser("~")
-	pictures = user + "/Pictures"
 
-	# Download wallpaper and place it in ~/Pictures/wallpaper
-	if not os.path.isdir(pictures):
-		os.mkdir(pictures)
+	wallpaperPath = utils.get_wallpaper_path(colorStyle["wallpaperName"])
 
-	wallpaperPath = user + "/Pictures/" + colorStyle["wallpaperName"]
+	if not os.path.isdir(os.path.dirname(wallpaperPath)):
+		utils.make_dirs(os.path.dirname(wallpaperPath))
+
 	if not os.path.isfile(wallpaperPath):
 		subprocess.run(["wget", colorStyle["wallpaperLink"], "-O", wallpaperPath])
 	subprocess.run(["cp", wallpaperPath, user + "/Pictures/wallpaper"])
