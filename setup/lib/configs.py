@@ -13,7 +13,8 @@ __SOURCE = "source"
 __TARGET = "target"
 __FLAGS = "flags"
 __COPY_FLAG = "copy"
-__SUBSTITUTION_FLAG = "substitute"
+__SUBS = "subs"
+__STYLE_SUBS = "substitutions"
 __SUDO_FLAG = "sudo"
 
 with open(__LINKS_FILE, "r") as f:
@@ -34,8 +35,13 @@ def link(style, user, setupDir, keepExpansions = False, force = False):
 
 		command = ["ln", linkFlags, linkSource, linkTarget]
 
-		if __SUBSTITUTION_FLAG in setupFlags:
-			if __COPY_FLAG not in setupFlags: setupFlags.append(__COPY_FLAG)
+		substitutionIds = []
+		if __SUBS in __linksList[link]:
+			substitutionIds = __linksList[link][__SUBS]
+
+		if len(substitutionIds) > 0:
+			if __COPY_FLAG not in setupFlags:
+				setupFlags.append(__COPY_FLAG)
 
 	        # If the temporary directory has not yet been created, create it
 			if not os.path.isdir(__EXPANSIONS_DIR):
@@ -45,9 +51,9 @@ def link(style, user, setupDir, keepExpansions = False, force = False):
 			linkSource = os.path.abspath(__EXPANSIONS_DIR + utils.get_last_node(linkSource))
 
 	        # Perform the necessary substitutions using sed
-			substitutions = style["substitutions"]
-			for identifier in substitutions:
-				subprocess.run(["sed", "-i", "s/" + identifier + "/" + substitutions[identifier] + "/g", linkSource])
+			substitutionVals = style[__STYLE_SUBS]
+			for id in substitutionIds:
+				subprocess.run(["sed", "-i", "s/" + substitutionIds[id] + "/" + substitutionVals[id] + "/g", linkSource])
 
 		if __COPY_FLAG in setupFlags:
 			command = ["cp", linkSource, linkTarget]

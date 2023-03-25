@@ -10,7 +10,9 @@
     "dunst": {
         "source": "$(setupDir)/.config/dunst/dunstrc",
         "target": "~/.config/dunst/dunstrc",
-        "flags": ["substitute"]
+        "subs": {
+            "mainColor": "mainColor"
+        }
     },
     "alacritty": {
         "source": "$(setupDir)/.config/alacritty/alacritty.yml",
@@ -23,7 +25,9 @@
     "rofi": {
         "source": "$(setupDir)/.config/rofi/config.rasi",
         "target": "~/.config/rofi/config.rasi",
-        "flags": ["substitute"]
+        "subs": {
+            "mainColor": "mainColor"
+        }
     },
     "ranger": {
         "source": "$(setupDir)/.config/ranger/rc.conf",
@@ -32,7 +36,10 @@
     "dwm": {
         "source": "$(setupDir)/.config/dwm/config.h",
         "target": "~/.config/dwm/config.h",
-        "flags": ["substitute"]
+        "subs": {
+            "mainColor": "mainColor",
+            "secondaryColor": "secondaryColor"
+        }
     },
     "plstatus": {
         "source": "$(setupDir)/.config/plstatus/config.json",
@@ -42,7 +49,15 @@
     "enhancer-for-youtube": {
         "source": "$(setupDir)/.config/enhancer-for-youtube/efy.json",
         "target": "~/.config/enhancer-for-youtube/efy.json",
-        "flags": ["substitute"]
+        "subs": {
+            "efy--main-color": "efy--main-color",
+            "efy--main-background": "efy--main-background",
+            "efy--second-background": "efy--second-background",
+            "efy--hover-background": "efy--hover-background",
+            "efy--main-text": "efy--main-text",
+            "efy--dimmer-text": "efy--dimmer-text",
+            "efy--shadow": "efy--shadow"
+        }
     },
     "reflector": {
         "source": "$(setupDir)/etc/xdg/reflector/reflector.conf",
