@@ -7,6 +7,7 @@ import setup.lib.utils as utils
 
 __DEFAULT_XINITRC = "/etc/X11/xinit/xinitrc"
 __USER_XINITRC = os.path.expanduser("~/.xinitrc")
+__USER_HYPRSETUP = os.path.expanduser("~/.config/hypr/hyprsetup.conf")
 __STARTUP_SCRIPT = os.path.expanduser("~/startup/startup.sh")
 __XINITRC_APPEND = "./.xinitrc_append"
 
@@ -25,6 +26,9 @@ def install():
 
 	__reflector()
 	printing.colorPrint("Reflector handled", printing.WHITE)
+
+	__hyprland()
+	printing.colorPrint(f"{__USER_HYPRSETUP} handled", printing.WHITE)
 
 	printing.colorPrint("Ended post install operations...", printing.GREEN)
 
@@ -92,3 +96,8 @@ def __rustup():
 
 def __reflector():
 	subprocess.run(["sudo", "systemctl", "enable", "reflector.service"])
+
+def __hyprland():
+	if not os.path.isfile(__USER_HYPRSETUP):
+		with open(__USER_HYPRSETUP, "w") as f:
+			f.write("# Device specific Hyprland options\n")
