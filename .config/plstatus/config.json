@@ -19,12 +19,20 @@
         },
         {
             "command": "battery-status",
+            "args": [
+                "-n",
+                ""
+            ],
             "period": 100,
             "separator": "|"
         },
         {
             "command": "eth-status",
             "period": 100,
+            "args": [
+                "-d",
+                ""
+            ],
             "separator": "|"
         },
         {
