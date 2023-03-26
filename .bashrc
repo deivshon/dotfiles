@@ -3,7 +3,7 @@
 [[ $- != *i* ]] && return
 
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
-    startx 2> /dev/null
+    Hyprland
 fi
 
 colors() {
