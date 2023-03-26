@@ -38,6 +38,12 @@
         {
             "command": "wifi-status",
             "period": 100,
+            "args": [
+                "-u",
+                "WIFI %p% %s",
+                "-d",
+                ""
+            ],
             "separator": "|"
         },
         {
