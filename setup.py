@@ -93,7 +93,6 @@ style.check(selectedStyle)
 install.download("dwm")
 install.download("plstatus")
 install.download("st")
-install.download("status_scripts")
 
 configs.link(selectedStyle, currentUser, setupDir, keepExpansions = args.keep, force = args.force)
 
@@ -108,9 +107,9 @@ post.change(selectedStyle)
 if firstRun:
     post.install()
 
-# Compile status scripts after rust is configured,
+# Install status scripts after rust is configured,
 # which happens only during the post install operations
-install.compile("status_scripts")
+install.status_scripts()
 
 # Compile plstatus after status scripts are installed,
 # otherwise commands in plstatus configuration will not exists in PATH

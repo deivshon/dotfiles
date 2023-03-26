@@ -57,3 +57,9 @@ def packages(firstRunFile):
 	# has been run at least once in the past and the packages have been installed
 	with open(firstRunFile, "w") as f:
 		f.write(str(currentTimestamp()) + "\n")
+
+def status_scripts():
+	install("status_scripts")
+
+	# Needed to allow correct plstatus compilation
+	os.environ["PATH"] += ":" + os.path.expanduser("~/.local/scripts")
