@@ -33,7 +33,8 @@
 		"rustup",
 		"reflector",
 		"otf-font-awesome",
-		"fuzzel"
+		"fuzzel",
+		"fontforge"
 	],
 	"yay": [
 		"afetch",
@@ -42,6 +43,7 @@
 		"gksu",
 		"hyprland",
 		"hyprpaper-git",
-		"waybar-hyprland-git"
+		"waybar-hyprland-git",
+		"wlr-randr"
 	]
 }
