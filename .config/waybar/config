@@ -22,37 +22,37 @@
     },
     "custom/mullvad": {
         "format": "{}",
-        "exec": "mullvad-status -u ' %h' -d ' %c'",
+        "exec": "command-cache 100 mullvad-status -u ' %h' -d ' %c'",
         "interval": 30
     },
     "custom/wifi": {
         "format": "{}",
-        "exec": "wifi-status -u ' %p% %s'",
+        "exec": "command-cache 100 wifi-status -u ' %p% %s'",
         "interval": 1
     },
     "custom/cpu": {
         "format": "{}",
-        "exec": "cpu-status -f ' %p%'",
+        "exec": "command-cache 100 cpu-status -f ' %p%'",
         "interval": 1
     },
     "custom/ram": {
         "format": "{}",
-        "exec": "ram-status -f ' %u/%t'",
+        "exec": "command-cache 100 ram-status -f ' %u/%t'",
         "interval": 1
     },
     "custom/disk": {
         "format": "{}",
-        "exec": "disk-status -f ' %u'",
+        "exec": "command-cache 100 disk-status -f ' %u'",
         "interval": 1
     },
     "custom/battery": {
         "format": "{}",
-        "exec": "battery-status -f ' %p%' -c ' %p%' -n ''",
+        "exec": "command-cache 100 battery-status -f ' %p%' -c ' %p%' -n ''",
         "interval": 1
     },
     "custom/eth": {
         "format": "{}",
-        "exec": "eth-status -u ' UP' -d ''",
+        "exec": "command-cache 100 eth-status -u ' UP' -d ''",
         "interval": 1
     }
 }
