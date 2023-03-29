@@ -107,9 +107,10 @@ post.change(selectedStyle)
 if firstRun:
     post.install()
 
-# Install status scripts after rust is configured,
+# Install Rust programs after rust is configured,
 # which happens only during the post install operations
 install.status_scripts()
+install.install("command_cache")
 
 # Compile plstatus after status scripts are installed,
 # otherwise commands in plstatus configuration will not exists in PATH

@@ -13,6 +13,7 @@ usage() {
     change_vol_pactl
     st
     status_scripts
+    command_cache
 
 Accepted second arguments (actions):
     d -> download
@@ -76,6 +77,10 @@ status_scripts_download() {
     git_download ~/.config/status-scripts https://github.com/deivshon/status-scripts status-scripts
 }
 
+command_cache_download() {
+    git_download ~/.config/command-cache https://github.com/deivshon/command-cache command-cache
+}
+
 ########## Compilations ##########
 
 dwm_compilation() {
@@ -105,6 +110,10 @@ change_vol_pactl_compilation() {
 
 status_scripts_compilation() {
     make -C ~/.config/status-scripts install
+}
+
+command_cache_compilation() {
+    make -C ~/.config/command-cache install
 }
 
 ########## Main ##########

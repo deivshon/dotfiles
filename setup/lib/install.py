@@ -13,6 +13,7 @@ __acceptedInstallPrograms = [
 	"change_vol_pactl",
 	"st",
 	"status_scripts",
+	"command_cache"
 ]
 
 __PACKAGES_FILE = "./setup/data/packages.json"
