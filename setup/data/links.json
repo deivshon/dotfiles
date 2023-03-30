@@ -99,6 +99,10 @@
     },
     "foot": {
         "source": "$(setupDir)/.config/foot/foot.ini",
-        "target": "~/.config/foot/foot.ini"
+        "target": "~/.config/foot/foot.ini",
+        "subs": {
+            "mainColorNoHash": "footMainColor",
+            "secondaryColorNoHash": "footSecondaryColor"
+        }
     }
 }
