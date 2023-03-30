@@ -66,9 +66,9 @@ button:hover {
     font-weight: bold;
 }
 
-/* Clock's margin should be 0 */
-/* If tray exists it also handles clock's margin */
-#clock {
+/* Last module's margin should be 0 */
+/* If tray exists it also handles last module's margin */
+#custom-mullvad {
     margin-right: 0px;
 }
 
