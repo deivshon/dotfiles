@@ -52,7 +52,7 @@
     },
     "custom/eth": {
         "format": "{}",
-        "exec": "command-cache 100 eth-status -u ' UP' -d ''",
+        "exec": "command-cache 100 eth-status -u ' Up' -d ''",
         "interval": 1
     }
 }
