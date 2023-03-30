@@ -125,6 +125,6 @@ alias mulreg="mullvad tunnel wireguard key regenerate"
 alias clip="xclip -sel c <"
 
 # Always show progress when using dd
-alias dd="dd status=progress"
+alias dd="sudo dd status=progress"
 
 afetch
