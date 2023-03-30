@@ -34,7 +34,8 @@
 		"reflector",
 		"otf-font-awesome",
 		"fuzzel",
-		"fontforge"
+		"fontforge",
+		"foot"
 	],
 	"yay": [
 		"afetch",

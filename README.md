@@ -45,3 +45,4 @@ The configuration files in this repository and the relative setup scripts are ta
 + [hyprpaper-git](https://aur.archlinux.org/packages/hyprpaper-git)
 + [waybar-hyprland-git](https://aur.archlinux.org/packages/waybar-hyprland-git)
 + [wlr-randr](https://aur.archlinux.org/packages/wlr-randr)
++ [foot](https://archlinux.org/packages/community/x86_64/foot/)
