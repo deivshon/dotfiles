@@ -35,7 +35,8 @@
 		"otf-font-awesome",
 		"fuzzel",
 		"fontforge",
-		"foot"
+		"foot",
+		"gsfonts"
 	],
 	"yay": [
 		"afetch",
