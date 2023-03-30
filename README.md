@@ -37,6 +37,7 @@ The configuration files in this repository and the relative setup scripts are ta
 + [otf-font-awesome](https://archlinux.org/packages/community/any/otf-font-awesome/)
 + [fuzzel](https://archlinux.org/packages/community/x86_64/fuzzel/)
 + [fontforge](https://archlinux.org/packages/extra/x86_64/fontforge/) [necessary for waybar glyphs]
++ [foot](https://archlinux.org/packages/community/x86_64/foot/)
 + [afetch](https://aur.archlinux.org/packages/afetch/)
 + [polkit-dumb-agent](https://aur.archlinux.org/packages/polkit-dumb-agent-git/)
 + [visual-studio-code-bin](https://aur.archlinux.org/packages/visual-studio-code-bin)
@@ -45,4 +46,4 @@ The configuration files in this repository and the relative setup scripts are ta
 + [hyprpaper-git](https://aur.archlinux.org/packages/hyprpaper-git)
 + [waybar-hyprland-git](https://aur.archlinux.org/packages/waybar-hyprland-git)
 + [wlr-randr](https://aur.archlinux.org/packages/wlr-randr)
-+ [foot](https://archlinux.org/packages/community/x86_64/foot/)
++ [nwg-look-bin](https://aur.archlinux.org/packages/nwg-look-bin) [wayland lxappearance equivalent]

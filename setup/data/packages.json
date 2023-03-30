@@ -45,6 +45,7 @@
 		"hyprland",
 		"hyprpaper-git",
 		"waybar-hyprland-git",
-		"wlr-randr"
+		"wlr-randr",
+		"nwg-look-bin"
 	]
 }
