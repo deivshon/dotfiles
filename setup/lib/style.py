@@ -9,6 +9,7 @@ __SUBSTITUTIONS = "substitutions"
 __EXPANDED_SUBSTITUTIONS = "setup-expanded-substitutions"
 
 __EFY = "enhancer-for-youtube"
+__FIREFOX = "firefox"
 __MAIN_COLOR = "mainColor"
 __SECONDARY_COLOR = "secondaryColor"
 __MAIN_COLOR_NOHASH = "mainColorNoHash"
@@ -42,6 +43,8 @@ def expand(colorStyle):
 
     __expand_colors_no_hash(colorStyle)
 
+    __expand_firefox(colorStyle, expansionData[__FIREFOX])
+
 def __expand_efy(colorStyle, efyFields):
     mainColor = colorStyle[__SUBSTITUTIONS][__MAIN_COLOR]
     newFields = {}
@@ -63,3 +66,21 @@ def __expand_colors_no_hash(colorStyle):
     colorStyle[__SUBSTITUTIONS][__MAIN_COLOR_NOHASH] = colorStyle[__SUBSTITUTIONS][__MAIN_COLOR][1:]
     colorStyle[__SUBSTITUTIONS][__SECONDARY_COLOR_NOHASH] = colorStyle[__SUBSTITUTIONS][__SECONDARY_COLOR][1:]
 
+def __expand_firefox(colorStyle, firefoxFields):
+    mainColor = colorStyle[__SUBSTITUTIONS][__MAIN_COLOR]
+    newFields = {}
+
+    for col in firefoxFields.keys():
+        alpha = ""
+        if len(firefoxFields[col]) == 9:
+            alpha = firefoxFields[col][-2:]
+            firefoxFields[col] = firefoxFields[col][:-2]
+        elif len(firefoxFields[col]) != 7:
+            sys.exit(f"Malformed hex color passed to expansion: {firefoxFields[col]}")
+
+        _, s, v = utils.hex_to_divided_hsv(firefoxFields[col])
+        newFields[col] = utils.apply_hue(s, v, mainColor) + alpha
+
+    for field in newFields:
+        if(field not in colorStyle[__SUBSTITUTIONS]):
+            colorStyle[__SUBSTITUTIONS][field] = newFields[field]
