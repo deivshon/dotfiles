@@ -16,24 +16,39 @@ __COPY_FLAG = "copy"
 __SUBS = "subs"
 __STYLE_SUBS = "substitutions"
 __SUDO_FLAG = "sudo"
+__VAR_TARGET_FLAG = "variable-target"
+
+__FIREFOX = "firefox"
 
 with open(__LINKS_FILE, "r") as f:
     __linksList = json.loads(f.read())
+
+def __firefox_target():
+	if not os.path.isdir(os.path.expanduser("~/.mozilla")):
+		return []
+	
+	if not os.path.isdir(os.path.expanduser("~/.mozilla/firefox")):
+		return []
+
+	targets = []
+	for path in os.listdir(os.path.expanduser("~/.mozilla/firefox")):
+		if ".default" in path:
+			targets.append(f"{os.path.expanduser('~/.mozilla/firefox')}/{path}/chrome/userChrome.css")
+
+	return targets
+
+__TARGET_SEARCH = {
+	__FIREFOX: __firefox_target
+}
 
 def link(style, user, setupDir, keepExpansions = False, force = False):
 	linkFlags = "-sf" if force else "-si"
 
 	# Handle each link/copy
 	for link in __linksList:
-		linkSource = __linksList[link][__SOURCE].replace("$(setupDir)", setupDir)
-		linkTarget = __linksList[link][__TARGET].replace("~", user)
 		setupFlags = __linksList[link][__FLAGS] if __FLAGS in __linksList[link] else []
+		linkSource = __linksList[link][__SOURCE].replace("$(setupDir)", setupDir)
 		action = "Linking"
-
-		# Create the directory where the target file needs to be in
-		utils.make_dirs(os.path.dirname(linkTarget))
-
-		command = ["ln", linkFlags, linkSource, linkTarget]
 
 		substitutionIds = []
 		if __SUBS in __linksList[link]:
@@ -55,21 +70,40 @@ def link(style, user, setupDir, keepExpansions = False, force = False):
 			for id in substitutionIds:
 				subprocess.run(["sed", "-i", "s/" + substitutionIds[id] + "/" + substitutionVals[id] + "/g", linkSource])
 
-		if __COPY_FLAG in setupFlags:
-			command = ["cp", linkSource, linkTarget]
-			action = "Copying"
-
-		printing.colorPrint(
-			action + " ", 	printing.WHITE,
-			linkSource, 	printing.YELLOW,
-			" to ", 		printing.WHITE,
-			linkTarget,		printing.CYAN
-		)
-
-		if __SUDO_FLAG in setupFlags:
-			subprocess.run(["sudo"] + command)
+		if __VAR_TARGET_FLAG in setupFlags:
+			linkTargets = __TARGET_SEARCH[link]()
 		else:
-			subprocess.run(command)
+			linkTargets = __linksList[link][__TARGET]
+
+		if isinstance(linkTargets, str):
+			linkTargets = [linkTargets]
+
+		if len(linkTargets) == 0:
+			printing.colorPrint(f"Warning: no targets for {link}", printing.RED)
+
+		for target in linkTargets:
+			target = target.replace("~", user)
+
+			# Create the directory where the target file needs to be in
+			utils.make_dirs(os.path.dirname(target))
+
+			command = ["ln", linkFlags, linkSource, target]
+
+			if __COPY_FLAG in setupFlags:
+				command = ["cp", linkSource, target]
+				action = "Copying"
+
+			printing.colorPrint(
+				action + " ", 	printing.WHITE,
+				linkSource, 	printing.YELLOW,
+				" to ", 		printing.WHITE,
+				target,			printing.CYAN
+			)
+
+			if __SUDO_FLAG in setupFlags:
+				subprocess.run(["sudo"] + command)
+			else:
+				subprocess.run(command)
 
 	# Delete temporary directory unless the user specified not to
 	if not keepExpansions and os.path.isdir(__EXPANSIONS_DIR):
