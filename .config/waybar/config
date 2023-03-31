@@ -27,7 +27,7 @@
     },
     "custom/wifi": {
         "format": "{}",
-        "exec": "command-cache 100 wifi-status -u ' %p% %s'",
+        "exec": "command-cache 100 wifi-status -u ' %p% %s' -d ''",
         "interval": 1
     },
     "custom/cpu": {
@@ -52,7 +52,7 @@
     },
     "custom/eth": {
         "format": "{}",
-        "exec": "command-cache 100 eth-status -u ' Up' -d ''",
+        "exec": "command-cache 100 eth-status -u ' %i' -d ''",
         "interval": 1
     }
 }
