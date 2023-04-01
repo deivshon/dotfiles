@@ -41,13 +41,13 @@ __TARGET_SEARCH = {
 	__FIREFOX: __firefox_target
 }
 
-def link(style, user, setupDir, keepExpansions = False, force = False):
+def link(style, user, keepExpansions = False, force = False):
 	linkFlags = "-sf" if force else "-si"
 
 	# Handle each link/copy
 	for link in __linksList:
 		setupFlags = __linksList[link][__FLAGS] if __FLAGS in __linksList[link] else []
-		linkSource = __linksList[link][__SOURCE].replace("$(setupDir)", setupDir)
+		linkSource = os.getcwd() + "/" + __linksList[link][__SOURCE]
 		action = "Linking"
 
 		substitutionIds = []

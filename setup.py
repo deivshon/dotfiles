@@ -94,7 +94,7 @@ install.download("dwm")
 install.download("plstatus")
 install.download("st")
 
-configs.link(selectedStyle, currentUser, setupDir, keepExpansions = args.keep, force = args.force)
+configs.link(selectedStyle, currentUser, keepExpansions = args.keep, force = args.force)
 
 # Download and compile change-vol-pactl
 install.install("change_vol_pactl")

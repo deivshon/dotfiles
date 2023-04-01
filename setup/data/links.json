@@ -1,40 +1,40 @@
 {
     "bashrc": {
-        "source": "$(setupDir)/.bashrc",
+        "source": ".bashrc",
         "target": "~/.bashrc"
     },
     "bashProfile": {
-        "source": "$(setupDir)/.bash_profile",
+        "source": ".bash_profile",
         "target": "~/.bash_profile"
     },
     "dunst": {
-        "source": "$(setupDir)/.config/dunst/dunstrc",
+        "source": ".config/dunst/dunstrc",
         "target": "~/.config/dunst/dunstrc",
         "subs": {
             "mainColor": "mainColor"
         }
     },
     "alacritty": {
-        "source": "$(setupDir)/.config/alacritty/alacritty.yml",
+        "source": ".config/alacritty/alacritty.yml",
         "target": "~/.config/alacritty/alacritty.yml"
     },
     "btop": {
-        "source": "$(setupDir)/.config/btop/btop.conf",
+        "source": ".config/btop/btop.conf",
         "target": "~/.config/btop/btop.conf"
     },
     "rofi": {
-        "source": "$(setupDir)/.config/rofi/config.rasi",
+        "source": ".config/rofi/config.rasi",
         "target": "~/.config/rofi/config.rasi",
         "subs": {
             "mainColor": "mainColor"
         }
     },
     "ranger": {
-        "source": "$(setupDir)/.config/ranger/rc.conf",
+        "source": ".config/ranger/rc.conf",
         "target": "~/.config/ranger/rc.conf"
     },
     "dwm": {
-        "source": "$(setupDir)/.config/dwm/config.h",
+        "source": ".config/dwm/config.h",
         "target": "~/.config/dwm/config.h",
         "subs": {
             "mainColor": "mainColor",
@@ -42,12 +42,12 @@
         }
     },
     "plstatus": {
-        "source": "$(setupDir)/.config/plstatus/config.json",
+        "source": ".config/plstatus/config.json",
         "target": "~/.config/plstatus/config.json",
         "flags": ["copy"]
     },
     "enhancer-for-youtube": {
-        "source": "$(setupDir)/.config/enhancer-for-youtube/efy.json",
+        "source": ".config/enhancer-for-youtube/efy.json",
         "target": "~/.config/enhancer-for-youtube/efy.json",
         "subs": {
             "efy--main-color": "efy--main-color",
@@ -60,12 +60,12 @@
         }
     },
     "reflector": {
-        "source": "$(setupDir)/etc/xdg/reflector/reflector.conf",
+        "source": "etc/xdg/reflector/reflector.conf",
         "target": "/etc/xdg/reflector/reflector.conf",
         "flags": ["sudo", "copy"]
     },
     "hyprland": {
-        "source": "$(setupDir)/.config/hypr/hyprland.conf",
+        "source": ".config/hypr/hyprland.conf",
         "target": "~/.config/hypr/hyprland.conf",
         "subs": {
             "mainColorNoHash": "hyprMainColor",
@@ -73,32 +73,32 @@
         }
     },
     "hyprpaper": {
-        "source": "$(setupDir)/.config/hypr/hyprpaper.conf",
+        "source": ".config/hypr/hyprpaper.conf",
         "target": "~/.config/hypr/hyprpaper.conf",
         "subs": {
             "wallpaperPath": "hyprWallpaperPath"
         }
     },
     "fuzzel": {
-        "source": "$(setupDir)/.config/fuzzel/fuzzel.ini",
+        "source": ".config/fuzzel/fuzzel.ini",
         "target": "~/.config/fuzzel/fuzzel.ini",
         "subs": {
             "mainColorNoHash": "fuzzelColor"
         }
     },
     "waybarConfig": {
-        "source": "$(setupDir)/.config/waybar/config",
+        "source": ".config/waybar/config",
         "target": "~/.config/waybar/config"
     },
     "waybarStyle": {
-        "source": "$(setupDir)/.config/waybar/style.css",
+        "source": ".config/waybar/style.css",
         "target": "~/.config/waybar/style.css",
         "subs": {
             "mainColor": "waybarColor"
         }
     },
     "foot": {
-        "source": "$(setupDir)/.config/foot/foot.ini",
+        "source": ".config/foot/foot.ini",
         "target": "~/.config/foot/foot.ini",
         "subs": {
             "mainColorNoHash": "footMainColor",
@@ -106,7 +106,7 @@
         }
     },
     "firefox": {
-        "source": "$(setupDir)/.mozilla/firefox/profile/chrome/userChrome.css",
+        "source": ".mozilla/firefox/profile/chrome/userChrome.css",
         "flags": ["variable-target"],
         "subs": {
             "ffx--button-bgcolor": "ffx--button-bgcolor",
