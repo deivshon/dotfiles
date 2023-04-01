@@ -23,36 +23,43 @@
     "custom/mullvad": {
         "format": "{}",
         "exec": "command-cache 100 mullvad-status -u ' %h' -d ' %c'",
-        "interval": 30
+        "interval": 30,
+        "tooltip": false
     },
     "custom/wifi": {
         "format": "{}",
         "exec": "command-cache 100 wifi-status -u ' %p% %s' -d ''",
-        "interval": 1
+        "interval": 1,
+        "tooltip": false
     },
     "custom/cpu": {
         "format": "{}",
         "exec": "command-cache 100 cpu-status -f ' %p%'",
-        "interval": 1
+        "interval": 1,
+        "tooltip": false
     },
     "custom/ram": {
         "format": "{}",
         "exec": "command-cache 100 ram-status -f ' %u/%t'",
-        "interval": 1
+        "interval": 1,
+        "tooltip": false
     },
     "custom/disk": {
         "format": "{}",
         "exec": "command-cache 100 disk-status -f ' %u'",
-        "interval": 1
+        "interval": 1,
+        "tooltip": false
     },
     "custom/battery": {
         "format": "{}",
         "exec": "command-cache 100 battery-status -f ' %p%' -c ' %p%' -n ''",
-        "interval": 1
+        "interval": 1,
+        "tooltip": false
     },
     "custom/eth": {
         "format": "{}",
         "exec": "command-cache 100 eth-status -u ' %i' -d ''",
-        "interval": 1
+        "interval": 1,
+        "tooltip": false
     }
 }
