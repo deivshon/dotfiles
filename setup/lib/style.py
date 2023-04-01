@@ -45,18 +45,6 @@ def expand(colorStyle):
 
     __expand_firefox(colorStyle, expansionData[__FIREFOX])
 
-def __expand_efy(colorStyle, efyFields):
-    mainColor = colorStyle[__SUBSTITUTIONS][__MAIN_COLOR]
-    newFields = {}
-
-    for col in efyFields.keys():
-        _, s, v = utils.hex_to_divided_hsv(efyFields[col])
-        newFields[col] = utils.apply_hue(s, v, mainColor)    
-
-    for field in newFields:
-        if(field not in colorStyle[__SUBSTITUTIONS]):
-            colorStyle[__SUBSTITUTIONS][field] = newFields[field]
-
 def __expand_wallpaper(colorStyle):
     colorStyle[__SUBSTITUTIONS]["wallpaperPath"] = utils.sed_escape_path(
         utils.get_wallpaper_path(colorStyle["wallpaperName"])
@@ -66,21 +54,28 @@ def __expand_colors_no_hash(colorStyle):
     colorStyle[__SUBSTITUTIONS][__MAIN_COLOR_NOHASH] = colorStyle[__SUBSTITUTIONS][__MAIN_COLOR][1:]
     colorStyle[__SUBSTITUTIONS][__SECONDARY_COLOR_NOHASH] = colorStyle[__SUBSTITUTIONS][__SECONDARY_COLOR][1:]
 
-def __expand_firefox(colorStyle, firefoxFields):
-    mainColor = colorStyle[__SUBSTITUTIONS][__MAIN_COLOR]
+def __expand_hue(colorStyle, colorFields, baseColor = None):
+    if baseColor == None:
+        baseColor = colorStyle[__SUBSTITUTIONS][__MAIN_COLOR]
     newFields = {}
 
-    for col in firefoxFields.keys():
+    for col in colorFields.keys():
         alpha = ""
-        if len(firefoxFields[col]) == 9:
-            alpha = firefoxFields[col][-2:]
-            firefoxFields[col] = firefoxFields[col][:-2]
-        elif len(firefoxFields[col]) != 7:
-            sys.exit(f"Malformed hex color passed to expansion: {firefoxFields[col]}")
+        if len(colorFields[col]) == 9:
+            alpha = colorFields[col][-2:]
+            colorFields[col] = colorFields[col][:-2]
+        elif len(colorFields[col]) != 7:
+            sys.exit(f"Malformed hex color passed to hue expansion: {colorFields[col]}")
 
-        _, s, v = utils.hex_to_divided_hsv(firefoxFields[col])
-        newFields[col] = utils.apply_hue(s, v, mainColor) + alpha
+        _, s, v = utils.hex_to_divided_hsv(colorFields[col])
+        newFields[col] = utils.apply_hue(s, v, baseColor) + alpha
 
     for field in newFields:
         if(field not in colorStyle[__SUBSTITUTIONS]):
             colorStyle[__SUBSTITUTIONS][field] = newFields[field]
+
+def __expand_efy(colorStyle, efyFields):
+    __expand_hue(colorStyle, efyFields)
+
+def __expand_firefox(colorStyle, firefoxFields):
+    __expand_hue(colorStyle, firefoxFields)
