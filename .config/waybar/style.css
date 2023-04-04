@@ -20,7 +20,7 @@ button:hover {
 }
 
 #workspaces {
-    margin-left: 7px;
+    margin-left: 5px;
     margin-top: 5px;
     border-radius: 15px;
     background: rgba(0, 0, 0, 0.8);
@@ -64,19 +64,4 @@ button:hover {
     background: rgba(0, 0, 0, 0.8);
     border: solid 2px waybarColor;
     font-weight: bold;
-}
-
-/* Last module's margin should be 0 */
-/* If tray exists it also handles last module's margin */
-#custom-mullvad {
-    margin-right: 0px;
-}
-
-#tray {
-    margin-right: 0px;
-    margin-left: 5px;
-}
-
-.modules-right {
-    margin-right: 7px;
 }
