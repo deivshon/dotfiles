@@ -83,8 +83,8 @@ lastdiff() {
     fi
 
     TOTAL_COMMITS="$(git --no-pager log --oneline | wc -l)"
-    TOTAL_COMMITS="$(echo "${TOTAL_COMMITS}" 1 - p | dc)"
     if [ "${COMMIT_NUMBER}" -ge "${TOTAL_COMMITS}" ]; then
+        TOTAL_COMMITS="$(echo "${TOTAL_COMMITS}" 1 - p | dc)"
         printf "Wrong commit number, oldest commit: %s\n" "${TOTAL_COMMITS}"
         return
     fi
