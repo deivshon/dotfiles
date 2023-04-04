@@ -76,6 +76,23 @@ extract()
     fi
 }
 
+lastdiff() {
+    COMMIT_NUMBER="1"
+    if [ "$1" != "" ]; then
+        COMMIT_NUMBER="$1"
+    fi
+
+    TOTAL_COMMITS="$(git --no-pager log --oneline | wc -l)"
+    TOTAL_COMMITS="$(echo "${TOTAL_COMMITS}" 1 - p | dc)"
+    if [ "${COMMIT_NUMBER}" -ge "${TOTAL_COMMITS}" ]; then
+        printf "Wrong commit number, oldest commit: %s\n" "${TOTAL_COMMITS}"
+        return
+    fi
+
+    COMMIT="$(git --no-pager log --oneline | awk "FNR == ${COMMIT_NUMBER} {print \$1}")"
+    git --no-pager diff --color=always "${COMMIT}"~ "${COMMIT}" | less -r
+}
+
 # Aliases
 
 # Exa
