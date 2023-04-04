@@ -76,17 +76,6 @@ extract ()
   fi
 }
 
-tdo()
-{
-    cmd="$1"; shift
-    while [[ $# -gt 0 ]]; do
-        cmd="$cmd $1"
-        shift
-    done
-
-    tmux new-session bash -c "$cmd; exec bash"
-}
-
 # Aliases
 
 # Exa
