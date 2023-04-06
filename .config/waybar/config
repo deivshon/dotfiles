@@ -1,4 +1,5 @@
 {
+    "layer": "top",
     "modules-left": ["wlr/workspaces"],
     "modules-center": ["clock"],
     "modules-right": ["custom/ram", "custom/disk", "custom/cpu", "custom/battery", "custom/eth", "custom/wifi", "custom/mullvad", "tray"],
