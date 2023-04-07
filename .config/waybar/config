@@ -25,7 +25,9 @@
         "format": "{}",
         "exec": "command-cache 100 mullvad-status -u ' %h' -d ' %c'",
         "interval": 30,
-        "tooltip": false
+        "tooltip": false,
+        "on-click": "",
+        "exec-on-event": true
     },
     "custom/wifi": {
         "format": "{}",
