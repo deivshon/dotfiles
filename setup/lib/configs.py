@@ -6,7 +6,7 @@ import shutil
 import setup.lib.printing as printing
 import setup.lib.utils as utils
 
-__EXPANSIONS_DIR = "./expansions"
+SUBSTITUTIONS_DIR = "./substitutions"
 __LINKS_FILE = "./setup/data/links.json"
 
 __SOURCE = "source"
@@ -43,28 +43,12 @@ __TARGET_SEARCH = {
 def link(style, user, keepExpansions = False, force = False):
 	copyFlags = "-f" if force else "-i"
 
-	if not os.path.isdir(__EXPANSIONS_DIR):
-		os.mkdir(__EXPANSIONS_DIR)
+	substitute(style, SUBSTITUTIONS_DIR)
 
 	# Handle each link/copy
 	for config in __configsList:
 		setupFlags = __configsList[config][__FLAGS] if __FLAGS in __configsList[config] else []
-		configSource = __configsList[config][__SOURCE]
-
-
-		utils.make_dirs(f"{__EXPANSIONS_DIR}/{os.path.dirname(configSource)}")
-		subprocess.run(["cp", configSource, f"{__EXPANSIONS_DIR}/{configSource}"])
-		configSource = os.path.abspath(f"{__EXPANSIONS_DIR}/{configSource}")
-
-		substitutionIds = []
-		if __SUBS in __configsList[config]:
-			substitutionIds = __configsList[config][__SUBS]
-
-		if len(substitutionIds) > 0:
-	        # Perform the necessary substitutions using sed
-			substitutionVals = style[__STYLE_SUBS]
-			for id in substitutionIds:
-				subprocess.run(["sed", "-i", "s/" + substitutionIds[id] + "/" + substitutionVals[id] + "/g", configSource])
+		configSource = os.path.abspath(f"{SUBSTITUTIONS_DIR}/{__configsList[config][__SOURCE]}")
 
 		if __VAR_TARGET_FLAG in setupFlags:
 			configTargets = __TARGET_SEARCH[config]()
@@ -98,8 +82,30 @@ def link(style, user, keepExpansions = False, force = False):
 				subprocess.run(command)
 
 	# Delete temporary directory unless the user specified not to
-	if not keepExpansions and os.path.isdir(__EXPANSIONS_DIR):
-		shutil.rmtree(__EXPANSIONS_DIR)
+	if not keepExpansions and os.path.isdir(SUBSTITUTIONS_DIR):
+		shutil.rmtree(SUBSTITUTIONS_DIR)
+
+def substitute(style, substitutionsDir):
+	if not os.path.isdir(substitutionsDir):
+		os.mkdir(substitutionsDir)
+
+	# Handle each link/copy
+	for config in __configsList:
+		configSource = __configsList[config][__SOURCE]
+
+		utils.make_dirs(f"{substitutionsDir}/{os.path.dirname(configSource)}")
+		subprocess.run(["cp", configSource, f"{substitutionsDir}/{configSource}"])
+		configSource = os.path.abspath(f"{substitutionsDir}/{configSource}")
+
+		substitutionIds = []
+		if __SUBS in __configsList[config]:
+			substitutionIds = __configsList[config][__SUBS]
+
+		if len(substitutionIds) > 0:
+	        # Perform the necessary substitutions using sed
+			substitutionVals = style[__STYLE_SUBS]
+			for id in substitutionIds:
+				subprocess.run(["sed", "-i", "s/" + substitutionIds[id] + "/" + substitutionVals[id] + "/g", configSource])
 
 def remove(user):
 	for link in __configsList:
