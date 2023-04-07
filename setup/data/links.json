@@ -43,8 +43,7 @@
     },
     "plstatus": {
         "source": ".config/plstatus/config.json",
-        "target": "~/.config/plstatus/config.json",
-        "flags": ["copy"]
+        "target": "~/.config/plstatus/config.json"
     },
     "enhancer-for-youtube": {
         "source": ".config/enhancer-for-youtube/efy.json",
@@ -62,7 +61,7 @@
     "reflector": {
         "source": "etc/xdg/reflector/reflector.conf",
         "target": "/etc/xdg/reflector/reflector.conf",
-        "flags": ["sudo", "copy"]
+        "flags": ["sudo"]
     },
     "hyprland": {
         "source": ".config/hypr/hyprland.conf",
