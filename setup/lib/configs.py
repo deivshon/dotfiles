@@ -6,7 +6,7 @@ import shutil
 import setup.lib.printing as printing
 import setup.lib.utils as utils
 
-__EXPANSIONS_DIR = "./expansions/"
+__EXPANSIONS_DIR = "./expansions"
 __LINKS_FILE = "./setup/data/links.json"
 
 __SOURCE = "source"
@@ -62,8 +62,9 @@ def link(style, user, keepExpansions = False, force = False):
 			if not os.path.isdir(__EXPANSIONS_DIR):
 				os.mkdir(__EXPANSIONS_DIR)
 
-			subprocess.run(["cp", linkSource, __EXPANSIONS_DIR])
-			linkSource = os.path.abspath(__EXPANSIONS_DIR + utils.get_last_node(linkSource))
+			utils.make_dirs(f"{__EXPANSIONS_DIR}/{os.path.dirname(linkSource)}")
+			subprocess.run(["cp", linkSource, f"{__EXPANSIONS_DIR}/{linkSource}"])
+			linkSource = os.path.abspath(f"{__EXPANSIONS_DIR}/{linkSource}")
 
 	        # Perform the necessary substitutions using sed
 			substitutionVals = style[__STYLE_SUBS]
