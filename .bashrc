@@ -56,6 +56,8 @@ lastdiff() {
 
 # Aliases
 
+[ "${TERM}" == "foot" ] && alias ssh="TERM=linux ssh"
+
 # Exa
 alias ls='exa'
 alias ll='exa -laF'
