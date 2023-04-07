@@ -12,7 +12,6 @@ __LINKS_FILE = "./setup/data/links.json"
 __SOURCE = "source"
 __TARGET = "target"
 __FLAGS = "flags"
-__COPY_FLAG = "copy"
 __SUBS = "subs"
 __STYLE_SUBS = "substitutions"
 __SUDO_FLAG = "sudo"
@@ -21,7 +20,7 @@ __VAR_TARGET_FLAG = "variable-target"
 __FIREFOX = "firefox"
 
 with open(__LINKS_FILE, "r") as f:
-    __linksList = json.loads(f.read())
+    __configsList = json.loads(f.read())
 
 def __firefox_target():
 	if not os.path.isdir(os.path.expanduser("~/.mozilla")):
@@ -42,63 +41,55 @@ __TARGET_SEARCH = {
 }
 
 def link(style, user, keepExpansions = False, force = False):
-	linkFlags = "-sf" if force else "-si"
+	copyFlags = "-f" if force else "-i"
 
 	# Handle each link/copy
-	for link in __linksList:
-		setupFlags = __linksList[link][__FLAGS] if __FLAGS in __linksList[link] else []
-		linkSource = os.getcwd() + "/" + __linksList[link][__SOURCE]
-		action = "Linking"
+	for config in __configsList:
+		setupFlags = __configsList[config][__FLAGS] if __FLAGS in __configsList[config] else []
+		configSource = os.getcwd() + "/" + __configsList[config][__SOURCE]
 
 		substitutionIds = []
-		if __SUBS in __linksList[link]:
-			substitutionIds = __linksList[link][__SUBS]
+		if __SUBS in __configsList[config]:
+			substitutionIds = __configsList[config][__SUBS]
 
 		if len(substitutionIds) > 0:
-			if __COPY_FLAG not in setupFlags:
-				setupFlags.append(__COPY_FLAG)
-
 	        # If the temporary directory has not yet been created, create it
 			if not os.path.isdir(__EXPANSIONS_DIR):
 				os.mkdir(__EXPANSIONS_DIR)
 
-			utils.make_dirs(f"{__EXPANSIONS_DIR}/{os.path.dirname(linkSource)}")
-			subprocess.run(["cp", linkSource, f"{__EXPANSIONS_DIR}/{linkSource}"])
-			linkSource = os.path.abspath(f"{__EXPANSIONS_DIR}/{linkSource}")
+			utils.make_dirs(f"{__EXPANSIONS_DIR}/{os.path.dirname(configSource)}")
+			subprocess.run(["cp", configSource, f"{__EXPANSIONS_DIR}/{configSource}"])
+			configSource = os.path.abspath(f"{__EXPANSIONS_DIR}/{configSource}")
 
 	        # Perform the necessary substitutions using sed
 			substitutionVals = style[__STYLE_SUBS]
 			for id in substitutionIds:
-				subprocess.run(["sed", "-i", "s/" + substitutionIds[id] + "/" + substitutionVals[id] + "/g", linkSource])
+				subprocess.run(["sed", "-i", "s/" + substitutionIds[id] + "/" + substitutionVals[id] + "/g", configSource])
 
 		if __VAR_TARGET_FLAG in setupFlags:
-			linkTargets = __TARGET_SEARCH[link]()
+			configTargets = __TARGET_SEARCH[config]()
 		else:
-			linkTargets = __linksList[link][__TARGET]
+			configTargets = __configsList[config][__TARGET]
 
-		if isinstance(linkTargets, str):
-			linkTargets = [linkTargets]
+		if isinstance(configTargets, str):
+			configTargets = [configTargets]
 
-		if len(linkTargets) == 0:
-			printing.colorPrint(f"Warning: no targets for {link}", printing.RED)
+		if len(configTargets) == 0:
+			printing.colorPrint(f"Warning: no targets for {config}", printing.RED)
 
-		for target in linkTargets:
+		for target in configTargets:
 			target = target.replace("~", user)
 
 			# Create the directory where the target file needs to be in
 			utils.make_dirs(os.path.dirname(target))
 
-			command = ["ln", linkFlags, linkSource, target]
-
-			if __COPY_FLAG in setupFlags:
-				command = ["cp", linkSource, target]
-				action = "Copying"
+			command = ["cp", copyFlags, configSource, target]
 
 			printing.colorPrint(
-				action + " ", 	printing.WHITE,
-				linkSource, 	printing.YELLOW,
-				" to ", 		printing.WHITE,
-				target,			printing.CYAN
+				"Copying ",							printing.WHITE,
+				utils.get_last_node(configSource), 	printing.YELLOW,
+				" to ", 							printing.WHITE,
+				target,								printing.CYAN
 			)
 
 			if __SUDO_FLAG in setupFlags:
