@@ -43,24 +43,24 @@ __TARGET_SEARCH = {
 def link(style, user, keepExpansions = False, force = False):
 	copyFlags = "-f" if force else "-i"
 
+	if not os.path.isdir(__EXPANSIONS_DIR):
+		os.mkdir(__EXPANSIONS_DIR)
+
 	# Handle each link/copy
 	for config in __configsList:
 		setupFlags = __configsList[config][__FLAGS] if __FLAGS in __configsList[config] else []
-		configSource = os.getcwd() + "/" + __configsList[config][__SOURCE]
+		configSource = __configsList[config][__SOURCE]
+
+
+		utils.make_dirs(f"{__EXPANSIONS_DIR}/{os.path.dirname(configSource)}")
+		subprocess.run(["cp", configSource, f"{__EXPANSIONS_DIR}/{configSource}"])
+		configSource = os.path.abspath(f"{__EXPANSIONS_DIR}/{configSource}")
 
 		substitutionIds = []
 		if __SUBS in __configsList[config]:
 			substitutionIds = __configsList[config][__SUBS]
 
 		if len(substitutionIds) > 0:
-	        # If the temporary directory has not yet been created, create it
-			if not os.path.isdir(__EXPANSIONS_DIR):
-				os.mkdir(__EXPANSIONS_DIR)
-
-			utils.make_dirs(f"{__EXPANSIONS_DIR}/{os.path.dirname(configSource)}")
-			subprocess.run(["cp", configSource, f"{__EXPANSIONS_DIR}/{configSource}"])
-			configSource = os.path.abspath(f"{__EXPANSIONS_DIR}/{configSource}")
-
 	        # Perform the necessary substitutions using sed
 			substitutionVals = style[__STYLE_SUBS]
 			for id in substitutionIds:
