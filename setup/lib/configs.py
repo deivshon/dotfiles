@@ -111,20 +111,27 @@ def link(style, user, keepExpansions = False, force = False):
 		shutil.rmtree(__EXPANSIONS_DIR)
 
 def remove(user):
-    for link in __linksList:
-        linkTarget = __linksList[link][__TARGET].replace("~", user)
-        needsSudo = __SUDO_FLAG in __linksList[link][__FLAGS]
+	for link in __configsList:
+		linkTarget = __configsList[link][__TARGET].replace("~", user) if __FLAGS not in __configsList[link] or __VAR_TARGET_FLAG not in __configsList[link][__FLAGS] else None
+		needsSudo = __SUDO_FLAG in __configsList[link][__FLAGS] if __FLAGS in __configsList[link] else False
 
-        removeCommand = ["rm", linkTarget]
-        if needsSudo: removeCommand.insert(0, "sudo")
-        if os.path.isfile(linkTarget):
-            printing.colorPrint(
+		if linkTarget is None:
+			printing.colorPrint(
+				"Varibale target for ",				printing.WHITE,
+				f"{link}: could not find target",	printing.RED
+			)
+			continue
+
+		removeCommand = ["rm", linkTarget]
+		if needsSudo: removeCommand.insert(0, "sudo")
+		if os.path.isfile(linkTarget):
+			printing.colorPrint(
 				"Removing ",	printing.WHITE,
 				linkTarget,		printing.RED
 			)
-            subprocess.run(removeCommand)
-        else:
-            printing.colorPrint(
+			subprocess.run(removeCommand)
+		else:
+			printing.colorPrint(
 				"Can't find ",	printing.WHITE,
 				linkTarget,		printing.RED
 			)
