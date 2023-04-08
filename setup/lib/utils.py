@@ -1,5 +1,6 @@
 import os
 import subprocess
+import hashlib
 from matplotlib.colors import hex2color, hsv_to_rgb, rgb_to_hsv, rgb2hex
 
 def pipeline(commandList, printLastOutput = False, printError = True):
@@ -48,3 +49,11 @@ def get_wallpaper_path(wallpaperName):
 
 def sed_escape_path(str):
     return str.replace("/", "\/")
+
+def sha256_checksum(filepath):
+    hashHandler = hashlib.sha256()
+    with open(filepath, "rb") as f:
+        while chunk := f.read(4096):
+            hashHandler.update(chunk)
+
+    return hashHandler.hexdigest()

@@ -65,16 +65,39 @@ def link(style, user, keepExpansions = False, force = False):
 		for target in configTargets:
 			target = target.replace("~", user)
 
+			sourceHash = utils.sha256_checksum(configSource)
+			targetHash = None
+			if os.path.isfile(target):
+				targetHash = utils.sha256_checksum(target)
+
+			# Don't copy if installed config is the same as the new one
+			if sourceHash == targetHash:
+				printing.colorPrint(
+					f"{utils.get_last_node(configSource):15}",
+					printing.YELLOW,
+					f"({sourceHash[0:4]}...{sourceHash[-4:]})",
+					printing.BLUE,
+					" already installed (",
+					printing.WHITE,
+					target,
+					printing.CYAN,
+					")",
+					printing.WHITE
+				)
+				continue
+
 			# Create the directory where the target file needs to be in
 			utils.make_dirs(os.path.dirname(target))
 
 			command = ["cp", copyFlags, configSource, target]
 
 			printing.colorPrint(
-				"Copying ",							printing.WHITE,
-				utils.get_last_node(configSource), 	printing.YELLOW,
-				" to ", 							printing.WHITE,
-				target,								printing.CYAN
+				f"{utils.get_last_node(configSource):15}",
+				printing.YELLOW,
+				f"{'-' * 12}> ",
+				printing.WHITE,
+				target,
+				printing.CYAN
 			)
 
 			if __SUDO_FLAG in setupFlags:
