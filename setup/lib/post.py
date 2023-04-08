@@ -8,6 +8,8 @@ import setup.lib.utils as utils
 __DEFAULT_XINITRC = "/etc/X11/xinit/xinitrc"
 __USER_XINITRC = os.path.expanduser("~/.xinitrc")
 __USER_HYPRSETUP = os.path.expanduser("~/.config/hypr/hyprsetup.conf")
+__DEVICE_BASHRC = os.path.expanduser("~/.bashrc_device")
+__DEVICE_BASH_PROFILE = os.path.expanduser("~/.bash_profile_device")
 __STARTUP_SCRIPT = os.path.expanduser("~/startup/startup.sh")
 __XINITRC_APPEND = "./.xinitrc_append"
 
@@ -29,6 +31,9 @@ def install():
 
 	__hyprland()
 	printing.colorPrint(f"{__USER_HYPRSETUP} handled", printing.WHITE)
+
+	__bash()
+	printing.colorPrint(f"Bash handled", printing.WHITE)
 
 	printing.colorPrint("Ended post install operations...", printing.GREEN)
 
@@ -101,3 +106,12 @@ def __hyprland():
 	if not os.path.isfile(__USER_HYPRSETUP):
 		with open(__USER_HYPRSETUP, "w") as f:
 			f.write("# Device specific Hyprland options\n")
+
+def __bash():
+	if not os.path.isfile(__DEVICE_BASHRC):
+		with open(__DEVICE_BASHRC, "w") as f:
+			f.write("#!/bin/bash\n\n# Device specific bashrc\n")
+
+	if not os.path.isfile(__DEVICE_BASH_PROFILE):
+		with open(__DEVICE_BASH_PROFILE, "w") as f:
+			f.write("#!/bin/bash\n\n# Device specific bash_profile\n")
