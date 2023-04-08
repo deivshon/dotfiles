@@ -134,4 +134,4 @@ colorsTmp
 *.o
 *.out
 .vscode
-expansions
+substitutions*
