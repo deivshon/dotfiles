@@ -34,7 +34,7 @@ def download(program):
 def compile(program):
 	__script(program, "c")
 
-def packages(firstRunFile):
+def packages():
 	with open(__PACKAGES_FILE) as f:
 		packages = json.loads(f.read())
 
@@ -53,11 +53,6 @@ def packages(firstRunFile):
 
 	subprocess.run(pacmanCommand)
 	subprocess.run(yayCommand)
-
-	# Create a file containing the current timestamp to mark that the script
-	# has been run at least once in the past and the packages have been installed
-	with open(firstRunFile, "w") as f:
-		f.write(str(currentTimestamp()) + "\n")
 
 def status_scripts():
 	install("status_scripts")

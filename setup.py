@@ -5,9 +5,9 @@ import sys
 import json
 import argparse
 
+import setup.lib.status as status
 import setup.lib.install as install
 
-FIRST_RUN_FILE = ".notFirstRun"
 DEFAULT_STYLE = "./setup/data/styles/sunsetDigital.json"
 
 parser = argparse.ArgumentParser(
@@ -53,10 +53,14 @@ startDir = os.getcwd()
 setupDir = os.path.dirname(os.path.realpath(__file__))
 os.chdir(setupDir)
 
-firstRun = not os.path.isfile(FIRST_RUN_FILE)
+if not os.path.isfile(status.SETUP_STATUS):
+    setupStatus = status.new()
+else:
+    setupStatus = status.get()
 
-if firstRun:
-    install.packages(FIRST_RUN_FILE)
+if not setupStatus[status.PACKAGES_INSTALLED]:
+    install.packages()
+    setupStatus[status.PACKAGES_INSTALLED] = True
 
 # Imported here because they use modules that are only installed
 # with install.packages
@@ -80,8 +84,9 @@ if not os.path.isfile(args.style):
 
 # Package installation if it's been explicitly requested but not performed
 # because the setup has been run before
-if not firstRun and args.packages:
-    install.packages(FIRST_RUN_FILE)
+if not setupStatus[status.PACKAGES_INSTALLED] and args.packages:
+    install.packages()
+    setupStatus[status.PACKAGES_INSTALLED] = True
 
 # Store style content
 with open(args.style, "r") as f:
@@ -104,8 +109,9 @@ install.compile("st")
 
 post.change(selectedStyle)
 
-if firstRun:
+if not setupStatus[status.POST_INSTALL_OPS]:
     post.install()
+    setupStatus[status.POST_INSTALL_OPS] = True
 
 # Install Rust programs after rust is configured,
 # which happens only during the post install operations
@@ -116,3 +122,5 @@ install.install("command_cache")
 # otherwise commands in plstatus configuration will not exists in PATH
 # at compile time and compilation will subsequently fail
 install.compile("plstatus")
+
+status.write(setupStatus)

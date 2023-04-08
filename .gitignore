@@ -135,3 +135,4 @@ colorsTmp
 *.out
 .vscode
 substitutions*
+setup_status.json
