@@ -39,7 +39,7 @@ extract() {
     fi
 }
 
-lastdiff() {
+gdiff() {
     COMMIT_NUMBER="1"
     if [ "$1" != "" ]; then
         COMMIT_NUMBER="$1"
@@ -97,5 +97,8 @@ alias clip="xclip -sel c <"
 
 # Always show progress when using dd
 alias dd="sudo dd status=progress"
+
+# Git
+alias glog="git log --oneline --color=always"
 
 afetch
