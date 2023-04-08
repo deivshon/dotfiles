@@ -7,6 +7,7 @@ import setup.lib.printing as printing
 import setup.lib.utils as utils
 
 SUBSTITUTIONS_DIR = "./substitutions"
+__DOTFILES_DIR = "./dots"
 __LINKS_FILE = "./setup/data/links.json"
 
 __SOURCE = "source"
@@ -94,7 +95,7 @@ def substitute(style, substitutionsDir):
 		configSource = __configsList[config][__SOURCE]
 
 		utils.make_dirs(f"{substitutionsDir}/{os.path.dirname(configSource)}")
-		subprocess.run(["cp", configSource, f"{substitutionsDir}/{configSource}"])
+		subprocess.run(["cp", f"{__DOTFILES_DIR}/{configSource}", f"{substitutionsDir}/{configSource}"])
 		configSource = os.path.abspath(f"{substitutionsDir}/{configSource}")
 
 		substitutionIds = []

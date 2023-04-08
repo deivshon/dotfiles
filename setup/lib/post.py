@@ -11,7 +11,7 @@ __USER_HYPRSETUP = os.path.expanduser("~/.config/hypr/hyprsetup.conf")
 __DEVICE_BASHRC = os.path.expanduser("~/.bashrc_device")
 __DEVICE_BASH_PROFILE = os.path.expanduser("~/.bash_profile_device")
 __STARTUP_SCRIPT = os.path.expanduser("~/startup/startup.sh")
-__XINITRC_APPEND = "./.xinitrc_append"
+__XINITRC_APPEND = "./dots/.xinitrc_append"
 
 # To be called only the first time the setup is run
 def install():
