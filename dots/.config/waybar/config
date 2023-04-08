@@ -2,7 +2,7 @@
     "layer": "top",
     "modules-left": ["wlr/workspaces"],
     "modules-center": ["clock"],
-    "modules-right": ["custom/ram", "custom/disk", "custom/cpu", "custom/battery", "custom/eth", "custom/wifi", "custom/mullvad", "tray"],
+    "modules-right": ["custom/kernel", "custom/ram", "custom/disk", "custom/cpu", "custom/battery", "custom/eth", "custom/wifi", "custom/mullvad", "tray"],
     "wlr/workspaces": {
         "disable-scroll": true,
         "all-outputs": true,
@@ -63,6 +63,12 @@
         "format": "{}",
         "exec": "command-cache 100 eth-status -u ' %i' -d ''",
         "interval": 1,
+        "tooltip": false
+    },
+    "custom/kernel": {
+        "format": " {}",
+        "exec": "uname -r",
+        "interval": 0,
         "tooltip": false
     }
 }
