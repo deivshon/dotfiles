@@ -58,9 +58,11 @@ if not os.path.isfile(status.SETUP_STATUS):
 else:
     setupStatus = status.get()
 
+installedInRun = False
 if not setupStatus[status.PACKAGES_INSTALLED]:
     install.packages()
     setupStatus[status.PACKAGES_INSTALLED] = True
+    installedInRun = True
 
 # Imported here because they use modules that are only installed
 # with install.packages
@@ -111,7 +113,7 @@ if not os.path.isfile(args.style):
 
 # Package installation if it's been explicitly requested but not performed
 # because the setup has been run before
-if not setupStatus[status.PACKAGES_INSTALLED] and args.packages:
+if not installedInRun and args.packages:
     install.packages()
     setupStatus[status.PACKAGES_INSTALLED] = True
 
