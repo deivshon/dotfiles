@@ -5,6 +5,7 @@ import sys
 import json
 import argparse
 
+import setup.lib.printing as printing
 import setup.lib.status as status
 import setup.lib.install as install
 
@@ -38,8 +39,7 @@ parser.add_argument(
 parser.add_argument(
     "-s", "--style",
     action = "store",
-    help = "Path to file describing the style to apply (./setup/data/styles/[...])",
-    default = DEFAULT_STYLE
+    help = "Path to file describing the style to apply (./setup/data/styles/[...])"
 )
 
 args = parser.parse_args()
@@ -67,19 +67,46 @@ if not setupStatus[status.PACKAGES_INSTALLED]:
 import setup.lib.configs as configs
 import setup.lib.style as style
 import setup.lib.post as post
+import setup.lib.utils as utils
 
 if args.remove:
     configs.remove(currentUser)
     quit()
 
-# Style file path is relative to caller's cwd (startDir)
-if args.style != None:
+if args.style is not None:
+    # Style file path argument is relative to caller's cwd (startDir)
     os.chdir(startDir)
     args.style = os.path.abspath(os.path.expanduser(args.style))
     os.chdir(setupDir)
+    printing.colorPrint(
+        f"Selecting style from argument: ",
+        printing.WHITE,
+        utils.get_last_node(args.style),
+        printing.MAGENTA
+    )
+else:
+    if status.STYLE not in setupStatus:
+        printing.colorPrint(
+            f"Selecting default style: ",
+            printing.WHITE,
+            DEFAULT_STYLE,
+            printing.MAGENTA
+        )
+        args.style = DEFAULT_STYLE
+    else:
+        printing.colorPrint(
+            f"Selecting style from old setup data ({status.SETUP_STATUS}): ",
+            printing.WHITE,
+            utils.get_last_node(setupStatus[status.STYLE]),
+            printing.MAGENTA
+        )
+        args.style = setupStatus[status.STYLE]
 
 if not os.path.isfile(args.style):
-    print(f"{args.style} does not exist")
+    printing.colorPrint(
+        f"{args.style} does not exist",
+        printing.WHITE
+    )
     quit()
 
 # Package installation if it's been explicitly requested but not performed
@@ -100,6 +127,7 @@ install.download("plstatus")
 install.download("st")
 
 configs.link(selectedStyle, currentUser, keepExpansions = args.keep, force = args.force)
+setupStatus[status.STYLE] = os.path.abspath(args.style)
 
 # Download and compile change-vol-pactl
 install.install("change_vol_pactl")

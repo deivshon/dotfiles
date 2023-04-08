@@ -3,6 +3,7 @@ import json
 SETUP_STATUS = "./setup_status.json"
 PACKAGES_INSTALLED = "packages-installed"
 POST_INSTALL_OPS = "post-install-operations"
+STYLE = "style"
 
 def get():
 	with open(SETUP_STATUS, "r") as f:
