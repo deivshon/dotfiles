@@ -2,7 +2,7 @@
     "layer": "top",
     "modules-left": ["wlr/workspaces"],
     "modules-center": ["clock"],
-    "modules-right": ["custom/kernel", "custom/ram", "custom/disk", "custom/cpu", "custom/battery", "custom/eth", "custom/wifi", "custom/mullvad", "tray"],
+    "modules-right": ["custom/ram", "custom/disk", "custom/cpu", "custom/battery", "custom/eth", "custom/wifi", "custom/mullvad", "tray"],
     "wlr/workspaces": {
         "disable-scroll": true,
         "all-outputs": true,
