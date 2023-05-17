@@ -1,12 +1,12 @@
 import sys
 
-RED =       "r"
-GREEN =     "g"
-YELLOW =    "y"
-BLUE =      "b"
-MAGENTA =   "m"
-CYAN =      "c"
-WHITE =     "w"
+RED = "r"
+GREEN = "g"
+YELLOW = "y"
+BLUE = "b"
+MAGENTA = "m"
+CYAN = "c"
+WHITE = "w"
 
 __termColors = {
     RED:        "\033[1m\033[31m",
@@ -20,8 +20,10 @@ __termColors = {
 
 __normalTermColor = "\033[0m\033[37m"
 
-# args format: [str, color, str, color ...]
+
 def colorPrint(*args):
+    """args format: [str, color, str, color ...]
+    """
     resultStr = ""
     for i in range(0, len(args), 2):
         if args[i + 1] not in __termColors:

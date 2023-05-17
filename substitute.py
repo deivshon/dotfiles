@@ -11,26 +11,27 @@ try:
     import setup.lib.style as style
     import setup.lib.utils as utils
 except Exception as e:
-    print(f"An error occurred while importing needed modules: {e}\nEnsure matplotlib is installed")
+    print(
+        f"An error occurred while importing needed modules: {e}\nEnsure matplotlib is installed")
     sys.exit(1)
 
 parser = argparse.ArgumentParser(
-    prog = "substitute",
-    description = "Perform configs substitutions for a specified color style"
+    prog="substitute",
+    description="Perform configs substitutions for a specified color style"
 )
 
 parser.add_argument(
     "-s", "--style",
-    action = "store",
-    help = "Path to file describing the style to apply (./setup/data/styles/[...])",
-	required = True
+    action="store",
+    help="Path to file describing the style to apply (./setup/data/styles/[...])",
+    required=True
 )
 
 parser.add_argument(
     "-o", "--output-dir",
-    action = "store",
-    help = "Output directory",
-	required = False
+    action="store",
+    help="Output directory",
+    required=False
 )
 
 args = parser.parse_args()

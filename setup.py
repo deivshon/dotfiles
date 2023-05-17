@@ -12,34 +12,34 @@ import setup.lib.install as install
 DEFAULT_STYLE = "./setup/data/styles/sunsetDigital.json"
 
 parser = argparse.ArgumentParser(
-    prog = "setup",
-    description = "Setup script for new installations or style changes"
+    prog="setup",
+    description="Setup script for new installations or style changes"
 )
 
 parser.add_argument(
     "-f", "--force",
-    action = "store_true",
-    help = "Overwrite existing configuration targets without asking"
+    action="store_true",
+    help="Overwrite existing configuration targets without asking"
 )
 parser.add_argument(
     "-k", "--keep",
-    action = "store_true",
-    help = "Keep directory containing expanded configurations"
+    action="store_true",
+    help="Keep directory containing expanded configurations"
 )
 parser.add_argument(
     "-rm", "--remove",
-    action = "store_true",
-    help = "Remove existing configuration files"
+    action="store_true",
+    help="Remove existing configuration files"
 )
 parser.add_argument(
     "-p", "--packages",
-    action = "store_true",
-    help = "Force packages installation"
+    action="store_true",
+    help="Force packages installation"
 )
 parser.add_argument(
     "-s", "--style",
-    action = "store",
-    help = "Path to file describing the style to apply (./setup/data/styles/[...])"
+    action="store",
+    help="Path to file describing the style to apply (./setup/data/styles/[...])"
 )
 
 args = parser.parse_args()
@@ -128,7 +128,8 @@ install.download("dwm")
 install.download("plstatus")
 install.download("st")
 
-configs.link(selectedStyle, currentUser, keepExpansions = args.keep, force = args.force)
+configs.link(selectedStyle, currentUser,
+             keepExpansions=args.keep, force=args.force)
 setupStatus[status.STYLE] = os.path.abspath(args.style)
 
 # Download and compile change-vol-pactl
