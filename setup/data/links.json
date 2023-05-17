@@ -135,5 +135,9 @@
     "tmux": {
         "source": ".tmux.conf",
         "target": "~/.tmux.conf"
+    },
+    "swaylock": {
+        "source": ".config/swaylock/config",
+        "target": "~/.config/swaylock/config"
     }
 }

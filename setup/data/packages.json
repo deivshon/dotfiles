@@ -47,6 +47,7 @@
 		"hyprpaper-git",
 		"waybar-hyprland-git",
 		"wlr-randr",
-		"nwg-look-bin"
+		"nwg-look-bin",
+		"swaylock-effects"
 	]
 }
