@@ -31,5 +31,24 @@
 		"ffx--toolbarbutton-icon-fill": "#FFFFFF",
 		"ffx--lwt-selected-tab-background-color": "#792020BB",
 		"ffx--autocomplete-popup-highlight-background": "#792020BB"
+	},
+	"swaylock": {
+		"swl--inside-color": "#1D1F21",
+		"swl--inside-clear-color": "#1D1F21",
+		"swl--inside-ver-color": "#1D1F21",
+		"swl--inside-wrong-color": "#1D1F21",
+		"swl--key-hl-color": "#7AA6DAAA",
+		"swl--bs-hl-color": "#D54E53AA",
+		"swl--separator-color": "#55555555",
+		"swl--line-color": "#1D1F21",
+		"swl--text-color": "#81A2BE",
+		"swl--text-clear-color": "#B5BD68",
+		"swl--text-caps-lock-color": "#F0C674",
+		"swl--text-ver-color": "#81A2BE",
+		"swl--text-wrong-color": "#CC6666",
+		"swl--ring-color": "#27323B",
+		"swl--ring-ver-color": "#81A2BE",
+		"swl--ring-clear-color": "#B5BD6811",
+		"swl--ring-wrong-color": "#CC6666"
 	}
 }

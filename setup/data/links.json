@@ -138,6 +138,25 @@
     },
     "swaylock": {
         "source": ".config/swaylock/config",
-        "target": "~/.config/swaylock/config"
+        "target": "~/.config/swaylock/config",
+        "subs": {
+            "swl--inside-color": "swl--inside-color",
+            "swl--inside-clear-color": "swl--inside-clear-color",
+            "swl--inside-ver-color": "swl--inside-ver-color",
+            "swl--inside-wrong-color": "swl--inside-wrong-color",
+            "swl--key-hl-color": "swl--key-hl-color",
+            "swl--bs-hl-color": "swl--bs-hl-color",
+            "swl--separator-color": "swl--separator-color",
+            "swl--line-color": "swl--line-color",
+            "swl--text-color": "swl--text-color",
+            "swl--text-clear-color": "swl--text-clear-color",
+            "swl--text-caps-lock-color": "swl--text-caps-lock-color",
+            "swl--text-ver-color": "swl--text-ver-color",
+            "swl--text-wrong-color": "swl--text-wrong-color",
+            "swl--ring-color": "swl--ring-color",
+            "swl--ring-ver-color": "swl--ring-ver-color",
+            "swl--ring-clear-color": "swl--ring-clear-color",
+            "swl--ring-wrong-color": "swl--ring-wrong-color"
+        }
     }
 }

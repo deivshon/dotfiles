@@ -16,28 +16,28 @@ indicator-radius=240
 indicator-thickness=20
 indicator-caps-lock
 
-inside-color=1D1F21
-inside-clear-color=1D1F21
-inside-ver-color=1D1F21
-inside-wrong-color=1D1F21
+inside-color=swl--inside-color
+inside-clear-color=swl--inside-clear-color
+inside-ver-color=swl--inside-ver-color
+inside-wrong-color=swl--inside-wrong-color
 
-key-hl-color=7AA6DAAA
-bs-hl-color=D54E53AA
+key-hl-color=swl--key-hl-color
+bs-hl-color=swl--bs-hl-color
 
-separator-color=55555555
+separator-color=swl--separator-color
 
-line-color=1D1F21
+line-color=swl--line-color
 line-uses-ring
 
-text-color=81A2BE
-text-clear-color=B5BD68
-text-caps-lock-color=F0C674
-text-ver-color=81A2BE
-text-wrong-color=CC6666
+text-color=swl--text-color
+text-clear-color=swl--text-clear-color
+text-caps-lock-color=swl--text-caps-lock-color
+text-ver-color=swl--text-ver-color
+text-wrong-color=swl--text-wrong-color
 
-ring-color=27323B
-ring-ver-color=81A2BE
-ring-clear-color=B5BD6811
-ring-wrong-color=CC6666
-text-caps-lock-color=009DDC
+ring-color=swl--ring-color
+ring-ver-color=swl--ring-ver-color
+ring-clear-color=swl--ring-clear-color
+ring-wrong-color=swl--ring-wrong-color
+text-caps-lock-color=swl--text-caps-lock-color
 disable-caps-lock-text

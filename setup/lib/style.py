@@ -10,6 +10,7 @@ __EXPANDED_SUBSTITUTIONS = "setup-expanded-substitutions"
 
 __EFY = "enhancer-for-youtube"
 __FIREFOX = "firefox"
+__SWAYLOCK = "swaylock"
 __MAIN_COLOR = "mainColor"
 __SECONDARY_COLOR = "secondaryColor"
 __MAIN_COLOR_NOHASH = "mainColorNoHash"
@@ -45,6 +46,8 @@ def expand(colorStyle):
 
     __expand_firefox(colorStyle, expansionData[__FIREFOX])
 
+    __expand_swaylock(colorStyle, expansionData[__SWAYLOCK])
+
 def __expand_wallpaper(colorStyle):
     colorStyle[__SUBSTITUTIONS]["wallpaperPath"] = utils.sed_escape_path(
         utils.get_wallpaper_path(colorStyle["wallpaperName"])
@@ -79,3 +82,6 @@ def __expand_efy(colorStyle, efyFields):
 
 def __expand_firefox(colorStyle, firefoxFields):
     __expand_hue(colorStyle, firefoxFields)
+
+def __expand_swaylock(colorStyle, swayFields):
+    __expand_hue(colorStyle, swayFields)
