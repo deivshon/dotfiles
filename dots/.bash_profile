@@ -1,5 +1,3 @@
-# Avoid Perl locale warnings
-
 source ~/.bash_profile_device
 
 export LC_CTYPE=en_US.UTF-8
