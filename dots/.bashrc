@@ -22,8 +22,8 @@ export HISTFILESIZE=100000
 shopt -s histappend
 
 extract() {
-    if [ -f $1 ] ; then
-    case $1 in
+    if [ -f "$1" ] ; then
+    case "$1" in
         *.tar.bz2)   tar xjf "$1"   ;;
         *.tar.gz)    tar xzf "$1"   ;;
         *.bz2)       bunzip2 "$1"   ;;
