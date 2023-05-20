@@ -59,6 +59,19 @@ gdiff() {
     git --no-pager diff --color=always "${COMMIT}"~ "${COMMIT}" | less -r
 }
 
+ssh-start() {
+    eval "$(ssh-agent)"
+
+    for KEY in ~/.ssh/*; do
+        if [ -f "$KEY" ]; then
+            FILE_RESULT=$(file -b "$KEY")
+            if printf "%s" "$FILE_RESULT" | grep -q "private key"; then
+                ssh-add "$KEY"
+            fi
+        fi
+    done
+}
+
 # Aliases
 
 [ "${TERM}" == "foot" ] && alias ssh="TERM=linux ssh"
