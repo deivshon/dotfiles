@@ -82,7 +82,7 @@ ssh-start() {
 
 # Exa
 alias ls='exa'
-alias ll='exa -laF'
+alias ll='exa -laFG'
 
 # Grep
 alias grep='grep --colour=always'
