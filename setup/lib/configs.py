@@ -6,9 +6,11 @@ import shutil
 import setup.lib.printing as printing
 import setup.lib.utils as utils
 
+from setup.lib import LIB_DIR
+
 SUBSTITUTIONS_DIR = "./substitutions"
-__DOTFILES_DIR = "./dots"
-__LINKS_FILE = "./setup/data/links.json"
+__DOTFILES_DIR = f"{LIB_DIR}/../../dots"
+__LINKS_FILE = f"{LIB_DIR}/../data/links.json"
 
 __SOURCE = "source"
 __TARGET = "target"
@@ -150,8 +152,8 @@ def remove(user):
 
         if linkTarget is None:
             printing.colorPrint(
-                "Varibale target for ",				printing.WHITE,
-                f"{link}: could not find target",	printing.RED
+                "Varibale target for ", printing.WHITE,
+                f"{link}: could not find target", printing.RED
             )
             continue
 
@@ -160,12 +162,12 @@ def remove(user):
             removeCommand.insert(0, "sudo")
         if os.path.isfile(linkTarget):
             printing.colorPrint(
-                "Removing ",	printing.WHITE,
-                linkTarget,		printing.RED
+                "Removing ", printing.WHITE,
+                linkTarget, printing.RED
             )
             subprocess.run(removeCommand)
         else:
             printing.colorPrint(
-                "Can't find ",	printing.WHITE,
-                linkTarget,		printing.RED
+                "Can't find ", printing.WHITE,
+                linkTarget, printing.RED
             )

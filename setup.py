@@ -5,11 +5,13 @@ import sys
 import json
 import argparse
 
-import setup.lib.printing as printing
-import setup.lib.status as status
-import setup.lib.install as install
+from setup.lib import printing
+from setup.lib import status
+from setup.lib import install
 
-DEFAULT_STYLE = "./setup/data/styles/sunsetDigital.json"
+__FILE_DIR__ = os.path.dirname(os.path.realpath(__file__))
+
+DEFAULT_STYLE = f"{__FILE_DIR__}/../data/styles/sunsetDigital.json"
 
 parser = argparse.ArgumentParser(
     prog="setup",
@@ -66,10 +68,10 @@ if not setupStatus[status.PACKAGES_INSTALLED]:
 
 # Imported here because they use modules that are only installed
 # with install.packages
-import setup.lib.configs as configs
-import setup.lib.style as style
-import setup.lib.post as post
-import setup.lib.utils as utils
+from setup.lib import configs
+from setup.lib import style
+from setup.lib import post
+from setup.lib import utils
 
 if args.remove:
     configs.remove(currentUser)

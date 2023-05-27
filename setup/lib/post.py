@@ -5,13 +5,15 @@ import subprocess
 import setup.lib.printing as printing
 import setup.lib.utils as utils
 
+from setup.lib import LIB_DIR
+
 __DEFAULT_XINITRC = "/etc/X11/xinit/xinitrc"
 __USER_XINITRC = os.path.expanduser("~/.xinitrc")
 __USER_HYPRSETUP = os.path.expanduser("~/.config/hypr/hyprsetup.conf")
 __DEVICE_BASHRC = os.path.expanduser("~/.bashrc_device")
 __DEVICE_BASH_PROFILE = os.path.expanduser("~/.bash_profile_device")
 __STARTUP_SCRIPT = os.path.expanduser("~/startup/startup.sh")
-__XINITRC_APPEND = "./dots/.xinitrc_append"
+__XINITRC_APPEND = f"{LIB_DIR}/../../dots/.xinitrc_append"
 
 # To be called only the first time the setup is run
 

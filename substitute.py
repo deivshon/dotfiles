@@ -7,12 +7,12 @@ import argparse
 from time import time
 
 try:
-    import setup.lib.configs as configs
-    import setup.lib.style as style
-    import setup.lib.utils as utils
+    from setup.lib import configs
+    from setup.lib import style
+    from setup.lib import utils
 except Exception as e:
     print(
-        f"An error occurred while importing needed modules: {e}\nEnsure matplotlib is installed")
+        f"An error occurred while importing needed modules: {e}\nEnsure matplotlib is installed\nTraceback: {e.__traceback__}")
     sys.exit(1)
 
 parser = argparse.ArgumentParser(

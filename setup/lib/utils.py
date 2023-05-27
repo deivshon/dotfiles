@@ -4,27 +4,6 @@ import hashlib
 from matplotlib.colors import hex2color, hsv_to_rgb, rgb_to_hsv, rgb2hex
 
 
-def pipeline(commandList, printLastOutput=False, printError=True):
-    currentCommand = 0
-    for i in range(0, len(commandList)):
-        if (i == 0):
-            currentCommand = subprocess.Popen(
-                commandList[i], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        else:
-            currentCommand = subprocess.Popen(
-                commandList[i], stdin=currentCommand.stdout, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        currentCommand.wait()
-        err = currentCommand.stderr.read().decode()
-        if (err != ""):
-            if (printError):
-                print("A error occurred:\n" + err)
-            return False
-    result = currentCommand.stdout.read().decode()
-    if (printLastOutput):
-        print(result)
-    return result
-
-
 def whitelistChars(string, whitelist):
     return ''.join([char for char in string if char in whitelist])
 
@@ -60,7 +39,8 @@ def get_wallpaper_path(wallpaperName):
 
 
 def sed_escape_path(str):
-    return str.replace("/", "\/")
+    # "\x5c/" = "\/", to avoid unnecessary warning
+    return str.replace("/", "\x5c/")
 
 
 def sha256_checksum(filepath):

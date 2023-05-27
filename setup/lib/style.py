@@ -3,8 +3,10 @@ import json
 
 import setup.lib.utils as utils
 
-__STYLE_FILE = "./setup/data/styleFields.json"
-__EXPANSIONS_FILE = "./setup/data/expansions.json"
+from setup.lib import LIB_DIR
+
+__STYLE_FILE = f"{LIB_DIR}/../data/styleFields.json"
+__EXPANSIONS_FILE = f"{LIB_DIR}/../data/expansions.json"
 __SUBSTITUTIONS = "substitutions"
 __EXPANDED_SUBSTITUTIONS = "setup-expanded-substitutions"
 

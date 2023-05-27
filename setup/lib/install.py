@@ -4,6 +4,8 @@ import os
 import json
 from time import time as currentTimestamp
 
+from setup.lib import LIB_DIR
+
 __PACMAN = "pacman"
 __YAY = "yay"
 __acceptedInstallPrograms = [
@@ -16,8 +18,8 @@ __acceptedInstallPrograms = [
     "command_cache"
 ]
 
-__PACKAGES_FILE = "./setup/data/packages.json"
-__INSTALLS_SCRIPT = "./setup/installs.sh"
+__PACKAGES_FILE = f"{LIB_DIR}/../data/packages.json"
+__INSTALLS_SCRIPT = f"{LIB_DIR}/../installs.sh"
 
 
 def __script(program, action):
