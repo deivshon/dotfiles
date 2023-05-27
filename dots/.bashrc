@@ -11,13 +11,13 @@ source ~/.bashrc_device
 [ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
 
 git_current_branch() {
-    git branch 2> /dev/null | sed -e "/^[^*]/d" -e "s/* \(.*\)/(\1)/"
+    git branch 2> /dev/null | sed -e "/^[^*]/d" -e "s/* \(.*\)/ (\1)/"
 }
 
 if [[ ${EUID} == 0 ]]; then
     PS1="\[\e[01;31m\][\h\[\e[01;36m\] \W\[\e[01;31m\]]\$\[\e[00m\] "
 else
-    PS1="\[\e[01;32m\][\u@\h\[\e[01;37m\] \W \e[1;33m\$(git_current_branch)\[\e[01;32m\]]\$\[\e[00m\] "
+    PS1="\[\e[01;32m\][\u@\h\[\e[01;37m\] \W\[\e[1;33m\]\$(git_current_branch)\[\e[01;32m\]]\$\[\e[00m\] "
 fi
 
 export HISTCONTROL=ignoredups:erasedups
