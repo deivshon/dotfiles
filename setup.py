@@ -70,7 +70,7 @@ if not setupStatus[status.PACKAGES_INSTALLED]:
 # with install.packages
 from setup.lib import configs
 from setup.lib import style
-from setup.lib import post
+from setup.lib.post import post
 from setup.lib import utils
 
 if args.remove:
