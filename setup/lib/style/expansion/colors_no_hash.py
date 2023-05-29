@@ -1,0 +1,7 @@
+from setup.lib.style import SUBSTITUTIONS, MAIN_COLOR, SECONDARY_COLOR
+from setup.lib.style.expansion import MAIN_COLOR_NOHASH, SECONDARY_COLOR_NOHASH
+
+
+def expand(colorStyle):
+    colorStyle[SUBSTITUTIONS][MAIN_COLOR_NOHASH] = colorStyle[SUBSTITUTIONS][MAIN_COLOR][1:]
+    colorStyle[SUBSTITUTIONS][SECONDARY_COLOR_NOHASH] = colorStyle[SUBSTITUTIONS][SECONDARY_COLOR][1:]

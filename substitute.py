@@ -8,7 +8,7 @@ from time import time
 
 try:
     from setup.lib import configs
-    from setup.lib import style
+    from setup.lib.style import style
     from setup.lib import utils
 except Exception as e:
     print(
