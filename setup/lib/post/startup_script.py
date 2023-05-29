@@ -1,6 +1,5 @@
 import os
-
-from os import stat
+import stat
 
 from setup.lib import utils
 from setup.lib import printing
