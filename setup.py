@@ -7,7 +7,13 @@ import argparse
 
 from setup.lib import printing
 from setup.lib import status
-from setup.lib import install
+from setup.lib.install import install
+from setup.lib.install.dwm import DwmInstaller
+from setup.lib.install.change_vol_pactl import ChangeVolPactlInstaller
+from setup.lib.install.command_cache import CommandCacheInstaller
+from setup.lib.install.plstatus import PlstatusInstaller
+from setup.lib.install.st import StInstaller
+from setup.lib.install.status_scripts import StatusScriptsInstaller
 
 __FILE_DIR__ = os.path.dirname(os.path.realpath(__file__))
 
@@ -126,19 +132,19 @@ with open(args.style, "r") as f:
 style.expand(selectedStyle)
 style.check(selectedStyle)
 
-install.download("dwm")
-install.download("plstatus")
-install.download("st")
+DwmInstaller.download()
+PlstatusInstaller.download()
+StInstaller.download()
 
 configs.link(selectedStyle, currentUser,
              keepExpansions=args.keep, force=args.force)
 setupStatus[status.STYLE] = os.path.abspath(args.style)
 
 # Download and compile change-vol-pactl
-install.install("change_vol_pactl")
+ChangeVolPactlInstaller.install()
 
-install.compile("dwm")
-install.compile("st")
+DwmInstaller.compile()
+StInstaller.compile()
 
 post.change(selectedStyle)
 
@@ -148,12 +154,14 @@ if not setupStatus[status.POST_INSTALL_OPS]:
 
 # Install Rust programs after rust is configured,
 # which happens only during the post install operations
-install.status_scripts()
-install.install("command_cache")
+CommandCacheInstaller.install()
+
+StatusScriptsInstaller.install()
+os.environ["PATH"] += ":" + os.path.expanduser("~/.local/scripts")
 
 # Compile plstatus after status scripts are installed,
 # otherwise commands in plstatus configuration will not exists in PATH
 # at compile time and compilation will subsequently fail
-install.compile("plstatus")
+PlstatusInstaller.compile()
 
 status.write(setupStatus)
