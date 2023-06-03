@@ -78,7 +78,7 @@ ssh-start() {
 
 # Aliases
 
-[ "${TERM}" == "foot" ] && alias ssh="TERM=linux ssh"
+[ "${TERM}" == "foot" ] && alias ssh="TERM=linux ssh" && alias vagrant="TERM=linux vagrant"
 
 # Exa
 alias ls='exa'
