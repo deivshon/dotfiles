@@ -1,7 +1,8 @@
-from abc import ABC, abstractstaticmethod
+from abc import ABC, abstractmethod
 
 
 class ExpansionHandler(ABC):
-    @abstractstaticmethod
+    @staticmethod
+    @abstractmethod
     def expand(color_data, expansion_data):
         ...
