@@ -1,4 +1,5 @@
 import sys
+import json
 
 from setup.lib import LIB_DIR
 from setup.lib.style import SUBSTITUTIONS, MAIN_COLOR
@@ -11,6 +12,9 @@ FIREFOX = "firefox"
 SWAYLOCK = "swaylock"
 MAIN_COLOR_NOHASH = "mainColorNoHash"
 SECONDARY_COLOR_NOHASH = "secondaryColorNoHash"
+
+with open(EXPANSIONS_FILE) as f:
+    EXPANSION_DATA = json.loads(f.read())
 
 
 def expand_hue(colorStyle, colorFields, baseColor=None):
