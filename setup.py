@@ -149,7 +149,7 @@ StInstaller.compile()
 post.change(selectedStyle)
 
 if not setupStatus[status.POST_INSTALL_OPS]:
-    post.install()
+    post.install(selectedStyle)
     setupStatus[status.POST_INSTALL_OPS] = True
 
 # Install Rust programs after rust is configured,

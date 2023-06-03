@@ -1,13 +1,20 @@
 import os
 
 from setup.lib.post import DEVICE_BASHRC, DEVICE_BASH_PROFILE
+from setup.lib.post.handler import PostOperationsHandler
 
 
-def trigger():
-    if not os.path.isfile(DEVICE_BASHRC):
-        with open(DEVICE_BASHRC, "w") as f:
-            f.write("#!/bin/bash\n\n# Device specific bashrc\n")
+class BashPostOperations(PostOperationsHandler):
+    @staticmethod
+    def name() -> str:
+        return "bash"
 
-    if not os.path.isfile(DEVICE_BASH_PROFILE):
-        with open(DEVICE_BASH_PROFILE, "w") as f:
-            f.write("#!/bin/bash\n\n# Device specific bash_profile\n")
+    @classmethod
+    def _trigger_impl(cls, color_style):
+        if not os.path.isfile(DEVICE_BASHRC):
+            with open(DEVICE_BASHRC, "w") as f:
+                f.write("#!/bin/bash\n\n# Device specific bashrc\n")
+
+        if not os.path.isfile(DEVICE_BASH_PROFILE):
+            with open(DEVICE_BASH_PROFILE, "w") as f:
+                f.write("#!/bin/bash\n\n# Device specific bash_profile\n")

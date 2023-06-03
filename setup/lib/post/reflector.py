@@ -1,5 +1,13 @@
 import subprocess
 
+from setup.lib.post.handler import PostOperationsHandler
 
-def trigger():
-    subprocess.run(["sudo", "systemctl", "enable", "reflector.service"])
+
+class ReflectorPostOperations(PostOperationsHandler):
+    @staticmethod
+    def name() -> str:
+        return "reflector"
+
+    @classmethod
+    def _trigger_impl(cls, color_style):
+        subprocess.run(["sudo", "systemctl", "enable", "reflector.service"])
