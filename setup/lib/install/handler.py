@@ -11,13 +11,25 @@ class InstallHandler(ABC):
 
     @classmethod
     @abstractmethod
-    def compile(cls):
+    def _compile_impl(cls):
         ...
 
     @classmethod
+    def compile(cls):
+        log.info(f"Starting {cls.name()} compilation")
+        cls._compile_impl()
+        log.info(f"Ended {cls.name()} compilation\n")
+
+    @classmethod
     @abstractmethod
-    def download(cls):
+    def _download_impl(cls):
         ...
+
+    @classmethod
+    def download(cls):
+        log.info(f"Starting {cls.name()} download")
+        cls._download_impl()
+        log.info(f"Ended {cls.name()} download\n")
 
     @classmethod
     def install(cls):

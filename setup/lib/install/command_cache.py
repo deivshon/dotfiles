@@ -15,18 +15,13 @@ class CommandCacheInstaller(InstallHandler):
         return "command-cache"
 
     @classmethod
-    def download(cls):
-        log.info(f"Starting {cls.name()} download")
+    def _download_impl(cls):
         git_download(cls.DEST_PATH, cls.REMOTE_URL)
-        log.info(f"Ended {cls.name()} download\n")
 
     @classmethod
-    def compile(cls):
-        log.info(f"Starting {cls.name()} compilation")
+    def _compile_impl(cls):
         try:
             subprocess.run(
                 ["make", "-C", cls.DEST_PATH, "install"])
         except Exception as e:
             log.error(f"Could not compile {cls.name()}: {e}")
-
-        log.info(f"Ended {cls.name()} compilation\n")

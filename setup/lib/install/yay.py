@@ -15,14 +15,11 @@ class YayInstaller(InstallHandler):
         return "yay"
 
     @classmethod
-    def download(cls):
-        log.info(f"Starting {cls.name()} download")
+    def _download_impl(cls):
         git_download(cls.DEST_PATH, cls.REMOTE_URL)
-        log.info(f"Ended {cls.name()} download\n")
 
     @classmethod
-    def compile(cls):
-        log.info(f"Started {cls.name()} compilation")
+    def _compile_impl(cls):
         if not os.path.isdir(cls.DEST_PATH):
             log.error(
                 f"Could not compile {cls.name()}: {cls.DEST_PATH} does not exist")
@@ -38,5 +35,3 @@ class YayInstaller(InstallHandler):
             log.error(f"An unknown error occurred while building yay: {e}")
         finally:
             os.chdir(old_cwd)
-
-        log.info(f"Ended {cls.name()} compilation\n")

@@ -15,14 +15,11 @@ class ChangeVolPactlInstaller(InstallHandler):
         return "change-vol-pactl"
 
     @classmethod
-    def download(cls):
-        log.info(f"Starting {cls.name()} download")
+    def _download_impl(cls):
         git_download(cls.DEST_PATH, cls.REMOTE_URL)
-        log.info(f"Ended {cls.name()} download\n")
 
     @classmethod
-    def compile(cls):
-        log.info(f"Starting {cls.name()} compilation")
+    def _compile_impl(cls):
         try:
             subprocess.run(
                 ["sudo", "make", "-C", cls.DEST_PATH, "clean", "install"])
@@ -30,5 +27,3 @@ class ChangeVolPactlInstaller(InstallHandler):
             log.error(
                 f"Could not compile {cls.name()}: {e}")
             return
-
-        log.info(f"Ended {cls.name()} compilation\n")
