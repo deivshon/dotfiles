@@ -5,7 +5,7 @@ from dataclasses import dataclass
 
 from setup.lib import LIB_DIR
 
-SETUP_STATUS = f"{LIB_DIR}/setup_status.json"
+SETUP_STATUS = f"{LIB_DIR}/../setup_status.json"
 PACKAGES_INSTALLED = "packages-installed"
 POST_INSTALL_OPS = "post-install-operations"
 STYLE = "style"
