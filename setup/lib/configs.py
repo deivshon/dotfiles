@@ -9,20 +9,20 @@ import setup.lib.utils as utils
 from setup.lib import LIB_DIR
 
 SUBSTITUTIONS_DIR = "./substitutions"
+LINKS_FILE = f"{LIB_DIR}/../data/links.json"
 __DOTFILES_DIR = f"{LIB_DIR}/../../dots"
-__LINKS_FILE = f"{LIB_DIR}/../data/links.json"
 
 __SOURCE = "source"
 __TARGET = "target"
 __FLAGS = "flags"
-__SUBS = "subs"
+SUBS = "subs"
 __STYLE_SUBS = "substitutions"
 __SUDO_FLAG = "sudo"
 __VAR_TARGET_FLAG = "variable-target"
 
 __FIREFOX = "firefox"
 
-with open(__LINKS_FILE, "r") as f:
+with open(LINKS_FILE, "r") as f:
     __configsList = json.loads(f.read())
 
 
@@ -133,8 +133,8 @@ def substitute(style, substitutionsDir):
         configSource = os.path.abspath(f"{substitutionsDir}/{configSource}")
 
         substitutionIds = []
-        if __SUBS in __configsList[config]:
-            substitutionIds = __configsList[config][__SUBS]
+        if SUBS in __configsList[config]:
+            substitutionIds = __configsList[config][SUBS]
 
         if len(substitutionIds) > 0:
             # Perform the necessary substitutions using sed
