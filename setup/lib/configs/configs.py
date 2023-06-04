@@ -7,9 +7,10 @@ import setup.lib.printing as printing
 import setup.lib.utils as utils
 
 from setup.lib import LIB_DIR
+from setup.lib.configs import LINKS_FILE
+from setup.lib.configs.targets.firefox import FirefoxVariableTarget
 
 SUBSTITUTIONS_DIR = "./substitutions"
-LINKS_FILE = f"{LIB_DIR}/../data/links.json"
 __DOTFILES_DIR = f"{LIB_DIR}/../../dots"
 
 __SOURCE = "source"
@@ -25,25 +26,8 @@ __FIREFOX = "firefox"
 with open(LINKS_FILE, "r") as f:
     __configsList = json.loads(f.read())
 
-
-def __firefox_target():
-    if not os.path.isdir(os.path.expanduser("~/.mozilla")):
-        return []
-
-    if not os.path.isdir(os.path.expanduser("~/.mozilla/firefox")):
-        return []
-
-    targets = []
-    for path in os.listdir(os.path.expanduser("~/.mozilla/firefox")):
-        if ".default" in path:
-            targets.append(
-                f"{os.path.expanduser('~/.mozilla/firefox')}/{path}/chrome/userChrome.css")
-
-    return targets
-
-
 __TARGET_SEARCH = {
-    __FIREFOX: __firefox_target
+    __FIREFOX: FirefoxVariableTarget()
 }
 
 
@@ -60,7 +44,7 @@ def link(style, user, keepExpansions=False, force=False):
             f"{SUBSTITUTIONS_DIR}/{__configsList[config][__SOURCE]}")
 
         if __VAR_TARGET_FLAG in setupFlags:
-            configTargets = __TARGET_SEARCH[config]()
+            configTargets = __TARGET_SEARCH[config].get_targets()
         else:
             configTargets = __configsList[config][__TARGET]
 

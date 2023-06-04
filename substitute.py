@@ -7,7 +7,7 @@ import argparse
 from time import time
 
 try:
-    from setup.lib import configs
+    from setup.lib.configs import configs
     from setup.lib.style import style
     from setup.lib import utils
 except Exception as e:

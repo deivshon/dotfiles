@@ -1,7 +1,7 @@
 import json
 
-from setup.lib import LIB_DIR
-from setup.lib.configs import LINKS_FILE, SUBS
+from setup.lib.configs import LINKS_FILE
+from setup.lib.configs.configs import SUBS
 
 SUBSTITUTIONS = "substitutions"
 EXPANDED_SUBSTITUTIONS = "setup-expanded-substitutions"

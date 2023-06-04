@@ -74,7 +74,7 @@ if not setupStatus[status.PACKAGES_INSTALLED]:
 
 # Imported here because they use modules that are only installed
 # with install.packages
-from setup.lib import configs
+from setup.lib.configs import configs
 from setup.lib.style import style
 from setup.lib.post import post
 from setup.lib import utils
