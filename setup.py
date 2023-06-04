@@ -6,7 +6,7 @@ import json
 import argparse
 
 from setup.lib import log
-from setup.lib import status
+from setup.lib.status import SetupStatus, SETUP_STATUS
 from setup.lib.install import install
 from setup.lib.install.dwm import DwmInstaller
 from setup.lib.install.change_vol_pactl import ChangeVolPactlInstaller
@@ -61,15 +61,19 @@ startDir = os.getcwd()
 setupDir = os.path.dirname(os.path.realpath(__file__))
 os.chdir(setupDir)
 
-if not os.path.isfile(status.SETUP_STATUS):
-    setupStatus = status.new()
+if not os.path.isfile(SETUP_STATUS):
+    setupStatus = SetupStatus(
+        packages_installed=False,
+        post_install_operations=False,
+        style=None
+    )
 else:
-    setupStatus = status.get()
+    setupStatus = SetupStatus.loads(SETUP_STATUS)
 
 installedInRun = False
-if not setupStatus[status.PACKAGES_INSTALLED]:
+if not setupStatus.packages_installed:
     install.packages()
-    setupStatus[status.PACKAGES_INSTALLED] = True
+    setupStatus.packages_installed = True
     installedInRun = True
 
 # Imported here because they use modules that are only installed
@@ -91,14 +95,14 @@ if args.style is not None:
     log.info(
         f"{log.WHITE}Selecting style from argument: {log.MAGENTA}{utils.path.get_last_node(args.style)}{log.NORMAL}")
 else:
-    if status.STYLE not in setupStatus:
+    if setupStatus.style is None:
         log.info(
             f"{log.WHITE}Selecting default style: {log.MAGENTA}{DEFAULT_STYLE}")
         args.style = DEFAULT_STYLE
     else:
         log.info(
-            f"{log.WHITE}Selecting style from old setup data ({status.SETUP_STATUS}): {log.MAGENTA}{utils.path.get_last_node(setupStatus[status.STYLE])}{log.NORMAL}")
-        args.style = setupStatus[status.STYLE]
+            f"{log.WHITE}Selecting style from old setup data ({SETUP_STATUS}): {log.MAGENTA}{utils.path.get_last_node(setupStatus.style)}{log.NORMAL}")
+        args.style = setupStatus.style
 
 if not os.path.isfile(args.style):
     log.info(f"{log.WHITE}{args.style} does not exist{log.NORMAL}")
@@ -108,7 +112,7 @@ if not os.path.isfile(args.style):
 # because the setup has been run before
 if not installedInRun and args.packages:
     install.packages()
-    setupStatus[status.PACKAGES_INSTALLED] = True
+    setupStatus.packages_installed = True
 
 # Store style content
 with open(args.style, "r") as f:
@@ -123,7 +127,7 @@ StInstaller.download()
 
 configs.link(selectedStyle, currentUser,
              keepExpansions=args.keep, force=args.force)
-setupStatus[status.STYLE] = os.path.abspath(args.style)
+setupStatus.style = os.path.abspath(args.style)
 
 # Download and compile change-vol-pactl
 ChangeVolPactlInstaller.install()
@@ -133,9 +137,9 @@ StInstaller.compile()
 
 post.change(selectedStyle)
 
-if not setupStatus[status.POST_INSTALL_OPS]:
+if not setupStatus.post_install_operations:
     post.install(selectedStyle)
-    setupStatus[status.POST_INSTALL_OPS] = True
+    setupStatus.post_install_operations = True
 
 # Install Rust programs after rust is configured,
 # which happens only during the post install operations
@@ -149,4 +153,5 @@ os.environ["PATH"] += ":" + os.path.expanduser("~/.local/scripts")
 # at compile time and compilation will subsequently fail
 PlstatusInstaller.compile()
 
-status.write(setupStatus)
+with open(SETUP_STATUS, "w") as f:
+    f.write(setupStatus.dumps())
