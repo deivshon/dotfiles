@@ -68,8 +68,8 @@ def link(style, user, keepExpansions=False, force=False):
                     f"{log.YELLOW}{utils.get_last_node(configSource):15}{log.BLUE}({sourceHash[0:4]}...{sourceHash[-4:]}){log.NORMAL} already installed ({log.CYAN}{target}{log.NORMAL})")
                 continue
 
-            # Create the directory where the target file needs to be in
-            utils.make_dirs(os.path.dirname(target))
+            if not os.path.isdir(os.path.dirname(target)):
+                os.makedirs(os.path.dirname(target))
 
             command = ["cp", copyFlags, configSource, target]
 
@@ -93,8 +93,10 @@ def substitute(style, substitutionsDir):
     # Handle each link/copy
     for config in __configsList:
         configSource = __configsList[config][__SOURCE]
+        configDir = f"{substitutionsDir}/{os.path.dirname(configSource)}"
+        if not os.path.isdir(configDir):
+            os.makedirs(configDir)
 
-        utils.make_dirs(f"{substitutionsDir}/{os.path.dirname(configSource)}")
         subprocess.run(
             ["cp", f"{__DOTFILES_DIR}/{configSource}", f"{substitutionsDir}/{configSource}"])
         configSource = os.path.abspath(f"{substitutionsDir}/{configSource}")

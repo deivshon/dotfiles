@@ -1,5 +1,4 @@
 import os
-import subprocess
 import hashlib
 from matplotlib.colors import hex2color, hsv_to_rgb, rgb_to_hsv, rgb2hex
 
@@ -24,10 +23,6 @@ def hex_to_divided_hsv(hex):
 def apply_hue(s, v, color):
     h = hex_to_hsv(color)[0]
     return hsv_to_hex((h, s, v))
-
-
-def make_dirs(path):
-    subprocess.run(["mkdir", "-p", path])
 
 
 def get_last_node(path):

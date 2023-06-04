@@ -17,7 +17,7 @@ class WallpaperPostOperations(PostOperationsHandler):
         wallpaperPath = utils.get_wallpaper_path(colorStyle["wallpaperName"])
 
         if not os.path.isdir(os.path.dirname(wallpaperPath)):
-            utils.make_dirs(os.path.dirname(wallpaperPath))
+            os.makedirs(os.path.dirname(wallpaperPath))
 
         if not os.path.isfile(wallpaperPath):
             subprocess.run(

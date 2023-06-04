@@ -16,7 +16,8 @@ class StatusScriptsPostOperations(PostOperationsHandler):
     def _trigger_impl(cls, color_style):
         # Create the startup folder and script in the home directory
         # This script is ran every time the X server starts
-        utils.make_dirs(os.path.dirname(STARTUP_SCRIPT))
+        if not os.path.isdir(os.path.dirname(STARTUP_SCRIPT)):
+            os.makedirs(os.path.dirname(STARTUP_SCRIPT))
 
         if not os.path.isfile(STARTUP_SCRIPT):
             with open(STARTUP_SCRIPT, "w") as f:
