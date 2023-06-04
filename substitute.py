@@ -44,7 +44,7 @@ style.expand(selectedStyle)
 style.check(selectedStyle)
 
 if args.output_dir is None:
-    styleName = utils.get_last_node(args.style)
+    styleName = utils.path.get_last_node(args.style)
     substitutionsDir = f"{configs.SUBSTITUTIONS_DIR}_{styleName}_{time():.0f}"
 
     # Ensure subsitutions directory does not exist already

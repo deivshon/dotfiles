@@ -57,15 +57,15 @@ def link(style, user, keepExpansions=False, force=False):
         for target in configTargets:
             target = target.replace("~", user)
 
-            sourceHash = utils.sha256_checksum(configSource)
+            sourceHash = utils.hash.sha256_checksum(configSource)
             targetHash = None
             if os.path.isfile(target):
-                targetHash = utils.sha256_checksum(target)
+                targetHash = utils.hash.sha256_checksum(target)
 
             # Don't copy if installed config is the same as the new one
             if sourceHash == targetHash:
                 log.info(
-                    f"{log.YELLOW}{utils.get_last_node(configSource):15}{log.BLUE}({sourceHash[0:4]}...{sourceHash[-4:]}){log.NORMAL} already installed ({log.CYAN}{target}{log.NORMAL})")
+                    f"{log.YELLOW}{utils.path.get_last_node(configSource):15}{log.BLUE}({sourceHash[0:4]}...{sourceHash[-4:]}){log.NORMAL} already installed ({log.CYAN}{target}{log.NORMAL})")
                 continue
 
             if not os.path.isdir(os.path.dirname(target)):
@@ -74,7 +74,7 @@ def link(style, user, keepExpansions=False, force=False):
             command = ["cp", copyFlags, configSource, target]
 
             log.info(
-                f"{log.YELLOW}{utils.get_last_node(configSource):15}{log.NORMAL}{'-' * 12}> {log.CYAN}{target}")
+                f"{log.YELLOW}{utils.path.get_last_node(configSource):15}{log.NORMAL}{'-' * 12}> {log.CYAN}{target}")
 
             if __SUDO_FLAG in setupFlags:
                 subprocess.run(["sudo"] + command)

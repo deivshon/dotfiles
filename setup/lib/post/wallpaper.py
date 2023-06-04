@@ -14,7 +14,8 @@ class WallpaperPostOperations(PostOperationsHandler):
     def _trigger_impl(cls, colorStyle):
         user = os.path.expanduser("~")
 
-        wallpaperPath = utils.get_wallpaper_path(colorStyle["wallpaperName"])
+        wallpaperPath = utils.path.get_wallpaper_path(
+            colorStyle["wallpaperName"])
 
         if not os.path.isdir(os.path.dirname(wallpaperPath)):
             os.makedirs(os.path.dirname(wallpaperPath))

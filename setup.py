@@ -89,7 +89,7 @@ if args.style is not None:
     args.style = os.path.abspath(os.path.expanduser(args.style))
     os.chdir(setupDir)
     log.info(
-        f"{log.WHITE}Selecting style from argument: {log.MAGENTA}{utils.get_last_node(args.style)}{log.NORMAL}")
+        f"{log.WHITE}Selecting style from argument: {log.MAGENTA}{utils.path.get_last_node(args.style)}{log.NORMAL}")
 else:
     if status.STYLE not in setupStatus:
         log.info(
@@ -97,7 +97,7 @@ else:
         args.style = DEFAULT_STYLE
     else:
         log.info(
-            f"{log.WHITE}Selecting style from old setup data ({status.SETUP_STATUS}): {log.MAGENTA}{utils.get_last_node(setupStatus[status.STYLE])}{log.NORMAL}")
+            f"{log.WHITE}Selecting style from old setup data ({status.SETUP_STATUS}): {log.MAGENTA}{utils.path.get_last_node(setupStatus[status.STYLE])}{log.NORMAL}")
         args.style = setupStatus[status.STYLE]
 
 if not os.path.isfile(args.style):
