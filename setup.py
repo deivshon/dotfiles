@@ -5,7 +5,7 @@ import sys
 import json
 import argparse
 
-from setup.lib import printing
+from setup.lib import log
 from setup.lib import status
 from setup.lib.install import install
 from setup.lib.install.dwm import DwmInstaller
@@ -88,35 +88,20 @@ if args.style is not None:
     os.chdir(startDir)
     args.style = os.path.abspath(os.path.expanduser(args.style))
     os.chdir(setupDir)
-    printing.colorPrint(
-        f"Selecting style from argument: ",
-        printing.WHITE,
-        utils.get_last_node(args.style),
-        printing.MAGENTA
-    )
+    log.info(
+        f"{log.WHITE}Selecting style from argument: {log.MAGENTA}{utils.get_last_node(args.style)}{log.NORMAL}")
 else:
     if status.STYLE not in setupStatus:
-        printing.colorPrint(
-            f"Selecting default style: ",
-            printing.WHITE,
-            DEFAULT_STYLE,
-            printing.MAGENTA
-        )
+        log.info(
+            f"{log.WHITE}Selecting default style: {log.MAGENTA}{DEFAULT_STYLE}")
         args.style = DEFAULT_STYLE
     else:
-        printing.colorPrint(
-            f"Selecting style from old setup data ({status.SETUP_STATUS}): ",
-            printing.WHITE,
-            utils.get_last_node(setupStatus[status.STYLE]),
-            printing.MAGENTA
-        )
+        log.info(
+            f"{log.WHITE}Selecting style from old setup data ({status.SETUP_STATUS}): {log.MAGENTA}{utils.get_last_node(setupStatus[status.STYLE])}{log.NORMAL}")
         args.style = setupStatus[status.STYLE]
 
 if not os.path.isfile(args.style):
-    printing.colorPrint(
-        f"{args.style} does not exist",
-        printing.WHITE
-    )
+    log.info(f"{log.WHITE}{args.style} does not exist{log.NORMAL}")
     quit()
 
 # Package installation if it's been explicitly requested but not performed

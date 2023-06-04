@@ -3,9 +3,9 @@ import subprocess
 import json
 import shutil
 
-import setup.lib.printing as printing
 import setup.lib.utils as utils
 
+from setup.lib import log
 from setup.lib import LIB_DIR
 from setup.lib.configs import LINKS_FILE
 from setup.lib.configs.targets.firefox import FirefoxVariableTarget
@@ -52,8 +52,7 @@ def link(style, user, keepExpansions=False, force=False):
             configTargets = [configTargets]
 
         if len(configTargets) == 0:
-            printing.colorPrint(
-                f"Warning: no targets for {config}", printing.RED)
+            log.error(f"Warning: no targets for {config}")
 
         for target in configTargets:
             target = target.replace("~", user)
@@ -65,18 +64,8 @@ def link(style, user, keepExpansions=False, force=False):
 
             # Don't copy if installed config is the same as the new one
             if sourceHash == targetHash:
-                printing.colorPrint(
-                    f"{utils.get_last_node(configSource):15}",
-                    printing.YELLOW,
-                    f"({sourceHash[0:4]}...{sourceHash[-4:]})",
-                    printing.BLUE,
-                    " already installed (",
-                    printing.WHITE,
-                    target,
-                    printing.CYAN,
-                    ")",
-                    printing.WHITE
-                )
+                log.info(
+                    f"{log.YELLOW}{utils.get_last_node(configSource):15}{log.BLUE}({sourceHash[0:4]}...{sourceHash[-4:]}){log.NORMAL} already installed ({log.CYAN}{target}{log.NORMAL})")
                 continue
 
             # Create the directory where the target file needs to be in
@@ -84,14 +73,8 @@ def link(style, user, keepExpansions=False, force=False):
 
             command = ["cp", copyFlags, configSource, target]
 
-            printing.colorPrint(
-                f"{utils.get_last_node(configSource):15}",
-                printing.YELLOW,
-                f"{'-' * 12}> ",
-                printing.WHITE,
-                target,
-                printing.CYAN
-            )
+            log.info(
+                f"{log.YELLOW}{utils.get_last_node(configSource):15}{log.NORMAL}{'-' * 12}> {log.CYAN}{target}")
 
             if __SUDO_FLAG in setupFlags:
                 subprocess.run(["sudo"] + command)
@@ -135,9 +118,8 @@ def remove(user):
         needsSudo = __SUDO_FLAG in __configsList[link][__FLAGS] if __FLAGS in __configsList[link] else False
 
         if linkTarget is None:
-            printing.colorPrint(
-                "Varibale target for ", printing.WHITE,
-                f"{link}: could not find target", printing.RED
+            log.info(
+                f"{log.WHITE}Varibale target for {log.RED}{link}: could not find target{log.NORMAL}"
             )
             continue
 
@@ -145,13 +127,8 @@ def remove(user):
         if needsSudo:
             removeCommand.insert(0, "sudo")
         if os.path.isfile(linkTarget):
-            printing.colorPrint(
-                "Removing ", printing.WHITE,
-                linkTarget, printing.RED
-            )
+            log.info(
+                f"{log.WHITE}Removing {log.RED}{linkTarget}{log.NORMAL}")
             subprocess.run(removeCommand)
         else:
-            printing.colorPrint(
-                "Can't find ", printing.WHITE,
-                linkTarget, printing.RED
-            )
+            log.info(f"{log.WHITE}Can't find {log.RED}{linkTarget}")

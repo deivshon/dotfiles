@@ -1,6 +1,6 @@
 import os
 
-from setup.lib import printing
+from setup.lib import log
 from setup.lib.post import USER_XINITRC, DEFAULT_XINITRC, XINITRC_APPEND
 from setup.lib.post.handler import PostOperationsHandler
 
@@ -13,20 +13,21 @@ class XinitrcPostOperations(PostOperationsHandler):
     @classmethod
     def _trigger_impl(cls, color_style):
         if os.path.isfile(USER_XINITRC):
-            printing.colorPrint(f"{USER_XINITRC} already exists", printing.RED)
+            log.warning(
+                f"{log.RED}{USER_XINITRC} already exists{log.NORMAL}")
             return
 
         if not os.path.isfile(DEFAULT_XINITRC):
-            printing.colorPrint(
-                "Couldn't handle xinitrc: default xinitrc not found", printing.RED)
+            log.error(
+                f"{log.RED}Couldn't handle xinitrc: default xinitrc not found{log.NORMAL}")
             return
 
         with open(DEFAULT_XINITRC) as f:
             xinitrc = f.read().splitlines()
 
         if "twm &" not in xinitrc:
-            printing.colorPrint(
-                "Couldn't handle xinitrc: malformed default xinitrc", printing.RED)
+            log.error(
+                f"{log.RED}Couldn't handle xinitrc: malformed default xinitrc{log.NORMAL}")
             return
 
         xinitrc = xinitrc[0:xinitrc.index("twm &")]
