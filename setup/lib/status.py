@@ -1,32 +1,27 @@
 import json
 
-SETUP_STATUS = "./setup_status.json"
+from typing import Optional
+from dataclasses import dataclass
+
+from setup.lib import LIB_DIR
+
+SETUP_STATUS = f"{LIB_DIR}/../setup_status.json"
 PACKAGES_INSTALLED = "packages-installed"
 POST_INSTALL_OPS = "post-install-operations"
 STYLE = "style"
 
 
-def get():
-    with open(SETUP_STATUS, "r") as f:
-        status = json.loads(f.read())
+@dataclass
+class SetupStatus():
+    packages_installed: bool
+    post_install_operations: bool
+    style: Optional[str]
 
-    if PACKAGES_INSTALLED not in status:
-        status[PACKAGES_INSTALLED] = False
+    def dumps(self) -> str:
+        return json.dumps(self.__dict__)
 
-    if POST_INSTALL_OPS not in status:
-        status[POST_INSTALL_OPS] = False
-
-    return status
-
-
-def write(status):
-    with open(SETUP_STATUS, "w") as f:
-        f.write(json.dumps(status, indent=4) + "\n")
-
-
-def new():
-    status = {}
-    status[PACKAGES_INSTALLED] = False
-    status[POST_INSTALL_OPS] = False
-
-    return status
+    @classmethod
+    def loads(cls, status_path: str):
+        with open(status_path, "r") as file:
+            data = json.loads(file.read())
+        return cls(**data)

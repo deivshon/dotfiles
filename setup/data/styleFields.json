@@ -1,22 +1,4 @@
-{
-	"substitutions": [
-		"mainColor",
-		"secondaryColor",
-		"wallpaperPath",
-		"mainColorNoHash",
-		"secondaryColorNoHash"
-	],
-	"setup-expanded-substitutions": [
-		"efy--main-color",
-		"efy--main-background",
-		"efy--second-background",
-		"efy--hover-background",
-		"efy--main-text",
-		"efy--dimmer-text",
-		"efy--shadow"
-	],
-	"other": [
-		"wallpaperLink",
-		"wallpaperName"
-	]
-}
+[
+	"wallpaperLink",
+	"wallpaperName"
+]
