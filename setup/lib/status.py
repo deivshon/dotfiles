@@ -24,5 +24,4 @@ class SetupStatus():
     def loads(cls, file: str):
         with open(file, "r") as f:
             data = json.loads(f.read())
-        print(data)
         return cls(**data)
