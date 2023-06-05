@@ -8,5 +8,5 @@ class ReflectorPostOperations(PostOperationsHandler):
         return "reflector"
 
     @classmethod
-    def _trigger_impl(cls, color_style):
+    def _trigger_impl(cls, _):
         process.exec(["sudo", "systemctl", "enable", "reflector.service"])

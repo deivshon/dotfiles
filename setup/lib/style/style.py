@@ -25,8 +25,8 @@ __EXPANSIONS: List[ExpansionHandler] = [
 
 
 def check(color_style):
-    with open(__STYLE_FILE, "r") as f:
-        expected_data = json.loads(f.read())
+    with open(__STYLE_FILE, "r") as file:
+        expected_data = json.loads(file.read())
 
     color_style_keys = color_style.keys()
     if SUBSTITUTIONS not in color_style_keys:

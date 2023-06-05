@@ -21,7 +21,7 @@ class SetupStatus():
         return json.dumps(self.__dict__)
 
     @classmethod
-    def loads(cls, file: str):
-        with open(file, "r") as f:
-            data = json.loads(f.read())
+    def loads(cls, status_path: str):
+        with open(status_path, "r") as file:
+            data = json.loads(file.read())
         return cls(**data)

@@ -37,22 +37,22 @@ parser.add_argument(
 args = parser.parse_args()
 
 # Store style content
-with open(args.style, "r") as f:
-    selectedStyle = json.loads(f.read())
+with open(args.style, "r") as file:
+    selected_style = json.loads(file.read())
 
-style.expand(selectedStyle)
-style.check(selectedStyle)
+style.expand(selected_style)
+style.check(selected_style)
 
 if args.output_dir is None:
     styleName = utils.path.get_last_node(args.style)
-    substitutionsDir = f"{configs.SUBSTITUTIONS_DIR}_{styleName}_{time():.0f}"
+    substitutions_dir = f"{configs.SUBSTITUTIONS_DIR}_{styleName}_{time():.0f}"
 
-    # Ensure subsitutions directory does not exist already
+    # Ensure substitutions directory does not exist already
     i = 2
-    while os.path.exists(substitutionsDir):
-        substitutionsDir = f"{configs.SUBSTITUTIONS_DIR}_{styleName}_{time():.0f}_{i}"
+    while os.path.exists(substitutions_dir):
+        substitutions_dir = f"{configs.SUBSTITUTIONS_DIR}_{styleName}_{time():.0f}_{i}"
         i += 1
 else:
-    substitutionsDir = args.output_dir
+    substitutions_dir = args.output_dir
 
-configs.substitute(selectedStyle, substitutionsDir)
+configs.substitute(selected_style, substitutions_dir)

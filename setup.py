@@ -56,25 +56,25 @@ args = parser.parse_args()
 if os.getuid() == 0:
     sys.exit("Don't run the script as root!")
 
-currentUser = os.path.expanduser("~")
-startDir = os.getcwd()
-setupDir = os.path.dirname(os.path.realpath(__file__))
-os.chdir(setupDir)
+current_user = os.path.expanduser("~")
+start_dir = os.getcwd()
+setup_dir = os.path.dirname(os.path.realpath(__file__))
+os.chdir(setup_dir)
 
 if not os.path.isfile(SETUP_STATUS):
-    setupStatus = SetupStatus(
+    setup_status = SetupStatus(
         packages_installed=False,
         post_install_operations=False,
         style=None
     )
 else:
-    setupStatus = SetupStatus.loads(SETUP_STATUS)
+    setup_status = SetupStatus.loads(SETUP_STATUS)
 
-installedInRun = False
-if not setupStatus.packages_installed:
+installed_in_run = False
+if not setup_status.packages_installed:
     install.packages()
-    setupStatus.packages_installed = True
-    installedInRun = True
+    setup_status.packages_installed = True
+    installed_in_run = True
 
 # Imported here because they use modules that are only installed
 # with install.packages
@@ -84,50 +84,50 @@ from setup.lib.post import post
 from setup.lib import utils
 
 if args.remove:
-    configs.remove(currentUser)
-    quit()
+    configs.remove(current_user)
+    sys.exit(0)
 
 if args.style is not None:
     # Style file path argument is relative to caller's cwd (startDir)
-    os.chdir(startDir)
+    os.chdir(start_dir)
     args.style = os.path.abspath(os.path.expanduser(args.style))
-    os.chdir(setupDir)
+    os.chdir(setup_dir)
     log.info(
         f"{log.WHITE}Selecting style from argument: {log.MAGENTA}{utils.path.get_last_node(args.style)}{log.NORMAL}")
 else:
-    if setupStatus.style is None:
+    if setup_status.style is None:
         log.info(
             f"{log.WHITE}Selecting default style: {log.MAGENTA}{DEFAULT_STYLE}")
         args.style = DEFAULT_STYLE
     else:
         log.info(
-            f"{log.WHITE}Selecting style from old setup data ({SETUP_STATUS}): {log.MAGENTA}{utils.path.get_last_node(setupStatus.style)}{log.NORMAL}")
-        args.style = setupStatus.style
+            f"{log.WHITE}Selecting style from old setup data ({SETUP_STATUS}): {log.MAGENTA}{utils.path.get_last_node(setup_status.style)}{log.NORMAL}")
+        args.style = setup_status.style
 
 if not os.path.isfile(args.style):
     log.info(f"{log.WHITE}{args.style} does not exist{log.NORMAL}")
-    quit()
+    sys.exit(1)
 
 # Package installation if it's been explicitly requested but not performed
 # because the setup has been run before
-if not installedInRun and args.packages:
+if not installed_in_run and args.packages:
     install.packages()
-    setupStatus.packages_installed = True
+    setup_status.packages_installed = True
 
 # Store style content
-with open(args.style, "r") as f:
-    selectedStyle = json.loads(f.read())
+with open(args.style, "r") as file:
+    selected_style = json.loads(file.read())
 
-style.expand(selectedStyle)
-style.check(selectedStyle)
+style.expand(selected_style)
+style.check(selected_style)
 
 DwmInstaller.download()
 PlstatusInstaller.download()
 StInstaller.download()
 
-configs.link(selectedStyle, currentUser,
-             keepExpansions=args.keep, force=args.force)
-setupStatus.style = os.path.abspath(args.style)
+configs.link(selected_style, current_user,
+             keep_expansion=args.keep, force=args.force)
+setup_status.style = os.path.abspath(args.style)
 
 # Download and compile change-vol-pactl
 ChangeVolPactlInstaller.install()
@@ -135,11 +135,11 @@ ChangeVolPactlInstaller.install()
 DwmInstaller.compile()
 StInstaller.compile()
 
-post.change(selectedStyle)
+post.change(selected_style)
 
-if not setupStatus.post_install_operations:
-    post.install(selectedStyle)
-    setupStatus.post_install_operations = True
+if not setup_status.post_install_operations:
+    post.install(selected_style)
+    setup_status.post_install_operations = True
 
 # Install Rust programs after rust is configured,
 # which happens only during the post install operations
@@ -153,5 +153,5 @@ os.environ["PATH"] += ":" + os.path.expanduser("~/.local/scripts")
 # at compile time and compilation will subsequently fail
 PlstatusInstaller.compile()
 
-with open(SETUP_STATUS, "w") as f:
-    f.write(setupStatus.dumps())
+with open(SETUP_STATUS, "w") as file:
+    file.write(setup_status.dumps())

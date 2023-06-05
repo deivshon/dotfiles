@@ -10,7 +10,7 @@ class HyprlandPostOperations(PostOperationsHandler):
         return "hyprland"
 
     @classmethod
-    def _trigger_impl(cls, color_style):
+    def _trigger_impl(cls, _):
         if not os.path.isfile(USER_HYPRSETUP):
-            with open(USER_HYPRSETUP, "w") as f:
-                f.write("# Device specific Hyprland options\n")
+            with open(USER_HYPRSETUP, "w") as file:
+                file.write("# Device specific Hyprland options\n")

@@ -9,8 +9,8 @@ EXPANDED_SUBSTITUTIONS = "setup-expanded-substitutions"
 MAIN_COLOR = "mainColor"
 SECONDARY_COLOR = "secondaryColor"
 
-with open(LINKS_FILE, "r") as f:
-    links_list = json.loads(f.read())
+with open(LINKS_FILE, "r") as file:
+    links_list = json.loads(file.read())
 
 EXPECTED_SUBSTITUTIONS = []
 for link in links_list:

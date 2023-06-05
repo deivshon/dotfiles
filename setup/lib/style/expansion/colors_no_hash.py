@@ -5,6 +5,6 @@ from setup.lib.style.expansion.handler import ExpansionHandler
 
 class ColorsNoHash(ExpansionHandler):
     @staticmethod
-    def expand(color_data, expansion_data):
+    def expand(color_data, _):
         color_data[SUBSTITUTIONS][MAIN_COLOR_NOHASH] = color_data[SUBSTITUTIONS][MAIN_COLOR][1:]
         color_data[SUBSTITUTIONS][SECONDARY_COLOR_NOHASH] = color_data[SUBSTITUTIONS][SECONDARY_COLOR][1:]

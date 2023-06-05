@@ -1,5 +1,4 @@
 import os
-import subprocess
 
 from setup.lib import log
 from setup.lib.utils import process

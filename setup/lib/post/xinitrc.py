@@ -11,7 +11,7 @@ class XinitrcPostOperations(PostOperationsHandler):
         return "xinitrc"
 
     @classmethod
-    def _trigger_impl(cls, color_style):
+    def _trigger_impl(cls, _):
         if os.path.isfile(USER_XINITRC):
             log.warning(
                 f"{log.RED}{USER_XINITRC} already exists{log.NORMAL}")
@@ -22,8 +22,8 @@ class XinitrcPostOperations(PostOperationsHandler):
                 f"{log.RED}Couldn't handle xinitrc: default xinitrc not found{log.NORMAL}")
             return
 
-        with open(DEFAULT_XINITRC) as f:
-            xinitrc = f.read().splitlines()
+        with open(DEFAULT_XINITRC) as file:
+            xinitrc = file.read().splitlines()
 
         if "twm &" not in xinitrc:
             log.error(
@@ -32,8 +32,8 @@ class XinitrcPostOperations(PostOperationsHandler):
 
         xinitrc = xinitrc[0:xinitrc.index("twm &")]
 
-        with open(XINITRC_APPEND, "r") as f:
-            xinitrc_append = f.read()
+        with open(XINITRC_APPEND, "r") as file:
+            xinitrc_append = file.read()
 
-        with open(USER_XINITRC, "w") as f:
-            f.write("\n".join(xinitrc) + "\n" + xinitrc_append)
+        with open(USER_XINITRC, "w") as file:
+            file.write("\n".join(xinitrc) + "\n" + xinitrc_append)

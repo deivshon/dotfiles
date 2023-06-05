@@ -20,12 +20,12 @@ try:
     NORMAL = subprocess.run(
         ["tput", "sgr0"], capture_output=True).stdout.decode()
 except Exception as e:
-    RED = "\033[1m\033[31m",
-    GREEN = "\033[1m\033[32m",
-    YELLOW = "\033[1m\033[33m",
-    BLUE = "\033[1m\033[34m",
-    MAGENTA = "\033[1m\033[35m",
-    CYAN = "\033[1m\033[36m",
+    RED = "\033[1m\033[31m"
+    GREEN = "\033[1m\033[32m"
+    YELLOW = "\033[1m\033[33m"
+    BLUE = "\033[1m\033[34m"
+    MAGENTA = "\033[1m\033[35m"
+    CYAN = "\033[1m\033[36m"
     WHITE = "\033[1m\033[37m"
     NORMAL = "\033[0m"
     __tput_warning = True

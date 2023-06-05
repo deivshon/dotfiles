@@ -5,7 +5,7 @@ from setup.lib.style.expansion.handler import ExpansionHandler
 
 class WallpaperPath(ExpansionHandler):
     @staticmethod
-    def expand(color_data, expansion_data):
+    def expand(color_data, _):
         color_data[SUBSTITUTIONS]["wallpaperPath"] = utils.path.sed_escape_path(
             utils.path.get_wallpaper_path(color_data["wallpaperName"])
         )

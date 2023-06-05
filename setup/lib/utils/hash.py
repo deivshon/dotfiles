@@ -2,9 +2,9 @@ import hashlib
 
 
 def sha256_checksum(filepath):
-    hashHandler = hashlib.sha256()
-    with open(filepath, "rb") as f:
-        while chunk := f.read(4096):
-            hashHandler.update(chunk)
+    hash_handler = hashlib.sha256()
+    with open(filepath, "rb") as file:
+        while chunk := file.read(4096):
+            hash_handler.update(chunk)
 
-    return hashHandler.hexdigest()
+    return hash_handler.hexdigest()

@@ -8,5 +8,5 @@ class RustupPostOperations(PostOperationsHandler):
         return "rustup"
 
     @classmethod
-    def _trigger_impl(cls, color_style):
+    def _trigger_impl(cls, _):
         process.exec(["rustup", "default", "stable"])

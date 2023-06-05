@@ -10,11 +10,11 @@ class BashPostOperations(PostOperationsHandler):
         return "bash"
 
     @classmethod
-    def _trigger_impl(cls, color_style):
+    def _trigger_impl(cls, _):
         if not os.path.isfile(DEVICE_BASHRC):
-            with open(DEVICE_BASHRC, "w") as f:
-                f.write("#!/bin/bash\n\n# Device specific bashrc\n")
+            with open(DEVICE_BASHRC, "w") as file:
+                file.write("#!/bin/bash\n\n# Device specific bashrc\n")
 
         if not os.path.isfile(DEVICE_BASH_PROFILE):
-            with open(DEVICE_BASH_PROFILE, "w") as f:
-                f.write("#!/bin/bash\n\n# Device specific bash_profile\n")
+            with open(DEVICE_BASH_PROFILE, "w") as file:
+                file.write("#!/bin/bash\n\n# Device specific bash_profile\n")

@@ -3,9 +3,9 @@ import subprocess
 import json
 import shutil
 
-import setup.lib.utils as utils
 
 from setup.lib import log
+from setup.lib import utils
 from setup.lib import LIB_DIR
 from setup.lib.configs import LINKS_FILE
 from setup.lib.configs.targets.firefox import FirefoxVariableTarget
@@ -23,114 +23,114 @@ __VAR_TARGET_FLAG = "variable-target"
 
 __FIREFOX = "firefox"
 
-with open(LINKS_FILE, "r") as f:
-    __configsList = json.loads(f.read())
+with open(LINKS_FILE, "r") as file:
+    __configs_list = json.loads(file.read())
 
 __TARGET_SEARCH = {
     __FIREFOX: FirefoxVariableTarget()
 }
 
 
-def link(style, user, keepExpansions=False, force=False):
-    copyFlags = "-f" if force else "-i"
+def link(style, user, keep_expansion=False, force=False):
+    copy_flags = "-f" if force else "-i"
 
     substitute(style, SUBSTITUTIONS_DIR)
 
     # Handle each link/copy
-    for config in __configsList:
-        setupFlags = __configsList[config][__FLAGS] if __FLAGS in __configsList[config] else [
+    for config in __configs_list:
+        setup_flags = __configs_list[config][__FLAGS] if __FLAGS in __configs_list[config] else [
         ]
-        configSource = os.path.abspath(
-            f"{SUBSTITUTIONS_DIR}/{__configsList[config][__SOURCE]}")
+        config_source = os.path.abspath(
+            f"{SUBSTITUTIONS_DIR}/{__configs_list[config][__SOURCE]}")
 
-        if __VAR_TARGET_FLAG in setupFlags:
-            configTargets = __TARGET_SEARCH[config].get_targets()
+        if __VAR_TARGET_FLAG in setup_flags:
+            config_targets = __TARGET_SEARCH[config].get_targets()
         else:
-            configTargets = __configsList[config][__TARGET]
+            config_targets = __configs_list[config][__TARGET]
 
-        if isinstance(configTargets, str):
-            configTargets = [configTargets]
+        if isinstance(config_targets, str):
+            config_targets = [config_targets]
 
-        if len(configTargets) == 0:
+        if len(config_targets) == 0:
             log.error(f"Warning: no targets for {config}")
 
-        for target in configTargets:
+        for target in config_targets:
             target = target.replace("~", user)
 
-            sourceHash = utils.hash.sha256_checksum(configSource)
-            targetHash = None
+            source_hash = utils.hash.sha256_checksum(config_source)
+            target_hash = None
             if os.path.isfile(target):
-                targetHash = utils.hash.sha256_checksum(target)
+                target_hash = utils.hash.sha256_checksum(target)
 
             # Don't copy if installed config is the same as the new one
-            if sourceHash == targetHash:
+            if source_hash == target_hash:
                 log.info(
-                    f"{log.YELLOW}{utils.path.get_last_node(configSource):15}{log.BLUE}({sourceHash[0:4]}...{sourceHash[-4:]}){log.NORMAL} already installed ({log.CYAN}{target}{log.NORMAL})")
+                    f"{log.YELLOW}{utils.path.get_last_node(config_source):15}{log.BLUE}({source_hash[0:4]}...{source_hash[-4:]}){log.NORMAL} already installed ({log.CYAN}{target}{log.NORMAL})")
                 continue
 
             if not os.path.isdir(os.path.dirname(target)):
                 os.makedirs(os.path.dirname(target))
 
-            command = ["cp", copyFlags, configSource, target]
+            command = ["cp", copy_flags, config_source, target]
 
             log.info(
-                f"{log.YELLOW}{utils.path.get_last_node(configSource):15}{log.NORMAL}{'-' * 12}> {log.CYAN}{target}")
+                f"{log.YELLOW}{utils.path.get_last_node(config_source):15}{log.NORMAL}{'-' * 12}> {log.CYAN}{target}")
 
-            if __SUDO_FLAG in setupFlags:
+            if __SUDO_FLAG in setup_flags:
                 subprocess.run(["sudo"] + command)
             else:
                 subprocess.run(command)
 
     # Delete temporary directory unless the user specified not to
-    if not keepExpansions and os.path.isdir(SUBSTITUTIONS_DIR):
+    if not keep_expansion and os.path.isdir(SUBSTITUTIONS_DIR):
         shutil.rmtree(SUBSTITUTIONS_DIR)
 
 
-def substitute(style, substitutionsDir):
-    if not os.path.isdir(substitutionsDir):
-        os.mkdir(substitutionsDir)
+def substitute(style, substitutions_dir):
+    if not os.path.isdir(substitutions_dir):
+        os.mkdir(substitutions_dir)
 
     # Handle each link/copy
-    for config in __configsList:
-        configSource = __configsList[config][__SOURCE]
-        configDir = f"{substitutionsDir}/{os.path.dirname(configSource)}"
-        if not os.path.isdir(configDir):
-            os.makedirs(configDir)
+    for config in __configs_list:
+        config_source = __configs_list[config][__SOURCE]
+        config_dir = f"{substitutions_dir}/{os.path.dirname(config_source)}"
+        if not os.path.isdir(config_dir):
+            os.makedirs(config_dir)
 
         subprocess.run(
-            ["cp", f"{__DOTFILES_DIR}/{configSource}", f"{substitutionsDir}/{configSource}"])
-        configSource = os.path.abspath(f"{substitutionsDir}/{configSource}")
+            ["cp", f"{__DOTFILES_DIR}/{config_source}", f"{substitutions_dir}/{config_source}"])
+        config_source = os.path.abspath(f"{substitutions_dir}/{config_source}")
 
-        substitutionIds = []
-        if SUBS in __configsList[config]:
-            substitutionIds = __configsList[config][SUBS]
+        substitution_ids = []
+        if SUBS in __configs_list[config]:
+            substitution_ids = __configs_list[config][SUBS]
 
-        if len(substitutionIds) > 0:
+        if len(substitution_ids) > 0:
             # Perform the necessary substitutions using sed
-            substitutionVals = style[__STYLE_SUBS]
-            for id in substitutionIds:
-                subprocess.run(["sed", "-i", "s/" + substitutionIds[id] +
-                               "/" + substitutionVals[id] + "/g", configSource])
+            substitution_vals = style[__STYLE_SUBS]
+            for id in substitution_ids:
+                subprocess.run(["sed", "-i", "s/" + substitution_ids[id] +
+                               "/" + substitution_vals[id] + "/g", config_source])
 
 
 def remove(user):
-    for link in __configsList:
-        linkTarget = __configsList[link][__TARGET].replace(
-            "~", user) if __FLAGS not in __configsList[link] or __VAR_TARGET_FLAG not in __configsList[link][__FLAGS] else None
-        needsSudo = __SUDO_FLAG in __configsList[link][__FLAGS] if __FLAGS in __configsList[link] else False
+    for link in __configs_list:
+        link_target = __configs_list[link][__TARGET].replace(
+            "~", user) if __FLAGS not in __configs_list[link] or __VAR_TARGET_FLAG not in __configs_list[link][__FLAGS] else None
+        needs_sudo = __SUDO_FLAG in __configs_list[link][__FLAGS] if __FLAGS in __configs_list[link] else False
 
-        if linkTarget is None:
+        if link_target is None:
             log.info(
-                f"{log.WHITE}Varibale target for {log.RED}{link}: could not find target{log.NORMAL}"
+                f"{log.WHITE}Variable target for {log.RED}{link}: could not find target{log.NORMAL}"
             )
             continue
 
-        removeCommand = ["rm", linkTarget]
-        if needsSudo:
-            removeCommand.insert(0, "sudo")
-        if os.path.isfile(linkTarget):
+        remove_command = ["rm", link_target]
+        if needs_sudo:
+            remove_command.insert(0, "sudo")
+        if os.path.isfile(link_target):
             log.info(
-                f"{log.WHITE}Removing {log.RED}{linkTarget}{log.NORMAL}")
-            subprocess.run(removeCommand)
+                f"{log.WHITE}Removing {log.RED}{link_target}{log.NORMAL}")
+            subprocess.run(remove_command)
         else:
-            log.info(f"{log.WHITE}Can't find {log.RED}{linkTarget}")
+            log.info(f"{log.WHITE}Can't find {log.RED}{link_target}")
