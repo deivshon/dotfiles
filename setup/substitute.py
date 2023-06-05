@@ -1,17 +1,11 @@
 import os
-import sys
 import json
 import argparse
-from time import time
 
-try:
-    from setup.lib.configs import configs
-    from setup.lib.style import style
-    from setup.lib import utils
-except Exception as e:
-    print(
-        f"An error occurred while importing needed modules: {e}\nEnsure matplotlib is installed\nTraceback: {e.__traceback__}")
-    sys.exit(1)
+from time import time
+from setup.lib import utils
+from setup.lib.style import style
+from setup.lib.configs import configs
 
 
 def main():

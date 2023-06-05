@@ -1,6 +1,6 @@
-import sys
 import json
 
+from setup.lib import log
 from setup.lib import LIB_DIR
 from setup.lib.style import SUBSTITUTIONS, MAIN_COLOR
 from setup.lib import utils as genutils
@@ -28,7 +28,7 @@ def expand_hue(color_style, color_fields, base_color=None):
             alpha = color_fields[col][-2:]
             color_fields[col] = color_fields[col][:-2]
         elif len(color_fields[col]) != 7:
-            sys.exit(
+            log.failure(
                 f"Malformed hex color passed to hue expansion: {color_fields[col]}")
 
         _, s, v = genutils.hue.hex_to_divided_hsv(color_fields[col])

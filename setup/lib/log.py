@@ -1,3 +1,4 @@
+import sys
 import subprocess
 
 
@@ -41,6 +42,12 @@ def info(msg: str):
 
 def error(msg: str):
     print(f"{WHITE}[{RED}!{WHITE}]{NORMAL} {msg}")
+
+
+def failure(msg: str):
+    error(f"{RED}FATAL ERROR OCCURRED{NORMAL}")
+    error(msg)
+    sys.exit(1)
 
 
 def subprocess_line(line: str):

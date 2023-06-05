@@ -52,9 +52,8 @@ def main():
 
     args = parser.parse_args()
 
-    # Check if the script is being run as root
     if os.getuid() == 0:
-        sys.exit("Don't run the script as root!")
+        log.failure("Don't run the script as root!")
 
     current_user = os.path.expanduser("~")
     start_dir = os.getcwd()
@@ -105,8 +104,7 @@ def main():
             args.style = setup_status.style
 
     if not os.path.isfile(args.style):
-        log.info(f"{log.WHITE}{args.style} does not exist{log.NORMAL}")
-        sys.exit(1)
+        log.failure(f"{log.WHITE}{args.style} does not exist{log.NORMAL}")
 
     # Package installation if it's been explicitly requested but not performed
     # because the setup has been run before

@@ -1,8 +1,8 @@
-import sys
 import json
 
 from typing import List
 
+from setup.lib import log
 from setup.lib import LIB_DIR
 from setup.lib.style import SUBSTITUTIONS, EXPECTED_SUBSTITUTIONS
 from setup.lib.style.expansion import EXPANSION_DATA
@@ -30,15 +30,15 @@ def check(color_style):
 
     color_style_keys = color_style.keys()
     if SUBSTITUTIONS not in color_style_keys:
-        sys.exit("Substitutions field missing in color style")
+        log.failure("Substitutions field missing in color style")
 
     for field in expected_data:
         if field not in color_style_keys:
-            sys.exit("Field missing in color style: " + field)
+            log.failure("Field missing in color style: " + field)
 
     for field in EXPECTED_SUBSTITUTIONS:
         if field not in color_style[SUBSTITUTIONS].keys():
-            sys.exit("Sub-field missing in substitutions field: " + field)
+            log.failure("Sub-field missing in substitutions field: " + field)
 
 
 def expand(color_style):
