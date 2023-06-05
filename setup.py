@@ -17,7 +17,7 @@ from setup.lib.install.status_scripts import StatusScriptsInstaller
 
 __FILE_DIR__ = os.path.dirname(os.path.realpath(__file__))
 
-DEFAULT_STYLE = f"{__FILE_DIR__}/../data/styles/sunsetDigital.json"
+DEFAULT_STYLE = f"{__FILE_DIR__}/setup/data/styles/sunsetDigital.json"
 
 parser = argparse.ArgumentParser(
     prog="setup",
