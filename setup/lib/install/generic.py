@@ -2,29 +2,24 @@ import os
 import subprocess
 
 from setup.lib import log
+from setup.lib.utils import process
 
 
 def git_download(path: str, link: str):
     if not os.path.isdir(path):
         try:
-            subprocess.run(["git", "clone", link, path], check=True)
-        except subprocess.CalledProcessError as e:
-            log.warning(
-                f"A git error occurred trying to clone repository at {link}: {e}")
+            process.exec(["git", "clone", link, path])
         except Exception as e:
             log.warning(
-                f"An unknown error occurred trying to clone repository at {link}: {e}")
+                f"An error occurred while trying to clone repository at {link}: {e}")
     else:
         if os.path.isdir(f"{path}/.git"):
             log.info(f"{path} already exists, pulling")
             try:
-                subprocess.run(["git", "-C", path, "pull"])
-            except subprocess.CalledProcessError as e:
-                log.warning(
-                    f"A git error occurred trying to pull repository at {link}: {e}")
+                process.exec(["git", "-C", path, "pull"])
             except Exception as e:
                 log.warning(
-                    f"An unknown error occurred trying to pull repository at {link}: {e}")
+                    f"An error occurred while trying to pull repository at {link}: {e}")
         else:
             log.warning(
                 f"{path} already exists and does not seem to be a git repository, aborting download")

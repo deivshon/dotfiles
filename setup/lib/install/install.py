@@ -1,7 +1,6 @@
-import sys
-import subprocess
 import os
 import json
+import subprocess
 
 from setup.lib import LIB_DIR
 from setup.lib.install.yay import YayInstaller

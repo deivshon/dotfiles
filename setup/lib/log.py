@@ -43,6 +43,10 @@ def error(msg: str):
     print(f"{WHITE}[{RED}!{WHITE}]{NORMAL} {msg}")
 
 
+def subprocess_line(line: str):
+    print(f" {BLUE}-->{NORMAL} {line}")
+
+
 if __tput_warning:
     warning("Could not use tput to generate color codes")
 

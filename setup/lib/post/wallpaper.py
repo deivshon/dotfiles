@@ -2,6 +2,7 @@ import os
 import subprocess
 
 from setup.lib import utils
+from setup.lib.utils import process
 from setup.lib.post.handler import PostOperationsHandler
 
 
@@ -21,7 +22,7 @@ class WallpaperPostOperations(PostOperationsHandler):
             os.makedirs(os.path.dirname(wallpaperPath))
 
         if not os.path.isfile(wallpaperPath):
-            subprocess.run(
+            process.exec(
                 ["wget", colorStyle["wallpaperLink"], "-O", wallpaperPath])
 
         subprocess.run(["cp", wallpaperPath, user + "/Pictures/wallpaper"])

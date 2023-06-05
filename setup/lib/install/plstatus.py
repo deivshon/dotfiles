@@ -1,7 +1,7 @@
 import os
-import subprocess
 
 from setup.lib import log
+from setup.lib.utils import process
 from setup.lib.install.handler import InstallHandler
 from setup.lib.install.generic import git_download
 
@@ -21,14 +21,14 @@ class PlstatusInstaller(InstallHandler):
     @classmethod
     def _compile_impl(cls):
         try:
-            subprocess.run(["make", "-C", cls.DEST_PATH, "clean", "all"])
+            process.exec(["make", "-C", cls.DEST_PATH, "clean", "all"])
         except Exception as e:
             log.error(
                 f"Could not compile {cls.name()}: {e}")
             return
 
         try:
-            subprocess.run(["sudo", "make", "-C", cls.DEST_PATH, "install"])
+            process.exec(["sudo", "make", "-C", cls.DEST_PATH, "install"])
         except Exception as e:
             log.error(
                 f"Could not install {cls.name()}: {e}")

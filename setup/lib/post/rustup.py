@@ -1,5 +1,4 @@
-import subprocess
-
+from setup.lib.utils import process
 from setup.lib.post.handler import PostOperationsHandler
 
 
@@ -10,4 +9,4 @@ class RustupPostOperations(PostOperationsHandler):
 
     @classmethod
     def _trigger_impl(cls, color_style):
-        subprocess.run(["rustup", "default", "stable"])
+        process.exec(["rustup", "default", "stable"])

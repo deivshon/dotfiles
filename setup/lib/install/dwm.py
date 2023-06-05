@@ -1,9 +1,9 @@
 import os
-import subprocess
 
 from abc import abstractmethod
 
 from setup.lib import log
+from setup.lib.utils import process
 from setup.lib.install.handler import InstallHandler
 from setup.lib.install.generic import git_download
 
@@ -25,7 +25,7 @@ class DwmInstaller(InstallHandler):
     @abstractmethod
     def _compile_impl(cls):
         try:
-            subprocess.run(
+            process.exec(
                 ["sudo", "make", "-C", cls.DEST_PATH, "clean", "install"])
         except Exception as e:
             log.error(f"Could not compile {cls.name()}: {e}")
