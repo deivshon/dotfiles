@@ -17,7 +17,7 @@ def __exec(command: List[str]):
             return
 
         for line in iter(process.stdout.readline, ""):
-            yield line.strip()
+            yield line.rstrip()
 
 
 def exec(command: List[str]):
