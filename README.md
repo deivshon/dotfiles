@@ -21,7 +21,6 @@ The configuration files in this repository and the relative setup scripts are ta
 + [network-manager-applet](https://archlinux.org/packages/extra/x86_64/network-manager-applet/) [systray network utility]
 + [noto-fonts](https://archlinux.org/packages/extra/any/noto-fonts/) [font for bar info]
 + [wget](https://archlinux.org/packages/extra/x86_64/wget/)
-+ [python-requests](https://archlinux.org/packages/extra/any/python-requests/)
 + [gnome-keyring](https://archlinux.org/packages/extra/x86_64/gnome-keyring/)
 + [firefox](https://archlinux.org/packages/extra/x86_64/firefox/)
 + [gnome-themes-extra](https://archlinux.org/packages/extra/x86_64/gnome-themes-extra/)
@@ -31,7 +30,6 @@ The configuration files in this repository and the relative setup scripts are ta
 + [tmux](https://archlinux.org/packages/community/x86_64/tmux/)
 + [btop](https://archlinux.org/packages/community/x86_64/btop/)
 + [xclip](https://archlinux.org/packages/extra/x86_64/xclip/)
-+ [python-matplotlib](https://archlinux.org/packages/community/x86_64/python-matplotlib/)
 + [bash-completion](https://archlinux.org/packages/extra/any/bash-completion/)
 + [rustup](https://archlinux.org/packages/community/x86_64/rustup/)
 + [otf-font-awesome](https://archlinux.org/packages/community/any/otf-font-awesome/)
