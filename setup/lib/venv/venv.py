@@ -8,7 +8,7 @@ from setup.lib import log
 from setup.lib import LIB_DIR
 from setup.lib.venv import VENV_PATH
 
-__VENV_REQUIREMENTS = os.path.abspath(f"{LIB_DIR}/../../requirements.txt")
+__VENV_REQUIREMENTS = os.path.abspath(f"{LIB_DIR}/../data/requirements.txt")
 __VENV_ENV_VAR = "dotfiles-venv"
 
 
