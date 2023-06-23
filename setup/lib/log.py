@@ -33,15 +33,15 @@ except Exception as e:
 
 
 def warning(msg: str):
-    print(f"{WHITE}[{YELLOW}!{WHITE}]{NORMAL} {msg}")
+    print(f"{WHITE}[{YELLOW}!{WHITE}]{NORMAL} {msg}{NORMAL}")
 
 
 def info(msg: str):
-    print(f"{WHITE}[{BLUE}>{WHITE}]{NORMAL} {msg}")
+    print(f"{WHITE}[{BLUE}>{WHITE}]{NORMAL} {msg}{NORMAL}")
 
 
 def error(msg: str):
-    print(f"{WHITE}[{RED}!{WHITE}]{NORMAL} {msg}")
+    print(f"{WHITE}[{RED}!{WHITE}]{NORMAL} {msg}{NORMAL}")
 
 
 def failure(msg: str):
