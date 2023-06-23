@@ -4,6 +4,11 @@ import json
 import argparse
 
 from setup.lib import log
+from setup.lib import utils
+from setup.lib.post import post
+from setup.lib.style import style
+from setup.lib.configs import configs
+
 from setup.lib.status import SetupStatus, SETUP_STATUS
 from setup.lib.install import install
 from setup.lib.install.dwm import DwmInstaller
@@ -74,13 +79,6 @@ def main():
         install.packages()
         setup_status.packages_installed = True
         installed_in_run = True
-
-    # Imported here because they use modules that are only installed
-    # with install.packages
-    from setup.lib.configs import configs
-    from setup.lib.style import style
-    from setup.lib.post import post
-    from setup.lib import utils
 
     if args.remove:
         configs.remove(current_user)
