@@ -96,8 +96,7 @@ alias cp='cp -i'
 alias ip='ip -c'
 
 # Update
-alias update="sudo pacman -Syu && yay -Sua"
-alias udpate="sudo pacman -Syu && yay -Sua"
+alias up="sudo pacman -Syu && yay -Sua"
 
 # Always clears scrollback buffer
 alias clear="printf '\033[2J\033[3J\033[1;1H' && afetch"
