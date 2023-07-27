@@ -34,7 +34,8 @@
 		"fuzzel",
 		"fontforge",
 		"foot",
-		"gsfonts"
+		"gsfonts",
+		"bat"
 	],
 	"yay": [
 		"afetch",
