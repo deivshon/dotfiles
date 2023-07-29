@@ -1,8 +1,8 @@
 {
     "substitutions": {
-        "mainColor": "#F15358",
-        "secondaryColor": "#74474A"
+        "main-color": "#F15358",
+        "secondary-color": "#74474A"
     },
     "wallpaperLink": "https://i.ibb.co/3vcjGzn/koi-Carp-Red.png",
-    "wallpaperName": "koiCarpRed.png"
+    "wallpaper-name": "koiCarpRed.png"
 }

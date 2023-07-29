@@ -1,8 +1,8 @@
 {
     "substitutions": {
-        "mainColor": "#C7607B",
-        "secondaryColor": "#312749"
+        "main-color": "#C7607B",
+        "secondary-color": "#312749"
     },
     "wallpaperLink": "https://iili.io/bOlNI4.png",
-    "wallpaperName": "fujiArchDigital.png"
+    "wallpaper-name": "fujiArchDigital.png"
 }

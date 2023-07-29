@@ -13,10 +13,10 @@
     bordercolor:                 #FFFFFF;
     alternate-normal-foreground: @foreground;
     normal-background:           #00000000;
-    selected-normal-background:  mainColor;
-    border-color:                mainColor;
+    selected-normal-background:  <main-color>;
+    border-color:                <main-color>;
     spacing:                     2;
-    separatorcolor:              mainColor;
+    separatorcolor:              <main-color>;
     urgent-background:           #00000000;
     selected-urgent-background:  #FF0000;
     alternate-urgent-foreground: #FFFFFF;

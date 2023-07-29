@@ -1,8 +1,8 @@
 {
     "substitutions": {
-        "mainColor": "#CC960C",
-        "secondaryColor": "#664901"
+        "main-color": "#CC960C",
+        "secondary-color": "#664901"
     },
     "wallpaperLink": "https://i.ibb.co/8NLxrvw/digital-Sunset.jpg",
-    "wallpaperName": "digitalSunset.jpeg"
+    "wallpaper-name": "digitalSunset.jpeg"
 }

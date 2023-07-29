@@ -6,8 +6,8 @@ from setup.lib.dots.dots import SUBS
 SUBSTITUTIONS = "substitutions"
 EXPANDED_SUBSTITUTIONS = "setup-expanded-substitutions"
 
-MAIN_COLOR = "mainColor"
-SECONDARY_COLOR = "secondaryColor"
+MAIN_COLOR = "main-color"
+SECONDARY_COLOR = "secondary-color"
 
 with open(LINKS_FILE, "r") as file:
     links_list = json.loads(file.read())

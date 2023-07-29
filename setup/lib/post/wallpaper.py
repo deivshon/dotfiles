@@ -16,7 +16,7 @@ class WallpaperPostOperations(PostOperationsHandler):
         user = os.path.expanduser("~")
 
         wallpaper_path = utils.path.get_wallpaper_path(
-            config["wallpaperName"])
+            config["wallpaper-name"])
 
         if not os.path.isdir(os.path.dirname(wallpaper_path)):
             os.makedirs(os.path.dirname(wallpaper_path))

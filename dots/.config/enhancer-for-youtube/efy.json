@@ -43,13 +43,13 @@
         "controlvolume": false,
         "controlvolumemousebutton": false,
         "customcolors": {
-            "--main-color": "efy--main-color",
-            "--main-background": "efy--main-background",
-            "--second-background": "efy--second-background",
-            "--hover-background": "efy--hover-background",
-            "--main-text": "efy--main-text",
-            "--dimmer-text": "efy--dimmer-text",
-            "--shadow": "efy--shadow"
+            "--main-color": "<efy--main-color>",
+            "--main-background": "<efy--main-background>",
+            "--second-background": "<efy--second-background>",
+            "--hover-background": "<efy--hover-background>",
+            "--main-text": "<efy--main-text>",
+            "--dimmer-text": "<efy--dimmer-text>",
+            "--shadow": "<efy--shadow>"
         },
         "customcssrules": "",
         "customscript": "",

@@ -10,8 +10,8 @@ EXPANSIONS_FILE = f"{LIB_DIR}/../data/expansions.json"
 EFY = "enhancer-for-youtube"
 FIREFOX = "firefox"
 SWAYLOCK = "swaylock"
-MAIN_COLOR_NOHASH = "mainColorNoHash"
-SECONDARY_COLOR_NOHASH = "secondaryColorNoHash"
+MAIN_COLOR_NOHASH = "main-color-no-hash"
+SECONDARY_COLOR_NOHASH = "secondary-color-no-hash"
 
 with open(EXPANSIONS_FILE) as file:
     EXPANSION_DATA = json.loads(file.read())

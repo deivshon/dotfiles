@@ -1,8 +1,8 @@
 {
     "substitutions": {
-        "mainColor": "#734BCF",
-        "secondaryColor": "#513BB7"
+        "main-color": "#734BCF",
+        "secondary-color": "#513BB7"
     },
     "wallpaperLink": "https://i.ibb.co/6XT1gPN/purple-cyan-cat-upscaled.png",
-    "wallpaperName": "purpleCyanCat.png"
+    "wallpaper-name": "purpleCyanCat.png"
 }

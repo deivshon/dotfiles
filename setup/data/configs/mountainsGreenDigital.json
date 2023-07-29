@@ -1,8 +1,8 @@
 {
     "substitutions": {
-        "mainColor": "#22B545",
-        "secondaryColor": "#146B29"
+        "main-color": "#22B545",
+        "secondary-color": "#146B29"
     },
     "wallpaperLink": "https://i.ibb.co/SwznKYX/mountains-Green-Digital.jpg",
-    "wallpaperName": "mountainsGreenDigital.jpeg"
+    "wallpaper-name": "mountainsGreenDigital.jpeg"
 }

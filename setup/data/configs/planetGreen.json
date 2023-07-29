@@ -1,8 +1,8 @@
 {
     "substitutions": {
-        "mainColor": "#408E79",
-        "secondaryColor": "#176B55"
+        "main-color": "#408E79",
+        "secondary-color": "#176B55"
     },
     "wallpaperLink": "https://i.ibb.co/PYqBftF/planet-Green.png",
-    "wallpaperName": "planetGreen.png"
+    "wallpaper-name": "planetGreen.png"
 }

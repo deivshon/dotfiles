@@ -1,8 +1,8 @@
 {
     "substitutions": {
-        "mainColor": "#2C7E4E",
-        "secondaryColor": "#2C413C"
+        "main-color": "#2C7E4E",
+        "secondary-color": "#2C413C"
     },
     "wallpaperLink": "https://iili.io/LWZMbI.png",
-    "wallpaperName": "neonShallows.png"
+    "wallpaper-name": "neonShallows.png"
 }

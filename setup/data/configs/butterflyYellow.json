@@ -1,8 +1,8 @@
 {
     "substitutions": {
-        "mainColor": "#E4B254",
-        "secondaryColor": "#D29341"
+        "main-color": "#E4B254",
+        "secondary-color": "#D29341"
     },
     "wallpaperLink": "https://i.ibb.co/YcMTJSL/butterfly-Yellow.png",
-    "wallpaperName": "butterflyYellow.png"
+    "wallpaper-name": "butterflyYellow.png"
 }

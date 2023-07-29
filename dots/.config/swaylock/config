@@ -16,28 +16,28 @@ indicator-radius=240
 indicator-thickness=20
 indicator-caps-lock
 
-inside-color=swl--inside-color
-inside-clear-color=swl--inside-clear-color
-inside-ver-color=swl--inside-ver-color
-inside-wrong-color=swl--inside-wrong-color
+inside-color=<swl--inside-color>
+inside-clear-color=<swl--inside-clear-color>
+inside-ver-color=<swl--inside-ver-color>
+inside-wrong-color=<swl--inside-wrong-color>
 
-key-hl-color=swl--key-hl-color
-bs-hl-color=swl--bs-hl-color
+key-hl-color=<swl--key-hl-color>
+bs-hl-color=<swl--bs-hl-color>
 
-separator-color=swl--separator-color
+separator-color=<swl--separator-color>
 
-line-color=swl--line-color
+line-color=<swl--line-color>
 line-uses-ring
 
-text-color=swl--text-color
-text-clear-color=swl--text-clear-color
-text-caps-lock-color=swl--text-caps-lock-color
-text-ver-color=swl--text-ver-color
-text-wrong-color=swl--text-wrong-color
+text-color=<swl--text-color>
+text-clear-color=<swl--text-clear-color>
+text-caps-lock-color=<swl--text-caps-lock-color>
+text-ver-color=<swl--text-ver-color>
+text-wrong-color=<swl--text-wrong-color>
 
-ring-color=swl--ring-color
-ring-ver-color=swl--ring-ver-color
-ring-clear-color=swl--ring-clear-color
-ring-wrong-color=swl--ring-wrong-color
-text-caps-lock-color=swl--text-caps-lock-color
+ring-color=<swl--ring-color>
+ring-ver-color=<swl--ring-ver-color>
+ring-clear-color=<swl--ring-clear-color>
+ring-wrong-color=<swl--ring-wrong-color>
+text-caps-lock-color=<swl--text-caps-lock-color>
 disable-caps-lock-text

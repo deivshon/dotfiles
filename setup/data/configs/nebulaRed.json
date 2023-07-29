@@ -1,8 +1,8 @@
 {
     "substitutions": {
-        "mainColor": "#F6493C",
-        "secondaryColor": "#823139"
+        "main-color": "#F6493C",
+        "secondary-color": "#823139"
     },
     "wallpaperLink": "https://i.ibb.co/2YFqXRN/nebula-Red.png",
-    "wallpaperName": "nebulaRed.png"
+    "wallpaper-name": "nebulaRed.png"
 }

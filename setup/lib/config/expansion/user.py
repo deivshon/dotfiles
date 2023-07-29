@@ -5,7 +5,7 @@ from setup.lib.config.expansion.handler import ExpansionHandler
 
 
 class SetupUser(ExpansionHandler):
-    __SETUP_USER_KEY = "setupUser"
+    __SETUP_USER_KEY = "setup-user"
 
     @staticmethod
     def expand(color_data, _):

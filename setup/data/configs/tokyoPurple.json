@@ -1,8 +1,8 @@
 {
     "substitutions": {
-        "mainColor": "#D25EFF",
-        "secondaryColor": "#67088C"
+        "main-color": "#D25EFF",
+        "secondary-color": "#67088C"
     },
     "wallpaperLink": "https://iili.io/HlXKMg4.jpg",
-    "wallpaperName": "tokyoDigital.jpeg"
+    "wallpaper-name": "tokyoDigital.jpeg"
 }

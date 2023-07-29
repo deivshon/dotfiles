@@ -1,8 +1,8 @@
 {
     "substitutions": {
-        "mainColor": "#886EB4",
-        "secondaryColor": "#644F89"
+        "main-color": "#886EB4",
+        "secondary-color": "#644F89"
     },
     "wallpaperLink": "https://i.ibb.co/9rGKV8z/arch-Black.png",
-    "wallpaperName": "archBlack.png"
+    "wallpaper-name": "archBlack.png"
 }

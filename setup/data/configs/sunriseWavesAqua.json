@@ -1,8 +1,8 @@
 {
     "substitutions": {
-        "mainColor": "#DF8340",
-        "secondaryColor": "#AC591D"
+        "main-color": "#DF8340",
+        "secondary-color": "#AC591D"
     },
     "wallpaperLink": "https://i.ibb.co/7bzFvDH/sunrise-Waves-Aqua.png",
-    "wallpaperName": "sunriseWavesOrange.png"
+    "wallpaper-name": "sunriseWavesOrange.png"
 }
