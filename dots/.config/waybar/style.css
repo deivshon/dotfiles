@@ -24,7 +24,7 @@ button:hover {
     margin-top: 5px;
     border-radius: 14px;
     background: rgb(0, 0, 0);
-    border: solid 2px <waybar-color>;
+    border: solid 2px <sub<waybar-color>>;
 }
 
 #workspaces button {
@@ -42,7 +42,7 @@ button:hover {
 }
 
 #workspaces button.urgent {
-    color: <waybar-color>;
+    color: <sub<waybar-color>>;
     font-weight: bold;
 }
 
@@ -63,6 +63,6 @@ button:hover {
     margin-right: 5px;
     border-radius: 14px;
     background: rgb(0, 0, 0);
-    border: solid 2px <waybar-color>;
+    border: solid 2px <sub<waybar-color>>;
     font-weight: bold;
 }

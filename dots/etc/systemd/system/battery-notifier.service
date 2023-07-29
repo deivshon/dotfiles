@@ -4,9 +4,9 @@ After=multi-user.target
 
 [Service]
 Type=simple
-User=<user>
-WorkingDirectory=/home/<user>
-ExecStart=/home/<user>/.local/scripts/battery-notifier
+User=<sub<user>>
+WorkingDirectory=/home/<sub<user>>
+ExecStart=/home/<sub<user>>/.local/scripts/battery-notifier
 Restart=on-abort
 
 [Install]

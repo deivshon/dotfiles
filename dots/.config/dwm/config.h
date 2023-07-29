@@ -68,33 +68,33 @@ static char c000000[]                    = "#000000"; // placeholder value
 
 static char normfgcolor[]                = "#ffffff";
 static char normbgcolor[]                = "#000000";
-static char normbordercolor[]            = "<secondary-color>";
-static char normfloatcolor[]             = "<main-color>";
+static char normbordercolor[]            = "<sub<secondary-color>>";
+static char normfloatcolor[]             = "<sub<main-color>>";
 
 static char selfgcolor[]                 = "#ffffff";
-static char selbgcolor[]                 = "<main-color>";
-static char selbordercolor[]             = "<main-color>";
-static char selfloatcolor[]              = "<main-color>";
+static char selbgcolor[]                 = "<sub<main-color>>";
+static char selbordercolor[]             = "<sub<main-color>>";
+static char selfloatcolor[]              = "<sub<main-color>>";
 
 static char titlenormfgcolor[]           = "#ffffff";
 static char titlenormbgcolor[]           = "#000000";
-static char titlenormbordercolor[]       = "<secondary-color>";
-static char titlenormfloatcolor[]        = "<main-color>";
+static char titlenormbordercolor[]       = "<sub<secondary-color>>";
+static char titlenormfloatcolor[]        = "<sub<main-color>>";
 
 static char titleselfgcolor[]            = "#ffffff";
-static char titleselbgcolor[]            = "<main-color>";
-static char titleselbordercolor[]        = "<main-color>";
-static char titleselfloatcolor[]         = "<main-color>";
+static char titleselbgcolor[]            = "<sub<main-color>>";
+static char titleselbordercolor[]        = "<sub<main-color>>";
+static char titleselfloatcolor[]         = "<sub<main-color>>";
 
 static char tagsnormfgcolor[]            = "#ffffff";
 static char tagsnormbgcolor[]            = "#000000";
-static char tagsnormbordercolor[]        = "<secondary-color>";
-static char tagsnormfloatcolor[]         = "<main-color>";
+static char tagsnormbordercolor[]        = "<sub<secondary-color>>";
+static char tagsnormfloatcolor[]         = "<sub<main-color>>";
 
 static char tagsselfgcolor[]             = "#ffffff";
-static char tagsselbgcolor[]             = "<main-color>";
-static char tagsselbordercolor[]         = "<main-color>";
-static char tagsselfloatcolor[]          = "<main-color>";
+static char tagsselbgcolor[]             = "<sub<main-color>>";
+static char tagsselbordercolor[]         = "<sub<main-color>>";
+static char tagsselfloatcolor[]          = "<sub<main-color>>";
 
 static char hidnormfgcolor[]             = "#005577";
 static char hidselfgcolor[]              = "#227799";
@@ -258,25 +258,25 @@ static const char *lockcmd[] = {
 	"--radius=250",
 	"--blur=1",
 	"--indicator",
-	"--inside-color=<i3l--inside-color>",
-	"--insidever-color=<i3l--inside-ver-color>",
-	"--insidewrong-color=<i3l--inside-wrong-color>",
-	"--keyhl-color=<i3l--key-hl-color>",
-	"--bshl-color=<i3l--bs-hl-color>",
-	"--separator-color=<i3l--separator-color>",
-	"--line-color=<i3l--line-color>",
+	"--inside-color=<sub<i3l--inside-color>>",
+	"--insidever-color=<sub<i3l--inside-ver-color>>",
+	"--insidewrong-color=<sub<i3l--inside-wrong-color>>",
+	"--keyhl-color=<sub<i3l--key-hl-color>>",
+	"--bshl-color=<sub<i3l--bs-hl-color>>",
+	"--separator-color=<sub<i3l--separator-color>>",
+	"--line-color=<sub<i3l--line-color>>",
 	"--line-uses-ring",
-	"--time-color=<i3l--text-color>",
-	"--date-color=<i3l--text-color>",
-	"--greeter-color=<i3l--text-color>",
-	"--modif-color=<i3l--text-color>",
-	"--wrong-color=<i3l--text-wrong-color>",
-	"--verif-color=<i3l--text-ver-color>",
+	"--time-color=<sub<i3l--text-color>>",
+	"--date-color=<sub<i3l--text-color>>",
+	"--greeter-color=<sub<i3l--text-color>>",
+	"--modif-color=<sub<i3l--text-color>>",
+	"--wrong-color=<sub<i3l--text-wrong-color>>",
+	"--verif-color=<sub<i3l--text-ver-color>>",
 	"--date-size=30",
 	"--time-size=60",
-	"--ring-color=<i3l--ring-color>",
-	"--ringver-color=<i3l--ring-ver-color>",
-	"--ringwrong-color=<i3l--ring-wrong-color>"
+	"--ring-color=<sub<i3l--ring-color>>",
+	"--ringver-color=<sub<i3l--ring-ver-color>>",
+	"--ringwrong-color=<sub<i3l--ring-wrong-color>>"
 };
 
 static const Key keys[] = {

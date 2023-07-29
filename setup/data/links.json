@@ -11,7 +11,7 @@
         "source": ".config/dunst/dunstrc",
         "target": "~/.config/dunst/dunstrc",
         "subs": {
-            "main-color": "<main-color>"
+            "main-color": "<sub<main-color>>"
         }
     },
     "alacritty": {
@@ -26,7 +26,7 @@
         "source": ".config/rofi/config.rasi",
         "target": "~/.config/rofi/config.rasi",
         "subs": {
-            "main-color": "<main-color>"
+            "main-color": "<sub<main-color>>"
         }
     },
     "ranger": {
@@ -37,25 +37,25 @@
         "source": ".config/dwm/config.h",
         "target": "~/.config/dwm/config.h",
         "subs": {
-            "main-color": "<main-color>",
-            "secondary-color": "<secondary-color>",
-            "swl--inside-color": "<i3l--inside-color>",
-            "swl--inside-clear-color": "<i3l--inside-clear-color>",
-            "swl--inside-ver-color": "<i3l--inside-ver-color>",
-            "swl--inside-wrong-color": "<i3l--inside-wrong-color>",
-            "swl--key-hl-color": "<i3l--key-hl-color>",
-            "swl--bs-hl-color": "<i3l--bs-hl-color>",
-            "swl--separator-color": "<i3l--separator-color>",
-            "swl--line-color": "<i3l--line-color>",
-            "swl--text-color": "<i3l--text-color>",
-            "swl--text-clear-color": "<i3l--text-clear-color>",
-            "swl--text-caps-lock-color": "<i3l--text-caps-lock-color>",
-            "swl--text-ver-color": "<i3l--text-ver-color>",
-            "swl--text-wrong-color": "<i3l--text-wrong-color>",
-            "swl--ring-color": "<i3l--ring-color>",
-            "swl--ring-ver-color": "<i3l--ring-ver-color>",
-            "swl--ring-clear-color": "<i3l--ring-clear-color>",
-            "swl--ring-wrong-color": "<i3l--ring-wrong-color>"
+            "main-color": "<sub<main-color>>",
+            "secondary-color": "<sub<secondary-color>>",
+            "swl--inside-color": "<sub<i3l--inside-color>>",
+            "swl--inside-clear-color": "<sub<i3l--inside-clear-color>>",
+            "swl--inside-ver-color": "<sub<i3l--inside-ver-color>>",
+            "swl--inside-wrong-color": "<sub<i3l--inside-wrong-color>>",
+            "swl--key-hl-color": "<sub<i3l--key-hl-color>>",
+            "swl--bs-hl-color": "<sub<i3l--bs-hl-color>>",
+            "swl--separator-color": "<sub<i3l--separator-color>>",
+            "swl--line-color": "<sub<i3l--line-color>>",
+            "swl--text-color": "<sub<i3l--text-color>>",
+            "swl--text-clear-color": "<sub<i3l--text-clear-color>>",
+            "swl--text-caps-lock-color": "<sub<i3l--text-caps-lock-color>>",
+            "swl--text-ver-color": "<sub<i3l--text-ver-color>>",
+            "swl--text-wrong-color": "<sub<i3l--text-wrong-color>>",
+            "swl--ring-color": "<sub<i3l--ring-color>>",
+            "swl--ring-ver-color": "<sub<i3l--ring-ver-color>>",
+            "swl--ring-clear-color": "<sub<i3l--ring-clear-color>>",
+            "swl--ring-wrong-color": "<sub<i3l--ring-wrong-color>>"
         }
     },
     "plstatus": {
@@ -66,13 +66,13 @@
         "source": ".config/enhancer-for-youtube/efy.json",
         "target": "~/.config/enhancer-for-youtube/efy.json",
         "subs": {
-            "efy--main-color": "<efy--main-color>",
-            "efy--main-background": "<efy--main-background>",
-            "efy--second-background": "<efy--second-background>",
-            "efy--hover-background": "<efy--hover-background>",
-            "efy--main-text": "<efy--main-text>",
-            "efy--dimmer-text": "<efy--dimmer-text>",
-            "efy--shadow": "<efy--shadow>"
+            "efy--main-color": "<sub<efy--main-color>>",
+            "efy--main-background": "<sub<efy--main-background>>",
+            "efy--second-background": "<sub<efy--second-background>>",
+            "efy--hover-background": "<sub<efy--hover-background>>",
+            "efy--main-text": "<sub<efy--main-text>>",
+            "efy--dimmer-text": "<sub<efy--dimmer-text>>",
+            "efy--shadow": "<sub<efy--shadow>>"
         }
     },
     "reflector": {
@@ -84,22 +84,22 @@
         "source": ".config/hypr/hyprland.conf",
         "target": "~/.config/hypr/hyprland.conf",
         "subs": {
-            "main-color-no-hash": "<hypr-main-color>",
-            "secondary-color-no-hash": "<hypr-secondary-color>"
+            "main-color-no-hash": "<sub<hypr-main-color>>",
+            "secondary-color-no-hash": "<sub<hypr-secondary-color>>"
         }
     },
     "hyprpaper": {
         "source": ".config/hypr/hyprpaper.conf",
         "target": "~/.config/hypr/hyprpaper.conf",
         "subs": {
-            "wallpaper-path": "<hypr-wallpaper-path>"
+            "wallpaper-path": "<sub<hypr-wallpaper-path>>"
         }
     },
     "fuzzel": {
         "source": ".config/fuzzel/fuzzel.ini",
         "target": "~/.config/fuzzel/fuzzel.ini",
         "subs": {
-            "main-color-no-hash": "<fuzzel-color>"
+            "main-color-no-hash": "<sub<fuzzel-color>>"
         }
     },
     "waybar-config": {
@@ -110,43 +110,43 @@
         "source": ".config/waybar/style.css",
         "target": "~/.config/waybar/style.css",
         "subs": {
-            "main-color": "<waybar-color>"
+            "main-color": "<sub<waybar-color>>"
         }
     },
     "foot": {
         "source": ".config/foot/foot.ini",
         "target": "~/.config/foot/foot.ini",
         "subs": {
-            "main-color-no-hash": "<foot-main-color>",
-            "secondary-color-no-hash": "<foot-secondary-color>"
+            "main-color-no-hash": "<sub<foot-main-color>>",
+            "secondary-color-no-hash": "<sub<foot-secondary-color>>"
         }
     },
     "firefox": {
         "source": ".mozilla/firefox/profile/chrome/userChrome.css",
         "flags": ["variable-target"],
         "subs": {
-            "ffx--button-bgcolor": "<ffx--button-bgcolor>",
-            "ffx--button-hover-bgcolor": "<ffx--button-hover-bgcolor>",
-            "ffx--button-active-bgcolor": "<ffx--button-active-bgcolor>",
-            "ffx--button-primary-bgcolor": "<ffx--button-primary-bgcolor>",
-            "ffx--button-primary-hover-bgcolor": "<ffx--button-primary-hover-bgcolor>",
-            "ffx--button-primary-active-bgcolor": "<ffx--button-primary-active-bgcolor>",
-            "ffx--button-primary-color": "<ffx--button-primary-color>",
-            "ffx--input-bgcolor": "<ffx--input-bgcolor>",
-            "ffx--input-border-color": "<ffx--input-border-color>",
-            "ffx--autocomplete-popup-separator-color": "<ffx--autocomplete-popup-separator-color>",
-            "ffx--panel-banner-item-update-supported-bgcolor": "<ffx--panel-banner-item-update-supported-bgcolor>",
-            "ffx--panel-banner-item-info-icon-bgcolor": "<ffx--panel-banner-item-info-icon-bgcolor>",
-            "ffx--tab-icon-overlay-stroke": "<ffx--tab-icon-overlay-stroke>",
-            "ffx--lwt-accent-color": "<ffx--lwt-accent-color>",
-            "ffx--arrowpanel-background": "<ffx--arrowpanel-background>",
-            "ffx--arrowpanel-border-color": "<ffx--arrowpanel-border-color>",
-            "ffx--toolbar-field-background-color": "<ffx--toolbar-field-background-color>",
-            "ffx--toolbar-field-focus-background-color": "<ffx--toolbar-field-focus-background-color>",
-            "ffx--toolbar-bgcolor": "<ffx--toolbar-bgcolor>",
-            "ffx--toolbarbutton-icon-fill": "<ffx--toolbarbutton-icon-fill>",
-            "ffx--lwt-selected-tab-background-color": "<ffx--lwt-selected-tab-background-color>",
-            "ffx--autocomplete-popup-highlight-background": "<ffx--autocomplete-popup-highlight-background>"
+            "ffx--button-bgcolor": "<sub<ffx--button-bgcolor>>",
+            "ffx--button-hover-bgcolor": "<sub<ffx--button-hover-bgcolor>>",
+            "ffx--button-active-bgcolor": "<sub<ffx--button-active-bgcolor>>",
+            "ffx--button-primary-bgcolor": "<sub<ffx--button-primary-bgcolor>>",
+            "ffx--button-primary-hover-bgcolor": "<sub<ffx--button-primary-hover-bgcolor>>",
+            "ffx--button-primary-active-bgcolor": "<sub<ffx--button-primary-active-bgcolor>>",
+            "ffx--button-primary-color": "<sub<ffx--button-primary-color>>",
+            "ffx--input-bgcolor": "<sub<ffx--input-bgcolor>>",
+            "ffx--input-border-color": "<sub<ffx--input-border-color>>",
+            "ffx--autocomplete-popup-separator-color": "<sub<ffx--autocomplete-popup-separator-color>>",
+            "ffx--panel-banner-item-update-supported-bgcolor": "<sub<ffx--panel-banner-item-update-supported-bgcolor>>",
+            "ffx--panel-banner-item-info-icon-bgcolor": "<sub<ffx--panel-banner-item-info-icon-bgcolor>>",
+            "ffx--tab-icon-overlay-stroke": "<sub<ffx--tab-icon-overlay-stroke>>",
+            "ffx--lwt-accent-color": "<sub<ffx--lwt-accent-color>>",
+            "ffx--arrowpanel-background": "<sub<ffx--arrowpanel-background>>",
+            "ffx--arrowpanel-border-color": "<sub<ffx--arrowpanel-border-color>>",
+            "ffx--toolbar-field-background-color": "<sub<ffx--toolbar-field-background-color>>",
+            "ffx--toolbar-field-focus-background-color": "<sub<ffx--toolbar-field-focus-background-color>>",
+            "ffx--toolbar-bgcolor": "<sub<ffx--toolbar-bgcolor>>",
+            "ffx--toolbarbutton-icon-fill": "<sub<ffx--toolbarbutton-icon-fill>>",
+            "ffx--lwt-selected-tab-background-color": "<sub<ffx--lwt-selected-tab-background-color>>",
+            "ffx--autocomplete-popup-highlight-background": "<sub<ffx--autocomplete-popup-highlight-background>>"
         }
     },
     "tmux": {
@@ -157,30 +157,30 @@
         "source": ".config/swaylock/config",
         "target": "~/.config/swaylock/config",
         "subs": {
-            "swl--inside-color": "<swl--inside-color>",
-            "swl--inside-clear-color": "<swl--inside-clear-color>",
-            "swl--inside-ver-color": "<swl--inside-ver-color>",
-            "swl--inside-wrong-color": "<swl--inside-wrong-color>",
-            "swl--key-hl-color": "<swl--key-hl-color>",
-            "swl--bs-hl-color": "<swl--bs-hl-color>",
-            "swl--separator-color": "<swl--separator-color>",
-            "swl--line-color": "<swl--line-color>",
-            "swl--text-color": "<swl--text-color>",
-            "swl--text-clear-color": "<swl--text-clear-color>",
-            "swl--text-caps-lock-color": "<swl--text-caps-lock-color>",
-            "swl--text-ver-color": "<swl--text-ver-color>",
-            "swl--text-wrong-color": "<swl--text-wrong-color>",
-            "swl--ring-color": "<swl--ring-color>",
-            "swl--ring-ver-color": "<swl--ring-ver-color>",
-            "swl--ring-clear-color": "<swl--ring-clear-color>",
-            "swl--ring-wrong-color": "<swl--ring-wrong-color>"
+            "swl--inside-color": "<sub<swl--inside-color>>",
+            "swl--inside-clear-color": "<sub<swl--inside-clear-color>>",
+            "swl--inside-ver-color": "<sub<swl--inside-ver-color>>",
+            "swl--inside-wrong-color": "<sub<swl--inside-wrong-color>>",
+            "swl--key-hl-color": "<sub<swl--key-hl-color>>",
+            "swl--bs-hl-color": "<sub<swl--bs-hl-color>>",
+            "swl--separator-color": "<sub<swl--separator-color>>",
+            "swl--line-color": "<sub<swl--line-color>>",
+            "swl--text-color": "<sub<swl--text-color>>",
+            "swl--text-clear-color": "<sub<swl--text-clear-color>>",
+            "swl--text-caps-lock-color": "<sub<swl--text-caps-lock-color>>",
+            "swl--text-ver-color": "<sub<swl--text-ver-color>>",
+            "swl--text-wrong-color": "<sub<swl--text-wrong-color>>",
+            "swl--ring-color": "<sub<swl--ring-color>>",
+            "swl--ring-ver-color": "<sub<swl--ring-ver-color>>",
+            "swl--ring-clear-color": "<sub<swl--ring-clear-color>>",
+            "swl--ring-wrong-color": "<sub<swl--ring-wrong-color>>"
         }
     },
     "battery-notifier-service": {
         "source": "/etc/systemd/system/battery-notifier.service",
         "target": "/etc/systemd/system/battery-notifier.service",
         "subs": {
-            "setup-user": "<user>"
+            "setup-user": "<sub<user>>"
         },
         "flags": ["sudo"]
     }
