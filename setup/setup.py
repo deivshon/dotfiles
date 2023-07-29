@@ -90,15 +90,15 @@ def main():
         args.config = os.path.abspath(os.path.expanduser(args.config))
         os.chdir(setup_dir)
         log.info(
-            f"{log.WHITE}Selecting config from argument: {log.MAGENTA}{utils.path.get_last_node(args.config)}{log.NORMAL}")
+            f"{log.WHITE}Selecting config from argument: {log.BLUE}{utils.path.get_last_node(args.config)}{log.NORMAL}")
     else:
         if setup_status.config is None:
             log.info(
-                f"{log.WHITE}Selecting default config: {log.MAGENTA}{DEFAULT_CONFIG}")
+                f"{log.WHITE}Selecting default config: {log.BLUE}{DEFAULT_CONFIG}")
             args.config = DEFAULT_CONFIG
         else:
             log.info(
-                f"{log.WHITE}Selecting config from old setup data ({SETUP_STATUS}): {log.MAGENTA}{utils.path.get_last_node(setup_status.config)}{log.NORMAL}")
+                f"{log.WHITE}Selecting config from old setup data ({SETUP_STATUS}): {log.BLUE}{utils.path.get_last_node(setup_status.config)}{log.NORMAL}")
             args.config = setup_status.config
 
     if not os.path.isfile(args.config):

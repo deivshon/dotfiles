@@ -117,22 +117,32 @@ def substitute(config, substitutions_dir):
 
 def remove(user):
     for link in __configs_list:
-        link_target = __configs_list[link][__TARGET].replace(
-            "~", user) if __FLAGS not in __configs_list[link] or __VAR_TARGET_FLAG not in __configs_list[link][__FLAGS] else None
-        needs_sudo = __SUDO_FLAG in __configs_list[link][__FLAGS] if __FLAGS in __configs_list[link] else False
+        setup_flags = __configs_list[link][__FLAGS] if __FLAGS in __configs_list[link] else [
+        ]
+        if __VAR_TARGET_FLAG in setup_flags:
+            link_targets = __TARGET_SEARCH[link].get_targets()
+        else:
+            link_targets = __configs_list[link][__TARGET].replace("~", user)
+        if not isinstance(link_targets, list):
+            link_targets = [link_targets]
 
-        if link_target is None:
+        needs_sudo = __SUDO_FLAG in __configs_list[link][
+            __FLAGS] if __FLAGS in __configs_list[link] else False
+
+        if len(link_targets) == 0:
             log.info(
                 f"{log.WHITE}Variable target for {log.RED}{link}: could not find target{log.NORMAL}"
             )
             continue
 
-        remove_command = ["rm", link_target]
-        if needs_sudo:
-            remove_command.insert(0, "sudo")
-        if os.path.isfile(link_target):
-            log.info(
-                f"{log.WHITE}Removing {log.RED}{link_target}{log.NORMAL}")
-            subprocess.run(remove_command)
-        else:
-            log.info(f"{log.WHITE}Can't find {log.RED}{link_target}")
+        for target in link_targets:
+            remove_command = ["rm", target]
+            if needs_sudo:
+                remove_command.insert(0, "sudo")
+
+            if os.path.isfile(target):
+                log.info(
+                    f"{log.WHITE}Removing {log.RED}{target}{log.NORMAL}")
+                subprocess.run(remove_command)
+            else:
+                log.info(f"{log.WHITE}Can't find {log.RED}{target}")
