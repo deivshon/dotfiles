@@ -38,7 +38,24 @@
         "target": "~/.config/dwm/config.h",
         "subs": {
             "mainColor": "mainColor",
-            "secondaryColor": "secondaryColor"
+            "secondaryColor": "secondaryColor",
+            "swl--inside-color": "i3l--inside-color",
+            "swl--inside-clear-color": "i3l--inside-clear-color",
+            "swl--inside-ver-color": "i3l--inside-ver-color",
+            "swl--inside-wrong-color": "i3l--inside-wrong-color",
+            "swl--key-hl-color": "i3l--key-hl-color",
+            "swl--bs-hl-color": "i3l--bs-hl-color",
+            "swl--separator-color": "i3l--separator-color",
+            "swl--line-color": "i3l--line-color",
+            "swl--text-color": "i3l--text-color",
+            "swl--text-clear-color": "i3l--text-clear-color",
+            "swl--text-caps-lock-color": "i3l--text-caps-lock-color",
+            "swl--text-ver-color": "i3l--text-ver-color",
+            "swl--text-wrong-color": "i3l--text-wrong-color",
+            "swl--ring-color": "i3l--ring-color",
+            "swl--ring-ver-color": "i3l--ring-ver-color",
+            "swl--ring-clear-color": "i3l--ring-clear-color",
+            "swl--ring-wrong-color": "i3l--ring-wrong-color"
         }
     },
     "plstatus": {

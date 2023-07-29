@@ -249,6 +249,35 @@ static const Layout layouts[] = {
 
 static const char *roficmd[] = { "rofi", "-show", "drun", "-display-drun", "", NULL };
 static const char *termcmd[]  = { "st", NULL };
+static const char *lockcmd[] = {
+	"i3lock",
+	"--ring-width=15",
+	"--clock",
+	"--time-str=%R",
+	"--date-str=%a, %e of %b",
+	"--radius=250",
+	"--blur=1",
+	"--indicator",
+	"--inside-color=i3l--inside-color",
+	"--insidever-color=i3l--inside-ver-color",
+	"--insidewrong-color=i3l--inside-wrong-color",
+	"--keyhl-color=i3l--key-hl-color",
+	"--bshl-color=i3l--bs-hl-color",
+	"--separator-color=i3l--separator-color",
+	"--line-color=i3l--line-color",
+	"--line-uses-ring",
+	"--time-color=i3l--text-color",
+	"--date-color=i3l--text-color",
+	"--greeter-color=i3l--text-color",
+	"--modif-color=i3l--text-color",
+	"--wrong-color=i3l--text-wrong-color",
+	"--verif-color=i3l--text-ver-color",
+	"--date-size=30",
+	"--time-size=60",
+	"--ring-color=i3l--ring-color",
+	"--ringver-color=i3l--ring-ver-color",
+	"--ringwrong-color=i3l--ring-wrong-color"
+};
 
 static const Key keys[] = {
 	/* modifier                     key            function                argument */
@@ -257,6 +286,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_b,          togglebar,              {0} },
 	{ MODKEY,                       XK_Right,      focusstack,             {.i = +1 } },
 	{ MODKEY,                       XK_Left,       focusstack,             {.i = -1 } },
+	{ MODKEY,                       XK_l,          spawn,                  {.v = lockcmd } },
 	// { MODKEY,                    XK_i,          incnmaster,             {.i = +1 } },
 	// { MODKEY,                    XK_d,          incnmaster,             {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_Left,       setmfact,               {.f = -0.05} },
