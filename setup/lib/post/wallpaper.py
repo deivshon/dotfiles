@@ -7,6 +7,8 @@ from setup.lib.post.handler import PostOperationsHandler
 
 
 class WallpaperPostOperations(PostOperationsHandler):
+    __WALLPAPER_LINK_KEY = "wallpaper-link"
+
     @staticmethod
     def name() -> str:
         return "wallpaper"
@@ -23,6 +25,6 @@ class WallpaperPostOperations(PostOperationsHandler):
 
         if not os.path.isfile(wallpaper_path):
             process.exec(
-                ["wget", config["wallpaperLink"], "-O", wallpaper_path])
+                ["wget", config[cls.__WALLPAPER_LINK_KEY], "-O", wallpaper_path])
 
         subprocess.run(["cp", wallpaper_path, user + "/Pictures/wallpaper"])
