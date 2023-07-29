@@ -3,7 +3,6 @@ import subprocess
 import json
 import shutil
 
-
 from setup.lib import log
 from setup.lib import utils
 from setup.lib import LIB_DIR
@@ -36,6 +35,7 @@ def link(config, user, keep_expansion=False, force=False):
 
     substitute(config, SUBSTITUTIONS_DIR)
 
+    no_target_dots = []
     # Handle each link/copy
     for dot_link in __configs_list:
         setup_flags = __configs_list[dot_link][__FLAGS] if __FLAGS in __configs_list[dot_link] else [
@@ -52,7 +52,7 @@ def link(config, user, keep_expansion=False, force=False):
             config_targets = [config_targets]
 
         if len(config_targets) == 0:
-            log.error(f"Warning: no targets for {dot_link}")
+            no_target_dots.append(dot_link)
 
         for target in config_targets:
             target = target.replace("~", user)
@@ -65,7 +65,7 @@ def link(config, user, keep_expansion=False, force=False):
             # Don't copy if installed dot is the same as the new one
             if source_hash == target_hash:
                 log.info(
-                    f"{log.YELLOW}{utils.path.get_last_node(config_source):15}{log.BLUE}({source_hash[0:4]}...{source_hash[-4:]}){log.NORMAL} already installed ({log.CYAN}{target}{log.NORMAL})")
+                    f"{log.BLUE}{source_hash[0:4]}...{source_hash[-4:]}{log.NORMAL} | {log.RED}already installed{log.NORMAL} {log.YELLOW}{target}{log.NORMAL}")
                 continue
 
             if not os.path.isdir(os.path.dirname(target)):
@@ -74,16 +74,18 @@ def link(config, user, keep_expansion=False, force=False):
             command = ["cp", copy_flags, config_source, target]
 
             log.info(
-                f"{log.YELLOW}{utils.path.get_last_node(config_source):15}{log.NORMAL}{'-' * 12}> {log.CYAN}{target}")
+                f"{log.BLUE}{source_hash[0:4]}...{source_hash[-4:]}{log.NORMAL} | {log.GREEN}installed in path{log.NORMAL} {log.YELLOW}{target}")
 
             if __SUDO_FLAG in setup_flags:
                 subprocess.run(["sudo"] + command)
             else:
                 subprocess.run(command)
 
-    # Delete temporary directory unless the user specified not to
     if not keep_expansion and os.path.isdir(SUBSTITUTIONS_DIR):
         shutil.rmtree(SUBSTITUTIONS_DIR)
+
+    for target in no_target_dots:
+        log.error(f"Could not find any target for {target}")
 
 
 def substitute(config, substitutions_dir):
