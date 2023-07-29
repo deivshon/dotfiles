@@ -175,5 +175,13 @@
             "swl--ring-clear-color": "swl--ring-clear-color",
             "swl--ring-wrong-color": "swl--ring-wrong-color"
         }
+    },
+    "battery-notifier-service": {
+        "source": "/etc/systemd/system/battery-notifier.service",
+        "target": "/etc/systemd/system/battery-notifier.service",
+        "subs": {
+            "setupUser": "<user>"
+        },
+        "flags": ["sudo"]
     }
 }

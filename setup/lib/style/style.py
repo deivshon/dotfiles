@@ -4,14 +4,15 @@ from typing import List
 
 from setup.lib import log
 from setup.lib import LIB_DIR
-from setup.lib.style import SUBSTITUTIONS, EXPECTED_SUBSTITUTIONS
 from setup.lib.style.expansion import EXPANSION_DATA
-from setup.lib.style.expansion.handler import ExpansionHandler
+from setup.lib.style import SUBSTITUTIONS, EXPECTED_SUBSTITUTIONS
 from setup.lib.style.expansion.efy import EfyColors
+from setup.lib.style.expansion.user import SetupUser
 from setup.lib.style.expansion.wallpaper import WallpaperPath
-from setup.lib.style.expansion.colors_no_hash import ColorsNoHash
 from setup.lib.style.expansion.firefox import FirefoxColors
 from setup.lib.style.expansion.swaylock import SwayLockColors
+from setup.lib.style.expansion.handler import ExpansionHandler
+from setup.lib.style.expansion.colors_no_hash import ColorsNoHash
 
 __STYLE_FILE = f"{LIB_DIR}/../data/styleFields.json"
 
@@ -20,7 +21,8 @@ __EXPANSIONS: List[ExpansionHandler] = [
     WallpaperPath(),
     ColorsNoHash(),
     FirefoxColors(),
-    SwayLockColors()
+    SwayLockColors(),
+    SetupUser(),
 ]
 
 

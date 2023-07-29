@@ -1,0 +1,13 @@
+[Unit]
+Description=Low battery charge notifier
+After=multi-user.target
+
+[Service]
+Type=simple
+User=<user>
+WorkingDirectory=/home/<user>
+ExecStart=/home/<user>/.local/scripts/battery-notifier
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target
