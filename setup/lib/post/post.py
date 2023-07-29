@@ -24,20 +24,20 @@ AFTER_RUN_OPERATIONS: List[PostOperationsHandler] = [
 ]
 
 
-def install(color_style: Dict):
+def install(config: Dict):
     log.info(
         f"{log.MAGENTA}Starting post install operations...{log.NORMAL}")
 
     for operation in AFTER_INSTALL_OPERATIONS:
-        operation.trigger(color_style)
+        operation.trigger(config)
 
     log.info(f"{log.MAGENTA}Ended post install operations...")
 
 
-def change(color_style):
+def change(config):
     log.info(f"{log.MAGENTA}Starting post run operations...{log.NORMAL}")
 
     for operation in AFTER_RUN_OPERATIONS:
-        operation.trigger(color_style)
+        operation.trigger(config)
 
     log.info(f"{log.GREEN}Ended post run operations...{log.NORMAL}")

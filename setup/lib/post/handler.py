@@ -12,10 +12,10 @@ class PostOperationsHandler(ABC):
 
     @classmethod
     @abstractmethod
-    def _trigger_impl(cls, color_style):
+    def _trigger_impl(cls, config):
         ...
 
     @classmethod
-    def trigger(cls, color_style: Dict):
-        cls._trigger_impl(color_style)
+    def trigger(cls, config: Dict):
+        cls._trigger_impl(config)
         log.info(f"{cls.name()} post operation completed")

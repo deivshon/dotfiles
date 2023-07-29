@@ -4,20 +4,20 @@ import argparse
 
 from time import time
 from setup.lib import utils
-from setup.lib.style import style
-from setup.lib.configs import configs
+from setup.lib.config import config
+from setup.lib.dots import dots
 
 
 def main():
     parser = argparse.ArgumentParser(
         prog="substitute",
-        description="Perform configs substitutions for a specified color style"
+        description="Perform configs substitutions for a specified color config"
     )
 
     parser.add_argument(
-        "-s", "--style",
+        "-c", "--config",
         action="store",
-        help="Path to file describing the style to apply (./setup/data/styles/[...])",
+        help="Path to file describing the config to apply (./setup/data/configs/[...])",
         required=True
     )
 
@@ -30,23 +30,23 @@ def main():
 
     args = parser.parse_args()
 
-    # Store style content
-    with open(args.style, "r") as file:
-        selected_style = json.loads(file.read())
+    # Store config content
+    with open(args.config, "r") as file:
+        selected_config = json.loads(file.read())
 
-    style.expand(selected_style)
-    style.check(selected_style)
+    config.expand(selected_config)
+    config.check(selected_config)
 
     if args.output_dir is None:
-        styleName = utils.path.get_last_node(args.style)
-        substitutions_dir = f"{configs.SUBSTITUTIONS_DIR}_{styleName}_{time():.0f}"
+        configName = utils.path.get_last_node(args.config)
+        substitutions_dir = f"{dots.SUBSTITUTIONS_DIR}_{configName}_{time():.0f}"
 
         # Ensure substitutions directory does not exist already
         i = 2
         while os.path.exists(substitutions_dir):
-            substitutions_dir = f"{configs.SUBSTITUTIONS_DIR}_{styleName}_{time():.0f}_{i}"
+            substitutions_dir = f"{dots.SUBSTITUTIONS_DIR}_{configName}_{time():.0f}_{i}"
             i += 1
     else:
         substitutions_dir = args.output_dir
 
-    configs.substitute(selected_style, substitutions_dir)
+    dots.substitute(selected_config, substitutions_dir)

@@ -1,5 +1,5 @@
-from setup.lib.style.expansion import expand_hue, FIREFOX
-from setup.lib.style.expansion.handler import ExpansionHandler
+from setup.lib.config.expansion import expand_hue, FIREFOX
+from setup.lib.config.expansion.handler import ExpansionHandler
 
 
 class FirefoxColors(ExpansionHandler):

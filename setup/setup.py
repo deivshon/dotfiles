@@ -6,8 +6,8 @@ import argparse
 from setup.lib import log
 from setup.lib import utils
 from setup.lib.post import post
-from setup.lib.style import style
-from setup.lib.configs import configs
+from setup.lib.config import config
+from setup.lib.dots import dots
 
 from setup.lib.status import SetupStatus, SETUP_STATUS
 from setup.lib.install import install
@@ -22,11 +22,11 @@ from setup.lib.install.status_scripts import StatusScriptsInstaller
 def main():
     __FILE_DIR__ = os.path.dirname(os.path.realpath(__file__))
 
-    DEFAULT_STYLE = f"{__FILE_DIR__}/data/styles/sunsetDigital.json"
+    DEFAULT_CONFIG = f"{__FILE_DIR__}/data/configs/sunsetDigital.json"
 
     parser = argparse.ArgumentParser(
         prog="setup",
-        description="Setup script for new installations or style changes"
+        description="Setup script for new installations or config changes"
     )
 
     parser.add_argument(
@@ -50,9 +50,9 @@ def main():
         help="Force packages installation"
     )
     parser.add_argument(
-        "-s", "--style",
+        "-c", "--config",
         action="store",
-        help="Path to file describing the style to apply (./setup/data/styles/[...])"
+        help="Path to file describing the config to apply (./setup/data/configs/[...])"
     )
 
     args = parser.parse_args()
@@ -69,7 +69,7 @@ def main():
         setup_status = SetupStatus(
             packages_installed=False,
             post_install_operations=False,
-            style=None
+            config=None
         )
     else:
         setup_status = SetupStatus.loads(SETUP_STATUS)
@@ -81,28 +81,28 @@ def main():
         installed_in_run = True
 
     if args.remove:
-        configs.remove(current_user)
+        dots.remove(current_user)
         sys.exit(0)
 
-    if args.style is not None:
-        # Style file path argument is relative to caller's cwd (startDir)
+    if args.config is not None:
+        # Config file path argument is relative to caller's cwd (startDir)
         os.chdir(start_dir)
-        args.style = os.path.abspath(os.path.expanduser(args.style))
+        args.config = os.path.abspath(os.path.expanduser(args.config))
         os.chdir(setup_dir)
         log.info(
-            f"{log.WHITE}Selecting style from argument: {log.MAGENTA}{utils.path.get_last_node(args.style)}{log.NORMAL}")
+            f"{log.WHITE}Selecting config from argument: {log.MAGENTA}{utils.path.get_last_node(args.config)}{log.NORMAL}")
     else:
-        if setup_status.style is None:
+        if setup_status.config is None:
             log.info(
-                f"{log.WHITE}Selecting default style: {log.MAGENTA}{DEFAULT_STYLE}")
-            args.style = DEFAULT_STYLE
+                f"{log.WHITE}Selecting default config: {log.MAGENTA}{DEFAULT_CONFIG}")
+            args.config = DEFAULT_CONFIG
         else:
             log.info(
-                f"{log.WHITE}Selecting style from old setup data ({SETUP_STATUS}): {log.MAGENTA}{utils.path.get_last_node(setup_status.style)}{log.NORMAL}")
-            args.style = setup_status.style
+                f"{log.WHITE}Selecting config from old setup data ({SETUP_STATUS}): {log.MAGENTA}{utils.path.get_last_node(setup_status.config)}{log.NORMAL}")
+            args.config = setup_status.config
 
-    if not os.path.isfile(args.style):
-        log.failure(f"{log.WHITE}{args.style} does not exist{log.NORMAL}")
+    if not os.path.isfile(args.config):
+        log.failure(f"{log.WHITE}{args.config} does not exist{log.NORMAL}")
 
     # Package installation if it's been explicitly requested but not performed
     # because the setup has been run before
@@ -110,20 +110,20 @@ def main():
         install.packages()
         setup_status.packages_installed = True
 
-    # Store style content
-    with open(args.style, "r") as file:
-        selected_style = json.loads(file.read())
+    # Store config content
+    with open(args.config, "r") as file:
+        selected_config = json.loads(file.read())
 
-    style.expand(selected_style)
-    style.check(selected_style)
+    config.expand(selected_config)
+    config.check(selected_config)
 
     DwmInstaller.download()
     PlstatusInstaller.download()
     StInstaller.download()
 
-    configs.link(selected_style, current_user,
-                 keep_expansion=args.keep, force=args.force)
-    setup_status.style = os.path.abspath(args.style)
+    dots.link(selected_config, current_user,
+              keep_expansion=args.keep, force=args.force)
+    setup_status.config = os.path.abspath(args.config)
 
     # Download and compile change-vol-pactl
     ChangeVolPactlInstaller.install()
@@ -131,10 +131,10 @@ def main():
     DwmInstaller.compile()
     StInstaller.compile()
 
-    post.change(selected_style)
+    post.change(selected_config)
 
     if not setup_status.post_install_operations:
-        post.install(selected_style)
+        post.install(selected_config)
         setup_status.post_install_operations = True
 
     # Install Rust programs after rust is configured,

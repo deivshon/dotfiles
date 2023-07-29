@@ -2,7 +2,7 @@ import os
 
 from typing import List
 
-from setup.lib.configs.targets.handler import VariableTargetHandler
+from setup.lib.dots.targets.handler import VariableTargetHandler
 
 
 class FirefoxVariableTarget(VariableTargetHandler):

@@ -7,8 +7,8 @@ import shutil
 from setup.lib import log
 from setup.lib import utils
 from setup.lib import LIB_DIR
-from setup.lib.configs import LINKS_FILE
-from setup.lib.configs.targets.firefox import FirefoxVariableTarget
+from setup.lib.dots import LINKS_FILE
+from setup.lib.dots.targets.firefox import FirefoxVariableTarget
 
 SUBSTITUTIONS_DIR = "./substitutions"
 __DOTFILES_DIR = f"{LIB_DIR}/../../dots"
@@ -17,7 +17,7 @@ __SOURCE = "source"
 __TARGET = "target"
 __FLAGS = "flags"
 SUBS = "subs"
-__STYLE_SUBS = "substitutions"
+__CONFIG_SUBS = "substitutions"
 __SUDO_FLAG = "sudo"
 __VAR_TARGET_FLAG = "variable-target"
 
@@ -31,28 +31,28 @@ __TARGET_SEARCH = {
 }
 
 
-def link(style, user, keep_expansion=False, force=False):
+def link(config, user, keep_expansion=False, force=False):
     copy_flags = "-f" if force else "-i"
 
-    substitute(style, SUBSTITUTIONS_DIR)
+    substitute(config, SUBSTITUTIONS_DIR)
 
     # Handle each link/copy
-    for config in __configs_list:
-        setup_flags = __configs_list[config][__FLAGS] if __FLAGS in __configs_list[config] else [
+    for dot_link in __configs_list:
+        setup_flags = __configs_list[dot_link][__FLAGS] if __FLAGS in __configs_list[dot_link] else [
         ]
         config_source = os.path.abspath(
-            f"{SUBSTITUTIONS_DIR}/{__configs_list[config][__SOURCE]}")
+            f"{SUBSTITUTIONS_DIR}/{__configs_list[dot_link][__SOURCE]}")
 
         if __VAR_TARGET_FLAG in setup_flags:
-            config_targets = __TARGET_SEARCH[config].get_targets()
+            config_targets = __TARGET_SEARCH[dot_link].get_targets()
         else:
-            config_targets = __configs_list[config][__TARGET]
+            config_targets = __configs_list[dot_link][__TARGET]
 
         if isinstance(config_targets, str):
             config_targets = [config_targets]
 
         if len(config_targets) == 0:
-            log.error(f"Warning: no targets for {config}")
+            log.error(f"Warning: no targets for {dot_link}")
 
         for target in config_targets:
             target = target.replace("~", user)
@@ -62,7 +62,7 @@ def link(style, user, keep_expansion=False, force=False):
             if os.path.isfile(target):
                 target_hash = utils.hash.sha256_checksum(target)
 
-            # Don't copy if installed config is the same as the new one
+            # Don't copy if installed dot is the same as the new one
             if source_hash == target_hash:
                 log.info(
                     f"{log.YELLOW}{utils.path.get_last_node(config_source):15}{log.BLUE}({source_hash[0:4]}...{source_hash[-4:]}){log.NORMAL} already installed ({log.CYAN}{target}{log.NORMAL})")
@@ -86,13 +86,13 @@ def link(style, user, keep_expansion=False, force=False):
         shutil.rmtree(SUBSTITUTIONS_DIR)
 
 
-def substitute(style, substitutions_dir):
+def substitute(config, substitutions_dir):
     if not os.path.isdir(substitutions_dir):
         os.mkdir(substitutions_dir)
 
     # Handle each link/copy
-    for config in __configs_list:
-        config_source = __configs_list[config][__SOURCE]
+    for dot_link in __configs_list:
+        config_source = __configs_list[dot_link][__SOURCE]
         config_dir = f"{substitutions_dir}/{os.path.dirname(config_source)}"
         if not os.path.isdir(config_dir):
             os.makedirs(config_dir)
@@ -102,12 +102,12 @@ def substitute(style, substitutions_dir):
         config_source = os.path.abspath(f"{substitutions_dir}/{config_source}")
 
         substitution_ids = []
-        if SUBS in __configs_list[config]:
-            substitution_ids = __configs_list[config][SUBS]
+        if SUBS in __configs_list[dot_link]:
+            substitution_ids = __configs_list[dot_link][SUBS]
 
         if len(substitution_ids) > 0:
             # Perform the necessary substitutions using sed
-            substitution_vals = style[__STYLE_SUBS]
+            substitution_vals = config[__CONFIG_SUBS]
             for id in substitution_ids:
                 subprocess.run(["sed", "-i", "s/" + substitution_ids[id] +
                                "/" + substitution_vals[id] + "/g", config_source])

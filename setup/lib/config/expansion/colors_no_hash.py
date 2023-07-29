@@ -1,6 +1,6 @@
-from setup.lib.style import SUBSTITUTIONS, MAIN_COLOR, SECONDARY_COLOR
-from setup.lib.style.expansion import MAIN_COLOR_NOHASH, SECONDARY_COLOR_NOHASH
-from setup.lib.style.expansion.handler import ExpansionHandler
+from setup.lib.config import SUBSTITUTIONS, MAIN_COLOR, SECONDARY_COLOR
+from setup.lib.config.expansion import MAIN_COLOR_NOHASH, SECONDARY_COLOR_NOHASH
+from setup.lib.config.expansion.handler import ExpansionHandler
 
 
 class ColorsNoHash(ExpansionHandler):

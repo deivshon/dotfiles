@@ -1,6 +1,6 @@
-from setup.lib.style import SUBSTITUTIONS
+from setup.lib.config import SUBSTITUTIONS
 from setup.lib import utils
-from setup.lib.style.expansion.handler import ExpansionHandler
+from setup.lib.config.expansion.handler import ExpansionHandler
 
 
 class WallpaperPath(ExpansionHandler):

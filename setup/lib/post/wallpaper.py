@@ -12,17 +12,17 @@ class WallpaperPostOperations(PostOperationsHandler):
         return "wallpaper"
 
     @classmethod
-    def _trigger_impl(cls, color_style):
+    def _trigger_impl(cls, config):
         user = os.path.expanduser("~")
 
         wallpaper_path = utils.path.get_wallpaper_path(
-            color_style["wallpaperName"])
+            config["wallpaperName"])
 
         if not os.path.isdir(os.path.dirname(wallpaper_path)):
             os.makedirs(os.path.dirname(wallpaper_path))
 
         if not os.path.isfile(wallpaper_path):
             process.exec(
-                ["wget", color_style["wallpaperLink"], "-O", wallpaper_path])
+                ["wget", config["wallpaperLink"], "-O", wallpaper_path])
 
         subprocess.run(["cp", wallpaper_path, user + "/Pictures/wallpaper"])

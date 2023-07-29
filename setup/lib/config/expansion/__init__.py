@@ -2,7 +2,7 @@ import json
 
 from setup.lib import log
 from setup.lib import LIB_DIR
-from setup.lib.style import SUBSTITUTIONS, MAIN_COLOR
+from setup.lib.config import SUBSTITUTIONS, MAIN_COLOR
 from setup.lib import utils as genutils
 
 EXPANSIONS_FILE = f"{LIB_DIR}/../data/expansions.json"
@@ -17,9 +17,9 @@ with open(EXPANSIONS_FILE) as file:
     EXPANSION_DATA = json.loads(file.read())
 
 
-def expand_hue(color_style, color_fields, base_color=None):
+def expand_hue(config, color_fields, base_color=None):
     if base_color is None:
-        base_color = color_style[SUBSTITUTIONS][MAIN_COLOR]
+        base_color = config[SUBSTITUTIONS][MAIN_COLOR]
     new_fields = {}
 
     for col in color_fields.keys():
@@ -35,5 +35,5 @@ def expand_hue(color_style, color_fields, base_color=None):
         new_fields[col] = genutils.hue.apply_hue(s, v, base_color) + alpha
 
     for field, value in new_fields.items():
-        if field not in color_style[SUBSTITUTIONS]:
-            color_style[SUBSTITUTIONS][field] = value
+        if field not in config[SUBSTITUTIONS]:
+            config[SUBSTITUTIONS][field] = value

@@ -1,5 +1,5 @@
-from setup.lib.style.expansion import expand_hue, SWAYLOCK
-from setup.lib.style.expansion.handler import ExpansionHandler
+from setup.lib.config.expansion import expand_hue, SWAYLOCK
+from setup.lib.config.expansion.handler import ExpansionHandler
 
 
 class SwayLockColors(ExpansionHandler):
