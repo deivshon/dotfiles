@@ -36,8 +36,9 @@ The configuration files in this repository and the relative setup scripts are ta
 + [fuzzel](https://archlinux.org/packages/community/x86_64/fuzzel/)
 + [fontforge](https://archlinux.org/packages/extra/x86_64/fontforge/) [necessary for waybar glyphs]
 + [foot](https://archlinux.org/packages/community/x86_64/foot/)
-+ [gsfonts](https://archlinux.org/packages/extra/x86_64/bat/)
++ [gsfonts](https://archlinux.org/packages/extra/x86_64/gsfonts/)
 + [bat](https://archlinux.org/packages/extra/x86_64/bat/)
++ [opendoas](https://archlinux.org/packages/extra/x86_64/opendoas/)
 + [afetch](https://aur.archlinux.org/packages/afetch/)
 + [polkit-dumb-agent](https://aur.archlinux.org/packages/polkit-dumb-agent-git/)
 + [visual-studio-code-bin](https://aur.archlinux.org/packages/visual-studio-code-bin)
