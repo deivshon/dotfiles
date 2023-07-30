@@ -35,7 +35,8 @@
 		"fontforge",
 		"foot",
 		"gsfonts",
-		"bat"
+		"bat",
+		"opendoas"
 	],
 	"yay": [
 		"afetch",

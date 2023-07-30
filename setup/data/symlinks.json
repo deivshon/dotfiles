@@ -1,0 +1,7 @@
+[
+    {
+        "source": "/usr/bin/doas",
+        "target": "/usr/local/bin/sudo",
+        "flags": ["sudo"]
+    }
+]

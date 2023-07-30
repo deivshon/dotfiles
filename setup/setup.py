@@ -9,14 +9,16 @@ from setup.lib.post import post
 from setup.lib.config import config
 from setup.lib.dots import dots
 
-from setup.lib.status import SetupStatus, SETUP_STATUS
 from setup.lib.install import install
-from setup.lib.install.dwm import DwmInstaller
-from setup.lib.install.change_vol_pactl import ChangeVolPactlInstaller
-from setup.lib.install.command_cache import CommandCacheInstaller
-from setup.lib.install.plstatus import PlstatusInstaller
 from setup.lib.install.st import StInstaller
+from setup.lib.install.dwm import DwmInstaller
+from setup.lib.status import SetupStatus, SETUP_STATUS
+from setup.lib.install.plstatus import PlstatusInstaller
+from setup.lib.install.command_cache import CommandCacheInstaller
 from setup.lib.install.status_scripts import StatusScriptsInstaller
+from setup.lib.install.change_vol_pactl import ChangeVolPactlInstaller
+
+from setup.lib import symlinks
 
 
 def main():
@@ -148,6 +150,8 @@ def main():
     # otherwise commands in plstatus configuration will not exists in PATH
     # at compile time and compilation will subsequently fail
     PlstatusInstaller.compile()
+
+    symlinks.apply_symlinks()
 
     with open(SETUP_STATUS, "w") as file:
         file.write(setup_status.dumps())

@@ -183,5 +183,10 @@
             "setup-user": "<sub<user>>"
         },
         "flags": ["sudo"]
+    },
+    "doas": {
+        "source": "/etc/doas.conf",
+        "target": "/etc/doas.conf",
+        "flags": ["sudo"]
     }
 }
