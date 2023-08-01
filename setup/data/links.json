@@ -188,5 +188,13 @@
         "source": "/etc/doas.conf",
         "target": "/etc/doas.conf",
         "flags": ["sudo"]
+    },
+    "micro-bindings": {
+        "source": ".config/micro/bindings.json",
+        "target": "~/.config/micro/bindings.json"
+    },
+    "micro-settings": {
+        "source": ".config/micro/settings.json",
+        "target": "~/.config/micro/settings.json"
     }
 }

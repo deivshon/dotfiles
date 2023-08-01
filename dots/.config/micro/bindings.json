@@ -1,0 +1,11 @@
+{
+    "Ctrl-o": "Save",
+    "Ctrl-y": "PageUp",
+    "Ctrl-v": "PageDown",
+    "Ctrl-k": "CutLine",
+    "Ctrl-u": "Paste",
+    "Ctrl-x": "Quit",
+    "Ctrl-w": "Find",
+    "Ctrl-n": "FindNext",
+    "Ctrl-p": "FindPrevious"
+}

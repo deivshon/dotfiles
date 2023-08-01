@@ -76,48 +76,26 @@ ssh-start() {
     done
 }
 
-# Aliases
-
 [ "${TERM}" == "foot" ] && alias ssh="TERM=linux ssh" && alias vagrant="TERM=linux vagrant"
 
-# Exa
 alias ls='exa'
 alias ll='exa -laFG'
-
-# Grep
 alias grep='grep --colour=always'
 alias egrep='egrep --colour=always'
 alias fgrep='fgrep --colour=always'
-
-# Copy (confirm before overwriting)
 alias cp='cp -i'
-
-# IP (color output)
 alias ip='ip -c'
-
-# Update
 alias up="sudo pacman -Syu && yay -Sua"
-
-# Always clears scrollback buffer
 alias clear="printf '\033[2J\033[3J\033[1;1H' && afetch"
 alias celar="printf '\033[2J\033[3J\033[1;1H' && afetch"
 alias clearall="printf '\033[2J\033[3J\033[1;1H'"
-
-# Cbonsai
 alias cbonsai="cbonsai -li -w 1 -L 50"
-
-# Mullvad
 alias muldown="mullvad lockdown-mode set off && mullvad disconnect"
 alias mulup="mullvad lockdown-mode set on && mullvad connect"
 alias mulreg="mullvad tunnel wireguard key regenerate"
-
-# Xclip
 alias clip="xclip -sel c <"
-
-# Always show progress when using dd
 alias dd="sudo dd status=progress"
-
-# Git
 alias glog="git log --oneline --color=always"
+alias nano="micro"
 
 afetch
