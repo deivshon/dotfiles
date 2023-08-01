@@ -1,0 +1,11 @@
+[Trigger]
+Type = Package
+Operation = Install
+Operation = Upgrade
+Target = bash
+
+[Action]
+Description = Linking /usr/bin/dash to /usr/bin/sh...
+When = PostTransaction
+Exec = /usr/bin/ln -sf /usr/bin/dash /usr/bin/sh
+Depends = dash

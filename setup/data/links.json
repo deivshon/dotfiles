@@ -208,5 +208,10 @@
         "subs": {
             "setup-user": "<sub<user>>"
         }
+    },
+    "dash-sh-hook": {
+        "source": "/etc/pacman.d/hooks/dashsh.hook",
+        "target": "/etc/pacman.d/hooks/dashsh.hook",
+        "flags": ["sudo"]
     }
 }
