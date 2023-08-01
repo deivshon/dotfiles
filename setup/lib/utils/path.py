@@ -27,3 +27,10 @@ def make_executable(path: str, sudo: bool = False):
         subprocess.run(["sudo", "chmod", "+x", path])
     else:
         os.chmod(path, os.stat(path).st_mode | stat.S_IEXEC)
+
+
+def makedirs(path: str):
+    try:
+        os.makedirs(path)
+    except PermissionError:
+        subprocess.run(["sudo", "mkdir", "-p", path])

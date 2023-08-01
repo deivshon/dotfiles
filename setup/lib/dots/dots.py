@@ -88,7 +88,7 @@ def link(config, user, keep_expansion=False, force=False):
                 continue
 
             if not os.path.isdir(os.path.dirname(target)):
-                os.makedirs(os.path.dirname(target))
+                utils.path.makedirs(os.path.dirname(target))
 
             command = ["cp", copy_flags, source, target]
 
@@ -111,7 +111,7 @@ def link(config, user, keep_expansion=False, force=False):
 
 def substitute(config, substitutions_dir):
     if not os.path.isdir(substitutions_dir):
-        os.mkdir(substitutions_dir)
+        os.makedirs(substitutions_dir)
 
     for dot_link in __DOT_LINKS:
         source = dot_link.source

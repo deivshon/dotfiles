@@ -6,6 +6,7 @@ from typing import List
 from dataclasses import dataclass, field
 
 from setup.lib import log
+from setup.lib import utils
 from setup.lib import LIB_DIR
 from setup.lib.symlinks.flags import SUDO_FLAG, FORCE_FLAG
 
@@ -66,7 +67,7 @@ def apply():
                 continue
 
         if not os.path.isdir(os.path.dirname(s.target)):
-            os.mkdir(os.path.dirname(s.target))
+            utils.path.makedirs(os.path.dirname(s.target))
 
         p = subprocess.run(link, capture_output=True)
         if p.returncode != 0:
