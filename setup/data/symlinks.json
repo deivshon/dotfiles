@@ -3,5 +3,10 @@
         "source": "/usr/bin/doas",
         "target": "/usr/local/bin/sudo",
         "flags": ["sudo"]
+    },
+    {
+        "source": "/usr/bin/dash",
+        "target": "/usr/bin/sh",
+        "flags": ["sudo", "force"]
     }
 ]

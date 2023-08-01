@@ -37,7 +37,8 @@
 		"gsfonts",
 		"bat",
 		"opendoas",
-		"micro"
+		"micro",
+		"dash"
 	],
 	"yay": [
 		"afetch",

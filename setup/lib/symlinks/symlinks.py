@@ -7,8 +7,7 @@ from dataclasses import dataclass, field
 
 from setup.lib import log
 from setup.lib import LIB_DIR
-
-__SUDO_FLAG = "sudo"
+from setup.lib.symlinks.flags import SUDO_FLAG, FORCE_FLAG
 
 
 @dataclass
@@ -42,23 +41,38 @@ __SYMLINKS = __load_symlinks(__SYMLINKS_FILE)
 
 def apply():
     for s in __SYMLINKS:
-        command = ["ln", "-s", s.source, s.target]
-        if __SUDO_FLAG in s.flags:
-            command = ["sudo"] + command
+        ln_flags = "-s"
+        if FORCE_FLAG in s.flags:
+            ln_flags += "f"
+
+        link = ["ln", ln_flags, s.source, s.target]
+
+        if SUDO_FLAG in s.flags:
+            link.insert(0, "sudo")
 
         if not os.path.isfile(s.source) and not os.path.isdir(s.source):
             log.warning(
                 f"Can't apply symlink: source {log.YELLOW}{s.source}{log.NORMAL} does not exist")
             continue
         if os.path.isfile(s.target):
-            log.warning(
-                f"Can't apply symlink: target {log.YELLOW}{s.target}{log.NORMAL} already exists")
-            continue
+            if os.path.islink(s.target) and os.readlink(s.target) == s.source:
+                log.info(
+                    f"Link {log.WHITE}{s.source}{log.NORMAL} to {log.WHITE}{s.target}{log.NORMAL} already exists")
+                continue
+
+            if FORCE_FLAG not in s.flags:
+                log.warning(
+                    f"Can't link {log.WHITE}{s.source}{log.NORMAL} to {log.YELLOW}{s.target}{log.NORMAL}: target exists")
+                continue
+
         if not os.path.isdir(os.path.dirname(s.target)):
             os.mkdir(os.path.dirname(s.target))
 
-        p = subprocess.run(command)
-        if p.returncode == 0:
+        p = subprocess.run(link, capture_output=True)
+        if p.returncode != 0:
+            log.error(
+                f"Could not link {log.WHITE}{s.source}{log.NORMAL} to {log.WHITE}{s.target}")
+        else:
             log.info(
                 f"Linked {log.WHITE}{s.source}{log.NORMAL} to {log.WHITE}{s.target}")
 
@@ -66,10 +80,12 @@ def apply():
 def remove():
     for s in __SYMLINKS:
         command = ["unlink", s.target]
-        if __SUDO_FLAG in s.flags:
-            command = ["sudo"] + command
+        if SUDO_FLAG in s.flags:
+            command.insert(0, "sudo")
 
-        if not os.path.isfile(s.target):
+        if not os.path.islink(s.target):
+            continue
+        if os.readlink(s.target) == s.target:
             continue
 
         p = subprocess.run(command)
