@@ -1,20 +1,20 @@
 {
     "max-status-length": 2048,
-    "status-period": 100,
+    "status-period": 750,
     "components": [
         {
             "command": "ram-status",
-            "period": 100,
+            "period": 1000,
             "separator": "|"
         },
         {
             "command": "disk-status",
-            "period": 100,
+            "period": 1000,
             "separator": "|"
         },
         {
             "command": "cpu-status",
-            "period": 250,
+            "period": 1000,
             "separator": "|"
         },
         {
@@ -23,12 +23,12 @@
                 "-n",
                 ""
             ],
-            "period": 100,
+            "period": 1000,
             "separator": "|"
         },
         {
             "command": "eth-status",
-            "period": 100,
+            "period": 1000,
             "args": [
                 "-d",
                 ""
@@ -37,7 +37,7 @@
         },
         {
             "command": "wifi-status",
-            "period": 100,
+            "period": 1000,
             "args": [
                 "-u",
                 "WIFI %p% %s",
