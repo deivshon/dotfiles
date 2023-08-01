@@ -204,6 +204,9 @@
     "sudoedit": {
         "source": "/usr/local/bin/nanowrap",
         "target": "/usr/local/bin/nanowrap",
-        "flags": ["sudo", "x"]
+        "flags": ["sudo", "x"],
+        "subs": {
+            "setup-user": "<sub<user>>"
+        }
     }
 }
