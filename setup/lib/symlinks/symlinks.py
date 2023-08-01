@@ -40,7 +40,7 @@ __SYMLINKS_FILE = f"{LIB_DIR}/../data/symlinks.json"
 __SYMLINKS = __load_symlinks(__SYMLINKS_FILE)
 
 
-def apply_symlinks():
+def apply():
     for s in __SYMLINKS:
         command = ["ln", "-s", s.source, s.target]
         if __SUDO_FLAG in s.flags:
@@ -61,3 +61,18 @@ def apply_symlinks():
         if p.returncode == 0:
             log.info(
                 f"Linked {log.WHITE}{s.source}{log.NORMAL} to {log.WHITE}{s.target}")
+
+
+def remove():
+    for s in __SYMLINKS:
+        command = ["unlink", s.target]
+        if __SUDO_FLAG in s.flags:
+            command = ["sudo"] + command
+
+        if not os.path.isfile(s.target):
+            continue
+
+        p = subprocess.run(command)
+        if p.returncode == 0:
+            log.info(
+                f"{log.WHITE}Removed {log.RED}{s.target}{log.WHITE} symlink")

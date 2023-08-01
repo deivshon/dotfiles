@@ -1,4 +1,7 @@
 import os
+import stat
+
+from setup.lib import log
 
 
 def get_last_node(path):
@@ -12,3 +15,11 @@ def get_wallpaper_path(wallpaper_name):
 def sed_escape_path(str):
     # "\x5c/" = "\/", to avoid unnecessary warning
     return str.replace("/", "\x5c/")
+
+
+def make_executable(path: str):
+    if not os.path.isfile(path):
+        log.error(f"Can't make {path} executable, not a file")
+        return
+
+    os.chmod(path, os.stat(path).st_mode | stat.S_IEXEC)

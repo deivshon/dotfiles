@@ -2,6 +2,8 @@ import os
 import subprocess
 import json
 import shutil
+from typing import Dict, Optional, List
+from dataclasses import dataclass, field
 
 from setup.lib import log
 from setup.lib import utils
@@ -12,9 +14,6 @@ from setup.lib.dots.targets.firefox import FirefoxVariableTarget
 SUBSTITUTIONS_DIR = "./substitutions"
 __DOTFILES_DIR = f"{LIB_DIR}/../../dots"
 
-__SOURCE = "source"
-__TARGET = "target"
-__FLAGS = "flags"
 SUBS = "subs"
 __CONFIG_SUBS = "substitutions"
 __SUDO_FLAG = "sudo"
@@ -22,8 +21,26 @@ __VAR_TARGET_FLAG = "variable-target"
 
 __FIREFOX = "firefox"
 
+
+@dataclass
+class DotLink:
+    name: str
+    source: str
+    target: Optional[str] = None
+    subs: Dict[str, str] = field(default_factory=dict)
+    flags: List[str] = field(default_factory=list)
+
+
+class InvalidDotLink(Exception):
+    pass
+
+
+__DOT_LINKS: List[DotLink] = []
+
 with open(LINKS_FILE, "r") as file:
     __configs_list = json.loads(file.read())
+    for x in __configs_list:
+        __DOT_LINKS.append(DotLink(name=x, **__configs_list[x]))
 
 __TARGET_SEARCH = {
     __FIREFOX: FirefoxVariableTarget()
@@ -36,28 +53,28 @@ def link(config, user, keep_expansion=False, force=False):
     substitute(config, SUBSTITUTIONS_DIR)
 
     no_target_dots = []
-    # Handle each link/copy
-    for dot_link in __configs_list:
-        setup_flags = __configs_list[dot_link][__FLAGS] if __FLAGS in __configs_list[dot_link] else [
-        ]
-        config_source = os.path.abspath(
-            f"{SUBSTITUTIONS_DIR}/{__configs_list[dot_link][__SOURCE]}")
 
-        if __VAR_TARGET_FLAG in setup_flags:
-            config_targets = __TARGET_SEARCH[dot_link].get_targets()
+    for dot_link in __DOT_LINKS:
+        source = os.path.abspath(
+            f"{SUBSTITUTIONS_DIR}/{dot_link.source}")
+
+        if __VAR_TARGET_FLAG in dot_link.flags:
+            targets = __TARGET_SEARCH[dot_link.name].get_targets()
+        elif dot_link.target is not None:
+            targets = dot_link.target
         else:
-            config_targets = __configs_list[dot_link][__TARGET]
+            raise InvalidDotLink
 
-        if isinstance(config_targets, str):
-            config_targets = [config_targets]
+        if isinstance(targets, str):
+            targets = [targets]
 
-        if len(config_targets) == 0:
-            no_target_dots.append(dot_link)
+        if len(targets) == 0:
+            no_target_dots.append(dot_link.name)
 
-        for target in config_targets:
+        for target in targets:
             target = target.replace("~", user)
 
-            source_hash = utils.hash.sha256_checksum(config_source)
+            source_hash = utils.hash.sha256_checksum(source)
             target_hash = None
             if os.path.isfile(target):
                 target_hash = utils.hash.sha256_checksum(target)
@@ -71,15 +88,14 @@ def link(config, user, keep_expansion=False, force=False):
             if not os.path.isdir(os.path.dirname(target)):
                 os.makedirs(os.path.dirname(target))
 
-            command = ["cp", copy_flags, config_source, target]
+            command = ["cp", copy_flags, source, target]
 
-            log.info(
-                f"{log.BLUE}{source_hash[0:4]}...{source_hash[-4:]}{log.NORMAL} | {log.GREEN}installed in path{log.NORMAL} {log.YELLOW}{target}")
-
-            if __SUDO_FLAG in setup_flags:
+            if __SUDO_FLAG in dot_link.flags:
                 subprocess.run(["sudo"] + command)
             else:
                 subprocess.run(command)
+            log.info(
+                f"{log.BLUE}{source_hash[0:4]}...{source_hash[-4:]}{log.NORMAL} | {log.GREEN}installed in path{log.NORMAL} {log.YELLOW}{target}")
 
     if not keep_expansion and os.path.isdir(SUBSTITUTIONS_DIR):
         shutil.rmtree(SUBSTITUTIONS_DIR)
@@ -92,46 +108,44 @@ def substitute(config, substitutions_dir):
     if not os.path.isdir(substitutions_dir):
         os.mkdir(substitutions_dir)
 
-    # Handle each link/copy
-    for dot_link in __configs_list:
-        config_source = __configs_list[dot_link][__SOURCE]
-        config_dir = f"{substitutions_dir}/{os.path.dirname(config_source)}"
+    for dot_link in __DOT_LINKS:
+        source = dot_link.source
+        config_dir = f"{substitutions_dir}/{os.path.dirname(source)}"
         if not os.path.isdir(config_dir):
             os.makedirs(config_dir)
 
         subprocess.run(
-            ["cp", f"{__DOTFILES_DIR}/{config_source}", f"{substitutions_dir}/{config_source}"])
-        config_source = os.path.abspath(f"{substitutions_dir}/{config_source}")
+            ["cp", f"{__DOTFILES_DIR}/{source}", f"{substitutions_dir}/{source}"])
+        source = os.path.abspath(f"{substitutions_dir}/{source}")
 
-        substitution_ids = []
-        if SUBS in __configs_list[dot_link]:
-            substitution_ids = __configs_list[dot_link][SUBS]
-
-        if len(substitution_ids) > 0:
-            # Perform the necessary substitutions using sed
+        subs = dot_link.subs
+        if len(subs) > 0:
             substitution_vals = config[__CONFIG_SUBS]
-            for id in substitution_ids:
-                subprocess.run(["sed", "-i", "s/" + substitution_ids[id] +
-                               "/" + substitution_vals[id] + "/g", config_source])
+            for id in subs:
+                subprocess.run(["sed", "-i", "s/" + subs[id] +
+                               "/" + substitution_vals[id] + "/g", source])
 
 
-def remove(user):
-    for link in __configs_list:
-        setup_flags = __configs_list[link][__FLAGS] if __FLAGS in __configs_list[link] else [
-        ]
-        if __VAR_TARGET_FLAG in setup_flags:
-            link_targets = __TARGET_SEARCH[link].get_targets()
+def remove(homedir):
+    for dot_link in __DOT_LINKS:
+        flags = dot_link.flags
+
+        if __VAR_TARGET_FLAG in flags:
+            link_targets = __TARGET_SEARCH[dot_link.name].get_targets()
+        elif dot_link.target is not None:
+            link_targets = dot_link.target.replace(
+                "~", homedir)
         else:
-            link_targets = __configs_list[link][__TARGET].replace("~", user)
+            link_targets = []
+
         if not isinstance(link_targets, list):
             link_targets = [link_targets]
 
-        needs_sudo = __SUDO_FLAG in __configs_list[link][
-            __FLAGS] if __FLAGS in __configs_list[link] else False
+        needs_sudo = __SUDO_FLAG in dot_link.flags
 
         if len(link_targets) == 0:
             log.info(
-                f"{log.WHITE}Variable target for {log.RED}{link}: could not find target{log.NORMAL}"
+                f"{log.WHITE}Variable target for {log.RED}{dot_link}: could not find target{log.NORMAL}"
             )
             continue
 
@@ -141,8 +155,8 @@ def remove(user):
                 remove_command.insert(0, "sudo")
 
             if os.path.isfile(target):
-                log.info(
-                    f"{log.WHITE}Removing {log.RED}{target}{log.NORMAL}")
                 subprocess.run(remove_command)
+                log.info(
+                    f"{log.WHITE}Removed {log.RED}{target}{log.NORMAL}")
             else:
                 log.info(f"{log.WHITE}Can't find {log.RED}{target}")

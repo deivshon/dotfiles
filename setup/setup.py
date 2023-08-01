@@ -62,7 +62,7 @@ def main():
     if os.getuid() == 0:
         log.failure("Don't run the script as root!")
 
-    current_user = os.path.expanduser("~")
+    homedir = os.path.expanduser("~")
     start_dir = os.getcwd()
     setup_dir = os.path.dirname(os.path.realpath(__file__))
     os.chdir(setup_dir)
@@ -83,7 +83,8 @@ def main():
         installed_in_run = True
 
     if args.remove:
-        dots.remove(current_user)
+        symlinks.remove()
+        dots.remove(homedir)
         sys.exit(0)
 
     if args.config is not None:
@@ -123,7 +124,7 @@ def main():
     PlstatusInstaller.download()
     StInstaller.download()
 
-    dots.link(selected_config, current_user,
+    dots.link(selected_config, homedir,
               keep_expansion=args.keep, force=args.force)
     setup_status.config = os.path.abspath(args.config)
 
@@ -151,7 +152,7 @@ def main():
     # at compile time and compilation will subsequently fail
     PlstatusInstaller.compile()
 
-    symlinks.apply_symlinks()
+    symlinks.apply()
 
     with open(SETUP_STATUS, "w") as file:
         file.write(setup_status.dumps())

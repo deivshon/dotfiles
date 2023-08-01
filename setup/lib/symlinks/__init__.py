@@ -1,1 +1,1 @@
-from setup.lib.symlinks.symlinks import apply_symlinks
+from setup.lib.symlinks.symlinks import apply, remove
