@@ -10,14 +10,15 @@ from setup.lib import utils
 from setup.lib import LIB_DIR
 from setup.lib.dots import LINKS_FILE
 from setup.lib.dots.targets.firefox import FirefoxVariableTarget
+from setup.lib.dots.flags import SUDO_FLAG, VAR_TARGET_FLAG, EXECUTABLE_FLAG
+
 
 SUBSTITUTIONS_DIR = "./substitutions"
 __DOTFILES_DIR = f"{LIB_DIR}/../../dots"
 
 SUBS = "subs"
 __CONFIG_SUBS = "substitutions"
-__SUDO_FLAG = "sudo"
-__VAR_TARGET_FLAG = "variable-target"
+
 
 __FIREFOX = "firefox"
 
@@ -39,8 +40,8 @@ __DOT_LINKS: List[DotLink] = []
 
 with open(LINKS_FILE, "r") as file:
     __configs_list = json.loads(file.read())
-    for x in __configs_list:
-        __DOT_LINKS.append(DotLink(name=x, **__configs_list[x]))
+    for key in __configs_list:
+        __DOT_LINKS.append(DotLink(name=key, **__configs_list[key]))
 
 __TARGET_SEARCH = {
     __FIREFOX: FirefoxVariableTarget()
@@ -57,8 +58,9 @@ def link(config, user, keep_expansion=False, force=False):
     for dot_link in __DOT_LINKS:
         source = os.path.abspath(
             f"{SUBSTITUTIONS_DIR}/{dot_link.source}")
+        flags = dot_link.flags
 
-        if __VAR_TARGET_FLAG in dot_link.flags:
+        if VAR_TARGET_FLAG in flags:
             targets = __TARGET_SEARCH[dot_link.name].get_targets()
         elif dot_link.target is not None:
             targets = dot_link.target
@@ -90,12 +92,15 @@ def link(config, user, keep_expansion=False, force=False):
 
             command = ["cp", copy_flags, source, target]
 
-            if __SUDO_FLAG in dot_link.flags:
+            if SUDO_FLAG in flags:
                 subprocess.run(["sudo"] + command)
             else:
                 subprocess.run(command)
             log.info(
                 f"{log.BLUE}{source_hash[0:4]}...{source_hash[-4:]}{log.NORMAL} | {log.GREEN}installed in path{log.NORMAL} {log.YELLOW}{target}")
+
+            if EXECUTABLE_FLAG in flags:
+                utils.path.make_executable(target, sudo=SUDO_FLAG in flags)
 
     if not keep_expansion and os.path.isdir(SUBSTITUTIONS_DIR):
         shutil.rmtree(SUBSTITUTIONS_DIR)
@@ -130,7 +135,7 @@ def remove(homedir):
     for dot_link in __DOT_LINKS:
         flags = dot_link.flags
 
-        if __VAR_TARGET_FLAG in flags:
+        if VAR_TARGET_FLAG in flags:
             link_targets = __TARGET_SEARCH[dot_link.name].get_targets()
         elif dot_link.target is not None:
             link_targets = dot_link.target.replace(
@@ -141,7 +146,7 @@ def remove(homedir):
         if not isinstance(link_targets, list):
             link_targets = [link_targets]
 
-        needs_sudo = __SUDO_FLAG in dot_link.flags
+        needs_sudo = SUDO_FLAG in dot_link.flags
 
         if len(link_targets) == 0:
             log.info(

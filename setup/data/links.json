@@ -200,5 +200,10 @@
     "nano": {
         "source": ".config/nano/nanorc",
         "target": "~/.config/nano/nanorc"
+    },
+    "sudoedit": {
+        "source": "/usr/local/bin/nanowrap",
+        "target": "/usr/local/bin/nanowrap",
+        "flags": ["sudo", "x"]
     }
 }

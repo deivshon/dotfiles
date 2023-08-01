@@ -96,5 +96,6 @@ alias mulreg="mullvad tunnel wireguard key regenerate"
 alias clip="xclip -sel c <"
 alias dd="sudo dd status=progress"
 alias glog="git log --oneline --color=always"
+alias sudoedit="sudo nanowrap"
 
 afetch

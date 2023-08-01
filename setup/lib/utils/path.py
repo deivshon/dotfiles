@@ -1,5 +1,6 @@
 import os
 import stat
+import subprocess
 
 from setup.lib import log
 
@@ -17,9 +18,12 @@ def sed_escape_path(str):
     return str.replace("/", "\x5c/")
 
 
-def make_executable(path: str):
+def make_executable(path: str, sudo: bool = False):
     if not os.path.isfile(path):
         log.error(f"Can't make {path} executable, not a file")
         return
 
-    os.chmod(path, os.stat(path).st_mode | stat.S_IEXEC)
+    if sudo:
+        subprocess.run(["sudo", "chmod", "+x", path])
+    else:
+        os.chmod(path, os.stat(path).st_mode | stat.S_IEXEC)

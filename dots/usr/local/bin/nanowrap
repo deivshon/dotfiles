@@ -1,0 +1,6 @@
+#!/bin/sh
+
+export HOME=/home/davide
+export XDG_CONFIG_HOME=$HOME/.config
+
+nano "$@"
