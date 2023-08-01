@@ -196,5 +196,9 @@
     "micro-settings": {
         "source": ".config/micro/settings.json",
         "target": "~/.config/micro/settings.json"
+    },
+    "nano": {
+        "source": ".config/nano/nanorc",
+        "target": "~/.config/nano/nanorc"
     }
 }
