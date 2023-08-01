@@ -39,6 +39,8 @@ The configuration files in this repository and the relative setup scripts are ta
 + [gsfonts](https://archlinux.org/packages/extra/x86_64/gsfonts/)
 + [bat](https://archlinux.org/packages/extra/x86_64/bat/)
 + [opendoas](https://archlinux.org/packages/extra/x86_64/opendoas/)
++ [micro](https://archlinux.org/packages/extra/x86_64/micro/)
++ [dash](https://archlinux.org/packages/core/x86_64/dash/)
 + [afetch](https://aur.archlinux.org/packages/afetch/)
 + [polkit-dumb-agent](https://aur.archlinux.org/packages/polkit-dumb-agent-git/)
 + [visual-studio-code-bin](https://aur.archlinux.org/packages/visual-studio-code-bin)
