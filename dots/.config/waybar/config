@@ -21,9 +21,9 @@
         "format": "{: %Y-%m-%d  %H:%M:%S}",
         "interval": 1
     },
-    "custom/proton": {
+    "custom/mullvad": {
         "format": "{}",
-        "exec": "command-cache 100 proton-status -u ' %h' -d ' %c'",
+        "exec": "command-cache 100 mullvad-status -u ' %h' -d ' %c'",
         "interval": 30,
         "tooltip": false,
         "on-click": "",
