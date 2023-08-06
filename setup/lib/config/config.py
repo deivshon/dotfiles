@@ -15,7 +15,6 @@ from setup.lib.config.expansion.handler import ExpansionHandler
 from setup.lib.config.expansion.colors_no_hash import ColorsNoHash
 
 __CONFIG_FILE = f"{LIB_DIR}/../data/configFields.json"
-
 __EXPANSIONS: List[ExpansionHandler] = [
     EfyColors(),
     WallpaperPath(),

@@ -1,0 +1,138 @@
+{
+    "arch-black-logo": {
+        "substitutions": {
+            "main-color": "#886EB4",
+            "secondary-color": "#644F89"
+        },
+        "wallpaper-link": "https://i.ibb.co/9rGKV8z/arch-Black.png",
+        "wallpaper-name": "arch-black-logo.png"
+    },
+    "butterfly-yellow-digital": {
+        "substitutions": {
+            "main-color": "#E4B254",
+            "secondary-color": "#D29341"
+        },
+        "wallpaper-link": "https://i.ibb.co/YcMTJSL/butterfly-Yellow.png",
+        "wallpaper-name": "butterfly-yellow-digital.png"
+    },
+    "cat-purple-digital": {
+        "substitutions": {
+            "main-color": "#734BCF",
+            "secondary-color": "#513BB7"
+        },
+        "wallpaper-link": "https://i.ibb.co/6XT1gPN/purple-cyan-cat-upscaled.png",
+        "wallpaper-name": "cat-purple-digital.png"
+    },
+    "forest-green-picture": {
+        "substitutions": {
+            "main-color": "#3C6D35",
+            "secondary-color": "#264025"
+        },
+        "wallpaper-link": "https://i.ibb.co/XSmy5Bn/forest-Green.jpg",
+        "wallpaper-name": "forest-green-picture.jpeg"
+    },
+    "fuji-pink-digital": {
+        "substitutions": {
+            "main-color": "#C7607B",
+            "secondary-color": "#312749"
+        },
+        "wallpaper-link": "https://iili.io/bOlNI4.png",
+        "wallpaper-name": "fuji-pink-digital.png"
+    },
+    "koi-red-digital": {
+        "substitutions": {
+            "main-color": "#F15358",
+            "secondary-color": "#74474A"
+        },
+        "wallpaper-link": "https://i.ibb.co/3vcjGzn/koi-Carp-Red.png",
+        "wallpaper-name": "koi-red-digital.png"
+    },
+    "lake-pink-minimal": {
+        "substitutions": {
+            "main-color": "#C9478E",
+            "secondary-color": "#90367C"
+        },
+        "wallpaper-link": "https://i.ibb.co/VHbJ5z6/lake-Side-Landscape-Fantasy.png",
+        "wallpaper-name": "lake-pink-minimal.png"
+    },
+    "mountains-blue-minimal": {
+        "substitutions": {
+            "main-color": "#3771C8",
+            "secondary-color": "#2C5AA0"
+        },
+        "wallpaper-link": "https://i.ibb.co/30g8pXH/mountains-Minimal-Blue.png",
+        "wallpaper-name": "mountains-blue-minimal.png"
+    },
+    "mountains-green-digital": {
+        "substitutions": {
+            "main-color": "#22B545",
+            "secondary-color": "#146B29"
+        },
+        "wallpaper-link": "https://i.ibb.co/SwznKYX/mountains-Green-Digital.jpg",
+        "wallpaper-name": "mountains-green-digital.jpeg"
+    },
+    "mountains-purple-minimal": {
+        "substitutions": {
+            "main-color": "#802CA6",
+            "secondary-color": "#431757"
+        },
+        "wallpaper-link": "https://i.ibb.co/YN5CK1J/mountains-Purple-Digital.jpg",
+        "wallpaper-name": "mountains-purple-minimal.jpeg"
+    },
+    "nebula-red-picture": {
+        "substitutions": {
+            "main-color": "#F6493C",
+            "secondary-color": "#823139"
+        },
+        "wallpaper-link": "https://i.ibb.co/2YFqXRN/nebula-Red.png",
+        "wallpaper-name": "nebula-red-picture.png"
+    },
+    "neon-shallows-green-minimal": {
+        "substitutions": {
+            "main-color": "#2C7E4E",
+            "secondary-color": "#2C413C"
+        },
+        "wallpaper-link": "https://iili.io/LWZMbI.png",
+        "wallpaper-name": "neon-shallows-green-minimal.png"
+    },
+    "planet-green-minimal": {
+        "substitutions": {
+            "main-color": "#408E79",
+            "secondary-color": "#176B55"
+        },
+        "wallpaper-link": "https://i.ibb.co/PYqBftF/planet-Green.png",
+        "wallpaper-name": "planet-green-minimal.png"
+    },
+    "sunrise-aqua-digital": {
+        "substitutions": {
+            "main-color": "#DF8340",
+            "secondary-color": "#AC591D"
+        },
+        "wallpaper-link": "https://i.ibb.co/7bzFvDH/sunrise-Waves-Aqua.png",
+        "wallpaper-name": "sunrise-aqua-digital.png"
+    },
+    "sunset-yellow-digital": {
+        "substitutions": {
+            "main-color": "#CC960C",
+            "secondary-color": "#664901"
+        },
+        "wallpaper-link": "https://i.ibb.co/8NLxrvw/digital-Sunset.jpg",
+        "wallpaper-name": "sunset-yellow-digital.jpeg"
+    },
+    "tokyo-purple-digital": {
+        "substitutions": {
+            "main-color": "#D25EFF",
+            "secondary-color": "#67088C"
+        },
+        "wallpaper-link": "https://iili.io/HlXKMg4.jpg",
+        "wallpaper-name": "tokyo-purple-digital.jpeg"
+    },
+    "butterfly-purple-digital": {
+        "substitutions": {
+            "main-color": "#8F3DCE",
+            "secondary-color": "#773AAA"
+        },
+        "wallpaper-link": "https://i.ibb.co/qF04kD6/butterfly-Purple.png",
+        "wallpaper-name": "butterfly-purple-digital.png"
+    }
+}

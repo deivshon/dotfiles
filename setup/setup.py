@@ -4,11 +4,11 @@ import json
 import argparse
 
 from setup.lib import log
-from setup.lib import utils
 from setup.lib.post import post
 from setup.lib.config import config
 from setup.lib.dots import dots
 
+from setup.lib.config import AVAILABLE_CONFIGS
 from setup.lib.install import install
 from setup.lib.install.st import StInstaller
 from setup.lib.install.dwm import DwmInstaller
@@ -24,7 +24,7 @@ from setup.lib import symlinks
 def main():
     __FILE_DIR__ = os.path.dirname(os.path.realpath(__file__))
 
-    DEFAULT_CONFIG = f"{__FILE_DIR__}/data/configs/sunsetDigital.json"
+    DEFAULT_CONFIG = "sunset-yellow-digital"
 
     parser = argparse.ArgumentParser(
         prog="setup",
@@ -88,12 +88,8 @@ def main():
         sys.exit(0)
 
     if args.config is not None:
-        # Config file path argument is relative to caller's cwd (startDir)
-        os.chdir(start_dir)
-        args.config = os.path.abspath(os.path.expanduser(args.config))
-        os.chdir(setup_dir)
         log.info(
-            f"{log.WHITE}Selecting config from argument: {log.BLUE}{utils.path.get_last_node(args.config)}{log.NORMAL}")
+            f"{log.WHITE}Selecting config from argument: {log.BLUE}{args.config}{log.NORMAL}")
     else:
         if setup_status.config is None:
             log.info(
@@ -101,11 +97,12 @@ def main():
             args.config = DEFAULT_CONFIG
         else:
             log.info(
-                f"{log.WHITE}Selecting config from old setup data ({SETUP_STATUS}): {log.BLUE}{utils.path.get_last_node(setup_status.config)}{log.NORMAL}")
+                f"{log.WHITE}Selecting config from old setup data ({SETUP_STATUS}): {log.BLUE}{setup_status.config}{log.NORMAL}")
             args.config = setup_status.config
 
-    if not os.path.isfile(args.config):
-        log.failure(f"{log.WHITE}{args.config} does not exist{log.NORMAL}")
+    if args.config not in AVAILABLE_CONFIGS:
+        log.failure(
+            f"{log.WHITE}{args.config} is not a valid config{log.NORMAL}\nValid configs: {json.dumps(list(AVAILABLE_CONFIGS.keys()), indent=4)}")
 
     # Package installation if it's been explicitly requested but not performed
     # because the setup has been run before
@@ -113,9 +110,7 @@ def main():
         install.packages()
         setup_status.packages_installed = True
 
-    # Store config content
-    with open(args.config, "r") as file:
-        selected_config = json.loads(file.read())
+    selected_config = AVAILABLE_CONFIGS[args.config]
 
     config.expand(selected_config)
     config.check(selected_config)

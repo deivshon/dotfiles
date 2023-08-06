@@ -1,5 +1,6 @@
 import json
 
+from setup.lib import LIB_DIR
 from setup.lib.dots import LINKS_FILE
 from setup.lib.dots.dots import SUBS
 
@@ -22,3 +23,7 @@ for link in links_list:
             continue
 
         EXPECTED_SUBSTITUTIONS += [sub]
+
+__CONFIGS_LIST_FILE = f"{LIB_DIR}/../data/configs.json"
+with open(__CONFIGS_LIST_FILE) as f:
+    AVAILABLE_CONFIGS = json.loads(f.read())
