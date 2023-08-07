@@ -121,7 +121,7 @@ def main():
 
     dots.link(selected_config, homedir,
               keep_expansion=args.keep, force=args.force)
-    setup_status.config = os.path.abspath(args.config)
+    setup_status.config = args.config
 
     # Download and compile change-vol-pactl
     ChangeVolPactlInstaller.install()
