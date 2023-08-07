@@ -1,3 +1,5 @@
+#!/bin/bash
+
 source ~/.bash_profile_device
 
 export LC_CTYPE=en_US.UTF-8
@@ -7,6 +9,13 @@ export EDITOR=nano
 
 PATH=${PATH}:~/.local/scripts/:
 
-if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
-    Hyprland
+if [ -z "$DISPLAY" ]; then
+    case $(tty) in
+        /dev/tty1)
+            Hyprland
+            ;;
+        /dev/tty2)
+            startx
+            ;;
+    esac
 fi
