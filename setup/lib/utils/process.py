@@ -21,5 +21,9 @@ def __exec(command: List[str]):
 
 
 def exec(command: List[str]):
+    stdout = ""
     for line in __exec(command):
         log.subprocess_line(line)
+        stdout += line
+
+    return stdout

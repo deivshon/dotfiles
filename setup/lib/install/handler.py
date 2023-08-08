@@ -4,34 +4,36 @@ from setup.lib import log
 
 
 class InstallHandler(ABC):
+    needsCompilation: bool = True
+
     @staticmethod
     @abstractmethod
     def name() -> str:
         ...
 
-    @classmethod
     @abstractmethod
-    def _compile_impl(cls):
+    def _compile_impl(self):
         ...
 
-    @classmethod
-    def compile(cls):
-        log.info(f"{log.WHITE}Starting {cls.name()} compilation")
-        cls._compile_impl()
-        log.info(f"{log.WHITE}Ended {cls.name()} compilation\n")
+    def compile(self):
+        if not self.needsCompilation:
+            log.info(
+                f"{log.WHITE}Not compiling {self.name()} due to no changes")
+            return
 
-    @classmethod
+        log.info(f"{log.WHITE}Starting {self.name()} compilation")
+        self._compile_impl()
+        log.info(f"{log.WHITE}Ended {self.name()} compilation\n")
+
     @abstractmethod
-    def _download_impl(cls):
+    def _download_impl(self, pull: bool):
         ...
 
-    @classmethod
-    def download(cls):
-        log.info(f"{log.WHITE}Starting {cls.name()} download")
-        cls._download_impl()
-        log.info(f"{log.WHITE}Ended {cls.name()} download\n")
+    def download(self, pull: bool = False):
+        log.info(f"{log.WHITE}Starting {self.name()} download")
+        self._download_impl(pull)
+        log.info(f"{log.WHITE}Ended {self.name()} download\n")
 
-    @classmethod
-    def install(cls):
-        cls.download()
-        cls.compile()
+    def install(self, pull: bool = False):
+        self.download(pull)
+        self.compile()

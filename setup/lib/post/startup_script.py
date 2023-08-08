@@ -6,7 +6,7 @@ from setup.lib.post import STARTUP_SCRIPT
 from setup.lib.post.handler import PostOperationsHandler
 
 
-class StatusScriptsPostOperations(PostOperationsHandler):
+class StartupScriptPostOperations(PostOperationsHandler):
     @staticmethod
     def name() -> str:
         return "status-scripts"

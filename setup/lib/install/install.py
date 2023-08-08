@@ -12,11 +12,12 @@ __PACKAGES_FILE = f"{LIB_DIR}/../data/packages.json"
 
 
 def packages():
+    yayInstaller = YayInstaller()
     with open(__PACKAGES_FILE) as file:
         packages_data = json.loads(file.read())
 
     if not os.path.isdir(os.path.expanduser("~/yay")):
-        YayInstaller.install()
+        yayInstaller.install()
 
     pacman_command = \
         ["sudo", "pacman", "-Syu"] + \

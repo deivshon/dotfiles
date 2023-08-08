@@ -16,16 +16,13 @@ class DwmInstaller(InstallHandler):
     def name() -> str:
         return "dwm"
 
-    @classmethod
-    @abstractmethod
-    def _download_impl(cls):
-        git_download(cls.DEST_PATH, cls.REMOTE_URL)
+    def _download_impl(self, pull: bool):
+        self.needsCompilation = git_download(
+            self.DEST_PATH, self.REMOTE_URL, pull)
 
-    @classmethod
-    @abstractmethod
-    def _compile_impl(cls):
+    def _compile_impl(self):
         try:
             process.exec(
-                ["sudo", "make", "-C", cls.DEST_PATH, "clean", "install"])
+                ["sudo", "make", "-C", self.DEST_PATH, "clean", "install"])
         except Exception as e:
-            log.error(f"Could not compile {cls.name()}: {e}")
+            log.error(f"Could not compile {self.name()}: {e}")

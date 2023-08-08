@@ -2,8 +2,10 @@ import os
 import sys
 import json
 import argparse
+from typing import List
 
 from setup.lib import log
+from setup.lib.install.handler import InstallHandler
 from setup.lib.post import post
 from setup.lib.config import config
 from setup.lib.dots import dots
@@ -22,6 +24,16 @@ from setup.lib import symlinks
 
 
 def main():
+    installers: List[InstallHandler] = [
+        DwmInstaller(),
+        PlstatusInstaller(),
+        StInstaller(),
+        ChangeVolPactlInstaller(),
+        CommandCacheInstaller(),
+        StatusScriptsInstaller(),
+        PlstatusInstaller()
+    ]
+
     __FILE_DIR__ = os.path.dirname(os.path.realpath(__file__))
 
     DEFAULT_CONFIG = "sunset-yellow-digital"
@@ -54,7 +66,13 @@ def main():
     parser.add_argument(
         "-c", "--config",
         action="store",
-        help="Path to file describing the config to apply (./setup/data/configs/[...])"
+        help="Name of the config to apply"
+    )
+
+    parser.add_argument(
+        "-g", "--git-pull",
+        action="store_true",
+        help="If repositories of installed custom software already exist, pull"
     )
 
     args = parser.parse_args()
@@ -63,7 +81,6 @@ def main():
         log.failure("Don't run the script as root!")
 
     homedir = os.path.expanduser("~")
-    start_dir = os.getcwd()
     setup_dir = os.path.dirname(os.path.realpath(__file__))
     os.chdir(setup_dir)
 
@@ -115,19 +132,12 @@ def main():
     config.expand(selected_config)
     config.check(selected_config)
 
-    DwmInstaller.download()
-    PlstatusInstaller.download()
-    StInstaller.download()
+    for inst in installers:
+        inst.download(args.git_pull)
 
     dots.link(selected_config, homedir,
               keep_expansion=args.keep, force=args.force)
     setup_status.config = args.config
-
-    # Download and compile change-vol-pactl
-    ChangeVolPactlInstaller.install()
-
-    DwmInstaller.compile()
-    StInstaller.compile()
 
     post.change(selected_config)
 
@@ -135,17 +145,9 @@ def main():
         post.install(selected_config)
         setup_status.post_install_operations = True
 
-    # Install Rust programs after rust is configured,
-    # which happens only during the post install operations
-    CommandCacheInstaller.install()
-
-    StatusScriptsInstaller.install()
     os.environ["PATH"] += ":" + os.path.expanduser("~/.local/scripts")
-
-    # Compile plstatus after status scripts are installed,
-    # otherwise commands in plstatus configuration will not exists in PATH
-    # at compile time and compilation will subsequently fail
-    PlstatusInstaller.compile()
+    for inst in installers:
+        inst.compile()
 
     symlinks.apply()
 
