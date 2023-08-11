@@ -213,5 +213,14 @@
         "source": "/etc/pacman.d/hooks/dashsh.hook",
         "target": "/etc/pacman.d/hooks/dashsh.hook",
         "flags": ["sudo"]
+    },
+    "qtile": {
+        "source": ".config/qtile/config.py",
+        "target": "~/.config/qtile/config.py",
+        "subs": {
+            "main-color": "<sub<main-color>>",
+            "secondary-color": "<sub<secondary-color>>",
+            "wallpaper-path": "<sub<qtile-wallpaper-path>>"
+        }
     }
 }
