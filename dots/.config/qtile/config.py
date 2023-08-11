@@ -1,10 +1,13 @@
+import re
+import subprocess
+
 from libqtile import bar, widget
 from libqtile.config import Drag, Group, Key, Screen
 from libqtile.lazy import lazy
 from libqtile.layout.xmonad import MonadTall
 
 mod = "mod4"
-terminal = "foot"
+terminal = "st"
 
 keys = [
     Key([mod, "shift"], "u", lazy.shutdown(), desc="Shutdown Qtile"),
@@ -23,7 +26,7 @@ keys = [
     ),
     Key([mod, "shift"], "Return", lazy.layout.swap_main()),
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
-    Key([mod], "d", lazy.spawn("fuzzel -I --no-fuzzy"), desc="Launch fuzzel"),
+    Key([mod], "d", lazy.spawn("rofi -show drun -display-drun"), desc="Launch rofi"),
 
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
 ]
@@ -66,20 +69,29 @@ widget_defaults = dict(
 
 extension_defaults = widget_defaults.copy()
 
-screens = [
-    Screen(
-        bottom=bar.Bar(
-            [
-                widget.GroupBox(),
-                widget.Prompt(),
-                widget.WindowName(),
-                widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
-            ],
-            24,
+p = subprocess.run(["xrandr"], capture_output=True)
+screen_count = 0
+for line in p.stdout.decode().splitlines():
+    if re.match(r".* connected.*", line):
+        screen_count += 1
+
+screens = []
+for i in range(0, max(screen_count, 1)):
+    screens.append(
+        Screen(
+            bottom=bar.Bar(
+                [
+                    widget.GroupBox(),
+                    widget.Prompt(),
+                    widget.WindowName(),
+                    widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
+                ],
+                24,
+            ),
+            wallpaper="<sub<qtile-wallpaper-path>>",
+            wallpaper_mode="fill"
         ),
-        wallpaper="<sub<qtile-wallpaper-path>>"
-    ),
-]
+    )
 
 
 mouse = [
