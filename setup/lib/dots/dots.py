@@ -10,7 +10,7 @@ from setup.lib import utils
 from setup.lib import LIB_DIR
 from setup.lib.dots import LINKS_FILE
 from setup.lib.dots.targets.firefox import FirefoxVariableTarget
-from setup.lib.dots.flags import SUDO_FLAG, VAR_TARGET_FLAG, EXECUTABLE_FLAG
+from setup.lib.dots.flags import DEVICE_SPECIFIC_FLAG, SUDO_FLAG, VAR_TARGET_FLAG, EXECUTABLE_FLAG
 
 
 SUBSTITUTIONS_DIR = "./substitutions"
@@ -60,6 +60,8 @@ def link(config, user, keep_expansion=False, force=False):
             f"{SUBSTITUTIONS_DIR}/{dot_link.source}")
         flags = dot_link.flags
 
+        device_specific = DEVICE_SPECIFIC_FLAG in flags
+
         if VAR_TARGET_FLAG in flags:
             targets = __TARGET_SEARCH[dot_link.name].get_targets()
         elif dot_link.target is not None:
@@ -76,12 +78,14 @@ def link(config, user, keep_expansion=False, force=False):
         for target in targets:
             target = target.replace("~", user)
 
+            if device_specific and os.path.exists(target):
+                continue
+
             source_hash = utils.hash.sha256_checksum(source)
             target_hash = None
             if os.path.isfile(target):
                 target_hash = utils.hash.sha256_checksum(target)
 
-            # Don't copy if installed dot is the same as the new one
             if source_hash == target_hash:
                 log.info(
                     f"{log.BLUE}{source_hash[0:4]}...{source_hash[-4:]}{log.NORMAL} | {log.RED}already installed{log.NORMAL} {log.YELLOW}{target}{log.NORMAL}")
@@ -96,8 +100,13 @@ def link(config, user, keep_expansion=False, force=False):
                 subprocess.run(["sudo"] + command)
             else:
                 subprocess.run(command)
-            log.info(
-                f"{log.BLUE}{source_hash[0:4]}...{source_hash[-4:]}{log.NORMAL} | {log.GREEN}installed in path{log.NORMAL} {log.YELLOW}{target}")
+
+            if device_specific:
+                log.info(
+                    f"{log.BLUE}{source_hash[0:4]}...{source_hash[-4:]}{log.NORMAL} | {log.GREEN}only ever install{log.NORMAL} {log.YELLOW}{target}")
+            else:
+                log.info(
+                    f"{log.BLUE}{source_hash[0:4]}...{source_hash[-4:]}{log.NORMAL} | {log.GREEN}installed in path{log.NORMAL} {log.YELLOW}{target}")
 
             if EXECUTABLE_FLAG in flags:
                 utils.path.make_executable(target, sudo=SUDO_FLAG in flags)

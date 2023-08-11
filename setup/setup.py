@@ -10,10 +10,10 @@ from setup.lib.post import post
 from setup.lib.config import config
 from setup.lib.dots import dots
 
-from setup.lib.config import AVAILABLE_CONFIGS
 from setup.lib.install import install
 from setup.lib.install.st import StInstaller
 from setup.lib.install.dwm import DwmInstaller
+from setup.lib.config import AVAILABLE_CONFIGS
 from setup.lib.status import SetupStatus, SETUP_STATUS
 from setup.lib.install.plstatus import PlstatusInstaller
 from setup.lib.install.command_cache import CommandCacheInstaller

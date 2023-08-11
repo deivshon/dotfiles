@@ -222,5 +222,30 @@
             "secondary-color": "<sub<secondary-color>>",
             "wallpaper-path": "<sub<qtile-wallpaper-path>>"
         }
+    },
+    "dwm-startup": {
+        "source": ".startup/dwm/startops.sh",
+        "target": "~/.startup/dwm/startops.sh",
+        "flags": ["device-specific"]
+    },
+    "qtile-startup": {
+        "source": ".startup/qtile/startops.sh",
+        "target": "~/.startup/qtile/startops.sh",
+        "flags": ["device-specific"]
+    },
+    "bashrc-device": {
+        "source": ".bashrc_device",
+        "target": "~/.bashrc_device",
+        "flags": ["device-specific"]
+    },
+    "bash-profile-device": {
+        "source": ".bash_profile_device",
+        "target": "~/.bash_profile_device",
+        "flags": ["device-specific"]
+    },
+    "hyprland-device": {
+        "source": ".config/hypr/hyprsetup.conf",
+        "target": "~/.config/hypr/hyprsetup.conf",
+        "flags": ["device-specific"]
     }
 }

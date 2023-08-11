@@ -3,20 +3,14 @@ from typing import Dict, List
 from setup.lib import log
 from setup.lib.post.handler import PostOperationsHandler
 from setup.lib.post.xinitrc import XinitrcPostOperations
-from setup.lib.post.startup_script import StartupScriptPostOperations
 from setup.lib.post.rustup import RustupPostOperations
 from setup.lib.post.reflector import ReflectorPostOperations
-from setup.lib.post.hyprland import HyprlandPostOperations
-from setup.lib.post.bash import BashPostOperations
 from setup.lib.post.wallpaper import WallpaperPostOperations
 
 AFTER_INSTALL_OPERATIONS: List[PostOperationsHandler] = [
     XinitrcPostOperations(),
-    StartupScriptPostOperations(),
     RustupPostOperations(),
     ReflectorPostOperations(),
-    BashPostOperations(),
-    HyprlandPostOperations()
 ]
 
 AFTER_RUN_OPERATIONS: List[PostOperationsHandler] = [
