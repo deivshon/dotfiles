@@ -1,8 +1,12 @@
 import os
 
 from setup.lib import log
-from setup.lib.post import USER_XINITRC, DEFAULT_XINITRC, XINITRC_APPEND
+from setup.lib.post import USER_XINITRC, DEFAULT_XINITRC, XINITRC_START
 from setup.lib.post.handler import PostOperationsHandler
+
+_XINITRC_APPEND = f"""
+startxwm $2
+"""
 
 
 class XinitrcPostOperations(PostOperationsHandler):
@@ -32,8 +36,5 @@ class XinitrcPostOperations(PostOperationsHandler):
 
         xinitrc = xinitrc[0:xinitrc.index("twm &")]
 
-        with open(XINITRC_APPEND, "r") as file:
-            xinitrc_append = file.read()
-
         with open(USER_XINITRC, "w") as file:
-            file.write("\n".join(xinitrc) + "\n" + xinitrc_append)
+            file.write("\n".join(xinitrc) + _XINITRC_APPEND)

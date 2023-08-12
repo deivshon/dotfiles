@@ -26,5 +26,3 @@ class WallpaperPostOperations(PostOperationsHandler):
         if not os.path.isfile(wallpaper_path):
             process.exec(
                 ["wget", config[cls.__WALLPAPER_LINK_KEY], "-O", wallpaper_path])
-
-        subprocess.run(["cp", wallpaper_path, user + "/Pictures/wallpaper"])

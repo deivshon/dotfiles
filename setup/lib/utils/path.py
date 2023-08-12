@@ -10,7 +10,7 @@ def get_last_node(path):
 
 
 def get_wallpaper_path(wallpaper_name):
-    return f"{os.path.expanduser('~')}/Pictures/{wallpaper_name}"
+    return f"{os.path.expanduser('~')}/Pictures/wallpapers/{wallpaper_name}"
 
 
 def sed_escape_path(str):

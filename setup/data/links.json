@@ -259,5 +259,13 @@
             "swl--ring-clear-color": "<sub<i3l--ring-clear-color>>",
             "swl--ring-wrong-color": "<sub<i3l--ring-wrong-color>>"
         }
+    },
+    "start-x-wm": {
+        "source": ".local/scripts/startxwm.sh",
+        "target": "~/.local/scripts/startxwm",
+        "flags": ["x"],
+        "subs": {
+            "wallpaper-path": "<sub<xwms-wallpaper-path>>"
+        }
     }
 }
