@@ -39,7 +39,8 @@
         "opendoas",
         "micro",
         "dash",
-        "python-psutil"
+        "python-psutil",
+        "qtile"
     ],
     "yay": [
         "afetch",
