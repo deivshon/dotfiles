@@ -28,7 +28,9 @@ keys = [
     Key([mod], "v", lazy.window.toggle_floating(),
         desc="Toggle floating on the focused window"),
     Key([mod], "Tab", lazy.layout.next(),
-        desc="Move window focus to other window"),
+        desc="Move window focus to next window"),
+    Key(["shift"], "Tab", lazy.layout.previous(),
+        desc="Move window focus to previous window"),
     Key([mod, "shift"], "Tab", lazy.next_screen(),
         desc="Move focus to next monitor"),
     Key(
@@ -41,7 +43,11 @@ keys = [
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     Key([mod], "d", lazy.spawn(
         "rofi -show drun -display-drun ''"), desc="Launch rofi"),
+
     Key([mod], "l", lazy.spawn("xlock"), desc="Lock screen"),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("change-vol-pactl +5%"), desc="Increase volume"),
+    Key([], "XF86AudioLowerVolume", lazy.spawn("change-vol-pactl -5%"), desc="Decrease volume"),
+    Key([], "XF86AudioMute", lazy.spawn("change-vol-pactl toggle"), desc="Toggle"),
 
     Key([mod], "f", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
@@ -98,6 +104,7 @@ layouts=[
         border_focus="<sub<main-color>>",
         border_normal="<sub<secondary-color>>",
         border_width=1,
+        ratio=0.55,
         new_client_position="top"
     ),
     Max(
@@ -110,7 +117,7 @@ layouts=[
 
 widget_defaults=dict(
     font="nimbu sans bold",
-    fontsize=12,
+    fontsize=13,
     padding=3,
 )
 
@@ -140,25 +147,25 @@ for i in range(0, screen_count):
                     ),
                     widget.Prompt(),
                     widget.WindowName(),
-                    widget.TextBox("CPU "),
-                    widget.CPUGraph(
-                        border_color="<sub<main-color>>",
-                        graph_color="<sub<main-color>>",
-                        fill_color="<sub<main-color>>.3",
-                        border_width=1
-                    ),
                     widget.TextBox("DISK "),
                     widget.HDDGraph(
                         border_color="<sub<main-color>>",
                         graph_color="<sub<main-color>>",
-                        fill_color="<sub<main-color>>.3",
+                        fill_color="<sub<main-color>>",
+                        border_width=1
+                    ),
+                    widget.TextBox("CPU "),
+                    widget.CPUGraph(
+                        border_color="<sub<main-color>>",
+                        graph_color="<sub<main-color>>",
+                        fill_color="<sub<main-color>>",
                         border_width=1
                     ),
                     widget.TextBox("RAM "),
                     widget.MemoryGraph(
                         border_color="<sub<main-color>>",
                         graph_color="<sub<main-color>>",
-                        fill_color="<sub<main-color>>.3",
+                        fill_color="<sub<main-color>>",
                         border_width=1
                     ),
                     widget.Clock(format="%Y-%m-%d %H:%M:%S"),
