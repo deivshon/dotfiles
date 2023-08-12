@@ -29,6 +29,8 @@ keys = [
         desc="Toggle floating on the focused window"),
     Key([mod], "Tab", lazy.layout.next(),
         desc="Move window focus to other window"),
+    Key([mod, "shift"], "Tab", lazy.next_screen(),
+        desc="Move focus to next monitor"),
     Key(
         [mod],
         "x",
@@ -64,40 +66,65 @@ def switch_workspace(name: str) -> Callable:
     return _inner
 
 
-for i in workspaces:
-    keys.append(Key([mod], i.name, lazy.function(
-        switch_workspace(i.name)), desc=f"Switch to workspace {i.name}")
-    )
-    keys.append(Key([mod, 'shift'], i.name, lazy.window.togroup(i.name)))
+def move_window(group: str) -> Callable:
+    def _inner(qtile: Qtile) -> None:
+        current_window = qtile.current_window
+        if current_window is None:
+            return
 
-layouts = [
+        current_window.togroup(group)
+        if len(qtile.screens) == 1:
+            return
+
+        if group in "13579":
+            qtile.focus_screen(0)
+        else:
+            qtile.focus_screen(1)
+
+        qtile.groups_map[group].cmd_toscreen()
+
+    return _inner
+
+
+for w in workspaces:
+    keys.append(Key([mod], w.name, lazy.function(
+        switch_workspace(w.name)), desc=f"Switch to workspace {w.name}")
+    )
+    keys.append(Key([mod, 'shift'], w.name, lazy.function(
+        move_window(w.name))))
+
+layouts=[
     MonadTall(
         border_focus="<sub<main-color>>",
         border_normal="<sub<secondary-color>>",
         border_width=1,
         new_client_position="top"
     ),
-    Max(),
+    Max(
+        border_focus="<sub<main-color>>",
+        border_normal="<sub<secondary-color>>",
+        border_width=1
+    ),
 ]
 
 
-widget_defaults = dict(
+widget_defaults=dict(
     font="nimbu sans bold",
     fontsize=12,
     padding=3,
 )
 
-extension_defaults = widget_defaults.copy()
+extension_defaults=widget_defaults.copy()
 
-p = subprocess.run(["xrandr"], capture_output=True)
-screen_count = 1
+p=subprocess.run(["xrandr"], capture_output=True)
+screen_count=1
 if p.returncode == 0:
-    screen_count = 0
+    screen_count=0
     for line in p.stdout.decode().splitlines():
         if re.match(r".* connected.*", line):
             screen_count += 1
 
-screens = []
+screens=[]
 for i in range(0, screen_count):
     screens.append(
         Screen(
@@ -146,27 +173,27 @@ for i in range(0, screen_count):
     )
 
 
-mouse = [
+mouse=[
     Drag([mod], "Button1", lazy.window.set_position_floating(),
          start=lazy.window.get_position()),
 ]
 
-dgroups_key_binder = None
-dgroups_app_rules = []
-follow_mouse_focus = True
-bring_front_click = False
-floats_kept_above = True
-cursor_warp = True
-auto_fullscreen = True
-focus_on_window_activation = "smart"
-reconfigure_screens = True
+dgroups_key_binder=None
+dgroups_app_rules=[]
+follow_mouse_focus=True
+bring_front_click=False
+floats_kept_above=True
+cursor_warp=True
+auto_fullscreen=True
+focus_on_window_activation="smart"
+reconfigure_screens=True
 
-auto_minimize = True
-wl_input_rules = None
+auto_minimize=True
+wl_input_rules=None
 
-wmname = "LG3D"
+wmname="LG3D"
 
-floating_layout = Floating(
+floating_layout=Floating(
     border_width=1,
     border_focus="<sub<main-color>>",
     border_normal="<sub<secondary-color>>",
