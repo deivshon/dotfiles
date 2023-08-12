@@ -39,6 +39,7 @@ keys = [
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     Key([mod], "d", lazy.spawn(
         "rofi -show drun -display-drun ''"), desc="Launch rofi"),
+    Key([mod], "l", lazy.spawn("xlock"), desc="Lock screen"),
 
     Key([mod], "x", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),

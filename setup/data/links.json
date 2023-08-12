@@ -38,24 +38,7 @@
         "target": "~/.config/dwm/config.h",
         "subs": {
             "main-color": "<sub<main-color>>",
-            "secondary-color": "<sub<secondary-color>>",
-            "swl--inside-color": "<sub<i3l--inside-color>>",
-            "swl--inside-clear-color": "<sub<i3l--inside-clear-color>>",
-            "swl--inside-ver-color": "<sub<i3l--inside-ver-color>>",
-            "swl--inside-wrong-color": "<sub<i3l--inside-wrong-color>>",
-            "swl--key-hl-color": "<sub<i3l--key-hl-color>>",
-            "swl--bs-hl-color": "<sub<i3l--bs-hl-color>>",
-            "swl--separator-color": "<sub<i3l--separator-color>>",
-            "swl--line-color": "<sub<i3l--line-color>>",
-            "swl--text-color": "<sub<i3l--text-color>>",
-            "swl--text-clear-color": "<sub<i3l--text-clear-color>>",
-            "swl--text-caps-lock-color": "<sub<i3l--text-caps-lock-color>>",
-            "swl--text-ver-color": "<sub<i3l--text-ver-color>>",
-            "swl--text-wrong-color": "<sub<i3l--text-wrong-color>>",
-            "swl--ring-color": "<sub<i3l--ring-color>>",
-            "swl--ring-ver-color": "<sub<i3l--ring-ver-color>>",
-            "swl--ring-clear-color": "<sub<i3l--ring-clear-color>>",
-            "swl--ring-wrong-color": "<sub<i3l--ring-wrong-color>>"
+            "secondary-color": "<sub<secondary-color>>"
         }
     },
     "plstatus": {
@@ -252,5 +235,29 @@
         "source": ".config/qtile/config_device.py",
         "target": "~/.config/qtile/config_device.py",
         "flags": ["device-specific"]
+    },
+    "xlock": {
+        "source": ".local/scripts/xlock.sh",
+        "target": "~/.local/scripts/xlock",
+        "flags": ["x"],
+        "subs": {
+            "swl--inside-color": "<sub<i3l--inside-color>>",
+            "swl--inside-clear-color": "<sub<i3l--inside-clear-color>>",
+            "swl--inside-ver-color": "<sub<i3l--inside-ver-color>>",
+            "swl--inside-wrong-color": "<sub<i3l--inside-wrong-color>>",
+            "swl--key-hl-color": "<sub<i3l--key-hl-color>>",
+            "swl--bs-hl-color": "<sub<i3l--bs-hl-color>>",
+            "swl--separator-color": "<sub<i3l--separator-color>>",
+            "swl--line-color": "<sub<i3l--line-color>>",
+            "swl--text-color": "<sub<i3l--text-color>>",
+            "swl--text-clear-color": "<sub<i3l--text-clear-color>>",
+            "swl--text-caps-lock-color": "<sub<i3l--text-caps-lock-color>>",
+            "swl--text-ver-color": "<sub<i3l--text-ver-color>>",
+            "swl--text-wrong-color": "<sub<i3l--text-wrong-color>>",
+            "swl--ring-color": "<sub<i3l--ring-color>>",
+            "swl--ring-ver-color": "<sub<i3l--ring-ver-color>>",
+            "swl--ring-clear-color": "<sub<i3l--ring-clear-color>>",
+            "swl--ring-wrong-color": "<sub<i3l--ring-wrong-color>>"
+        }
     }
 }
