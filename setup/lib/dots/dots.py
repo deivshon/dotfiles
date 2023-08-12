@@ -11,6 +11,7 @@ from setup.lib import LIB_DIR
 from setup.lib.dots import LINKS_FILE
 from setup.lib.dots.targets.firefox import FirefoxVariableTarget
 from setup.lib.dots.flags import DEVICE_SPECIFIC_FLAG, SUDO_FLAG, VAR_TARGET_FLAG, EXECUTABLE_FLAG
+from setup.lib.install.handler import InstallHandler
 
 
 SUBSTITUTIONS_DIR = "./substitutions"
@@ -48,7 +49,7 @@ __TARGET_SEARCH = {
 }
 
 
-def link(config, user, keep_expansion=False, force=False):
+def link(config, user, keep_expansion=False, force=False, compilationMap: Dict[str, InstallHandler] = {}):
     copy_flags = "-f" if force else "-i"
 
     substitute(config, SUBSTITUTIONS_DIR)
@@ -110,6 +111,9 @@ def link(config, user, keep_expansion=False, force=False):
 
             if EXECUTABLE_FLAG in flags:
                 utils.path.make_executable(target, sudo=SUDO_FLAG in flags)
+
+            if dot_link.name in compilationMap:
+                compilationMap[dot_link.name].needsCompilation = True
 
     if not keep_expansion and os.path.isdir(SUBSTITUTIONS_DIR):
         shutil.rmtree(SUBSTITUTIONS_DIR)

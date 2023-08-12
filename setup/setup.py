@@ -2,7 +2,7 @@ import os
 import sys
 import json
 import argparse
-from typing import List
+from typing import Dict, List
 
 from setup.lib import log
 from setup.lib.install.handler import InstallHandler
@@ -24,8 +24,10 @@ from setup.lib import symlinks
 
 
 def main():
+    dwm_installer = DwmInstaller()
+
     installers: List[InstallHandler] = [
-        DwmInstaller(),
+        dwm_installer,
         PlstatusInstaller(),
         StInstaller(),
         ChangeVolPactlInstaller(),
@@ -33,6 +35,10 @@ def main():
         StatusScriptsInstaller(),
         PlstatusInstaller()
     ]
+
+    compilationMap: Dict[str, InstallHandler] = {
+        "dwm": dwm_installer,
+    }
 
     __FILE_DIR__ = os.path.dirname(os.path.realpath(__file__))
 
@@ -136,7 +142,10 @@ def main():
         inst.download(args.git_pull)
 
     dots.link(selected_config, homedir,
-              keep_expansion=args.keep, force=args.force)
+              keep_expansion=args.keep,
+              force=args.force,
+              compilationMap=compilationMap)
+
     setup_status.config = args.config
 
     post.change(selected_config)
