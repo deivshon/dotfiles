@@ -31,7 +31,7 @@ keys = [
         desc="Move window focus to other window"),
     Key(
         [mod],
-        "f",
+        "x",
         lazy.window.toggle_fullscreen(),
         desc="Toggle fullscreen on the focused window",
     ),
@@ -41,7 +41,7 @@ keys = [
         "rofi -show drun -display-drun ''"), desc="Launch rofi"),
     Key([mod], "l", lazy.spawn("xlock"), desc="Lock screen"),
 
-    Key([mod], "x", lazy.next_layout(), desc="Toggle between layouts"),
+    Key([mod], "f", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
 ]
 
