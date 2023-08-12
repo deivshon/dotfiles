@@ -226,12 +226,12 @@
     "dwm-startup": {
         "source": ".startup/dwm/startops.sh",
         "target": "~/.startup/dwm/startops.sh",
-        "flags": ["device-specific"]
+        "flags": ["device-specific", "x"]
     },
     "qtile-startup": {
         "source": ".startup/qtile/startops.sh",
         "target": "~/.startup/qtile/startops.sh",
-        "flags": ["device-specific"]
+        "flags": ["device-specific", "x"]
     },
     "bashrc-device": {
         "source": ".bashrc_device",
@@ -246,6 +246,11 @@
     "hyprland-device": {
         "source": ".config/hypr/hyprsetup.conf",
         "target": "~/.config/hypr/hyprsetup.conf",
+        "flags": ["device-specific"]
+    },
+    "qtile-device": {
+        "source": ".config/qtile/config_device.py",
+        "target": "~/.config/qtile/config_device.py",
         "flags": ["device-specific"]
     }
 }

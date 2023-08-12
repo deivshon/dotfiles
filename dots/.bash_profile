@@ -15,7 +15,10 @@ if [ -z "$DISPLAY" ]; then
             Hyprland
             ;;
         /dev/tty2)
-            startx
+            startx dwm
+            ;;
+        /dev/tty3)
+            startx qtile
             ;;
     esac
 fi
