@@ -33,7 +33,6 @@ def main():
         ChangeVolPactlInstaller(),
         CommandCacheInstaller(),
         StatusScriptsInstaller(),
-        PlstatusInstaller()
     ]
 
     compilationMap: Dict[str, InstallHandler] = {
