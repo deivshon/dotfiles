@@ -134,5 +134,13 @@
         },
         "wallpaper-link": "https://i.ibb.co/qF04kD6/butterfly-Purple.png",
         "wallpaper-name": "butterfly-purple-digital.png"
+    },
+    "butterfly-aqua-digital": {
+        "substitutions": {
+            "main-color": "#4BB2A0",
+            "secondary-color": "#449788"
+        },
+        "wallpaper-link": "https://i.ibb.co/Ny4XvrT/butterfly-aqua-digital.png",
+        "wallpaper-name": "butterfly-aqua-digital.png"
     }
 }
