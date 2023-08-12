@@ -7,33 +7,33 @@
         "source": ".bash_profile",
         "target": "~/.bash_profile"
     },
-    "dunst": {
+    "dunst-config": {
         "source": ".config/dunst/dunstrc",
         "target": "~/.config/dunst/dunstrc",
         "subs": {
             "main-color": "<sub<main-color>>"
         }
     },
-    "alacritty": {
+    "alacritty-config": {
         "source": ".config/alacritty/alacritty.yml",
         "target": "~/.config/alacritty/alacritty.yml"
     },
-    "btop": {
+    "btop-config": {
         "source": ".config/btop/btop.conf",
         "target": "~/.config/btop/btop.conf"
     },
-    "rofi": {
+    "rofi-config": {
         "source": ".config/rofi/config.rasi",
         "target": "~/.config/rofi/config.rasi",
         "subs": {
             "main-color": "<sub<main-color>>"
         }
     },
-    "ranger": {
+    "ranger-config": {
         "source": ".config/ranger/rc.conf",
         "target": "~/.config/ranger/rc.conf"
     },
-    "dwm": {
+    "dwm-config": {
         "source": ".config/dwm/config.h",
         "target": "~/.config/dwm/config.h",
         "subs": {
@@ -41,11 +41,11 @@
             "secondary-color": "<sub<secondary-color>>"
         }
     },
-    "plstatus": {
+    "plstatus-config": {
         "source": ".config/plstatus/config.json",
         "target": "~/.config/plstatus/config.json"
     },
-    "enhancer-for-youtube": {
+    "enhancer-for-youtube-config": {
         "source": ".config/enhancer-for-youtube/efy.json",
         "target": "~/.config/enhancer-for-youtube/efy.json",
         "subs": {
@@ -58,12 +58,12 @@
             "efy--shadow": "<sub<efy--shadow>>"
         }
     },
-    "reflector": {
+    "reflector-config": {
         "source": "etc/xdg/reflector/reflector.conf",
         "target": "/etc/xdg/reflector/reflector.conf",
         "flags": ["sudo"]
     },
-    "hyprland": {
+    "hyprland-config": {
         "source": ".config/hypr/hyprland.conf",
         "target": "~/.config/hypr/hyprland.conf",
         "subs": {
@@ -71,14 +71,14 @@
             "secondary-color-no-hash": "<sub<hypr-secondary-color>>"
         }
     },
-    "hyprpaper": {
+    "hyprpaper-config": {
         "source": ".config/hypr/hyprpaper.conf",
         "target": "~/.config/hypr/hyprpaper.conf",
         "subs": {
             "wallpaper-path": "<sub<hypr-wallpaper-path>>"
         }
     },
-    "fuzzel": {
+    "fuzzel-config": {
         "source": ".config/fuzzel/fuzzel.ini",
         "target": "~/.config/fuzzel/fuzzel.ini",
         "subs": {
@@ -96,7 +96,7 @@
             "main-color": "<sub<waybar-color>>"
         }
     },
-    "foot": {
+    "foot-config": {
         "source": ".config/foot/foot.ini",
         "target": "~/.config/foot/foot.ini",
         "subs": {
@@ -104,7 +104,7 @@
             "secondary-color-no-hash": "<sub<foot-secondary-color>>"
         }
     },
-    "firefox": {
+    "firefox-userchrome": {
         "source": ".mozilla/firefox/profile/chrome/userChrome.css",
         "flags": ["variable-target"],
         "subs": {
@@ -132,11 +132,11 @@
             "ffx--autocomplete-popup-highlight-background": "<sub<ffx--autocomplete-popup-highlight-background>>"
         }
     },
-    "tmux": {
+    "tmux-config": {
         "source": ".tmux.conf",
         "target": "~/.tmux.conf"
     },
-    "swaylock": {
+    "swaylock-config": {
         "source": ".config/swaylock/config",
         "target": "~/.config/swaylock/config",
         "subs": {
@@ -167,7 +167,7 @@
         },
         "flags": ["sudo"]
     },
-    "doas": {
+    "doas-config": {
         "source": "/etc/doas.conf",
         "target": "/etc/doas.conf",
         "flags": ["sudo"]
@@ -176,16 +176,16 @@
         "source": ".config/micro/bindings.json",
         "target": "~/.config/micro/bindings.json"
     },
-    "micro-settings": {
+    "micro-config": {
         "source": ".config/micro/settings.json",
         "target": "~/.config/micro/settings.json"
     },
-    "nano": {
+    "nano-config": {
         "source": ".config/nano/nanorc",
         "target": "~/.config/nano/nanorc"
     },
     "sudoedit": {
-        "source": "/usr/local/bin/nanowrap",
+        "source": "/usr/local/bin/nanowrap.sh",
         "target": "/usr/local/bin/nanowrap",
         "flags": ["sudo", "x"],
         "subs": {
@@ -197,7 +197,7 @@
         "target": "/etc/pacman.d/hooks/dashsh.hook",
         "flags": ["sudo"]
     },
-    "qtile": {
+    "qtile-config": {
         "source": ".config/qtile/config.py",
         "target": "~/.config/qtile/config.py",
         "subs": {
@@ -226,12 +226,12 @@
         "target": "~/.bash_profile_device",
         "flags": ["device-specific"]
     },
-    "hyprland-device": {
+    "hyprland-config-device": {
         "source": ".config/hypr/hyprsetup.conf",
         "target": "~/.config/hypr/hyprsetup.conf",
         "flags": ["device-specific"]
     },
-    "qtile-device": {
+    "qtile-config-device": {
         "source": ".config/qtile/config_device.py",
         "target": "~/.config/qtile/config_device.py",
         "flags": ["device-specific"]

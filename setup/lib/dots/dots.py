@@ -21,7 +21,7 @@ SUBS = "subs"
 __CONFIG_SUBS = "substitutions"
 
 
-__FIREFOX = "firefox"
+__FIREFOX = "firefox-userchrome"
 
 
 @dataclass
