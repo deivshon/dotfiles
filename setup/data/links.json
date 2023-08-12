@@ -267,5 +267,10 @@
         "subs": {
             "wallpaper-path": "<sub<xwms-wallpaper-path>>"
         }
+    },
+    "alacritty-start-script": {
+        "source": "/usr/local/bin/alacritty.sh",
+        "target": "/usr/local/bin/alacritty",
+        "flags": ["sudo", "x"]
     }
 }
