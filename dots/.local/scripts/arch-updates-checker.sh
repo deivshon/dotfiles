@@ -22,7 +22,6 @@ cache() {
 CACHE_FILE=""
 if [ "$1" != "" ]; then
     CACHE_FILE="$1"
-    CACHE_DIR=$(dirname "$CACHE_FILE")
 
     cache 0 "$CACHE_FILE"
 fi
