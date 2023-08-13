@@ -3,7 +3,7 @@ import re
 import sys
 import subprocess
 
-from typing import Callable
+from typing import Callable, Optional
 
 from libqtile.lazy import lazy
 from libqtile import bar, widget
@@ -16,6 +16,37 @@ from libqtile.config import Drag, Group, Key, Screen
 
 sys.path.insert(1, os.path.dirname(__file__))
 from config_device import primary_screen, workspace_bindings
+
+do_nothing = lambda *_: None
+
+def read_file(path: str) -> Optional[str]:
+    if not os.path.isfile(path):
+        return None
+
+    with open(path) as f:
+        content = f.read()
+
+    return content
+
+def check_battery() -> bool:
+    batteries_path = "/sys/class/power_supply"
+    if not os.path.isdir(batteries_path):
+        return False
+
+    for dev in os.listdir(batteries_path):
+        content = read_file(f"{batteries_path}/{dev}/type")
+
+        if content is None:
+            continue
+
+        if content.strip() == "Battery":
+            return True
+
+    return False
+
+battery_exists = check_battery()
+del check_battery
+del read_file
 
 mod = "mod4"
 terminal = "alacritty"
@@ -120,6 +151,8 @@ if p.returncode == 0:
         if re.match(r".* connected.*", line):
             screen_count += 1
 
+widget.GroupBox.button_press = do_nothing
+
 screens=[]
 for i in range(0, screen_count):
     screens.append(
@@ -158,7 +191,7 @@ for i in range(0, screen_count):
                         border_width=1
                     ),
                     widget.Clock(format="%Y-%m-%d %H:%M:%S"),
-                    widget.BatteryIcon(),
+                    widget.BatteryIcon() if battery_exists else widget.Spacer(length=0),
                     widget.Systray() if i == primary_screen else widget.Spacer(length=0),
                 ],
                 24,
