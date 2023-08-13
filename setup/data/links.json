@@ -7,9 +7,23 @@
         "source": ".bash_profile",
         "target": "~/.bash_profile"
     },
-    "dunst-config": {
-        "source": ".config/dunst/dunstrc",
-        "target": "~/.config/dunst/dunstrc",
+    "dunst-config-dwm": {
+        "source": ".config/dunst/dunstrc-dwm",
+        "target": "~/.config/dunst/dunstrc-dwm",
+        "subs": {
+            "main-color": "<sub<main-color>>"
+        }
+    },
+    "dunst-config-hyprland": {
+        "source": ".config/dunst/dunstrc-hyprland",
+        "target": "~/.config/dunst/dunstrc-hyprland",
+        "subs": {
+            "main-color": "<sub<main-color>>"
+        }
+    },
+    "dunst-config-qtile": {
+        "source": ".config/dunst/dunstrc-qtile",
+        "target": "~/.config/dunst/dunstrc-qtile",
         "subs": {
             "main-color": "<sub<main-color>>"
         }

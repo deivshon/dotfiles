@@ -4,6 +4,7 @@ systemctl --user import-environment DISPLAY
 eval "$(ssh-agent)"
 
 start_dwm() {
+    dunst -config ~/.config/dunst/dunstrc-dwm &
     plstatus &
     feh --bg-fill <sub<xwms-wallpaper-path>> &
     ~/.startup/dwm/startops.sh &
@@ -11,13 +12,13 @@ start_dwm() {
 }
 
 start_qtile() {
+    dunst -config ~/.config/dunst/dunstrc-qtile &
     ~/.startup/qtile/startops.sh &
     exec qtile start
 }
 
 nm-applet &
 polkit-dumb-agent &
-dunst &
 xset -b &
 case $1 in
     dwm  ) start_dwm;;
