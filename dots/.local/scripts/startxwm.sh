@@ -12,9 +12,12 @@ start_dwm() {
 }
 
 start_qtile() {
+    export QTILE_WIDGETS_CACHE_DIR="/tmp/qtile-configs-cache"
+    export QTILE_UPDATES_CACHE_FILE="arch-updates-checker"
+
     dunst -config ~/.config/dunst/dunstrc-qtile &
-    ~/.startup/qtile/startops.sh &
-    exec qtile start
+    arch-updates-checker "$QTILE_WIDGETS_CACHE_DIR/$QTILE_UPDATES_CACHE_FILE" 60 &
+    ~/.startup/qtile/startops.sh && exec qtile start
 }
 
 nm-applet &

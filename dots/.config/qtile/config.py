@@ -3,7 +3,7 @@ import re
 import sys
 import subprocess
 
-from typing import Callable, Optional
+from typing import Callable, Optional, Union, NoReturn
 
 from libqtile.lazy import lazy
 from libqtile import bar, widget
@@ -19,6 +19,24 @@ from config_device import primary_screen, workspace_bindings
 
 do_nothing = lambda *_: None
 
+def getenv_or_die(name: str) -> Union[str, NoReturn]:
+    var = os.getenv(name)
+    if var is None:
+        sys.exit(1)
+
+    return var
+
+WIDGETS_CACHE_DIR = getenv_or_die("QTILE_WIDGETS_CACHE_DIR")
+UPDATES_CACHE_FILE = f"{WIDGETS_CACHE_DIR}/{getenv_or_die('QTILE_UPDATES_CACHE_FILE')}"
+
+def check_arch_updates():
+    if not os.path.exists(UPDATES_CACHE_FILE):
+        return "0"
+
+    with open(UPDATES_CACHE_FILE) as f:
+        return f.read().strip()
+
+
 def read_file(path: str) -> Optional[str]:
     if not os.path.isfile(path):
         return None
@@ -27,6 +45,7 @@ def read_file(path: str) -> Optional[str]:
         content = f.read()
 
     return content
+
 
 def check_battery() -> bool:
     batteries_path = "/sys/class/power_supply"
@@ -85,7 +104,6 @@ keys = [
 ]
 
 workspaces = [Group(i) for i in "123456789"]
-
 
 def switch_workspace(name: str) -> Callable:
     def _inner(qtile: Qtile) -> None:
@@ -169,6 +187,7 @@ for i in range(0, screen_count):
                     ),
                     widget.Prompt(),
                     widget.WindowName(),
+                    widget.Spacer(length=7),
                     widget.TextBox("DISK "),
                     widget.HDDGraph(
                         border_color="<sub<main-color>>",
@@ -193,6 +212,9 @@ for i in range(0, screen_count):
                     widget.Clock(format="%Y-%m-%d %H:%M:%S"),
                     widget.BatteryIcon() if battery_exists else widget.Spacer(length=0),
                     widget.Systray() if i == primary_screen else widget.Spacer(length=0),
+                    widget.GenPollText(func=check_arch_updates,
+                        update_interval=5,
+                        fmt=" {}"),
                 ],
                 24,
             ),
