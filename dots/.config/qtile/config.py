@@ -15,7 +15,7 @@ from libqtile.config import Drag, Group, Key, Screen
 
 
 sys.path.insert(1, os.path.dirname(__file__))
-import config_device
+from config_device import primary_screen, workspace_bindings
 
 mod = "mod4"
 terminal = "alacritty"
@@ -58,15 +58,9 @@ workspaces = [Group(i) for i in "123456789"]
 
 def switch_workspace(name: str) -> Callable:
     def _inner(qtile: Qtile) -> None:
-        if len(qtile.screens) == 1:
-            qtile.groups_map[name].cmd_toscreen()
-            return
+        bound_screen = workspace_bindings[len(qtile.screens)][name]
 
-        if name in "13579":
-            qtile.focus_screen(0)
-        else:
-            qtile.focus_screen(1)
-
+        qtile.focus_screen(bound_screen)
         qtile.groups_map[name].cmd_toscreen()
 
     return _inner
@@ -78,15 +72,10 @@ def move_window(group: str) -> Callable:
         if current_window is None:
             return
 
+        bound_screen = workspace_bindings[len(qtile.screens)][group]
+
         current_window.togroup(group)
-        if len(qtile.screens) == 1:
-            return
-
-        if group in "13579":
-            qtile.focus_screen(0)
-        else:
-            qtile.focus_screen(1)
-
+        qtile.focus_screen(bound_screen)
         qtile.groups_map[group].cmd_toscreen()
 
     return _inner
@@ -170,7 +159,7 @@ for i in range(0, screen_count):
                     ),
                     widget.Clock(format="%Y-%m-%d %H:%M:%S"),
                     widget.BatteryIcon(),
-                    widget.Systray() if i == config_device.primary_screen else widget.Spacer(length=0),
+                    widget.Systray() if i == primary_screen else widget.Spacer(length=0),
                 ],
                 24,
             ),
