@@ -217,7 +217,7 @@ for i in range(0, screen_count):
                         graph_color="<sub<main-color>>",
                         fill_color="<sub<main-color>>",
                         border_width=1,
-                        update_interval=30,
+                        frequency=30,
                         samples=120
                     ) if battery_path is not None else widget.Spacer(length=0),
                     widget.Clock(format="%Y-%m-%d %H:%M:%S"),
