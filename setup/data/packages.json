@@ -40,7 +40,8 @@
         "micro",
         "dash",
         "python-psutil",
-        "qtile"
+        "qtile",
+        "pacman-contrib"
     ],
     "yay": [
         "afetch",
