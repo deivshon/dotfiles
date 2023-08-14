@@ -56,3 +56,5 @@ The configuration files in this repository and the relative setup scripts are ta
 -   [waybar-hyprland-git](https://aur.archlinux.org/packages/waybar-hyprland-git)
 -   [wlr-randr](https://aur.archlinux.org/packages/wlr-randr)
 -   [nwg-look-bin](https://aur.archlinux.org/packages/nwg-look-bin) [wayland lxappearance equivalent]
+-   [swaylock-effects](https://aur.archlinux.org/packages/swaylock-effects)
+-   [i3lock-color](https://aur.archlinux.org/packages/i3lock-color)

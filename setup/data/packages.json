@@ -53,6 +53,7 @@
         "waybar-hyprland-git",
         "wlr-randr",
         "nwg-look-bin",
-        "swaylock-effects"
+        "swaylock-effects",
+        "i3lock-color"
     ]
 }
