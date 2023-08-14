@@ -296,5 +296,9 @@
         "source": ".local/scripts/up.sh",
         "target": "~/.local/scripts/up",
         "flags": ["x"]
+    },
+    "battery-graph-qtile": {
+        "source": ".config/qtile/battery_graph.py",
+        "target": "~/.config/qtile/battery_graph.py"
     }
 }

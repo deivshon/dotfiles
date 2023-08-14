@@ -16,6 +16,7 @@ from libqtile.config import Drag, Group, Key, Screen
 
 sys.path.insert(1, os.path.dirname(__file__))
 from config_device import primary_screen, workspace_bindings
+from battery_graph import BatteryGraph
 
 do_nothing = lambda *_: None
 
@@ -47,10 +48,10 @@ def read_file(path: str) -> Optional[str]:
     return content
 
 
-def check_battery() -> bool:
+def get_battery_path() -> Optional[str]:
     batteries_path = "/sys/class/power_supply"
     if not os.path.isdir(batteries_path):
-        return False
+        return None
 
     for dev in os.listdir(batteries_path):
         content = read_file(f"{batteries_path}/{dev}/type")
@@ -59,12 +60,12 @@ def check_battery() -> bool:
             continue
 
         if content.strip() == "Battery":
-            return True
+            return f"{batteries_path}/{dev}"
 
-    return False
+    return None
 
-battery_exists = check_battery()
-del check_battery
+battery_path = get_battery_path()
+del get_battery_path
 del read_file
 
 mod = "mod4"
@@ -209,7 +210,16 @@ for i in range(0, screen_count):
                         fill_color="<sub<main-color>>",
                         border_width=1
                     ),
-                    widget.BatteryIcon() if battery_exists else widget.Spacer(length=0),
+                    widget.TextBox("BAT "),
+                    BatteryGraph(
+                        battery_path=battery_path,
+                        border_color="<sub<main-color>>",
+                        graph_color="<sub<main-color>>",
+                        fill_color="<sub<main-color>>",
+                        border_width=1,
+                        update_interval=60,
+                        samples=120
+                    ) if battery_path is not None else widget.Spacer(length=0),
                     widget.Clock(format="%Y-%m-%d %H:%M:%S"),
                     widget.Systray() if i == primary_screen else widget.Spacer(length=0),
                     widget.GenPollText(func=check_arch_updates,
