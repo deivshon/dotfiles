@@ -1,5 +1,5 @@
 [Unit]
-Description=Low battery charge notifier
+Description=Battery charge notifier
 After=multi-user.target
 
 [Service]
