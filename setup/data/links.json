@@ -291,5 +291,10 @@
         "source": ".local/scripts/arch-updates-checker.sh",
         "target": "~/.local/scripts/arch-updates-checker",
         "flags": ["x"]
+    },
+    "update-script": {
+        "source": ".local/scripts/up.sh",
+        "target": "~/.local/scripts/up",
+        "flags": ["x"]
     }
 }

@@ -1,5 +1,7 @@
 #!/bin/sh
 
+LAST_SIGUSR1=0
+
 is_number() {
     expr "$1" : '^[0-9]*$' > /dev/null
 }
@@ -19,26 +21,8 @@ cache() {
     echo "$1" > "$2"
 }
 
-CACHE_FILE=""
-if [ "$1" != "" ]; then
+run_and_cache() {
     CACHE_FILE="$1"
-
-    cache 0 "$CACHE_FILE"
-fi
-
-SLEEP_TIME=60
-if [ "$2" != "" ]; then
-    if ! is_number "$2"; then
-        log_err "sleep time '$2' is not a number"
-        exit 1
-    else
-        SLEEP_TIME=$2
-    fi
-elif [ "$CACHE_FILE" != "" ]; then
-    log_info "using default period (60s)"
-fi
-
-while true; do
     PACMAN_UPDATES=$(checkupdates)
     CHECKUPDATES_STATUS=$?
     PACMAN_UPDATES_NUMBER=0
@@ -79,6 +63,39 @@ while true; do
     elif [ "$CACHE_FILE" = "" ]; then
         exit 1
     fi
+}
 
-    sleep "$SLEEP_TIME"
+handle_sigusr1() {
+    CACHE_FILE="$1"
+    LAST_SIGUSR1=1
+    run_and_cache "$CACHE_FILE"
+}
+
+CACHE_FILE=""
+if [ "$1" != "" ]; then
+    CACHE_FILE="$1"
+
+    cache 0 "$CACHE_FILE"
+fi
+
+SLEEP_TIME=60
+if [ "$2" != "" ]; then
+    if ! is_number "$2"; then
+        log_err "sleep time '$2' is not a number"
+        exit 1
+    else
+        SLEEP_TIME=$2
+    fi
+elif [ "$CACHE_FILE" != "" ]; then
+    log_info "using default period (60s)"
+fi
+
+trap 'handle_sigusr1 "$CACHE_FILE"' USR1
+
+while true; do
+    [ "$LAST_SIGUSR1" -eq 0 ] && run_and_cache "$CACHE_FILE"
+    LAST_SIGUSR1=0
+
+    sleep "$SLEEP_TIME" &
+    wait $!
 done

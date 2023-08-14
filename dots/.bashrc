@@ -85,7 +85,6 @@ alias egrep='egrep --colour=always'
 alias fgrep='fgrep --colour=always'
 alias cp='cp -i'
 alias ip='ip -c'
-alias up="sudo pacman -Syu && yay -Sua"
 alias clear="printf '\033[2J\033[3J\033[1;1H' && afetch"
 alias celar="printf '\033[2J\033[3J\033[1;1H' && afetch"
 alias clearall="printf '\033[2J\033[3J\033[1;1H'"

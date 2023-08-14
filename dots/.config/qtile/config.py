@@ -213,7 +213,7 @@ for i in range(0, screen_count):
                     widget.BatteryIcon() if battery_exists else widget.Spacer(length=0),
                     widget.Systray() if i == primary_screen else widget.Spacer(length=0),
                     widget.GenPollText(func=check_arch_updates,
-                        update_interval=5,
+                        update_interval=1,
                         fmt=" {}"),
                 ],
                 24,
