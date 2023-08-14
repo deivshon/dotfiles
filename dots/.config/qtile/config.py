@@ -209,8 +209,8 @@ for i in range(0, screen_count):
                         fill_color="<sub<main-color>>",
                         border_width=1
                     ),
-                    widget.Clock(format="%Y-%m-%d %H:%M:%S"),
                     widget.BatteryIcon() if battery_exists else widget.Spacer(length=0),
+                    widget.Clock(format="%Y-%m-%d %H:%M:%S"),
                     widget.Systray() if i == primary_screen else widget.Spacer(length=0),
                     widget.GenPollText(func=check_arch_updates,
                         update_interval=1,
