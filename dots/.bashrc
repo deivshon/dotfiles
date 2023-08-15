@@ -2,10 +2,6 @@
 
 [[ $- != *i* ]] && return
 
-if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
-    Hyprland
-fi
-
 source ~/.bashrc_device
 
 [ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
