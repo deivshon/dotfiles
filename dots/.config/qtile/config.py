@@ -130,6 +130,8 @@ def move_window(group: str) -> Callable:
 
     return _inner
 
+MAIN_COLOR="<sub<main-color>>"
+SECONDARY_COLOR="<sub<secondary-color>>"
 
 for w in workspaces:
     keys.append(Key([mod], w.name, lazy.function(
@@ -140,15 +142,15 @@ for w in workspaces:
 
 layouts=[
     MonadTall(
-        border_focus="<sub<main-color>>",
-        border_normal="<sub<secondary-color>>",
+        border_focus=MAIN_COLOR,
+        border_normal=SECONDARY_COLOR,
         border_width=1,
         ratio=0.55,
         new_client_position="top"
     ),
     Max(
-        border_focus="<sub<main-color>>",
-        border_normal="<sub<secondary-color>>",
+        border_focus=MAIN_COLOR,
+        border_normal=SECONDARY_COLOR,
         border_width=1
     ),
 ]
@@ -182,8 +184,8 @@ for i in range(0, screen_count):
                         scale=1.3,
                         padding=0),
                     widget.GroupBox(
-                        this_screen_border="<sub<secondary-color>>",
-                        this_current_screen_border="<sub<main-color>>",
+                        this_screen_border=SECONDARY_COLOR,
+                        this_current_screen_border=MAIN_COLOR,
                         other_current_screen_border="#000000",
                         other_screen_border="#000000",
                         borderwidth=2,
@@ -195,31 +197,31 @@ for i in range(0, screen_count):
                     widget.Spacer(length=7),
                     widget.TextBox("DISK "),
                     widget.HDDGraph(
-                        border_color="<sub<main-color>>",
-                        graph_color="<sub<main-color>>",
-                        fill_color="<sub<main-color>>",
+                        border_color=MAIN_COLOR,
+                        graph_color=MAIN_COLOR,
+                        fill_color=MAIN_COLOR,
                         border_width=1
                     ),
                     widget.TextBox("CPU "),
                     widget.CPUGraph(
-                        border_color="<sub<main-color>>",
-                        graph_color="<sub<main-color>>",
-                        fill_color="<sub<main-color>>",
+                        border_color=MAIN_COLOR,
+                        graph_color=MAIN_COLOR,
+                        fill_color=MAIN_COLOR,
                         border_width=1
                     ),
                     widget.TextBox("RAM "),
                     widget.MemoryGraph(
-                        border_color="<sub<main-color>>",
-                        graph_color="<sub<main-color>>",
-                        fill_color="<sub<main-color>>",
+                        border_color=MAIN_COLOR,
+                        graph_color=MAIN_COLOR,
+                        fill_color=MAIN_COLOR,
                         border_width=1
                     ),
                     widget.TextBox("BAT ") if battery_path is not None else widget.Spacer(length=0),
                     BatteryGraph(
                         battery_path=battery_path,
-                        border_color="<sub<main-color>>",
-                        graph_color="<sub<main-color>>",
-                        fill_color="<sub<main-color>>",
+                        border_color=MAIN_COLOR,
+                        graph_color=MAIN_COLOR,
+                        fill_color=MAIN_COLOR,
                         border_width=1,
                         frequency=30,
                         samples=120
@@ -260,6 +262,6 @@ wmname="LG3D"
 
 floating_layout=Floating(
     border_width=1,
-    border_focus="<sub<main-color>>",
-    border_normal="<sub<secondary-color>>",
+    border_focus=MAIN_COLOR,
+    border_normal=SECONDARY_COLOR,
 )
