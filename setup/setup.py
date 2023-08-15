@@ -11,7 +11,7 @@ from setup.lib.config import config
 from setup.lib.dots import dots
 
 from setup.lib.install import install
-from setup.lib.dots.names import DWM_CONFIG
+from setup.lib.dots.names import DotsNames
 from setup.lib.install.st import StInstaller
 from setup.lib.install.dwm import DwmInstaller
 from setup.lib.config import AVAILABLE_CONFIGS
@@ -37,7 +37,7 @@ def main():
     ]
 
     compilationMap: Dict[str, InstallHandler] = {
-        DWM_CONFIG: dwm_installer,
+        DotsNames.DWM_CONFIG: dwm_installer,
     }
 
     __FILE_DIR__ = os.path.dirname(os.path.realpath(__file__))

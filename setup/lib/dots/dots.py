@@ -9,7 +9,7 @@ from setup.lib import log
 from setup.lib import utils
 from setup.lib import LIB_DIR
 from setup.lib.dots import LINKS_FILE
-from setup.lib.dots.names import DOTS_NAMES
+from setup.lib.dots.names import DotsNames
 from setup.lib.install.handler import InstallHandler
 from setup.lib.dots.targets.firefox import FirefoxVariableTarget
 from setup.lib.dots.flags import DEVICE_SPECIFIC_FLAG, SUDO_FLAG, VAR_TARGET_FLAG, EXECUTABLE_FLAG
@@ -43,7 +43,7 @@ __DOT_LINKS: List[DotLink] = []
 with open(LINKS_FILE, "r") as file:
     __configs_list = json.loads(file.read())
     for key in __configs_list:
-        if key not in DOTS_NAMES:
+        if key not in DotsNames.__dict__.values():
             log.failure(
                 f"Naming inconsistency: \"{key}\" does not appear in allowed names")
 
