@@ -40,6 +40,8 @@ ALACRITTY_START_SCRIPT="alacritty-start-script"
 ARCH_UPDATE_CHECKER="arch-update-checker"
 UPDATE_SCRIPT="update-script"
 BATTER_GRAPH_TILE="battery-graph-qtile"
+QTILE_MONADTALL_LAYOUT_ICON="qtile-monadtall-layout-icon"
+QTILE_MAX_LAYOUT_ICON="qtile-max-layout-icon"
 
 DOTS_NAMES = [
     BASHRC,
@@ -83,5 +85,7 @@ DOTS_NAMES = [
     ALACRITTY_START_SCRIPT,
     ARCH_UPDATE_CHECKER,
     UPDATE_SCRIPT,
-    BATTER_GRAPH_TILE
+    BATTER_GRAPH_TILE,
+    QTILE_MONADTALL_LAYOUT_ICON,
+    QTILE_MAX_LAYOUT_ICON
 ]

@@ -300,5 +300,13 @@
     "battery-graph-qtile": {
         "source": ".config/qtile/battery_graph.py",
         "target": "~/.config/qtile/battery_graph.py"
+    },
+    "qtile-monadtall-layout-icon": {
+        "source": ".icons/qtile/layout-monadtall.png",
+        "target": "~/.icons/qtile/layout-monadtall.png"
+    },
+    "qtile-max-layout-icon": {
+        "source": ".icons/qtile/layout-max.png",
+        "target": "~/.icons/qtile/layout-max.png"
     }
 }

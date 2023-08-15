@@ -178,13 +178,17 @@ for i in range(0, screen_count):
         Screen(
             bottom=bar.Bar(
                 [
+                    widget.CurrentLayoutIcon(custom_icon_paths=[os.path.expanduser("~/.icons/qtile/")],
+                        scale=1.3,
+                        padding=0),
                     widget.GroupBox(
                         this_screen_border="<sub<secondary-color>>",
                         this_current_screen_border="<sub<main-color>>",
                         other_current_screen_border="#000000",
                         other_screen_border="#000000",
                         borderwidth=2,
-                        highlight_method="line"
+                        highlight_method="line",
+                        padding=3
                     ),
                     widget.Prompt(),
                     widget.WindowName(),
@@ -226,7 +230,7 @@ for i in range(0, screen_count):
                         update_interval=1,
                         fmt=" {}"),
                 ],
-                24,
+                25,
             ),
             wallpaper="<sub<qtile-wallpaper-path>>",
             wallpaper_mode="fill"
