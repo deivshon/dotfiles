@@ -78,16 +78,17 @@ if [ "$1" != "" ]; then
     cache 0 "$CACHE_FILE"
 fi
 
-SLEEP_TIME=60
+SLEEP_TIME=600
 if [ "$2" != "" ]; then
     if ! is_number "$2"; then
         log_err "sleep time '$2' is not a number"
         exit 1
     else
+        log_info "starting with $SLEEP_TIME seconds period"
         SLEEP_TIME=$2
     fi
 elif [ "$CACHE_FILE" != "" ]; then
-    log_info "using default period (60s)"
+    log_info "using default $SLEEP_TIME seconds period"
 fi
 
 trap 'handle_sigusr1 "$CACHE_FILE"' USR1

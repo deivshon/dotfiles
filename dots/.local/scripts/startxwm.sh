@@ -15,7 +15,7 @@ start_qtile() {
     export QTILE_WIDGETS_CACHE_DIR="/tmp/qtile-configs-cache"
     export QTILE_UPDATES_CACHE_FILE="arch-updates-checker"
 
-    arch-updates-checker "$QTILE_WIDGETS_CACHE_DIR/$QTILE_UPDATES_CACHE_FILE" 60 &
+    arch-updates-checker "$QTILE_WIDGETS_CACHE_DIR/$QTILE_UPDATES_CACHE_FILE" 600 &
     export QTILE_UPDATES_CHECKER_PID=$!
 
     dunst -config ~/.config/dunst/dunstrc-qtile &
