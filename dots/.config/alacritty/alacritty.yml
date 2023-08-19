@@ -1,36 +1,36 @@
-# Font configuration
 env:
-  # Make font size consistent across screens with different DPI values
-  WINIT_X11_SCALE_FACTOR: "1"
+    # Make font size consistent across screens with different DPI values
+    WINIT_X11_SCALE_FACTOR: "1"
 
+# Font configuration
 font:
-  normal:
-    family: Source Code Pro
-    size: 8.0
+    normal:
+        family: Source Code Pro
+        size: 8.0
 
 colors:
-  # Default colors
-  primary:
-   background: '#000000'
-   foreground: '#ffffff'
-  # Normal colors
-  normal:
-   black:   '#000000'
-   red:     '#ff5555'
-   green:   '#55ff55'
-   yellow:  '#ffff55'
-   blue:    '#5555ff'
-   magenta: '#ff55ff'
-   cyan:    '#55ffff'
-   white:   '#ffffff'
+    # Default colors
+    primary:
+        background: "#000000"
+        foreground: "#ffffff"
+    # Normal colors
+    normal:
+        black: "#000000"
+        red: "#ff5555"
+        green: "#55ff55"
+        yellow: "#ffff55"
+        blue: "#5555ff"
+        magenta: "#ff55ff"
+        cyan: "#55ffff"
+        white: "#ffffff"
 
-  # Bright colors
-  bright:
-   black:   '#000000'
-   red:     '#ff5555'
-   green:   '#55ff55'
-   yellow:  '#ffff55'
-   blue:    '#5555ff'
-   magenta: '#ff55ff'
-   cyan:    '#55ffff'
-   white:   '#ffffff'
+    # Bright colors
+    bright:
+        black: "#000000"
+        red: "#ff5555"
+        green: "#55ff55"
+        yellow: "#ffff55"
+        blue: "#5555ff"
+        magenta: "#ff55ff"
+        cyan: "#55ffff"
+        white: "#ffffff"
