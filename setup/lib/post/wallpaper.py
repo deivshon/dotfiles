@@ -15,8 +15,6 @@ class WallpaperPostOperations(PostOperationsHandler):
 
     @classmethod
     def _trigger_impl(cls, config):
-        user = os.path.expanduser("~")
-
         wallpaper_path = utils.path.get_wallpaper_path(
             config["wallpaper-name"])
 
