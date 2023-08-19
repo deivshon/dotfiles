@@ -80,9 +80,9 @@ keys = [
         desc="Toggle floating on the focused window"),
     Key([mod], "Tab", lazy.layout.next(),
         desc="Move window focus to next window"),
-    Key(["shift"], "Tab", lazy.layout.previous(),
+    Key([mod, "shift"], "Tab", lazy.layout.previous(),
         desc="Move window focus to previous window"),
-    Key([mod, "shift"], "Tab", lazy.next_screen(),
+    Key([mod, "control"], "Tab", lazy.next_screen(),
         desc="Move focus to next monitor"),
     Key(
         [mod],
