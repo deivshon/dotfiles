@@ -76,13 +76,6 @@ set -U fish_user $(whoami)
 set -U fish_hostname $(hostname)
 
 function fish_prompt
-    set -f cwd (pwd)
-    if [ "$cwd" = $HOME ]
-        set -f cwd "~"
-    else
-        set -f cwd (basename (realpath .))
-    end
-
     set -l last_pipestatus $pipestatus
     set -lx __fish_last_status $status
 
@@ -90,10 +83,17 @@ function fish_prompt
     set -l statusb_color (set_color red)
     set -l prompt_status (__fish_print_pipestatus "" ">" "/" "$status_color" "$statusb_color" $last_pipestatus)" "
 
-    if test -z "$prompt_status"
-        echo -n -s (set_color green) ["$fish_user@$fish_hostname " (set_color $fish_color_cwd) "$cwd" (set_color yellow) (fish_vcs_prompt) (set_color green)] (set_color green)"> "
+    set -f prompt_cwd (pwd)
+    if [ "$prompt_cwd" = $HOME ]
+        set -f prompt_cwd "~"
     else
-        echo -n -s (set_color green) ["$fish_user@$fish_hostname " (set_color $fish_color_cwd) "$cwd" (set_color yellow) (fish_vcs_prompt) (set_color green)] " $prompt_status"
+        set -f prompt_cwd (basename (realpath .))
+    end
+
+    if test -z "$prompt_status"
+        echo -n -s (set_color green) ["$fish_user@$fish_hostname " (set_color $fish_color_cwd) "$prompt_cwd" (set_color yellow) (fish_vcs_prompt) (set_color green)] (set_color green)"> "
+    else
+        echo -n -s (set_color green) ["$fish_user@$fish_hostname " (set_color $fish_color_cwd) "$prompt_cwd" (set_color yellow) (fish_vcs_prompt) (set_color green)] " $prompt_status"
     end
 end
 
