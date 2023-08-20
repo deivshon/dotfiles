@@ -6,7 +6,7 @@ set FISH_ALIASES_FILE "$HOME/.config/aliases/fish_aliases.fish"
 if test -f "$FISH_ALIASES_FILE"
     source "$FISH_ALIASES_FILE"
 else
-    printf "Error: aliases file not found at $FISH_ALIASES_FILE" 1>&2
+    printf "Error: aliases file not found at $FISH_ALIASES_FILE\n" 1>&2
 end
 set -e FISH_ALIASES_FILE
 

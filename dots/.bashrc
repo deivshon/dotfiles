@@ -8,7 +8,7 @@ BASH_ALIASES_FILE="$HOME/.config/aliases/bash_aliases.bash"
 if [ -f "$BASH_ALIASES_FILE" ]; then
     source "$BASH_ALIASES_FILE"
 else
-    printf "Error: aliases file not found at $BASH_ALIASES_FILE" 1>&2
+    printf "Error: aliases file not found at $BASH_ALIASES_FILE\n" 1>&2
 fi
 unset BASH_ALIASES_FILE
 
