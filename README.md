@@ -15,7 +15,7 @@ The configuration files in this repository and the relative setup scripts are ta
 -   [curl](https://archlinux.org/packages/core/x86_64/curl/)
 -   [sudo](https://archlinux.org/packages/core/x86_64/sudo/)
 -   [exa](https://archlinux.org/packages/community/x86_64/exa/) [ls replacement]
--   [adobe-source-code-pro-fonts](https://archlinux.org/packages/extra/any/adobe-source-code-pro-fonts/)
+-   [ttf-sourcecodepro-nerd](https://archlinux.org/packages/extra/any/ttf-sourcecodepro-nerd/)
 -   [iw](https://archlinux.org/packages/core/x86_64/iw/) [used by wifi-status script]
 -   [ranger](https://archlinux.org/packages/community/any/ranger/) [TUI file manager]
 -   [ueberzug](https://archlinux.org/packages/community/x86_64/ueberzug/) [used by ranger to display images in the terminal]
@@ -47,6 +47,7 @@ The configuration files in this repository and the relative setup scripts are ta
 -   [python-psutil](https://archlinux.org/packages/extra/x86_64/python-psutil/) [qtile graphs requirement]
 -   [qtile](https://archlinux.org/packages/?name=qtile)
 -   [pacman-contrib](https://archlinux.org/packages/extra/x86_64/pacman-contrib/) [provides checkupdates]
+-   [fish](https://archlinux.org/packages/extra/x86_64/fish/)
 -   [afetch](https://aur.archlinux.org/packages/afetch/)
 -   [polkit-dumb-agent](https://aur.archlinux.org/packages/polkit-dumb-agent-git/)
 -   [visual-studio-code-bin](https://aur.archlinux.org/packages/visual-studio-code-bin)

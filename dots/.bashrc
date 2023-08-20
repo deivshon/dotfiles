@@ -4,6 +4,14 @@
 
 source ~/.bashrc_device
 
+BASH_ALIASES_FILE="$HOME/.config/aliases/bash_aliases.bash"
+if [ -f "$BASH_ALIASES_FILE" ]; then
+    source "$BASH_ALIASES_FILE"
+else
+    printf "Error: aliases file not found at $BASH_ALIASES_FILE" 1>&2
+fi
+unset BASH_ALIASES_FILE
+
 [ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
 
 git_current_branch() {
@@ -17,47 +25,7 @@ else
 fi
 
 export HISTCONTROL=ignoredups:erasedups
-export HISTSIZE=100000
-export HISTFILESIZE=100000
 shopt -s histappend
-
-extract() {
-    if [ -f "$1" ] ; then
-    case "$1" in
-        *.tar.bz2)   tar xjf "$1"   ;;
-        *.tar.gz)    tar xzf "$1"   ;;
-        *.bz2)       bunzip2 "$1"   ;;
-        *.rar)       unrar x "$1"   ;;
-        *.gz)        gunzip "$1"    ;;
-        *.tar)       tar xf "$1"    ;;
-        *.tbz2)      tar xjf "$1"   ;;
-        *.tgz)       tar xzf "$1"   ;;
-        *.zip)       unzip "$1"     ;;
-        *.Z)         uncompress "$1";;
-        *.7z)        7z x "$1"      ;;
-        *)           echo "'$1' cannot be extracted via extract()" ;;
-    esac
-    else
-        echo "'$1' is not a valid file"
-    fi
-}
-
-gdiff() {
-    COMMIT_NUMBER="1"
-    if [ "$1" != "" ]; then
-        COMMIT_NUMBER="$1"
-    fi
-
-    TOTAL_COMMITS="$(git --no-pager log --oneline | wc -l)"
-    if [ "${COMMIT_NUMBER}" -ge "${TOTAL_COMMITS}" ]; then
-        TOTAL_COMMITS="$(echo "${TOTAL_COMMITS}" 1 - p | dc)"
-        printf "Wrong commit number, oldest commit: %s\n" "${TOTAL_COMMITS}"
-        return
-    fi
-
-    COMMIT="$(git --no-pager log --oneline | awk "FNR == ${COMMIT_NUMBER} {print \$1}")"
-    git --no-pager diff --color=always "${COMMIT}"~ "${COMMIT}" | less -r
-}
 
 ssh-start() {
     eval "$(ssh-agent)"
@@ -73,26 +41,5 @@ ssh-start() {
 }
 
 [ "${TERM}" == "foot" ] && alias ssh="TERM=linux ssh" && alias vagrant="TERM=linux vagrant"
-
-alias ls='exa'
-alias ll='exa -laFG'
-alias grep='grep --colour=always'
-alias egrep='egrep --colour=always'
-alias fgrep='fgrep --colour=always'
-alias cp='cp -i'
-alias ip='ip -c'
-alias clear="printf '\033[2J\033[3J\033[1;1H' && afetch"
-alias celar="printf '\033[2J\033[3J\033[1;1H' && afetch"
-alias clearall="printf '\033[2J\033[3J\033[1;1H'"
-alias cbonsai="cbonsai -li -w 1 -L 50"
-alias muldown="mullvad lockdown-mode set off && mullvad disconnect"
-alias mulup="mullvad lockdown-mode set on && mullvad connect"
-alias mulreg="mullvad tunnel wireguard key regenerate"
-alias protup="protonvpn-cli killswitch --permanent"
-alias protdown="protonvpn-cli killswitch --on"
-alias clip="xclip -sel c <"
-alias dd="sudo dd status=progress"
-alias glog="git log --oneline --color=always"
-alias sudoedit="sudo nanowrap"
 
 afetch

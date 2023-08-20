@@ -9,7 +9,7 @@
         "curl",
         "sudo",
         "exa",
-        "adobe-source-code-pro-fonts",
+        "ttf-sourcecodepro-nerd",
         "iw",
         "ranger",
         "ueberzug",
@@ -41,7 +41,8 @@
         "dash",
         "python-psutil",
         "qtile",
-        "pacman-contrib"
+        "pacman-contrib",
+        "fish"
     ],
     "yay": [
         "afetch",

@@ -308,5 +308,27 @@
     "qtile-max-layout-icon": {
         "source": ".icons/qtile/layout-max.png",
         "target": "~/.icons/qtile/layout-max.png"
+    },
+    "gdiff-script": {
+        "source": ".local/scripts/gdiff.sh",
+        "target": "~/.local/scripts/gdiff",
+        "flags": ["x"]
+    },
+    "extract-script": {
+        "source": ".local/scripts/extract.sh",
+        "target": "~/.local/scripts/extract",
+        "flags": ["x"]
+    },
+    "fish-config": {
+        "source": ".config/fish/config.fish",
+        "target": "~/.config/fish/config.fish"
+    },
+    "bash-aliases": {
+        "source": ".config/aliases/bash_aliases.bash",
+        "target": "~/.config/aliases/bash_aliases.bash"
+    },
+    "fish-aliases": {
+        "source": ".config/aliases/fish_aliases.fish",
+        "target": "~/.config/aliases/fish_aliases.fish"
     }
 }

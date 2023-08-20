@@ -47,3 +47,8 @@ class DotsNames():
     BATTER_GRAPH_TILE = "battery-graph-qtile"
     QTILE_MONADTALL_LAYOUT_ICON = "qtile-monadtall-layout-icon"
     QTILE_MAX_LAYOUT_ICON = "qtile-max-layout-icon"
+    GDIFF_SCRIPT="gdiff-script"
+    EXTRACT_SCRIPT="extract-script"
+    FISH_CONFIG="fish-config"
+    BASH_ALIASES="bash-aliases"
+    FISH_ALIASES="fish-aliases"
