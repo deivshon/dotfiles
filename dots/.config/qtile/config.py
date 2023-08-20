@@ -157,7 +157,7 @@ layouts=[
 
 
 widget_defaults=dict(
-    font="nimbu sans bold",
+    font="Jet Brains Mono NF",
     fontsize=13,
     padding=3,
 )
@@ -195,28 +195,28 @@ for i in range(0, screen_count):
                     widget.Prompt(),
                     widget.WindowName(),
                     widget.Spacer(length=7),
-                    widget.TextBox("DISK "),
+                    widget.TextBox("DISK"),
                     widget.HDDGraph(
                         border_color=MAIN_COLOR,
                         graph_color=MAIN_COLOR,
                         fill_color=MAIN_COLOR,
                         border_width=1
                     ),
-                    widget.TextBox("CPU "),
+                    widget.TextBox("CPU"),
                     widget.CPUGraph(
                         border_color=MAIN_COLOR,
                         graph_color=MAIN_COLOR,
                         fill_color=MAIN_COLOR,
                         border_width=1
                     ),
-                    widget.TextBox("RAM "),
+                    widget.TextBox("RAM"),
                     widget.MemoryGraph(
                         border_color=MAIN_COLOR,
                         graph_color=MAIN_COLOR,
                         fill_color=MAIN_COLOR,
                         border_width=1
                     ),
-                    widget.TextBox("BAT ") if battery_path is not None else widget.Spacer(length=0),
+                    widget.TextBox("BAT") if battery_path is not None else widget.Spacer(length=0),
                     BatteryGraph(
                         battery_path=battery_path,
                         border_color=MAIN_COLOR,

@@ -23,6 +23,7 @@
     background-color:            #00000000;
     alternate-active-foreground: @active-foreground;
     active-background:           #00000000;
+    font:                        "JetBrains Mono Nerd Font 12";
 }
 
 #window {

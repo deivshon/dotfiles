@@ -9,14 +9,14 @@
         "curl",
         "sudo",
         "exa",
-        "ttf-sourcecodepro-nerd",
         "iw",
         "ranger",
         "ueberzug",
-        "ttf-droid",
         "polkit",
         "network-manager-applet",
         "noto-fonts",
+        "noto-fonts-cjk",
+        "noto-fonts-emoji",
         "wget",
         "gnome-keyring",
         "firefox",
@@ -42,7 +42,8 @@
         "python-psutil",
         "qtile",
         "pacman-contrib",
-        "fish"
+        "fish",
+        "ttf-jetbrains-mono-nerd"
     ],
     "yay": [
         "afetch",

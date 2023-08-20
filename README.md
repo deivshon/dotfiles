@@ -15,14 +15,14 @@ The configuration files in this repository and the relative setup scripts are ta
 -   [curl](https://archlinux.org/packages/core/x86_64/curl/)
 -   [sudo](https://archlinux.org/packages/core/x86_64/sudo/)
 -   [exa](https://archlinux.org/packages/community/x86_64/exa/) [ls replacement]
--   [ttf-sourcecodepro-nerd](https://archlinux.org/packages/extra/any/ttf-sourcecodepro-nerd/)
 -   [iw](https://archlinux.org/packages/core/x86_64/iw/) [used by wifi-status script]
 -   [ranger](https://archlinux.org/packages/community/any/ranger/) [TUI file manager]
 -   [ueberzug](https://archlinux.org/packages/community/x86_64/ueberzug/) [used by ranger to display images in the terminal]
--   [ttf-droid](https://archlinux.org/packages/community/any/ttf-droid/) [default VS Code font]
 -   [polkit](https://archlinux.org/packages/extra/x86_64/polkit/)
 -   [network-manager-applet](https://archlinux.org/packages/extra/x86_64/network-manager-applet/) [systray network utility]
--   [noto-fonts](https://archlinux.org/packages/extra/any/noto-fonts/) [font for bar info]
+-   [noto-fonts](https://archlinux.org/packages/extra/any/noto-fonts/)
+-   [noto-fonts-cjk](https://archlinux.org/packages/extra/any/noto-fonts-cjk/)
+-   [noto-fonts-emoji](https://archlinux.org/packages/extra/any/noto-fonts-emoji/)
 -   [wget](https://archlinux.org/packages/extra/x86_64/wget/)
 -   [gnome-keyring](https://archlinux.org/packages/extra/x86_64/gnome-keyring/)
 -   [firefox](https://archlinux.org/packages/extra/x86_64/firefox/)
@@ -48,6 +48,7 @@ The configuration files in this repository and the relative setup scripts are ta
 -   [qtile](https://archlinux.org/packages/?name=qtile)
 -   [pacman-contrib](https://archlinux.org/packages/extra/x86_64/pacman-contrib/) [provides checkupdates]
 -   [fish](https://archlinux.org/packages/extra/x86_64/fish/)
+-   [ttf-jetbrains-mono-nerd](https://archlinux.org/packages/extra/any/ttf-jetbrains-mono-nerd/)
 -   [afetch](https://aur.archlinux.org/packages/afetch/)
 -   [polkit-dumb-agent](https://aur.archlinux.org/packages/polkit-dumb-agent-git/)
 -   [visual-studio-code-bin](https://aur.archlinux.org/packages/visual-studio-code-bin)

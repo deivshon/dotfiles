@@ -2,10 +2,9 @@ env:
     # Make font size consistent across screens with different DPI values
     WINIT_X11_SCALE_FACTOR: "1"
 
-# Font configuration
 font:
     normal:
-        family: Sauce Code Pro Nerd Font
+        family: JetBrainsMono Nerd Font
         style: regular
     size: 11.5
 
