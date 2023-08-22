@@ -157,7 +157,7 @@ layouts=[
 
 
 widget_defaults=dict(
-    font="Jet Brains Mono NF",
+    font="Jet Brains Mono NF SemiBold",
     fontsize=13,
     padding=3,
 )
