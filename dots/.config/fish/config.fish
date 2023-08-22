@@ -73,7 +73,7 @@ set_theme
 set -U fish_color_cwd_root white
 set -U fish_color_cwd white
 set -U fish_user $(whoami)
-set -U fish_hostname $(hostname)
+set -U fish_hostname $(cat /etc/hostname)
 
 function fish_prompt
     set -l last_pipestatus $pipestatus
