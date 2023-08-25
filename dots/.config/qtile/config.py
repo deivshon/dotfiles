@@ -158,7 +158,7 @@ layouts=[
 
 widget_defaults=dict(
     font="Jet Brains Mono NF SemiBold",
-    fontsize=13,
+    fontsize=15,
     padding=3,
 )
 
@@ -190,26 +190,27 @@ for i in range(0, screen_count):
                         other_screen_border="#000000",
                         borderwidth=2,
                         highlight_method="line",
-                        padding=3
+                        padding=3,
+                        fontsize=13
                     ),
                     widget.Prompt(),
                     widget.WindowName(),
                     widget.Spacer(length=7),
-                    widget.TextBox("DISK"),
+                    widget.TextBox("DISK ", padding=7),
                     widget.HDDGraph(
                         border_color=MAIN_COLOR,
                         graph_color=MAIN_COLOR,
                         fill_color=MAIN_COLOR,
                         border_width=1
                     ),
-                    widget.TextBox("CPU"),
+                    widget.TextBox("CPU ", padding=8),
                     widget.CPUGraph(
                         border_color=MAIN_COLOR,
                         graph_color=MAIN_COLOR,
                         fill_color=MAIN_COLOR,
                         border_width=1
                     ),
-                    widget.TextBox("RAM"),
+                    widget.TextBox("RAM "),
                     widget.MemoryGraph(
                         border_color=MAIN_COLOR,
                         graph_color=MAIN_COLOR,
