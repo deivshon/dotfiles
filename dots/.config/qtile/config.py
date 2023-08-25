@@ -217,7 +217,7 @@ for i in range(0, screen_count):
                         fill_color=MAIN_COLOR,
                         border_width=1
                     ),
-                    widget.TextBox("BAT") if battery_path is not None else widget.Spacer(length=0),
+                    widget.TextBox("BAT ", padding=12) if battery_path is not None else widget.Spacer(length=0),
                     BatteryGraph(
                         battery_path=battery_path,
                         border_color=MAIN_COLOR,
