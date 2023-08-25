@@ -16,7 +16,7 @@ function ssh-start
     for KEY in ~/.ssh/*
         if test -f "$KEY"
             set FILE_RESULT (file -b "$KEY")
-            if string match -q "private key" "$FILE_RESULT"
+            if string match -qr "private key" "$FILE_RESULT"
                 ssh-add "$KEY"
             end
         end
