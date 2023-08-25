@@ -203,7 +203,7 @@ for i in range(0, screen_count):
                         fill_color=MAIN_COLOR,
                         border_width=1
                     ),
-                    widget.TextBox("CPU ", padding=7),
+                    widget.TextBox("CPU ", padding=9),
                     widget.CPUGraph(
                         border_color=MAIN_COLOR,
                         graph_color=MAIN_COLOR,
