@@ -1,6 +1,7 @@
 from typing import Dict, List
 
 from setup.lib import log
+from setup.lib.post.chsh import ChangeShellPostOperation
 from setup.lib.post.handler import PostOperationsHandler
 from setup.lib.post.xinitrc import XinitrcPostOperations
 from setup.lib.post.rustup import RustupPostOperations
@@ -11,6 +12,7 @@ AFTER_INSTALL_OPERATIONS: List[PostOperationsHandler] = [
     XinitrcPostOperations(),
     RustupPostOperations(),
     ReflectorPostOperations(),
+    ChangeShellPostOperation(),
 ]
 
 AFTER_RUN_OPERATIONS: List[PostOperationsHandler] = [
