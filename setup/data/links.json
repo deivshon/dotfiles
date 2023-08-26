@@ -330,5 +330,16 @@
     "fish-aliases": {
         "source": ".config/aliases/fish_aliases.fish",
         "target": "~/.config/aliases/fish_aliases.fish"
+    },
+    "pfetch-custom-logos": {
+        "source": ".config/pfetch/custom-logos",
+        "target": "~/.config/pfetch/custom-logos"
+    },
+    "pfetch-config": {
+        "source": ".config/pfetch/pfetch-config.sh",
+        "target": "~/.config/pfetch/pfetch-config.sh",
+        "subs": {
+            "setup-user": "<sub<user>>"
+        }
     }
 }

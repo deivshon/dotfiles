@@ -8,6 +8,8 @@ export LC_ALL=en_US.UTF-8
 export SHELL=/bin/fish
 export EDITOR=nano
 
+export PF_SOURCE=~/.config/pfetch/pfetch-config.sh
+
 PATH=${PATH}:~/.local/scripts:
 
 launch_hyprland() {

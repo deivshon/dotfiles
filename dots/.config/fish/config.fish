@@ -1,5 +1,9 @@
 #!/bin/fish
 
+if status is-login
+    exec bash -l
+end
+
 set -U fish_greeting
 
 set FISH_ALIASES_FILE "$HOME/.config/aliases/fish_aliases.fish"
@@ -101,4 +105,4 @@ function fish_command_not_found
     return
 end
 
-afetch
+pfetch

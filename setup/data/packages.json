@@ -46,7 +46,7 @@
         "ttf-jetbrains-mono-nerd"
     ],
     "yay": [
-        "afetch",
+        "pfetch-rs",
         "polkit-dumb-agent-git",
         "visual-studio-code-bin",
         "gksu",

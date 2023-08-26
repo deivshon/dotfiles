@@ -52,3 +52,5 @@ class DotsNames():
     FISH_CONFIG="fish-config"
     BASH_ALIASES="bash-aliases"
     FISH_ALIASES="fish-aliases"
+    PFETCH_CUSTOM_LOGOS="pfetch-custom-logos"
+    PFETCH_CONFIG="pfetch-config"
