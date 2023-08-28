@@ -1,6 +1,6 @@
 #!/bin/fish
 
-if status is-login
+if tty | grep -q "/dev/tty[1-3]"
     exec bash -l
 end
 
