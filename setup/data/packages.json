@@ -43,7 +43,8 @@
         "qtile",
         "pacman-contrib",
         "fish",
-        "ttf-jetbrains-mono-nerd"
+        "ttf-jetbrains-mono-nerd",
+        "hyperfine"
     ],
     "yay": [
         "pfetch-rs",

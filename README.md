@@ -49,6 +49,7 @@ The configuration files in this repository and the relative setup scripts are ta
 -   [pacman-contrib](https://archlinux.org/packages/extra/x86_64/pacman-contrib/) [provides checkupdates]
 -   [fish](https://archlinux.org/packages/extra/x86_64/fish/)
 -   [ttf-jetbrains-mono-nerd](https://archlinux.org/packages/extra/any/ttf-jetbrains-mono-nerd/)
+-   [hyperfine](https://archlinux.org/packages/extra/x86_64/hyperfine/)
 -   [pfetch-rs](https://aur.archlinux.org/packages/pfetch-rs/)
 -   [polkit-dumb-agent](https://aur.archlinux.org/packages/polkit-dumb-agent-git/)
 -   [visual-studio-code-bin](https://aur.archlinux.org/packages/visual-studio-code-bin)
