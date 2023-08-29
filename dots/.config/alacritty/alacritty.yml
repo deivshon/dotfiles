@@ -6,7 +6,7 @@ font:
     normal:
         family: JetBrainsMono Nerd Font
         style: regular
-    size: 11.5
+    size: 10
 
 colors:
     # Default colors

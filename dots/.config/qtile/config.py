@@ -158,7 +158,7 @@ layouts=[
 
 widget_defaults=dict(
     font="Jet Brains Mono NF SemiBold",
-    fontsize=15,
+    fontsize=12,
     padding=3,
 )
 
@@ -191,7 +191,7 @@ for i in range(0, screen_count):
                         borderwidth=2,
                         highlight_method="line",
                         padding=3,
-                        fontsize=13
+                        fontsize=12
                     ),
                     widget.Prompt(),
                     widget.WindowName(),
@@ -235,7 +235,7 @@ for i in range(0, screen_count):
                         update_interval=1,
                         fmt=" {}"),
                 ],
-                25,
+                20,
             ),
             wallpaper="<sub<qtile-wallpaper-path>>",
             wallpaper_mode="fill"
