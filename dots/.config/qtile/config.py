@@ -196,30 +196,28 @@ for i in range(0, screen_count):
                     widget.Prompt(),
                     widget.WindowName(),
                     widget.Spacer(length=7),
-                    widget.TextBox("DISK ", padding=7),
+                    widget.TextBox("DISK ", padding=4),
                     widget.HDDGraph(
                         border_color=MAIN_COLOR,
                         graph_color=MAIN_COLOR,
                         fill_color=MAIN_COLOR,
                         border_width=1
                     ),
-                    widget.TextBox("CPU ", padding=9),
+                    widget.TextBox("CPU 󰒋", padding=2),
                     widget.CPUGraph(
                         border_color=MAIN_COLOR,
                         graph_color=MAIN_COLOR,
                         fill_color=MAIN_COLOR,
                         border_width=1
                     ),
-                    widget.Spacer(length=7),
-                    widget.TextBox("RAM "),
+                    widget.TextBox("RAM ", padding=0),
                     widget.MemoryGraph(
                         border_color=MAIN_COLOR,
                         graph_color=MAIN_COLOR,
                         fill_color=MAIN_COLOR,
                         border_width=1
                     ),
-                    widget.Spacer(length=7),
-                    widget.TextBox("BAT ") if battery_path is not None else widget.Spacer(length=0),
+                    widget.TextBox("BAT ", padding=0) if battery_path is not None else widget.Spacer(length=0),
                     BatteryGraph(
                         battery_path=battery_path,
                         border_color=MAIN_COLOR,
