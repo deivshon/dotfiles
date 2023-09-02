@@ -142,5 +142,13 @@
         },
         "wallpaper-link": "https://i.ibb.co/Ny4XvrT/butterfly-aqua-digital.png",
         "wallpaper-name": "butterfly-aqua-digital.png"
+    },
+    "leaves-orange-aesthetic": {
+        "substitutions": {
+            "main-color": "#D98801",
+            "secondary-color": "#714700"
+        },
+        "wallpaper-link": "https://i.ibb.co/M6V234z/leaves-orange-aesthetic.jpg",
+        "wallpaper-name": "leaves-orange-aesthetic.jpg"
     }
 }
