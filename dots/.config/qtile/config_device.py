@@ -1,6 +1,7 @@
 from typing import Dict, Dict
 
-primary_screen = 0
+screen_count = 1
+primary_screen = 1
 
 workspace_bindings: Dict[int, Dict[str, int]] = {
     1: {

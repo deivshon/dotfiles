@@ -15,7 +15,7 @@ from libqtile.config import Drag, Group, Key, Screen
 
 
 sys.path.insert(1, os.path.dirname(__file__))
-from config_device import primary_screen, workspace_bindings
+from config_device import primary_screen, workspace_bindings, screen_count
 from battery_graph import BatteryGraph
 
 do_nothing = lambda *_: None
@@ -108,7 +108,7 @@ workspaces = [Group(i) for i in "123456789"]
 
 def switch_workspace(name: str) -> Callable:
     def _inner(qtile: Qtile) -> None:
-        bound_screen = workspace_bindings[len(qtile.screens)][name]
+        bound_screen = workspace_bindings[screen_count][name]
 
         qtile.focus_screen(bound_screen)
         qtile.groups_map[name].cmd_toscreen()
@@ -122,7 +122,7 @@ def move_window(group: str) -> Callable:
         if current_window is None:
             return
 
-        bound_screen = workspace_bindings[len(qtile.screens)][group]
+        bound_screen = workspace_bindings[screen_count][group]
 
         current_window.togroup(group)
         qtile.focus_screen(bound_screen)
@@ -163,14 +163,6 @@ widget_defaults=dict(
 )
 
 extension_defaults=widget_defaults.copy()
-
-p=subprocess.run(["xrandr"], capture_output=True)
-screen_count=1
-if p.returncode == 0:
-    screen_count=0
-    for line in p.stdout.decode().splitlines():
-        if re.match(r".* connected.*", line):
-            screen_count += 1
 
 widget.GroupBox.button_press = do_nothing
 
@@ -228,7 +220,7 @@ for i in range(0, screen_count):
                         samples=120
                     ) if battery_path is not None else widget.Spacer(length=0),
                     widget.Clock(format="%Y-%m-%d %H:%M:%S"),
-                    widget.Systray() if i == primary_screen else widget.Spacer(length=0),
+                    widget.Systray() if (i + 1) == primary_screen else widget.Spacer(length=0),
                     widget.GenPollText(func=check_arch_updates,
                         update_interval=1,
                         fmt=" {}"),
