@@ -10,7 +10,7 @@ export EDITOR=nano
 
 export PF_SOURCE=~/.config/pfetch/pfetch-config.sh
 
-PATH=${PATH}:~/.local/scripts:
+PATH=${PATH}:~/.local/scripts:~/.local/bin
 
 launch_hyprland() {
     Hyprland
