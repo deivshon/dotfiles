@@ -150,5 +150,13 @@
         },
         "wallpaper-link": "https://i.ibb.co/M6V234z/leaves-orange-aesthetic.jpg",
         "wallpaper-name": "leaves-orange-aesthetic.jpg"
+    },
+    "arch-light-blue-minimal": {
+        "substitutions": {
+            "main-color": "#1793D1",
+            "secondary-color": "#014161"
+        },
+        "wallpaper-link": "https://i.ibb.co/S0JxHfv/archlinux.png",
+        "wallpaper-name": "arch-light-blue-minimal.png"
     }
 }
