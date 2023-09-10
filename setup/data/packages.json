@@ -45,7 +45,8 @@
         "pacman-contrib",
         "fish",
         "ttf-jetbrains-mono-nerd",
-        "hyperfine"
+        "hyperfine",
+        "flameshot"
     ],
     "yay": [
         "pfetch-rs",

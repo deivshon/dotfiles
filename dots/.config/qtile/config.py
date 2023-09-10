@@ -1,7 +1,5 @@
 import os
-import re
 import sys
-import subprocess
 
 from typing import Callable, Optional, Union, NoReturn
 
@@ -98,7 +96,9 @@ keys = [
     Key([mod], "l", lazy.spawn("xlock"), desc="Lock screen"),
     Key([], "XF86AudioRaiseVolume", lazy.spawn("change-vol-pactl +5%"), desc="Increase volume"),
     Key([], "XF86AudioLowerVolume", lazy.spawn("change-vol-pactl -5%"), desc="Decrease volume"),
-    Key([], "XF86AudioMute", lazy.spawn("change-vol-pactl toggle"), desc="Toggle"),
+    Key([], "XF86AudioMute", lazy.spawn("change-vol-pactl toggle"), desc="Toggle audio"),
+    Key([mod], "p", lazy.spawn(
+        "flameshot gui"), desc="Start screenshot area selection"),
 
     Key([mod], "f", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
