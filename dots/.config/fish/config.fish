@@ -102,7 +102,15 @@ function fish_prompt
 end
 
 function fish_command_not_found
+    printf "Command not found\n" 1>&2
     return
 end
+
+function exit_cleanup
+    if set -q SSH_AGENT_PID
+        kill $SSH_AGENT_PID
+    end
+end
+trap exit_cleanup EXIT
 
 pfetch
