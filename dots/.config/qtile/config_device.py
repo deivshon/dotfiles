@@ -1,7 +1,16 @@
-from typing import Dict, Dict
+from dataclasses import dataclass, field
+from typing import Dict, Dict, List
+
+
+@dataclass
+class Application():
+  binary: str
+  args: List[str] = field(default_factory=list)
 
 screen_count = 1
 primary_screen = 1
+
+apps_to_start: List[Application] = []
 
 workspace_bindings: Dict[int, Dict[str, int]] = {
     1: {

@@ -1,8 +1,10 @@
 import os
+import subprocess
 import sys
 
-from typing import Callable, Optional, Union, NoReturn
+from typing import Callable, List, Optional, Union, NoReturn
 
+from libqtile import hook
 from libqtile.lazy import lazy
 from libqtile import bar, widget
 from libqtile.layout.max import Max
@@ -13,7 +15,7 @@ from libqtile.config import Drag, Group, Key, Screen
 
 
 sys.path.insert(1, os.path.dirname(__file__))
-from config_device import primary_screen, workspace_bindings, screen_count
+from config_device import primary_screen, workspace_bindings, screen_count, apps_to_start
 from battery_graph import BatteryGraph
 
 do_nothing = lambda *_: None
@@ -61,6 +63,11 @@ def get_battery_path() -> Optional[str]:
             return f"{batteries_path}/{dev}"
 
     return None
+
+@hook.subscribe.startup_once
+def autostart():
+    for app in apps_to_start:
+        subprocess.Popen([app.binary] + app.args)
 
 battery_path = get_battery_path()
 del get_battery_path
