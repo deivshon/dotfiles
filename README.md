@@ -38,6 +38,7 @@ The configuration files in this repository and the relative setup scripts are ta
 -   [otf-font-awesome](https://archlinux.org/packages/community/any/otf-font-awesome/)
 -   [fuzzel](https://archlinux.org/packages/community/x86_64/fuzzel/)
 -   [fontforge](https://archlinux.org/packages/extra/x86_64/fontforge/) [necessary for waybar glyphs]
+-   [waybar](https://archlinux.org/packages/extra/x86_64/waybar)
 -   [foot](https://archlinux.org/packages/community/x86_64/foot/)
 -   [gsfonts](https://archlinux.org/packages/extra/x86_64/gsfonts/)
 -   [bat](https://archlinux.org/packages/extra/x86_64/bat/)
@@ -56,7 +57,6 @@ The configuration files in this repository and the relative setup scripts are ta
 -   [gksu](https://aur.archlinux.org/packages/gksu) [root privileges for rofi launched applications]
 -   [hyprland](https://aur.archlinux.org/packages/hyprland)
 -   [hyprpaper-git](https://aur.archlinux.org/packages/hyprpaper-git)
--   [waybar-hyprland-git](https://aur.archlinux.org/packages/waybar-hyprland-git)
 -   [wlr-randr](https://aur.archlinux.org/packages/wlr-randr)
 -   [nwg-look-bin](https://aur.archlinux.org/packages/nwg-look-bin) [wayland lxappearance equivalent]
 -   [swaylock-effects](https://aur.archlinux.org/packages/swaylock-effects)
