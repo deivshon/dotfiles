@@ -46,7 +46,9 @@
         "fish",
         "ttf-jetbrains-mono-nerd",
         "hyperfine",
-        "flameshot"
+        "flameshot",
+        "zig",
+        "zls"
     ],
     "yay": [
         "pfetch-rs",
