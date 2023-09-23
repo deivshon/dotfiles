@@ -52,7 +52,8 @@
         "target": "~/.config/dwm/config.h",
         "subs": {
             "main-color": "<sub<main-color>>",
-            "secondary-color": "<sub<secondary-color>>"
+            "secondary-color": "<sub<secondary-color>>",
+            "setup-user": "<sub<user>>"
         }
     },
     "plstatus-config": {
