@@ -214,9 +214,9 @@ static const int resizehints = 1;    /* 1 means respect size hints in tiled resi
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
 
 // Volume control
-static const char *upvol[]   = { "/usr/local/bin/change-vol-pactl", "+5%",     NULL };
-static const char *downvol[] = { "/usr/local/bin/change-vol-pactl", "-5%",     NULL };
-static const char *mutevol[] = { "/usr/local/bin/change-vol-pactl", "toggle",  NULL };
+static const char *upvol[]   = { "/home/<sub<user>>/.local/bin/pactl-ewr", "-c", "5",     NULL };
+static const char *downvol[] = { "/home/<sub<user>>/.local/bin/pactl-ewr", "-c", "-5",     NULL };
+static const char *mutevol[] = { "/home/<sub<user>>/.local/bin/pactl-ewr", "-t",  NULL };
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */

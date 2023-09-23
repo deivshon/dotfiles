@@ -4,8 +4,9 @@ from typing import Dict, List
 
 @dataclass
 class Application():
-  binary: str
-  args: List[str] = field(default_factory=list)
+    binary: str
+    args: List[str] = field(default_factory=list)
+
 
 screen_count = 1
 primary_screen = 1

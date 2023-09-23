@@ -7,12 +7,12 @@ from setup.lib.install.generic import git_download
 
 
 class ChangeVolPactlInstaller(InstallHandler):
-    REMOTE_URL = "https://github.com/deivshon/change-vol-pactl"
-    DEST_PATH = os.path.expanduser("~/.config/change-vol-pactl")
+    REMOTE_URL = "https://github.com/deivshon/pactl-ewr"
+    DEST_PATH = os.path.expanduser("~/.config/pactl-ewr")
 
     @staticmethod
     def name() -> str:
-        return "change-vol-pactl"
+        return "pactl-ewr"
 
     def _download_impl(self, pull: bool):
         self.needsCompilation = git_download(
@@ -21,7 +21,7 @@ class ChangeVolPactlInstaller(InstallHandler):
     def _compile_impl(self):
         try:
             process.exec(
-                ["sudo", "make", "-C", self.DEST_PATH, "clean", "install"])
+                ["make", "-C", self.DEST_PATH, "clean", "install"])
         except Exception as e:
             log.error(
                 f"Could not compile {self.name()}: {e}")

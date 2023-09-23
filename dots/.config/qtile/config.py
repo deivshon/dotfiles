@@ -20,6 +20,7 @@ from battery_graph import BatteryGraph
 
 do_nothing = lambda *_: None
 
+
 def getenv_or_die(name: str) -> Union[str, NoReturn]:
     var = os.getenv(name)
     if var is None:
@@ -27,8 +28,10 @@ def getenv_or_die(name: str) -> Union[str, NoReturn]:
 
     return var
 
+
 WIDGETS_CACHE_DIR = getenv_or_die("QTILE_WIDGETS_CACHE_DIR")
 UPDATES_CACHE_FILE = f"{WIDGETS_CACHE_DIR}/{getenv_or_die('QTILE_UPDATES_CACHE_FILE')}"
+
 
 def check_arch_updates():
     if not os.path.exists(UPDATES_CACHE_FILE):
@@ -64,10 +67,12 @@ def get_battery_path() -> Optional[str]:
 
     return None
 
+
 @hook.subscribe.startup_once
 def autostart():
     for app in apps_to_start:
         subprocess.Popen([app.binary] + app.args)
+
 
 battery_path = get_battery_path()
 del get_battery_path
@@ -101,9 +106,12 @@ keys = [
         "rofi -show drun -display-drun ''"), desc="Launch rofi"),
 
     Key([mod], "l", lazy.spawn("xlock"), desc="Lock screen"),
-    Key([], "XF86AudioRaiseVolume", lazy.spawn("change-vol-pactl +5%"), desc="Increase volume"),
-    Key([], "XF86AudioLowerVolume", lazy.spawn("change-vol-pactl -5%"), desc="Decrease volume"),
-    Key([], "XF86AudioMute", lazy.spawn("change-vol-pactl toggle"), desc="Toggle audio"),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn(
+        "pactl-ewr -c 5"), desc="Increase volume"),
+    Key([], "XF86AudioLowerVolume", lazy.spawn(
+        "pactl-ewr -c -5"), desc="Decrease volume"),
+    Key([], "XF86AudioMute", lazy.spawn(
+        "pactl-ewr -t"), desc="Toggle audio"),
     Key([mod], "p", lazy.spawn(
         "flameshot gui"), desc="Start screenshot area selection"),
 
@@ -112,6 +120,7 @@ keys = [
 ]
 
 workspaces = [Group(i) for i in "123456789"]
+
 
 def switch_workspace(name: str) -> Callable:
     def _inner(qtile: Qtile) -> None:
@@ -137,8 +146,9 @@ def move_window(group: str) -> Callable:
 
     return _inner
 
-MAIN_COLOR="<sub<main-color>>"
-SECONDARY_COLOR="<sub<secondary-color>>"
+
+MAIN_COLOR = "<sub<main-color>>"
+SECONDARY_COLOR = "<sub<secondary-color>>"
 
 for w in workspaces:
     keys.append(Key([mod], w.name, lazy.function(
@@ -147,7 +157,7 @@ for w in workspaces:
     keys.append(Key([mod, 'shift'], w.name, lazy.function(
         move_window(w.name))))
 
-layouts=[
+layouts = [
     MonadTall(
         border_focus=MAIN_COLOR,
         border_normal=SECONDARY_COLOR,
@@ -163,25 +173,25 @@ layouts=[
 ]
 
 
-widget_defaults=dict(
+widget_defaults = dict(
     font="Jet Brains Mono NF SemiBold",
     fontsize=12,
     padding=3,
 )
 
-extension_defaults=widget_defaults.copy()
+extension_defaults = widget_defaults.copy()
 
 widget.GroupBox.button_press = do_nothing
 
-screens=[]
+screens = []
 for i in range(0, screen_count):
     screens.append(
         Screen(
             bottom=bar.Bar(
                 [
                     widget.CurrentLayoutIcon(custom_icon_paths=[os.path.expanduser("~/.icons/qtile/")],
-                        scale=1.3,
-                        padding=0),
+                                             scale=1.3,
+                                             padding=0),
                     widget.GroupBox(
                         this_screen_border=SECONDARY_COLOR,
                         this_current_screen_border=MAIN_COLOR,
@@ -216,7 +226,8 @@ for i in range(0, screen_count):
                         fill_color=MAIN_COLOR,
                         border_width=1
                     ),
-                    widget.TextBox("BAT ", padding=0) if battery_path is not None else widget.Spacer(length=0),
+                    widget.TextBox(
+                        "BAT ", padding=0) if battery_path is not None else widget.Spacer(length=0),
                     BatteryGraph(
                         battery_path=battery_path,
                         border_color=MAIN_COLOR,
@@ -229,8 +240,8 @@ for i in range(0, screen_count):
                     widget.Clock(format="%Y-%m-%d %H:%M:%S"),
                     widget.Systray() if (i + 1) == primary_screen else widget.Spacer(length=0),
                     widget.GenPollText(func=check_arch_updates,
-                        update_interval=1,
-                        fmt=" {}"),
+                                       update_interval=1,
+                                       fmt=" {}"),
                 ],
                 20,
             ),
@@ -240,27 +251,27 @@ for i in range(0, screen_count):
     )
 
 
-mouse=[
+mouse = [
     Drag([mod], "Button1", lazy.window.set_position_floating(),
          start=lazy.window.get_position()),
 ]
 
-dgroups_key_binder=None
-dgroups_app_rules=[]
-follow_mouse_focus=True
-bring_front_click=False
-floats_kept_above=True
-cursor_warp=True
-auto_fullscreen=True
-focus_on_window_activation="smart"
-reconfigure_screens=True
+dgroups_key_binder = None
+dgroups_app_rules = []
+follow_mouse_focus = True
+bring_front_click = False
+floats_kept_above = True
+cursor_warp = True
+auto_fullscreen = True
+focus_on_window_activation = "smart"
+reconfigure_screens = True
 
-auto_minimize=True
-wl_input_rules=None
+auto_minimize = True
+wl_input_rules = None
 
-wmname="LG3D"
+wmname = "LG3D"
 
-floating_layout=Floating(
+floating_layout = Floating(
     border_width=1,
     border_focus=MAIN_COLOR,
     border_normal=SECONDARY_COLOR,
