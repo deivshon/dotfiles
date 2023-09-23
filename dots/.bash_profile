@@ -9,6 +9,7 @@ export SHELL=/bin/fish
 export EDITOR=nano
 
 export PF_SOURCE=~/.config/pfetch/pfetch-config.sh
+export EXA_COLORS="xx=37"
 
 PATH=${PATH}:~/.local/scripts:~/.local/bin
 
