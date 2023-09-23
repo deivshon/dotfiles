@@ -5,23 +5,39 @@
         {
             "command": "ram-status",
             "period": 1000,
+            "args": [
+                "-f",
+                " %u/%t (%p%)"
+            ],
             "separator": "|"
         },
         {
             "command": "disk-status",
+            "args": [
+                "-f",
+                " %u"
+            ],
             "period": 1000,
             "separator": "|"
         },
         {
             "command": "cpu-status",
             "period": 1000,
+            "args": [
+                "-f",
+                " %p%"
+            ],
             "separator": "|"
         },
         {
             "command": "battery-status",
             "args": [
                 "-n",
-                ""
+                "",
+                "-f",
+                "  50%",
+                "-c",
+                " %p"
             ],
             "period": 1000,
             "separator": "|"
@@ -31,7 +47,9 @@
             "period": 1000,
             "args": [
                 "-d",
-                ""
+                "",
+                "-u",
+                "󰈀 %i"
             ],
             "separator": "|"
         },
@@ -40,20 +58,15 @@
             "period": 1000,
             "args": [
                 "-u",
-                "WIFI %p% %s",
+                "  %p% %s",
                 "-d",
                 ""
             ],
             "separator": "|"
         },
         {
-            "command": "mullvad-status",
-            "period": 30000,
-            "separator": "|"
-        },
-        {
             "command": "date",
-            "args": "+%Y-%m-%d - %H:%M:%S",
+            "args": "+%Y-%m-%d/%H:%M:%S",
             "period": 500
         }
     ]
