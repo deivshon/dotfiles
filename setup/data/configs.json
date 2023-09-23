@@ -158,5 +158,13 @@
         },
         "wallpaper-link": "https://i.ibb.co/S0JxHfv/archlinux.png",
         "wallpaper-name": "arch-light-blue-minimal.png"
+    },
+    "nasa-blue-minimal": {
+        "substitutions": {
+            "main-color": "#0858A1",
+            "secondary-color": "#012547"
+        },
+        "wallpaper-link": "https://i.ibb.co/YLzRZ3f/nasa-blue-minimal.png",
+        "wallpaper-name": "nasa-blue-minimal.png"
     }
 }
