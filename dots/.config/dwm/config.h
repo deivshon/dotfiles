@@ -44,13 +44,13 @@ DEALINGS IN THE SOFTWARE.
 /* appearance */
 static const unsigned int borderpx       = 1;   /* border pixel of windows */
 static const unsigned int snap           = 32;  /* snap pixel */
-static const unsigned int gappih         = 7;   /* horiz inner gap between windows */
-static const unsigned int gappiv         = 7;   /* vert inner gap between windows */
-static const unsigned int gappoh         = 7;   /* horiz outer gap between windows and screen edge */
-static const unsigned int gappov         = 7;   /* vert outer gap between windows and screen edge */
+static const unsigned int gappih         = 0;   /* horiz inner gap between windows */
+static const unsigned int gappiv         = 0;   /* vert inner gap between windows */
+static const unsigned int gappoh         = 0;   /* horiz outer gap between windows and screen edge */
+static const unsigned int gappov         = 0;   /* vert outer gap between windows and screen edge */
 static const int smartgaps_fact          = 1;   /* gap factor when there is only one client; 0 = no gaps, 3 = 3x outer gaps */
 static const int showbar                 = 1;   /* 0 means no bar */
-static const int topbar                  = 1;   /* 0 means bottom bar */
+static const int topbar                  = 0;   /* 0 means bottom bar */
 
 /* Status is to be shown on: -1 (all monitors), 0 (a specific monitor by index), 'A' (active monitor) */
 static const int statusmon               = 'A';
@@ -221,7 +221,7 @@ static const char *mutevol[] = { "/home/<sub<user>>/.local/bin/pactl-ewr", "-t",
 static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "|=|",      tile },    /* first entry is default */
-	{ "><>",      NULL },    /* no layout function means floating behavior */
+	// { "><>",      NULL },    /* no layout function means floating behavior */
 	{ "[M]",      monocle },
 };
 
@@ -237,18 +237,19 @@ static const Layout layouts[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-// static const char *dmenucmd[] = {
-// 	"dmenu_run",
-// 	"-fn", dmenufont,
-// 	"-nb", normbgcolor,
-// 	"-nf", normfgcolor,
-// 	"-sb", selbgcolor,
-// 	"-sf", selfgcolor,
-// 	NULL
-// };
+static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
+static const char *dmenucmd[] = {
+	"dmenu_run",
+	"-fn", dmenufont,
+	"-nb", normbgcolor,
+	"-nf", normfgcolor,
+	"-sb", selbgcolor,
+	"-sf", selfgcolor,
+	NULL
+};
 
-static const char *roficmd[] = { "rofi", "-show", "drun", "-display-drun", "", NULL };
-static const char *termcmd[]  = { "st", NULL };
+static const char *roficmd[] = { "rofi", "-show", "drun", NULL };
+static const char *termcmd[]  = { "alacritty", NULL };
 static const char *lockcmd[] = { "xlock", NULL };
 
 static const Key keys[] = {
@@ -285,9 +286,7 @@ static const Key keys[] = {
 	// { MODKEY,                       XK_Tab,        view,                   {0} },
 	{ MODKEY|ShiftMask,             XK_q,          killclient,             {0} },
 	{ MODKEY|ShiftMask,             XK_u,          quit,                   {0} },
-	// { MODKEY,                       XK_t,          setlayout,              {.v = &layouts[0]} },
-	// { MODKEY,                       XK_f,          setlayout,              {.v = &layouts[1]} },
-	// { MODKEY,                       XK_m,          setlayout,              {.v = &layouts[2]} },
+	{ MODKEY,                       XK_f,          cyclelayout,              {.i = +1} },
 	// { MODKEY,                       XK_space,      setlayout,              {0} },
 	// { MODKEY|ShiftMask,             XK_space,      togglefloating,         {0} },
 	{ MODKEY,                       XK_0,          view,                   {.ui = ~0 } },
