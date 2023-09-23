@@ -54,7 +54,7 @@ static const int topbar                  = 0;   /* 0 means bottom bar */
 
 /* Status is to be shown on: -1 (all monitors), 0 (a specific monitor by index), 'A' (active monitor) */
 static const int statusmon               = 'A';
-static const unsigned int systrayspacing = 2;   /* systray spacing */
+static const unsigned int systrayspacing = 0;   /* systray spacing */
 static const int showsystray             = 1;   /* 0 means no systray */
 
 /* Indicators: see patch/bar_indicators.h for options */
@@ -248,7 +248,7 @@ static const char *dmenucmd[] = {
 	NULL
 };
 
-static const char *roficmd[] = { "rofi", "-show", "drun", NULL };
+static const char *roficmd[] = { "rofi", "-show", "drun", "-display-drun", "", NULL };
 static const char *termcmd[] = { "alacritty", NULL };
 static const char *lockcmd[] = { "xlock", NULL };
 
