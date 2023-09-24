@@ -7,8 +7,7 @@ start_dwm() {
     dunst -config ~/.config/dunst/dunstrc-dwm &
     plstatus &
     feh --bg-fill <sub<xwms-wallpaper-path>> &
-    ~/.startup/dwm/startops.sh &
-    exec dwm
+    ~/.startup/dwm/startops.sh && exec dwm
 }
 
 start_qtile() {

@@ -36,6 +36,11 @@
             "arguments": ["-u", "  %p% %s", "-d", ""]
         },
         {
+            "binary": "command-cache",
+            "arguments": ["600000", "arch-updates-status", "-f", " %p/%y"],
+            "period": 1000
+        },
+        {
             "binary": "date",
             "arguments": ["+ %Y-%m-%d 󰥔   %H:%M:%S"],
             "period": 1000
