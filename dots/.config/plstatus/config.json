@@ -1,73 +1,46 @@
 {
-    "max-status-length": 2048,
-    "status-period": 750,
     "components": [
         {
-            "command": "ram-status",
-            "period": 1000,
-            "args": [
-                "-f",
-                " %u/%t (%p%)"
-            ],
-            "separator": "|"
+            "binary": "uname",
+            "arguments": ["-r"],
+            "label": " "
         },
         {
-            "command": "disk-status",
-            "args": [
-                "-f",
-                " %u"
-            ],
-            "period": 1000,
-            "separator": "|"
+            "binary": "ram-status",
+            "arguments": ["-f", " %u/%t (%p%)"],
+            "period": 1000
         },
         {
-            "command": "cpu-status",
-            "period": 1000,
-            "args": [
-                "-f",
-                " %p%"
-            ],
-            "separator": "|"
+            "binary": "disk-status",
+            "arguments": ["-f", " %u"],
+            "period": 1000
         },
         {
-            "command": "battery-status",
-            "args": [
-                "-n",
-                "",
-                "-f",
-                "  50%",
-                "-c",
-                " %p"
-            ],
-            "period": 1000,
-            "separator": "|"
+            "binary": "cpu-status",
+            "arguments": ["-f", " %p%"],
+            "period": 1000
         },
         {
-            "command": "eth-status",
-            "period": 1000,
-            "args": [
-                "-d",
-                "",
-                "-u",
-                "󰈀 %i"
-            ],
-            "separator": "|"
+            "binary": "battery-status",
+            "arguments": ["-n", "", "-f", "  50%", "-c", " %p"],
+            "period": 1000
         },
         {
-            "command": "wifi-status",
-            "period": 1000,
-            "args": [
-                "-u",
-                "  %p% %s",
-                "-d",
-                ""
-            ],
-            "separator": "|"
+            "binary": "eth-status",
+            "arguments": ["-d", "", "-u", "󰈀 %i"],
+            "period": 1000
         },
         {
-            "command": "date",
-            "args": "+%Y-%m-%d/%H:%M:%S",
+            "binary": "wifi-status",
+            "period": 1000,
+            "arguments": ["-u", "  %p% %s", "-d", ""]
+        },
+        {
+            "binary": "date",
+            "arguments": ["+ %Y-%m-%d 󰥔  %H:%M:%S"],
             "period": 500
         }
-    ]
+    ],
+    "period": 1000,
+    "first_wait": 10
 }

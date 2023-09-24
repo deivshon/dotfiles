@@ -26,11 +26,10 @@ from setup.lib import symlinks
 
 def main():
     dwm_installer = DwmInstaller()
-    plstatus_installer = PlstatusInstaller()
 
     installers: List[InstallHandler] = [
         dwm_installer,
-        plstatus_installer,
+        PlstatusInstaller(),
         StInstaller(),
         ChangeVolPactlInstaller(),
         CommandCacheInstaller(),
@@ -39,7 +38,6 @@ def main():
 
     compilationMap: Dict[str, InstallHandler] = {
         DotsNames.DWM_CONFIG: dwm_installer,
-        DotsNames.PLSTATUS_CONFIG: plstatus_installer
     }
 
     __FILE_DIR__ = os.path.dirname(os.path.realpath(__file__))
