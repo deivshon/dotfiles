@@ -22,7 +22,7 @@
         },
         {
             "binary": "battery-status",
-            "arguments": ["-n", "", "-f", "  50%", "-c", " %p"],
+            "arguments": ["-n", "", "-f", "  %p%", "-c", " %p%"],
             "period": 1000
         },
         {
@@ -37,8 +37,8 @@
         },
         {
             "binary": "date",
-            "arguments": ["+ %Y-%m-%d 󰥔  %H:%M:%S"],
-            "period": 500
+            "arguments": ["+ %Y-%m-%d 󰥔   %H:%M:%S"],
+            "period": 1000
         }
     ],
     "period": 1000,
