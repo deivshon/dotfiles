@@ -3,7 +3,7 @@
         {
             "binary": "uname",
             "arguments": ["-r"],
-            "label": " "
+            "label": " "
         },
         {
             "binary": "ram-status",
@@ -22,7 +22,7 @@
         },
         {
             "binary": "battery-status",
-            "arguments": ["-n", "", "-f", "  %p%", "-c", " %p%"],
+            "arguments": ["-n", "", "-f", "   %p%", "-c", " %p%"],
             "period": 1000
         },
         {
@@ -33,7 +33,7 @@
         {
             "binary": "wifi-status",
             "period": 1000,
-            "arguments": ["-u", "  %p% %s", "-d", ""]
+            "arguments": ["-u", "  %s", "-d", ""]
         },
         {
             "binary": "command-cache",
