@@ -4,13 +4,7 @@
 
 source ~/.bashrc_device
 
-ALIAS_RS_BIN="/usr/local/bin/alias-rs"
-if [ -f "$ALIAS_RS_BIN" ]; then
-    eval $($ALIAS_RS_BIN -s bash)
-else
-    printf "Error: aliases file not found at $ALIAS_RS_BIN\n" 1>&2
-fi
-unset ALIAS_RS_BIN
+eval $(/usr/local/bin/alias-rs -c $HOME/.config/alias-rs/config.device.json -s bash -a)
 
 [ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
 

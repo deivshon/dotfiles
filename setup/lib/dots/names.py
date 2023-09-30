@@ -53,3 +53,4 @@ class DotsNames():
     PFETCH_CUSTOM_LOGOS = "pfetch-custom-logos"
     PFETCH_CONFIG = "pfetch-config"
     ALIAS_RS_CONFIG = "alias-rs-config"
+    ALIAS_RS_CONFIG_DEVICE = "alias-rs-config-device"

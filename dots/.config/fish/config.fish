@@ -6,13 +6,7 @@ end
 
 set -U fish_greeting
 
-set ALIAS_RS_BIN "/usr/local/bin/alias-rs"
-if test -f "$ALIAS_RS_BIN"
-    eval ($ALIAS_RS_BIN -s fish )
-else
-    printf "Error: alias-rs not found at $ALIAS_RS_BIN\n" 1>&2
-end
-set -e ALIAS_RS_BIN
+eval (/usr/local/bin/alias-rs -c $HOME/.config/alias-rs/config.device.json -s fish -a)
 
 function ssh-start
     eval (ssh-agent -c)
