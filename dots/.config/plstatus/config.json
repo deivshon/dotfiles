@@ -37,7 +37,7 @@
         },
         {
             "binary": "command-cache",
-            "arguments": ["600000", "arch-updates-status", "-f", " %p/%y"],
+            "arguments": ["-p", "600000", "-c", "arch-updates-status,-f, %p/%y"],
             "period": 1000
         },
         {
