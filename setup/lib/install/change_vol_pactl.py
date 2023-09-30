@@ -8,7 +8,7 @@ from setup.lib.install.generic import git_download
 
 class ChangeVolPactlInstaller(InstallHandler):
     REMOTE_URL = "https://github.com/deivshon/pactl-ewr"
-    DEST_PATH = os.path.expanduser("~/.config/pactl-ewr")
+    DEST_PATH = os.path.expanduser("~/.local/repos/pactl-ewr")
 
     @staticmethod
     def name() -> str:

@@ -8,7 +8,7 @@ from setup.lib.install.generic import git_download
 
 class PlstatusInstaller(InstallHandler):
     REMOTE_URL = "https://github.com/deivshon/plstatus"
-    DEST_PATH = os.path.expanduser("~/.config/plstatus")
+    DEST_PATH = os.path.expanduser("~/.local/repos/plstatus")
 
     @staticmethod
     def name() -> str:

@@ -8,7 +8,7 @@ from setup.lib.install.generic import git_download
 
 class CommandCacheInstaller(InstallHandler):
     REMOTE_URL = "https://github.com/deivshon/command-cache"
-    DEST_PATH = os.path.expanduser("~/.config/command-cache")
+    DEST_PATH = os.path.expanduser("~/.local/repos/command-cache")
 
     @staticmethod
     def name() -> str:

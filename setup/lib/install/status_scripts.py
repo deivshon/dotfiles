@@ -8,7 +8,7 @@ from setup.lib.install.generic import git_download
 
 class StatusScriptsInstaller(InstallHandler):
     REMOTE_URL = "https://github.com/deivshon/status-scripts"
-    DEST_PATH = os.path.expanduser("~/.config/status-scripts")
+    DEST_PATH = os.path.expanduser("~/.local/repos/status-scripts")
     INSTALL_PATH = os.path.expanduser("~/.local/scripts")
 
     @staticmethod

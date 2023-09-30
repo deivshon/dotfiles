@@ -8,7 +8,7 @@ from setup.lib.install.generic import git_download
 
 class StInstaller(InstallHandler):
     REMOTE_URL = "https://github.com/deivshon/st"
-    DEST_PATH = os.path.expanduser("~/.config/st")
+    DEST_PATH = os.path.expanduser("~/.local/repos/st")
 
     @staticmethod
     def name() -> str:

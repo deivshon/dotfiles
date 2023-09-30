@@ -8,7 +8,7 @@ from setup.lib.install.generic import git_download
 
 class AliasRsInstaller(InstallHandler):
     REMOTE_URL = "https://github.com/deivshon/alias-rs"
-    DEST_PATH = os.path.expanduser("~/.config/alias-rs")
+    DEST_PATH = os.path.expanduser("~/.local/repos/alias-rs")
 
     @staticmethod
     def name() -> str:
