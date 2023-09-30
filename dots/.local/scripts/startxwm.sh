@@ -1,7 +1,6 @@
 #!/bin/sh
 
 systemctl --user import-environment DISPLAY
-eval "$(ssh-agent)"
 
 start_dwm() {
     dunst -config ~/.config/dunst/dunstrc-dwm &
