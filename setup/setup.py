@@ -16,6 +16,7 @@ from setup.lib.install.st import StInstaller
 from setup.lib.install.dwm import DwmInstaller
 from setup.lib.config import AVAILABLE_CONFIGS
 from setup.lib.status import SetupStatus, SETUP_STATUS
+from setup.lib.install.alias_rs import AliasRsInstaller
 from setup.lib.install.plstatus import PlstatusInstaller
 from setup.lib.install.command_cache import CommandCacheInstaller
 from setup.lib.install.status_scripts import StatusScriptsInstaller
@@ -34,6 +35,7 @@ def main():
         ChangeVolPactlInstaller(),
         CommandCacheInstaller(),
         StatusScriptsInstaller(),
+        AliasRsInstaller(),
     ]
 
     compilationMap: Dict[str, InstallHandler] = {

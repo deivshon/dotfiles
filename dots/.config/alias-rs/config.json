@@ -1,0 +1,83 @@
+{
+    "aliases": [
+        {
+            "alias": "ls",
+            "equals": "exa --icons"
+        },
+        {
+            "alias": "ll",
+            "equals": "exa --icons -laF"
+        },
+        {
+            "alias": "grep",
+            "equals": "grep --colour=always"
+        },
+        {
+            "alias": "egrep",
+            "equals": "grep -E --colour=always"
+        },
+        {
+            "alias": "fgrep",
+            "equals": "grep -F --colour=always"
+        },
+        {
+            "alias": "cp",
+            "equals": "cp -i"
+        },
+        {
+            "alias": "ip",
+            "equals": "ip -c"
+        },
+        {
+            "alias": "clear",
+            "equals": "printf '\\033[2J\\033[3J\\033[1;1H' && pfetch"
+        },
+        {
+            "alias": "clearall",
+            "equals": "printf '\\033[2J\\033[3J\\033[1;1H'"
+        },
+        {
+            "alias": "muldown",
+            "equals": "mullvad lockdown-mode set off && mullvad disconnect"
+        },
+        {
+            "alias": "mulup",
+            "equals": "mullvad lockdown-mode set on && mullvad connect"
+        },
+        {
+            "alias": "mulreg",
+            "equals": "mullvad tunnel wireguard key regenerate"
+        },
+        {
+            "alias": "protup",
+            "equals": "protonvpn-cli killswitch --permanent"
+        },
+        {
+            "alias": "protdown",
+            "equals": "protonvpn-cli killswitch --on"
+        },
+        {
+            "alias": "clip",
+            "equals": "xclip -sel c <"
+        },
+        {
+            "alias": "dd",
+            "equals": "sudo dd status=progress"
+        },
+        {
+            "alias": "glog",
+            "equals": "git log --oneline --color=always"
+        },
+        {
+            "alias": "sudoedit",
+            "equals": "sudo nanowrap"
+        },
+        {
+            "alias": "unset",
+            "equals": "set -e",
+            "shells": {
+                "whitelist": ["fish"]
+            }
+        }
+    ]
+}

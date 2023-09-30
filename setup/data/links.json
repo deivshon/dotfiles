@@ -324,14 +324,6 @@
         "source": ".config/fish/config.fish",
         "target": "~/.config/fish/config.fish"
     },
-    "bash-aliases": {
-        "source": ".config/aliases/bash_aliases.bash",
-        "target": "~/.config/aliases/bash_aliases.bash"
-    },
-    "fish-aliases": {
-        "source": ".config/aliases/fish_aliases.fish",
-        "target": "~/.config/aliases/fish_aliases.fish"
-    },
     "pfetch-custom-logos": {
         "source": ".config/pfetch/custom-logos",
         "target": "~/.config/pfetch/custom-logos"
@@ -342,5 +334,9 @@
         "subs": {
             "setup-user": "<sub<user>>"
         }
+    },
+    "alias-rs-config": {
+        "source": ".config/alias-rs/config.json",
+        "target": "~/.config/alias-rs/config.json"
     }
 }

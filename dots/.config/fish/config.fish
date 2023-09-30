@@ -6,13 +6,13 @@ end
 
 set -U fish_greeting
 
-set FISH_ALIASES_FILE "$HOME/.config/aliases/fish_aliases.fish"
-if test -f "$FISH_ALIASES_FILE"
-    source "$FISH_ALIASES_FILE"
+set ALIAS_RS_BIN "/usr/local/bin/alias-rs"
+if test -f "$ALIAS_RS_BIN"
+    eval ($ALIAS_RS_BIN -s fish )
 else
-    printf "Error: aliases file not found at $FISH_ALIASES_FILE\n" 1>&2
+    printf "Error: alias-rs not found at $ALIAS_RS_BIN\n" 1>&2
 end
-set -e FISH_ALIASES_FILE
+set -e ALIAS_RS_BIN
 
 function ssh-start
     eval (ssh-agent -c)

@@ -4,13 +4,13 @@
 
 source ~/.bashrc_device
 
-BASH_ALIASES_FILE="$HOME/.config/aliases/bash_aliases.bash"
-if [ -f "$BASH_ALIASES_FILE" ]; then
-    source "$BASH_ALIASES_FILE"
+ALIAS_RS_BIN="/usr/local/bin/alias-rs"
+if [ -f "$ALIAS_RS_BIN" ]; then
+    eval $($ALIAS_RS_BIN -s bash)
 else
-    printf "Error: aliases file not found at $BASH_ALIASES_FILE\n" 1>&2
+    printf "Error: aliases file not found at $ALIAS_RS_BIN\n" 1>&2
 fi
-unset BASH_ALIASES_FILE
+unset ALIAS_RS_BIN
 
 [ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
 
