@@ -49,7 +49,7 @@
     },
     "dwm-config": {
         "source": ".config/dwm/config.h",
-        "target": "~/.config/dwm/config.h",
+        "target": "~/.local/repos/dwm/config.h",
         "subs": {
             "main-color": "<sub<main-color>>",
             "secondary-color": "<sub<secondary-color>>",
