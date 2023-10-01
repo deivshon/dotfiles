@@ -1,7 +1,5 @@
 #!/bin/sh
 
-systemctl --user import-environment DISPLAY
-
 start_dwm() {
     dunst -config ~/.config/dunst/dunstrc-dwm &
     plstatus &
@@ -10,15 +8,11 @@ start_dwm() {
 }
 
 start_qtile() {
-    export QTILE_WIDGETS_CACHE_DIR="/tmp/qtile-configs-cache"
-    export QTILE_UPDATES_CACHE_FILE="arch-updates-checker"
-
-    arch-updates-checker "$QTILE_WIDGETS_CACHE_DIR/$QTILE_UPDATES_CACHE_FILE" 600 &
-    export QTILE_UPDATES_CHECKER_PID=$!
-
     dunst -config ~/.config/dunst/dunstrc-qtile &
     ~/.startup/qtile/startops.sh && exec qtile start
 }
+
+systemctl --user import-environment DISPLAY
 
 nm-applet &
 polkit-dumb-agent &

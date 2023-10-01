@@ -29,16 +29,12 @@ def getenv_or_die(name: str) -> Union[str, NoReturn]:
     return var
 
 
-WIDGETS_CACHE_DIR = getenv_or_die("QTILE_WIDGETS_CACHE_DIR")
-UPDATES_CACHE_FILE = f"{WIDGETS_CACHE_DIR}/{getenv_or_die('QTILE_UPDATES_CACHE_FILE')}"
-
-
 def check_arch_updates():
-    if not os.path.exists(UPDATES_CACHE_FILE):
-        return "0"
+    p = subprocess.run(["command-cache", "-p", "600000", "-d",
+                       "/tmp/command-cache/aus/", "-c", "arch-updates-status -f %p/%y"], capture_output=True)
 
-    with open(UPDATES_CACHE_FILE) as f:
-        return f.read().strip()
+    if p.returncode == 0:
+        return p.stdout.decode().strip()
 
 
 def read_file(path: str) -> Optional[str]:

@@ -40,6 +40,8 @@
             "arguments": [
                 "-p",
                 "600000",
+                "-d",
+                "/tmp/command-cache/aus/",
                 "-c",
                 "arch-updates-status -f ' %p/%y'"
             ],

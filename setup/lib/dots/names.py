@@ -42,7 +42,6 @@ class DotsNames():
     XLOCK = "xlock"
     START_X_WM = "start-x-wm"
     ALACRITTY_START_SCRIPT = "alacritty-start-script"
-    ARCH_UPDATE_CHECKER = "arch-update-checker"
     UPDATE_SCRIPT = "update-script"
     BATTER_GRAPH_TILE = "battery-graph-qtile"
     QTILE_MONADTALL_LAYOUT_ICON = "qtile-monadtall-layout-icon"
