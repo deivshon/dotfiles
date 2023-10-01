@@ -26,7 +26,7 @@ def pacman_packages():
 
 def yay_packages():
     yayInstaller = YayInstaller()
-    if not os.path.isdir(os.path.expanduser("~/yay")):
+    if not os.path.isdir(yayInstaller.DEST_PATH):
         yayInstaller.install()
 
     yay_command = \

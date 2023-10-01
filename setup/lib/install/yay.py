@@ -8,7 +8,7 @@ from setup.lib.install.generic import git_download
 
 class YayInstaller(InstallHandler):
     REMOTE_URL = "https://aur.archlinux.org/yay.git"
-    DEST_PATH = os.path.expanduser("~/yay")
+    DEST_PATH = os.path.expanduser("~/.local/repos/yay")
 
     @staticmethod
     def name() -> str:
