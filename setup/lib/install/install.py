@@ -11,23 +11,27 @@ __YAY = "yay"
 __PACKAGES_FILE = f"{LIB_DIR}/../data/packages.json"
 
 
-def packages():
-    yayInstaller = YayInstaller()
-    with open(__PACKAGES_FILE) as file:
-        packages_data = json.loads(file.read())
+with open(__PACKAGES_FILE) as file:
+    _packages_data = json.loads(file.read())
 
-    if not os.path.isdir(os.path.expanduser("~/yay")):
-        yayInstaller.install()
 
+def pacman_packages():
     pacman_command = \
         ["sudo", "pacman", "-Syu"] + \
-        packages_data[__PACMAN] + \
-        ["--needed"]
-
-    yay_command = \
-        ["yay", "-Sua"] + \
-        packages_data[__YAY] + \
+        _packages_data[__PACMAN] + \
         ["--needed"]
 
     subprocess.run(pacman_command)
+
+
+def yay_packages():
+    yayInstaller = YayInstaller()
+    if not os.path.isdir(os.path.expanduser("~/yay")):
+        yayInstaller.install()
+
+    yay_command = \
+        ["yay", "-Sua"] + \
+        _packages_data[__YAY] + \
+        ["--needed"]
+
     subprocess.run(yay_command)

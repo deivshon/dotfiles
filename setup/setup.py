@@ -101,17 +101,6 @@ def main():
     else:
         setup_status = SetupStatus.loads(SETUP_STATUS)
 
-    installed_in_run = False
-    if not setup_status.packages_installed:
-        install.packages()
-        setup_status.packages_installed = True
-        installed_in_run = True
-
-    if args.remove:
-        symlinks.remove()
-        dots.remove(homedir)
-        sys.exit(0)
-
     if args.config is not None:
         log.info(
             f"{log.WHITE}Selecting config from argument: {log.BLUE}{args.config}{log.NORMAL}")
@@ -129,16 +118,30 @@ def main():
         log.failure(
             f"{log.WHITE}{args.config} is not a valid config{log.NORMAL}\nValid configs: {json.dumps(list(AVAILABLE_CONFIGS.keys()), indent=4)}")
 
-    # Package installation if it's been explicitly requested but not performed
-    # because the setup has been run before
-    if not installed_in_run and args.packages:
-        install.packages()
-        setup_status.packages_installed = True
-
     selected_config = AVAILABLE_CONFIGS[args.config]
 
     config.expand(selected_config)
     config.check(selected_config)
+
+    installed_in_run = False
+    if not setup_status.packages_installed:
+        install.pacman_packages()
+        post.after_packages_install(selected_config)
+        install.yay_packages()
+        setup_status.packages_installed = True
+        installed_in_run = True
+
+    if args.remove:
+        symlinks.remove()
+        dots.remove(homedir)
+        sys.exit(0)
+
+    # Package installation if it's been explicitly requested but not performed
+    # because the setup has been run before
+    if not installed_in_run and args.packages:
+        install.pacman_packages()
+        install.yay_packages()
+        setup_status.packages_installed = True
 
     for inst in installers:
         inst.download(args.git_pull)

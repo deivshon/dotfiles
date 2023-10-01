@@ -10,9 +10,12 @@ from setup.lib.post.wallpaper import WallpaperPostOperations
 
 AFTER_INSTALL_OPERATIONS: List[PostOperationsHandler] = [
     XinitrcPostOperations(),
-    RustupPostOperations(),
     ReflectorPostOperations(),
     ChangeShellPostOperation(),
+]
+
+AFTER_PACKAGES_OPERATIONS: List[PostOperationsHandler] = [
+    RustupPostOperations(),
 ]
 
 AFTER_RUN_OPERATIONS: List[PostOperationsHandler] = [
@@ -20,20 +23,24 @@ AFTER_RUN_OPERATIONS: List[PostOperationsHandler] = [
 ]
 
 
-def install(config: Dict):
+def _generic_install(config: Dict, operations_label: str, operations_list: List[PostOperationsHandler]):
     log.info(
-        f"{log.WHITE}Starting post install operations...{log.NORMAL}")
+        f"{log.WHITE}Starting {operations_label} operations...{log.NORMAL}")
 
-    for operation in AFTER_INSTALL_OPERATIONS:
+    for operation in operations_list:
         operation.trigger(config)
 
-    log.info(f"{log.WHITE}Ended post install operations...")
+    log.info(f"{log.WHITE}Ended {operations_label} operations...")
+
+
+def after_packages_install(config: Dict):
+    _generic_install(config, "post packages install",
+                     AFTER_PACKAGES_OPERATIONS)
+
+
+def install(config: Dict):
+    _generic_install(config, "post install", AFTER_INSTALL_OPERATIONS)
 
 
 def change(config):
-    log.info(f"{log.WHITE}Starting post run operations...{log.NORMAL}")
-
-    for operation in AFTER_RUN_OPERATIONS:
-        operation.trigger(config)
-
-    log.info(f"{log.WHITE}Ended post run operations...{log.NORMAL}")
+    _generic_install(config, "post run", AFTER_RUN_OPERATIONS)
