@@ -166,5 +166,13 @@
         },
         "wallpaper-link": "https://i.ibb.co/YLzRZ3f/nasa-blue-minimal.png",
         "wallpaper-name": "nasa-blue-minimal.png"
+    },
+    "arch-darkgrey-minimal": {
+        "substitutions": {
+            "main-color": "#66818D",
+            "secondary-color": "#3F535C"
+        },
+        "wallpaper-link": "https://raw.githubusercontent.com/pablocorbalann/arch-minimal-wallpapers/main/wallpapers/2k/dark-grey.png",
+        "wallpaper-name": "arch-darkgrey-minimal.png"
     }
 }
