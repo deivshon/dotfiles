@@ -14,6 +14,7 @@ def hex_to_divided_hsv(hex):
     return hsv[0], hsv[1], hsv[2]
 
 
-def apply_hue(s, v, color):
-    h = hex_to_hsv(color)[0]
+def apply_hue_saturation(v, color):
+    hsv = hex_to_hsv(color)
+    h, s = hsv[0], hsv[1]
     return hsv_to_hex((h, s, v))

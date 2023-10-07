@@ -23,6 +23,10 @@ def expand_hue(config, color_fields, base_color=None):
     new_fields = {}
 
     for col in color_fields.keys():
+        if color_fields[col].startswith("#FFFFFF"):
+            new_fields[col] = color_fields[col]
+            continue
+
         alpha = ""
         if len(color_fields[col]) == 9:
             alpha = color_fields[col][-2:]
@@ -31,8 +35,9 @@ def expand_hue(config, color_fields, base_color=None):
             log.failure(
                 f"Malformed hex color passed to hue expansion: {color_fields[col]}")
 
-        _, s, v = genutils.hue.hex_to_divided_hsv(color_fields[col])
-        new_fields[col] = genutils.hue.apply_hue(s, v, base_color) + alpha
+        _, _, v = genutils.hue.hex_to_divided_hsv(color_fields[col])
+        new_fields[col] = genutils.hue.apply_hue_saturation(
+            v, base_color) + alpha
 
     for field, value in new_fields.items():
         if field not in config[SUBSTITUTIONS]:
