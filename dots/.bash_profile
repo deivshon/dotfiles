@@ -11,7 +11,7 @@ export EDITOR=nano
 export PF_SOURCE=~/.config/pfetch/pfetch-config.sh
 export EXA_COLORS="xx=37"
 
-PATH=${PATH}:~/.local/scripts:~/.local/bin
+PATH=${PATH}:/usr/lib/polkit-gnome/:~/.local/scripts:~/.local/bin
 
 launch_hyprland() {
     Hyprland

@@ -15,7 +15,7 @@ start_qtile() {
 systemctl --user import-environment DISPLAY
 
 nm-applet &
-polkit-dumb-agent &
+polkit-gnome-authentication-agent-1 &
 xset -b &
 case $1 in
     dwm  ) start_dwm;;

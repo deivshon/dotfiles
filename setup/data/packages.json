@@ -48,11 +48,11 @@
         "hyperfine",
         "flameshot",
         "zig",
-        "zls"
+        "zls",
+        "polkit-gnome"
     ],
     "yay": [
         "pfetch-rs",
-        "polkit-dumb-agent-git",
         "visual-studio-code-bin",
         "gksu",
         "hyprland",
