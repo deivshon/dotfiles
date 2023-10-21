@@ -13,4 +13,9 @@ if [ "${COMMIT_NUMBER}" -ge "${TOTAL_COMMITS}" ]; then
 fi
 
 COMMIT="$(git --no-pager log --oneline | awk "FNR == ${COMMIT_NUMBER} {print \$1}")"
-git --no-pager diff --color=always "${COMMIT}"~ "${COMMIT}" | less -r
+
+if type bat 1>/dev/null 2>/dev/null; then
+    git --no-pager diff --color=always "${COMMIT}"~ "${COMMIT}" | bat
+else
+    git --no-pager diff --color=always "${COMMIT}"~ "${COMMIT}" | less -r
+fi
