@@ -49,7 +49,8 @@
         "flameshot",
         "zig",
         "zls",
-        "polkit-gnome"
+        "polkit-gnome",
+        "go"
     ],
     "yay": [
         "pfetch-rs",
