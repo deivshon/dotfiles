@@ -50,13 +50,13 @@
         "zig",
         "zls",
         "polkit-gnome",
-        "go"
+        "go",
+        "hyprland"
     ],
     "yay": [
         "pfetch-rs",
         "visual-studio-code-bin",
         "gksu",
-        "hyprland",
         "hyprpaper-git",
         "wlr-randr",
         "nwg-look-bin",
