@@ -172,7 +172,23 @@
             "main-color": "#66818D",
             "secondary-color": "#3F535C"
         },
-        "wallpaper-link": "https://raw.githubusercontent.com/pablocorbalann/arch-minimal-wallpapers/main/wallpapers/2k/dark-grey.png",
+        "wallpaper-link": "https://i.ibb.co/SXYRJ8f/arch-darkgrey-minimal.png",
         "wallpaper-name": "arch-darkgrey-minimal.png"
+    },
+    "rhombus-orange-minimal": {
+        "substitutions": {
+            "main-color": "#F59548",
+            "secondary-color": "#8A450E"
+        },
+        "wallpaper-link": "https://i.ibb.co/fHms0dF/rhombus-orange-minimal.png",
+        "wallpaper-name": "rhombus-orange-minimal.jpg"
+    },
+    "ship-orange-digital": {
+        "substitutions": {
+            "main-color": "#F0700F",
+            "secondary-color": "#873C03"
+        },
+        "wallpaper-link": "https://i.ibb.co/5rZQfwP/ship-orange-digital.png",
+        "wallpaper-name": "ship-orange-digital.png"
     }
 }
