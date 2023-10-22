@@ -43,7 +43,7 @@
                 "-d",
                 "/tmp/command-cache/aus/",
                 "-c",
-                "arch-updates-status -f ' %p/%y'"
+                "arch-updates-status -f ' %p/%y' -p"
             ],
             "period": 1000
         },

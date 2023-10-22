@@ -31,7 +31,7 @@ def getenv_or_die(name: str) -> Union[str, NoReturn]:
 
 def check_arch_updates():
     p = subprocess.run(["command-cache", "-p", "600000", "-d",
-                       "/tmp/command-cache/aus/", "-c", "arch-updates-status -f %p/%y"], capture_output=True)
+                       "/tmp/command-cache/aus/", "-c", "arch-updates-status -f %p/%y -p"], capture_output=True)
 
     if p.returncode == 0:
         return p.stdout.decode().strip()
