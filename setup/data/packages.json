@@ -52,7 +52,8 @@
         "polkit-gnome",
         "go",
         "hyprland",
-        "hyprpaper"
+        "hyprpaper",
+        "tldr"
     ],
     "paru": [
         "pfetch-rs",

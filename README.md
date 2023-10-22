@@ -56,11 +56,12 @@ The configuration files in this repository and the relative setup scripts are ta
 -   [zls](https://archlinux.org/packages/extra/x86_64/zls/)
 -   [polkit-gnome](https://archlinux.org/packages/extra/x86_64/polkit-gnome/)
 -   [go](https://archlinux.org/packages/extra/x86_64/go/)
+-   [hyprland](https://archlinux.org/packages/extra/x86_64/hyprland/)
+-   [hyprpaper](https://archlinux.org/packages/extra/x86_64/hyprpaper/)
+-   [tldr](https://archlinux.org/packages/extra/any/tldr/)
 -   [pfetch-rs](https://aur.archlinux.org/packages/pfetch-rs/)
 -   [visual-studio-code-bin](https://aur.archlinux.org/packages/visual-studio-code-bin)
 -   [gksu](https://aur.archlinux.org/packages/gksu) [root privileges for rofi launched applications]
--   [hyprland](https://aur.archlinux.org/packages/hyprland)
--   [hyprpaper-git](https://aur.archlinux.org/packages/hyprpaper-git)
 -   [wlr-randr](https://aur.archlinux.org/packages/wlr-randr)
 -   [nwg-look-bin](https://aur.archlinux.org/packages/nwg-look-bin) [wayland lxappearance equivalent]
 -   [swaylock-effects](https://aur.archlinux.org/packages/swaylock-effects)
