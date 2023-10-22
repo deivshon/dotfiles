@@ -1,6 +1,6 @@
 #!/bin/sh
 
-sudo pacman -Syu && yay -Sua
+sudo pacman -Syu && paru -Sua
 EXIT_CODE=$?
 
 rm -rf /tmp/command-cache/aus/

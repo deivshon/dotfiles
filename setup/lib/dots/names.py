@@ -53,3 +53,4 @@ class DotsNames():
     PFETCH_CONFIG = "pfetch-config"
     ALIAS_RS_CONFIG = "alias-rs-config"
     ALIAS_RS_CONFIG_DEVICE = "alias-rs-config-device"
+    PARU_CONFIG = "paru-config"

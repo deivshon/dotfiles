@@ -338,5 +338,9 @@
         "source": ".config/alias-rs/config.device.json",
         "target": "~/.config/alias-rs/config.device.json",
         "flags": ["device-specific"]
+    },
+    "paru-config": {
+        "source": ".config/paru/paru.conf",
+        "target": "~/.config/paru/paru.conf"
     }
 }

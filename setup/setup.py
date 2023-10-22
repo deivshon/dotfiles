@@ -127,7 +127,7 @@ def main():
     if not setup_status.packages_installed:
         install.pacman_packages()
         post.after_packages_install(selected_config)
-        install.yay_packages()
+        install.paru_packages()
         setup_status.packages_installed = True
         installed_in_run = True
 
@@ -140,7 +140,7 @@ def main():
     # because the setup has been run before
     if not installed_in_run and args.packages:
         install.pacman_packages()
-        install.yay_packages()
+        install.paru_packages()
         setup_status.packages_installed = True
 
     for inst in installers:

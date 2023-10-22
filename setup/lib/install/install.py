@@ -3,10 +3,10 @@ import json
 import subprocess
 
 from setup.lib import LIB_DIR
-from setup.lib.install.yay import YayInstaller
+from setup.lib.install.paru import ParuInstaller
 
 __PACMAN = "pacman"
-__YAY = "yay"
+__PARU = "paru"
 
 __PACKAGES_FILE = f"{LIB_DIR}/../data/packages.json"
 
@@ -24,14 +24,14 @@ def pacman_packages():
     subprocess.run(pacman_command)
 
 
-def yay_packages():
-    yayInstaller = YayInstaller()
-    if not os.path.isdir(yayInstaller.DEST_PATH):
-        yayInstaller.install()
+def paru_packages():
+    paruInstaller = ParuInstaller()
+    if not os.path.isdir(ParuInstaller.DEST_PATH):
+        paruInstaller.install()
 
-    yay_command = \
-        ["yay", "-Sua"] + \
-        _packages_data[__YAY] + \
+    paru_command = \
+        ["paru", "-Sua"] + \
+        _packages_data[__PARU] + \
         ["--needed"]
 
-    subprocess.run(yay_command)
+    subprocess.run(paru_command)

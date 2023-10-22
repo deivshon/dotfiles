@@ -53,7 +53,7 @@
         "go",
         "hyprland"
     ],
-    "yay": [
+    "paru": [
         "pfetch-rs",
         "visual-studio-code-bin",
         "gksu",
