@@ -51,13 +51,13 @@
         "zls",
         "polkit-gnome",
         "go",
-        "hyprland"
+        "hyprland",
+        "hyprpaper"
     ],
     "paru": [
         "pfetch-rs",
         "visual-studio-code-bin",
         "gksu",
-        "hyprpaper-git",
         "wlr-randr",
         "nwg-look-bin",
         "swaylock-effects",
