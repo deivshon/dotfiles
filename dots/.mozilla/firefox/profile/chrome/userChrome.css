@@ -22,3 +22,11 @@ html#main-window {
 	--lwt-selected-tab-background-color: <sub<ffx--lwt-selected-tab-background-color>> !important;
 	--autocomplete-popup-highlight-background: <sub<ffx--autocomplete-popup-highlight-background>> !important;
 }
+
+.tabbrowser-tab:not([selected]):hover .tab-background {
+	background-color: <sub<ffx--background-tab-hover-brackgroud>> !important;
+}
+
+toolbarbutton.subviewbutton:not([disabled], [open], :active):is(:hover) {
+    background-color: <sub<ffx--toolbarbutton-select-hover-background>> !important;
+}
