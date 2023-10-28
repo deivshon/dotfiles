@@ -2,7 +2,7 @@ import json
 
 from setup.lib import LIB_DIR
 from setup.lib.dots import LINKS_FILE
-from setup.lib.dots.dots import SUBS
+from setup.lib.dots.dots import LINK_SUBS
 
 SUBSTITUTIONS = "substitutions"
 EXPANDED_SUBSTITUTIONS = "setup-expanded-substitutions"
@@ -16,10 +16,10 @@ with open(LINKS_FILE, "r") as file:
 
 EXPECTED_SUBSTITUTIONS = []
 for link in links_list:
-    if SUBS not in links_list[link]:
+    if LINK_SUBS not in links_list[link]:
         continue
 
-    for sub in links_list[link][SUBS]:
+    for sub in links_list[link][LINK_SUBS]:
         if sub in EXPECTED_SUBSTITUTIONS:
             continue
 

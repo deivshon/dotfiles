@@ -15,6 +15,7 @@ from setup.lib.config.expansion.firefox import FirefoxColors
 from setup.lib.config.expansion.swaylock import SwayLockColors
 from setup.lib.config.expansion.handler import ExpansionHandler
 from setup.lib.config.expansion.colors_no_hash import ColorsNoHash
+from setup.lib.dots.appliers import APPLIERS
 
 __CONFIG_FILE = f"{LIB_DIR}/../data/configFields.json"
 __EXPANSIONS: List[ExpansionHandler] = [
@@ -30,7 +31,8 @@ __DEFAULTS_PATHS: List[str] = [
     "btop.json",
     "dwm.json",
     "firefox.json",
-    "rofi.json"
+    "rofi.json",
+    "vscode.json"
 ]
 
 
@@ -45,6 +47,12 @@ def check(config):
     for field in EXPECTED_SUBSTITUTIONS:
         if field not in config[SUBSTITUTIONS].keys():
             log.failure("Sub-field missing in substitutions field: " + field)
+
+    for applier in APPLIERS:
+        for field in applier.required:
+            if field not in config[SUBSTITUTIONS].keys():
+                log.failure(
+                    f"Field missing for applier {log.BLUE}{applier.name}{log.NORMAL}: {log.RED}{field}")
 
 
 def expand(config):

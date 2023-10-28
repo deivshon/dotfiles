@@ -23,6 +23,7 @@
     "btop-theme": "\\/usr\\/share\\/btop\\/themes\\/gruvbox_dark_v2.theme",
     "rofi-background": "#0c0d0e",
     "rofi-foreground": "#DDC9AD",
+    "vscode-theme": "Darkbox",
     "efy--main-color": "#458588",
     "efy--main-background": "#080808",
     "efy--second-background": "#0c0d0e",

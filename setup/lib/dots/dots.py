@@ -10,6 +10,7 @@ from setup.lib import utils
 from setup.lib import LIB_DIR
 from setup.lib.dots import LINKS_FILE
 from setup.lib.dots.names import DotsNames
+from setup.lib.dots.appliers import APPLIERS
 from setup.lib.install.handler import InstallHandler
 from setup.lib.dots.targets.firefox import FirefoxVariableTarget
 from setup.lib.dots.flags import DEVICE_SPECIFIC_FLAG, SUDO_FLAG, VAR_TARGET_FLAG, EXECUTABLE_FLAG
@@ -18,7 +19,7 @@ from setup.lib.dots.flags import DEVICE_SPECIFIC_FLAG, SUDO_FLAG, VAR_TARGET_FLA
 SUBSTITUTIONS_DIR = "./substitutions"
 __DOTFILES_DIR = f"{LIB_DIR}/../../dots"
 
-SUBS = "subs"
+LINK_SUBS = "subs"
 __CONFIG_SUBS = "substitutions"
 
 
@@ -125,6 +126,12 @@ def link(config, user, keep_expansion=False, force=False, compilationMap: Dict[s
 
     for target in no_target_dots:
         log.error(f"Could not find any target for {target}")
+
+    for applier in APPLIERS:
+        log.info(f"Running applier {log.GREEN}{applier.name}")
+        applier.run(config[__CONFIG_SUBS])
+
+    print("\n", end="")
 
 
 def substitute(config, substitutions_dir):
