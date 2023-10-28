@@ -32,6 +32,8 @@
         "source": ".config/alacritty/alacritty.yml",
         "target": "~/.config/alacritty/alacritty.yml",
         "subs": {
+            "terminal-background": "<sub<terminal-background>>",
+            "terminal-foreground": "<sub<terminal-foreground>>",
             "terminal-normal-black": "<sub<terminal-normal-black>>",
             "terminal-normal-red": "<sub<terminal-normal-red>>",
             "terminal-normal-green": "<sub<terminal-normal-green>>",
@@ -52,13 +54,18 @@
     },
     "btop-config": {
         "source": ".config/btop/btop.conf",
-        "target": "~/.config/btop/btop.conf"
+        "target": "~/.config/btop/btop.conf",
+        "subs": {
+            "btop-theme": "<sub<btop-theme>>"
+        }
     },
     "rofi-config": {
         "source": ".config/rofi/config.rasi",
         "target": "~/.config/rofi/config.rasi",
         "subs": {
-            "main-color": "<sub<main-color>>"
+            "main-color": "<sub<main-color>>",
+            "rofi-background": "<sub<rofi-background>>",
+            "rofi-foreground": "<sub<rofi-foreground>>"
         }
     },
     "ranger-config": {
@@ -71,7 +78,9 @@
         "subs": {
             "main-color": "<sub<main-color>>",
             "secondary-color": "<sub<secondary-color>>",
-            "setup-user": "<sub<user>>"
+            "setup-user": "<sub<user>>",
+            "dwm-bgcolor": "<sub<dwm-bgcolor>>",
+            "dwm-fgcolor": "<sub<dwm-fgcolor>>"
         }
     },
     "plstatus-config": {
@@ -164,7 +173,17 @@
             "ffx--lwt-selected-tab-background-color": "<sub<ffx--lwt-selected-tab-background-color>>",
             "ffx--autocomplete-popup-highlight-background": "<sub<ffx--autocomplete-popup-highlight-background>>",
             "ffx--background-tab-hover-brackgroud": "<sub<ffx--background-tab-hover-brackgroud>>",
-            "ffx--toolbarbutton-select-hover-background": "<sub<ffx--toolbarbutton-select-hover-background>>"
+            "ffx--toolbarbutton-select-hover-background": "<sub<ffx--toolbarbutton-select-hover-background>>",
+            "ffx--lwt-text-color": "<sub<ffx--lwt-text-color>>",
+            "ffx--lwt-tab-text": "<sub<ffx--lwt-tab-text>>",
+            "ffx--toolbar-field-color": "<sub<ffx--toolbar-field-color>>",
+            "ffx--arrowpanel-color": "<sub<ffx--arrowpanel-color>>",
+            "ffx--autocomplete-popup-highlight-color": "<sub<ffx--autocomplete-popup-highlight-color>>",
+            "ffx--input-color": "<sub<ffx--input-color>>",
+            "ffx--urlbarView-result-button-selected-color": "<sub<ffx--urlbarView-result-button-selected-color>>",
+            "ffx--toolbar-field-focus-color": "<sub<ffx--toolbar-field-focus-color>>",
+            "ffx--toolbar-color": "<sub<ffx--toolbar-color>>",
+            "ffx--tab-icon-overlay-fill": "<sub<ffx--tab-icon-overlay-fill>>"
         }
     },
     "tmux-config": {

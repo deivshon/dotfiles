@@ -1,28 +1,28 @@
 * {
-    selected-normal-foreground:  #FFFFFF;
-    foreground:                  #FFFFFF;
+    selected-normal-foreground:  <sub<rofi-foreground>>;
+    foreground:                  <sub<rofi-foreground>>;
     normal-foreground:           @foreground;
-    alternate-normal-background: #00000000;
+    alternate-normal-background: <sub<rofi-background>>;
     red:                         #FF0000;
-    selected-urgent-foreground:  #000000;
+    selected-urgent-foreground:  <sub<rofi-background>>;
     urgent-foreground:           #FF0000;
-    alternate-urgent-background: #00000000;
-    active-foreground:           #000000;
-    alternate-active-background: #00000000;
-    background:                  #000000;
-    bordercolor:                 #FFFFFF;
+    alternate-urgent-background: <sub<rofi-background>>;
+    active-foreground:           <sub<rofi-background>>;
+    alternate-active-background: <sub<rofi-background>>;
+    background:                  <sub<rofi-background>>;
+    bordercolor:                 <sub<rofi-foreground>>;
     alternate-normal-foreground: @foreground;
-    normal-background:           #00000000;
+    normal-background:           <sub<rofi-background>>;
     selected-normal-background:  <sub<main-color>>;
     border-color:                <sub<main-color>>;
     spacing:                     2;
     separatorcolor:              <sub<main-color>>;
-    urgent-background:           #00000000;
+    urgent-background:           <sub<rofi-background>>;
     selected-urgent-background:  #FF0000;
-    alternate-urgent-foreground: #FFFFFF;
-    background-color:            #00000000;
+    alternate-urgent-foreground: <sub<rofi-foreground>>;
+    background-color:            <sub<rofi-background>>;
     alternate-active-foreground: @active-foreground;
-    active-background:           #00000000;
+    active-background:           <sub<rofi-background>>;
     font:                        "JetBrains Mono Nerd Font 12";
 }
 

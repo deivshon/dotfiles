@@ -13,14 +13,25 @@ html#main-window {
 	--panel-banner-item-info-icon-bgcolor: <sub<ffx--panel-banner-item-info-icon-bgcolor>> !important;
 	--tab-icon-overlay-stroke: <sub<ffx--tab-icon-overlay-stroke>> !important;
 	--lwt-accent-color: <sub<ffx--lwt-accent-color>> !important;
+	--lwt-text-color: <sub<ffx--lwt-text-color>> !important;
+	--lwt-tab-text: <sub<ffx--lwt-tab-text>> !important;
 	--arrowpanel-background: <sub<ffx--arrowpanel-background>> !important;
 	--arrowpanel-border-color: <sub<ffx--arrowpanel-border-color>> !important;
 	--toolbar-field-background-color: <sub<ffx--toolbar-field-background-color>> !important;
 	--toolbar-field-focus-background-color: <sub<ffx--toolbar-field-focus-background-color>> !important;
 	--toolbar-bgcolor: <sub<ffx--toolbar-bgcolor>> !important;
+	--toolbar-field-color: <sub<ffx--toolbar-field-color>> !important;
 	--toolbarbutton-icon-fill: <sub<ffx--toolbarbutton-icon-fill>> !important;
 	--lwt-selected-tab-background-color: <sub<ffx--lwt-selected-tab-background-color>> !important;
 	--autocomplete-popup-highlight-background: <sub<ffx--autocomplete-popup-highlight-background>> !important;
+	--autocomplete-popup-highlight-color: <sub<ffx--autocomplete-popup-highlight-color>> !important;
+	--arrowpanel-color: <sub<ffx--arrowpanel-color>> !important;
+	--input-color: <sub<ffx--input-color>> !important;
+	--urlbarView-result-button-selected-color: <sub<ffx--urlbarView-result-button-selected-color>> !important;
+	--toolbar-field-focus-color: <sub<ffx--toolbar-field-focus-color>> !important;
+	--toolbar-color: <sub<ffx--toolbar-color>> !important;
+	--tab-icon-overlay-fill: <sub<ffx--tab-icon-overlay-fill>> !important;
+
 }
 
 .tabbrowser-tab:not([selected]):hover .tab-background {

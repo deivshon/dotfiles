@@ -1,7 +1,8 @@
-from typing import Dict
+import os
 import json
 
 from typing import List
+from typing import Dict
 
 from setup.lib import log
 from setup.lib import LIB_DIR
@@ -24,9 +25,12 @@ __EXPANSIONS: List[ExpansionHandler] = [
     SwayLockColors(),
     SetupUser(),
 ]
-
 __DEFAULTS_PATHS: List[str] = [
-    "terminal_colors.json"
+    "terminal_colors.json",
+    "btop.json",
+    "dwm.json",
+    "firefox.json",
+    "rofi.json"
 ]
 
 
@@ -34,12 +38,8 @@ def check(config):
     with open(__CONFIG_FILE, "r") as file:
         expected_data = json.loads(file.read())
 
-    config_keys = config.keys()
-    if SUBSTITUTIONS not in config_keys:
-        log.failure("Substitutions field missing in config")
-
     for field in expected_data:
-        if field not in config_keys:
+        if field not in config.keys():
             log.failure("Field missing in config: " + field)
 
     for field in EXPECTED_SUBSTITUTIONS:
@@ -61,3 +61,22 @@ def apply_defaults(config: Dict) -> None:
         for key, value in current_fields.items():
             if key not in config[SUBSTITUTIONS]:
                 config[SUBSTITUTIONS][key] = value
+
+
+def apply_preset(config: Dict, preset_name: str) -> None:
+    preset_path = f"./data/presets/{preset_name}.json"
+    if not os.path.isfile(preset_path):
+        log.failure(f"Preset {preset_name} does not exist")
+
+    log.info(f"Applying preset {log.GREEN}{preset_name}")
+    with open(preset_path) as f:
+        preset = json.loads(f.read())
+
+    for key, value in preset.items():
+        if key not in config[SUBSTITUTIONS]:
+            config[SUBSTITUTIONS][key] = value
+
+
+def initialize(config: Dict):
+    if SUBSTITUTIONS not in config:
+        config[SUBSTITUTIONS] = {}

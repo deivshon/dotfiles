@@ -11,8 +11,8 @@ font:
 colors:
     # Default colors
     primary:
-        background: "#000000"
-        foreground: "#ffffff"
+        background: "<sub<terminal-background>>"
+        foreground: "<sub<terminal-foreground>>"
     # Normal colors
     normal:
         black: "<sub<terminal-normal-black>>"

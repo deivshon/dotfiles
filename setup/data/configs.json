@@ -190,5 +190,10 @@
         },
         "wallpaper-link": "https://i.ibb.co/5rZQfwP/ship-orange-digital.png",
         "wallpaper-name": "ship-orange-digital.png"
+    },
+    "arch-darkbox-minimal": {
+        "preset": "darkbox-blue-accent",
+        "wallpaper-link": "https://i.ibb.co/c6bBj6P/arch-darkbox-minimal.png",
+        "wallpaper-name": "arch-darkbox-minimal.png"
     }
 }

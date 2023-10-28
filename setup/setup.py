@@ -7,7 +7,7 @@ from typing import Dict, List
 from setup.lib import log
 from setup.lib.post import post
 from setup.lib.dots import dots
-from setup.lib.config import config
+from setup.lib.config import PRESET, config
 from setup.lib.install import install
 from setup.lib.dots.names import DotsNames
 from setup.lib.install.st import StInstaller
@@ -116,6 +116,10 @@ def main():
             f"{log.WHITE}{args.config} is not a valid config{log.NORMAL}\nValid configs: {json.dumps(list(AVAILABLE_CONFIGS.keys()), indent=4)}")
 
     selected_config = AVAILABLE_CONFIGS[args.config]
+    config.initialize(selected_config)
+
+    if PRESET in selected_config:
+        config.apply_preset(selected_config, selected_config[PRESET])
 
     config.apply_defaults(selected_config)
     config.expand(selected_config)

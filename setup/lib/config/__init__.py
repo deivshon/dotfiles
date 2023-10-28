@@ -9,6 +9,7 @@ EXPANDED_SUBSTITUTIONS = "setup-expanded-substitutions"
 
 MAIN_COLOR = "main-color"
 SECONDARY_COLOR = "secondary-color"
+PRESET = "preset"
 
 with open(LINKS_FILE, "r") as file:
     links_list = json.loads(file.read())

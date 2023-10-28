@@ -4,7 +4,7 @@ import argparse
 from time import time
 from setup.lib.dots import dots
 from setup.lib import log
-from setup.lib.config import AVAILABLE_CONFIGS, config
+from setup.lib.config import AVAILABLE_CONFIGS, PRESET, config
 
 
 def main():
@@ -38,6 +38,10 @@ def main():
         log.failure("Select a valid config")
 
     selected_config = AVAILABLE_CONFIGS[args.config]
+    config.initialize(selected_config)
+
+    if PRESET in selected_config:
+        config.apply_preset(selected_config, selected_config[PRESET])
 
     config.apply_defaults(selected_config)
     config.expand(selected_config)

@@ -66,32 +66,32 @@ static const char dmenufont[]            = "JetBrainsMonoNerdFont:pixelsize=14";
 
 static char c000000[]                    = "#000000"; // placeholder value
 
-static char normfgcolor[]                = "#ffffff";
-static char normbgcolor[]                = "#000000";
+static char normfgcolor[]                = "<sub<dwm-fgcolor>>";
+static char normbgcolor[]                = "<sub<dwm-bgcolor>>";
 static char normbordercolor[]            = "<sub<secondary-color>>";
 static char normfloatcolor[]             = "<sub<main-color>>";
 
-static char selfgcolor[]                 = "#ffffff";
+static char selfgcolor[]                 = "<sub<dwm-fgcolor>>";
 static char selbgcolor[]                 = "<sub<main-color>>";
 static char selbordercolor[]             = "<sub<main-color>>";
 static char selfloatcolor[]              = "<sub<main-color>>";
 
-static char titlenormfgcolor[]           = "#ffffff";
-static char titlenormbgcolor[]           = "#000000";
+static char titlenormfgcolor[]           = "<sub<dwm-fgcolor>>";
+static char titlenormbgcolor[]           = "<sub<dwm-bgcolor>>";
 static char titlenormbordercolor[]       = "<sub<secondary-color>>";
 static char titlenormfloatcolor[]        = "<sub<main-color>>";
 
-static char titleselfgcolor[]            = "#ffffff";
+static char titleselfgcolor[]            = "<sub<dwm-fgcolor>>";
 static char titleselbgcolor[]            = "<sub<main-color>>";
 static char titleselbordercolor[]        = "<sub<main-color>>";
 static char titleselfloatcolor[]         = "<sub<main-color>>";
 
-static char tagsnormfgcolor[]            = "#ffffff";
-static char tagsnormbgcolor[]            = "#000000";
+static char tagsnormfgcolor[]            = "<sub<dwm-fgcolor>>";
+static char tagsnormbgcolor[]            = "<sub<dwm-bgcolor>>";
 static char tagsnormbordercolor[]        = "<sub<secondary-color>>";
 static char tagsnormfloatcolor[]         = "<sub<main-color>>";
 
-static char tagsselfgcolor[]             = "#ffffff";
+static char tagsselfgcolor[]             = "<sub<dwm-fgcolor>>";
 static char tagsselbgcolor[]             = "<sub<main-color>>";
 static char tagsselbordercolor[]         = "<sub<main-color>>";
 static char tagsselfloatcolor[]          = "<sub<main-color>>";
@@ -101,8 +101,8 @@ static char hidselfgcolor[]              = "#227799";
 static char hidnormbgcolor[]             = "#222222";
 static char hidselbgcolor[]              = "#222222";
 
-static char urgfgcolor[]                 = "#ffffff";
-static char urgbgcolor[]                 = "#000000";
+static char urgfgcolor[]                 = "<sub<dwm-fgcolor>>";
+static char urgbgcolor[]                 = "<sub<dwm-bgcolor>>";
 static char urgbordercolor[]             = "#ff0000";
 static char urgfloatcolor[]              = "#ff0000";
 

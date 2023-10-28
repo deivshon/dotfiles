@@ -1,4 +1,6 @@
 {
+    "terminal-background": "#000000",
+    "terminal-foreground": "#ffffff",
     "terminal-normal-black": "#000000",
     "terminal-normal-red": "#ff5555",
     "terminal-normal-green": "#55ff55",
