@@ -41,8 +41,7 @@ def main():
         DotsNames.DWM_CONFIG: dwm_installer,
     }
 
-    __FILE_DIR__ = os.path.dirname(os.path.realpath(__file__))
-
+    __FILE_DIR = os.path.dirname(os.path.realpath(__file__))
     DEFAULT_CONFIG = "sunset-yellow-digital"
 
     parser = argparse.ArgumentParser(
@@ -88,8 +87,7 @@ def main():
         log.failure("Don't run the script as root!")
 
     homedir = os.path.expanduser("~")
-    setup_dir = os.path.dirname(os.path.realpath(__file__))
-    os.chdir(setup_dir)
+    os.chdir(__FILE_DIR)
 
     if not os.path.isfile(SETUP_STATUS):
         setup_status = SetupStatus(
