@@ -32,7 +32,8 @@ __DEFAULTS_PATHS: List[str] = [
     "dwm.json",
     "firefox.json",
     "rofi.json",
-    "vscode.json"
+    "vscode.json",
+    "dunst.json"
 ]
 
 

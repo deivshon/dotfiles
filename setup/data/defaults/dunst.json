@@ -1,0 +1,9 @@
+{
+    "dunst-low-bg": "#000000",
+    "dunst-low-fg": "#FFFFFF",
+    "dunst-normal-bg": "#000000",
+    "dunst-normal-fg": "#FFFFFF",
+    "dunst-critical-bg": "#900000",
+    "dunst-critical-fg": "#FFFFFF",
+    "dunst-critical-frame": "#FF0000"
+}
