@@ -1,0 +1,18 @@
+{
+    "terminal-normal-black": "#000000",
+    "terminal-normal-red": "#ff5555",
+    "terminal-normal-green": "#55ff55",
+    "terminal-normal-yellow": "#ffff55",
+    "terminal-normal-blue": "#5555ff",
+    "terminal-normal-magenta": "#ff55ff",
+    "terminal-normal-cyan": "#55ffff",
+    "terminal-normal-white": "#ffffff",
+    "terminal-bright-black": "#000000",
+    "terminal-bright-red": "#ff5555",
+    "terminal-bright-green": "#55ff55",
+    "terminal-bright-yellow": "#ffff55",
+    "terminal-bright-blue": "#5555ff",
+    "terminal-bright-magenta": "#ff55ff",
+    "terminal-bright-cyan": "#55ffff",
+    "terminal-bright-white": "#ffffff"
+}

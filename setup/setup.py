@@ -5,16 +5,15 @@ import argparse
 from typing import Dict, List
 
 from setup.lib import log
-from setup.lib.install.handler import InstallHandler
 from setup.lib.post import post
-from setup.lib.config import config
 from setup.lib.dots import dots
-
+from setup.lib.config import config
 from setup.lib.install import install
 from setup.lib.dots.names import DotsNames
 from setup.lib.install.st import StInstaller
 from setup.lib.install.dwm import DwmInstaller
 from setup.lib.config import AVAILABLE_CONFIGS
+from setup.lib.install.handler import InstallHandler
 from setup.lib.status import SetupStatus, SETUP_STATUS
 from setup.lib.install.alias_rs import AliasRsInstaller
 from setup.lib.install.plstatus import PlstatusInstaller
@@ -120,6 +119,7 @@ def main():
 
     selected_config = AVAILABLE_CONFIGS[args.config]
 
+    config.apply_defaults(selected_config)
     config.expand(selected_config)
     config.check(selected_config)
 

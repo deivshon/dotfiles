@@ -30,7 +30,25 @@
     },
     "alacritty-config": {
         "source": ".config/alacritty/alacritty.yml",
-        "target": "~/.config/alacritty/alacritty.yml"
+        "target": "~/.config/alacritty/alacritty.yml",
+        "subs": {
+            "terminal-normal-black": "<sub<terminal-normal-black>>",
+            "terminal-normal-red": "<sub<terminal-normal-red>>",
+            "terminal-normal-green": "<sub<terminal-normal-green>>",
+            "terminal-normal-yellow": "<sub<terminal-normal-yellow>>",
+            "terminal-normal-blue": "<sub<terminal-normal-blue>>",
+            "terminal-normal-magenta": "<sub<terminal-normal-magenta>>",
+            "terminal-normal-cyan": "<sub<terminal-normal-cyan>>",
+            "terminal-normal-white": "<sub<terminal-normal-white>>",
+            "terminal-bright-black": "<sub<terminal-bright-black>>",
+            "terminal-bright-red": "<sub<terminal-bright-red>>",
+            "terminal-bright-green": "<sub<terminal-bright-green>>",
+            "terminal-bright-yellow": "<sub<terminal-bright-yellow>>",
+            "terminal-bright-blue": "<sub<terminal-bright-blue>>",
+            "terminal-bright-magenta": "<sub<terminal-bright-magenta>>",
+            "terminal-bright-cyan": "<sub<terminal-bright-cyan>>",
+            "terminal-bright-white": "<sub<terminal-bright-white>>"
+        }
     },
     "btop-config": {
         "source": ".config/btop/btop.conf",

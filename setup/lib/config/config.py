@@ -1,3 +1,4 @@
+from typing import Dict
 import json
 
 from typing import List
@@ -24,6 +25,10 @@ __EXPANSIONS: List[ExpansionHandler] = [
     SetupUser(),
 ]
 
+__DEFAULTS_PATHS: List[str] = [
+    "terminal_colors.json"
+]
+
 
 def check(config):
     with open(__CONFIG_FILE, "r") as file:
@@ -45,3 +50,14 @@ def check(config):
 def expand(config):
     for expansion in __EXPANSIONS:
         expansion.expand(config, EXPANSION_DATA)
+
+
+def apply_defaults(config: Dict) -> None:
+    path_prefix = "./data/defaults"
+    for path in __DEFAULTS_PATHS:
+        with open(f"{path_prefix}/{path}") as f:
+            current_fields = json.loads(f.read())
+
+        for key, value in current_fields.items():
+            if key not in config[SUBSTITUTIONS]:
+                config[SUBSTITUTIONS][key] = value
