@@ -62,6 +62,8 @@
         "wlr-randr",
         "nwg-look-bin",
         "swaylock-effects",
-        "i3lock-color"
+        "i3lock-color",
+        "gruvbox-dark-gtk",
+        "gruvbox-dark-icons-gtk"
     ]
 }

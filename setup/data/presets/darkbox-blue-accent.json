@@ -31,6 +31,8 @@
     "dunst-critical-bg": "#CC241D",
     "dunst-critical-fg": "#DDC9AD",
     "dunst-critical-frame": "#DDC9AD",
+    "gtk-theme": "gruvbox-dark-gtk",
+    "gtk-icon-theme": "gruvbox-dark-icons-gtk",
     "efy--main-color": "#458588",
     "efy--main-background": "#080808",
     "efy--second-background": "#0c0d0e",

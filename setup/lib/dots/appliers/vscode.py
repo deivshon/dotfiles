@@ -6,8 +6,6 @@ from setup.lib import log
 from setup.lib.dots.appliers.applier import Applier
 
 __VSCODE_THEME = "vscode-theme"
-
-__VSCODE_NAME = "vscode"
 __VSCODE_REQUIRED: List[str] = [
     __VSCODE_THEME
 ]
@@ -35,11 +33,16 @@ def __theme_applier(config_substitutions: Dict) -> None:
     with open(settings_file) as f:
         vscode_settings = json.loads(f.read())
 
+    if __SETTINGS_THEME in vscode_settings and vscode_settings[__SETTINGS_THEME] == config_substitutions[__VSCODE_THEME]:
+        return
+
     vscode_settings[__SETTINGS_THEME] = config_substitutions[__VSCODE_THEME]
 
+    log.info(
+        f"Applying VS Code theme {log.YELLOW}{config_substitutions[__VSCODE_THEME]}")
     with open(settings_file, "w") as f:
         f.write(json.dumps(vscode_settings, indent=4))
 
 
-VSCODE_APPLIER = Applier(name=__VSCODE_NAME, required=__VSCODE_REQUIRED,
+VSCODE_APPLIER = Applier(name="vscode", required=__VSCODE_REQUIRED,
                          apply_once=False, run=__theme_applier)

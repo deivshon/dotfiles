@@ -6,18 +6,19 @@ from typing import Dict
 
 from setup.lib import log
 from setup.lib import LIB_DIR
-from setup.lib.config.expansion import EXPANSION_DATA
-from setup.lib.config import SUBSTITUTIONS, EXPECTED_SUBSTITUTIONS
+from setup.lib.dots.appliers import APPLIERS
 from setup.lib.config.expansion.efy import EfyColors
 from setup.lib.config.expansion.user import SetupUser
+from setup.lib.config.expansion import EXPANSION_DATA
 from setup.lib.config.expansion.wallpaper import WallpaperPath
 from setup.lib.config.expansion.firefox import FirefoxColors
 from setup.lib.config.expansion.swaylock import SwayLockColors
 from setup.lib.config.expansion.handler import ExpansionHandler
 from setup.lib.config.expansion.colors_no_hash import ColorsNoHash
-from setup.lib.dots.appliers import APPLIERS
+from setup.lib.config import SUBSTITUTIONS, EXPECTED_SUBSTITUTIONS
 
 __CONFIG_FILE = f"{LIB_DIR}/../data/configFields.json"
+__DEFAULTS_DIRECTORY = "./data/defaults"
 __EXPANSIONS: List[ExpansionHandler] = [
     EfyColors(),
     WallpaperPath(),
@@ -25,15 +26,6 @@ __EXPANSIONS: List[ExpansionHandler] = [
     FirefoxColors(),
     SwayLockColors(),
     SetupUser(),
-]
-__DEFAULTS_PATHS: List[str] = [
-    "terminal_colors.json",
-    "btop.json",
-    "dwm.json",
-    "firefox.json",
-    "rofi.json",
-    "vscode.json",
-    "dunst.json"
 ]
 
 
@@ -62,9 +54,12 @@ def expand(config):
 
 
 def apply_defaults(config: Dict) -> None:
-    path_prefix = "./data/defaults"
-    for path in __DEFAULTS_PATHS:
-        with open(f"{path_prefix}/{path}") as f:
+    for file_path in os.listdir(__DEFAULTS_DIRECTORY):
+        path = f"{__DEFAULTS_DIRECTORY}/{file_path}"
+        if not os.path.isfile(path) or not path.endswith(".json"):
+            continue
+
+        with open(path) as f:
             current_fields = json.loads(f.read())
 
         for key, value in current_fields.items():
