@@ -6,7 +6,7 @@ After=multi-user.target
 Type=simple
 User=<sub<user>>
 WorkingDirectory=/home/<sub<user>>
-ExecStart=/home/<sub<user>>/.local/scripts/battery-notifier
+ExecStart=/home/<sub<user>>/.local/bin/battery-notifier
 Restart=on-abort
 
 [Install]
