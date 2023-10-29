@@ -4,7 +4,7 @@
 
 The configuration files in this repository and the relative setup scripts are tailored to my use cases, use at your own risk
 
-## **Packages**
+## **Stable repositories**
 
 -   [xorg](https://archlinux.org/groups/x86_64/xorg/)
 -   [xorg-xinit](https://archlinux.org/packages/extra/x86_64/xorg-xinit/)
@@ -59,6 +59,9 @@ The configuration files in this repository and the relative setup scripts are ta
 -   [hyprland](https://archlinux.org/packages/extra/x86_64/hyprland/)
 -   [hyprpaper](https://archlinux.org/packages/extra/x86_64/hyprpaper/)
 -   [tldr](https://archlinux.org/packages/extra/any/tldr/)
+
+## **AUR**
+
 -   [pfetch-rs](https://aur.archlinux.org/packages/pfetch-rs/)
 -   [visual-studio-code-bin](https://aur.archlinux.org/packages/visual-studio-code-bin)
 -   [gksu](https://aur.archlinux.org/packages/gksu) [root privileges for rofi launched applications]
@@ -66,3 +69,5 @@ The configuration files in this repository and the relative setup scripts are ta
 -   [nwg-look-bin](https://aur.archlinux.org/packages/nwg-look-bin) [wayland lxappearance equivalent]
 -   [swaylock-effects](https://aur.archlinux.org/packages/swaylock-effects)
 -   [i3lock-color](https://aur.archlinux.org/packages/i3lock-color)
+-   [gruvbox-dark-gtk](https://aur.archlinux.org/packages/gruvbox-dark-gtk)
+-   [gruvbox-dark-icons-gtk](https://aur.archlinux.org/packages/gruvbox-dark-icons-gtk)
