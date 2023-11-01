@@ -29,8 +29,7 @@ __EMPTY_PERSISTENT_DATA: Dict[str, List[str]] = {
     "6": [],
     "7": [],
     "8": [],
-    "9": [],
-    "10": [],
+    "9": []
 }
 
 
