@@ -33,9 +33,6 @@ def __theme_applier(config_substitutions: Dict) -> None:
     with open(settings_file) as f:
         vscode_settings = json.loads(f.read())
 
-    if __SETTINGS_THEME in vscode_settings and vscode_settings[__SETTINGS_THEME] == config_substitutions[__VSCODE_THEME]:
-        return
-
     vscode_settings[__SETTINGS_THEME] = config_substitutions[__VSCODE_THEME]
 
     log.info(
