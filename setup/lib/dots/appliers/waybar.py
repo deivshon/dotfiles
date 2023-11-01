@@ -34,6 +34,26 @@ __EMPTY_PERSISTENT_DATA: Dict[str, List[str]] = {
 }
 
 
+def __get_existing_monitors() -> Set[str]:
+    existing_monitors = set()
+    try:
+        with open(__WAYBAR_CONFIG_FILE) as f:
+            waybar_config = json.loads(f.read())
+        for workspace in __EMPTY_PERSISTENT_DATA:
+            if workspace not in waybar_config[__HYPRLAND_WORKSPACES][__PERSISTENT]:
+                continue
+
+            existing_monitors = existing_monitors.union(
+                set(waybar_config[__HYPRLAND_WORKSPACES][__PERSISTENT][workspace]))
+    except Exception as _:
+        return set()
+
+    return existing_monitors
+
+
+__EXISTING_MONITORS = __get_existing_monitors()
+
+
 def __generate_names() -> Set[str]:
     names: Set[str] = set()
     for prefix in __MONITOR_PREFIXES:
@@ -75,6 +95,8 @@ def __waybar_applier(_: Dict) -> None:
             f"Could not find waybar configuration file at {log.RED}{__WAYBAR_CONFIG_FILE}")
         return
 
+    monitor_names = __generate_names().union(__EXISTING_MONITORS)
+
     with open(__WAYBAR_CONFIG_FILE) as f:
         waybar_config = json.loads(f.read())
 
@@ -89,7 +111,6 @@ def __waybar_applier(_: Dict) -> None:
         if workspace not in waybar_config[__HYPRLAND_WORKSPACES][__PERSISTENT]:
             waybar_config[__HYPRLAND_WORKSPACES][__PERSISTENT][workspace] = []
 
-    monitor_names = __generate_names()
     wlr_randr_monitors = __get_wlr_randr_monitors()
     if wlr_randr_monitors is not None:
         monitor_names = monitor_names.union(wlr_randr_monitors)
