@@ -5,11 +5,13 @@ import argparse
 from typing import Dict, List
 
 from setup.lib import log
+from setup.lib import symlinks
 from setup.lib.post import post
 from setup.lib.dots import dots
-from setup.lib.config import PRESET, config
+from setup.lib.utils import HOME_DIR
 from setup.lib.install import install
 from setup.lib.dots.names import DotsNames
+from setup.lib.config import PRESET, config
 from setup.lib.install.st import StInstaller
 from setup.lib.install.dwm import DwmInstaller
 from setup.lib.config import AVAILABLE_CONFIGS
@@ -20,8 +22,6 @@ from setup.lib.install.plstatus import PlstatusInstaller
 from setup.lib.install.command_cache import CommandCacheInstaller
 from setup.lib.install.status_scripts import StatusScriptsInstaller
 from setup.lib.install.change_vol_pactl import ChangeVolPactlInstaller
-
-from setup.lib import symlinks
 
 
 def main():
@@ -86,7 +86,6 @@ def main():
     if os.getuid() == 0:
         log.failure("Don't run the script as root!")
 
-    homedir = os.path.expanduser("~")
     os.chdir(__FILE_DIR)
 
     if not os.path.isfile(SETUP_STATUS):
@@ -135,7 +134,7 @@ def main():
 
     if args.remove:
         symlinks.remove()
-        dots.remove(homedir)
+        dots.remove(HOME_DIR)
         sys.exit(0)
 
     # Package installation if it's been explicitly requested but not performed
@@ -148,7 +147,7 @@ def main():
     for inst in installers:
         inst.download(args.git_pull)
 
-    dots.link(selected_config, homedir,
+    dots.link(selected_config, HOME_DIR,
               keep_expansion=args.keep,
               force=args.force,
               compilationMap=compilationMap)

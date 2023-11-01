@@ -7,6 +7,7 @@ from typing import Dict, List, Optional
 
 from setup.lib import log
 from setup.lib.dots.appliers.applier import Applier
+from setup.lib.utils import HOME_DIR
 
 __GTK_THEME = "gtk-theme"
 __GTK_ICONS = "gtk-icon-theme"
@@ -15,10 +16,10 @@ __GTK_REQUIRED: List[str] = [
     __GTK_ICONS
 ]
 
-__GTK_CONFIG_DIR: List[str] = [".config", "gtk-3.0"]
-__GTK_XSETTINGS_DIR: List[str] = [".config", "xsettingsd"]
-__GTK_SETTINGS_FILE = "settings.ini"
-__GTK_XSETTINGS_FILE = "xsettingsd.conf"
+__GTK_SETTINGS_FILE = os.path.join(
+    HOME_DIR, ".config", "gtk-3.0", "settings.ini")
+__GTK_XSETTINGS_FILE = os.path.join(
+    HOME_DIR, ".config", "xsettingsd", "xsettingsd.conf")
 
 __GTK_SETTINGS_SECTION = "Settings"
 __GTK_SETTINGS_THEME = "gtk-theme-name"
@@ -37,37 +38,31 @@ def __gsetting_cmd(setting: str, value: str) -> Optional[Exception]:
 
 
 def __apply_gtk(config_theme: str, config_icons: str) -> None:
-    gtk_dir = os.path.join(os.path.expanduser("~"), *__GTK_CONFIG_DIR)
-    if not os.path.isdir(gtk_dir):
+    if not os.path.isfile(__GTK_SETTINGS_FILE):
         log.error(
-            f"Could not find GTK directory: {log.RED}{gtk_dir}{log.NORMAL} does not exist")
-        return
-
-    settings_file = os.path.join(gtk_dir, __GTK_SETTINGS_FILE)
-    if not os.path.isfile(settings_file):
-        log.error(
-            f"Could not find GTK settings file: {log.RED}{settings_file}{log.NORMAL} does not exist")
+            f"Could not find GTK settings file: {log.RED}{__GTK_SETTINGS_FILE}{log.NORMAL} does not exist")
         return
 
     config = configparser.ConfigParser()
-    read_ok = config.read(settings_file)
+    read_ok = config.read(__GTK_SETTINGS_FILE)
     if len(read_ok) == 0:
-        log.error(f"Could not read GTK settings at {log.RED}{settings_file}")
+        log.error(
+            f"Could not read GTK settings at {log.RED}{__GTK_SETTINGS_FILE}")
         return
 
     if __GTK_SETTINGS_SECTION not in config:
         log.error(
-            f"Could not find settings section in settings at {log.RED}{settings_file}")
+            f"Could not find settings section in settings at {log.RED}{__GTK_SETTINGS_FILE}")
         return
 
     log.info(
-        f"Applying GTK theme {log.YELLOW}{config_theme}{log.NORMAL} ({settings_file})")
+        f"Applying GTK theme {log.YELLOW}{config_theme}{log.NORMAL} ({__GTK_SETTINGS_FILE})")
     config[__GTK_SETTINGS_SECTION][__GTK_SETTINGS_THEME] = config_theme
     log.info(
-        f"Applying GTK icons {log.YELLOW}{config_icons}{log.NORMAL} ({settings_file})")
+        f"Applying GTK icons {log.YELLOW}{config_icons}{log.NORMAL} ({__GTK_SETTINGS_FILE})")
     config[__GTK_SETTINGS_SECTION][__GTK_SETTINGS_ICONS] = config_icons
 
-    with open(settings_file, "w") as f:
+    with open(__GTK_SETTINGS_FILE, "w") as f:
         config.write(f)
 
 
@@ -89,21 +84,19 @@ def __apply_gtk_wayland(config_theme: str, config_icons: str) -> None:
 
 
 def __apply_gtk_xwayland(config_theme: str, config_icons: str) -> None:
-    xsettings_file = os.path.join(
-        os.path.expanduser("~"), *__GTK_XSETTINGS_DIR, __GTK_XSETTINGS_FILE)
-    if not os.path.isfile(xsettings_file):
+    if not os.path.isfile(__GTK_XSETTINGS_FILE):
         log.error(
-            f"Could not find GTK xsettings file at {log.RED}{xsettings_file}")
+            f"Could not find GTK xsettings file at {log.RED}{__GTK_XSETTINGS_FILE}")
         return
 
     log.info(
-        f"Applying GTK theme {log.YELLOW}{config_theme}{log.NORMAL} ({xsettings_file})")
+        f"Applying GTK theme {log.YELLOW}{config_theme}{log.NORMAL} ({__GTK_XSETTINGS_FILE})")
     subprocess.run(["sed", "-iE", "s/Net\\/ThemeName .*/" +
-                   f"Net\\/ThemeName {config_theme}" + "/g", xsettings_file])
+                   f"Net\\/ThemeName {config_theme}" + "/g", __GTK_XSETTINGS_FILE])
     log.info(
-        f"Applying GTK icons {log.YELLOW}{config_icons}{log.NORMAL} ({xsettings_file})")
+        f"Applying GTK icons {log.YELLOW}{config_icons}{log.NORMAL} ({__GTK_XSETTINGS_FILE})")
     subprocess.run(["sed", "-iE", "s/Net\\/IconThemeName .*/" +
-                   f"Net\\/IconThemeName {config_icons}" + "/g", xsettings_file])
+                   f"Net\\/IconThemeName {config_icons}" + "/g", __GTK_XSETTINGS_FILE])
 
 
 def __gtk_applier(config_substitutions: Dict) -> None:

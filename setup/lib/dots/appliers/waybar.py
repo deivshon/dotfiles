@@ -6,6 +6,7 @@ from typing import Dict, List, Optional, Set
 
 from setup.lib import log
 from setup.lib.dots.appliers.applier import Applier
+from setup.lib.utils import HOME_DIR
 
 __MONITOR_PREFIXES: List[str] = [
     "DP-",
@@ -17,7 +18,7 @@ __MONITOR_PREFIXES: List[str] = [
     "VGA-",
     "eDP-"
 ]
-__WAYBAR_CONFIG_PATH: List[str] = [".config", "waybar", "config"]
+__WAYBAR_CONFIG_FILE = os.path.join(HOME_DIR, ".config", "waybar", "config")
 __HYPRLAND_WORKSPACES = "hyprland/workspaces"
 __PERSISTENT = "persistent_workspaces"
 __EMPTY_PERSISTENT_DATA: Dict[str, List[str]] = {
@@ -69,14 +70,12 @@ def __get_wlr_randr_monitors() -> Optional[Set[str]]:
 
 
 def __waybar_applier(_: Dict) -> None:
-    waybar_config_file = os.path.join(
-        os.path.expanduser("~"), *__WAYBAR_CONFIG_PATH)
-    if not os.path.isfile(waybar_config_file):
+    if not os.path.isfile(__WAYBAR_CONFIG_FILE):
         log.error(
-            f"Could not find waybar configuration file at {log.RED}{waybar_config_file}")
+            f"Could not find waybar configuration file at {log.RED}{__WAYBAR_CONFIG_FILE}")
         return
 
-    with open(waybar_config_file) as f:
+    with open(__WAYBAR_CONFIG_FILE) as f:
         waybar_config = json.loads(f.read())
 
     if __HYPRLAND_WORKSPACES not in waybar_config:
@@ -96,14 +95,14 @@ def __waybar_applier(_: Dict) -> None:
         monitor_names = monitor_names.union(wlr_randr_monitors)
 
     log.info(
-        f"Adding monitor names ({waybar_config_file})")
+        f"Adding monitor names ({__WAYBAR_CONFIG_FILE})")
     for workspace in waybar_config[__HYPRLAND_WORKSPACES][__PERSISTENT]:
         for name in monitor_names:
             if name not in waybar_config[__HYPRLAND_WORKSPACES][__PERSISTENT][workspace]:
                 waybar_config[__HYPRLAND_WORKSPACES][__PERSISTENT][workspace].append(
                     name)
 
-    with open(waybar_config_file, "w") as f:
+    with open(__WAYBAR_CONFIG_FILE, "w") as f:
         f.write(json.dumps(waybar_config, indent=4))
 
 
