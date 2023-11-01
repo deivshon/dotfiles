@@ -5,9 +5,7 @@ from dataclasses import dataclass
 class DotsNames():
     BASHRC = "bashrc"
     BASH_PROFILE = "bash-profile"
-    DUNST_CONFIG_DWM = "dunst-config-dwm"
-    DUNST_CONFIG_HYPRLAND = "dunst-config-hyprland"
-    DUNST_CONFIG_QTILE = "dunst-config-qtile"
+    DUNST_CONFIG_DWM = "dunst-config"
     ALACRITTY_CONFIG = "alacritty-config"
     BTOP_CONFIG = "btop-config"
     ROFI_CONFIG = "rofi-config"
@@ -21,7 +19,6 @@ class DotsNames():
     FUZZEL_CONFIG = "fuzzel-config"
     WAYBAR_CONFIG = "waybar-config"
     WAYBAR_STYLE = "waybar-style"
-    FOOT_CONFIG = "foot-config"
     FIREFOX_USERCHROME = "firefox-userchrome"
     TMUX_CONFIG = "tmux-config"
     SWAYLOCK_CONFIG = "swaylock-config"

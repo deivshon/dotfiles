@@ -1,17 +1,20 @@
 * {
-    /* `otf-font-awesome` is required to be installed for icons */
-    font-family: Noto;
+    font-family: JetBrainsMonoNerdFont;
     font-size: 14px;
     min-height: 0px;
+    border: 0px;
+    border-radius: 0px;
+    margin: 0px;
+    padding: 0px;
 }
 
 window#waybar {
-    background-color: rgba(0, 0, 0, 0);
-    color: #ffffff;
+    color: <sub<dwm-fgcolor>>;
+    background-color: <sub<main-color>>;
 }
 
-window#waybar.hidden {
-    opacity: 0.2;
+#window {
+    padding-left: 5px;
 }
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
@@ -20,49 +23,35 @@ button:hover {
 }
 
 #workspaces {
-    margin-left: 5px;
-    margin-top: 5px;
-    border-radius: 14px;
     background: rgb(0, 0, 0);
-    border: solid 2px <sub<waybar-color>>;
 }
 
 #workspaces button {
-    border-width: 2px;
-    color: #ffffff;
+    padding: 1px 4px;
+    color: <sub<dwm-fgcolor>>;
 }
 
-#workspaces button:hover,
-#workspaces button.active:hover {
-    border-radius: 14px;
-    border-color: #ffffff;
-    border-width: 2px;
-    text-shadow: inherit;
-    box-shadow: inherit;
+#workspaces button.active {
+    color: <sub<dwm-fgcolor>>;
+    background: <sub<main-color>>
 }
 
 #workspaces button.urgent {
-    color: <sub<waybar-color>>;
+    color: <sub<main-color>>;
     font-weight: bold;
 }
 
 #clock,
-#custom-battery,
-#custom-cpu,
-#custom-ram,
-#custom-disk,
-#custom-wifi,
-#custom-eth,
-#pulseaudio,
-#custom-mullvad,
-#custom-kernel,
+#custom-plstatus,
 #tray {
-    padding: 5px 5px;
-    color: #ffffff;
-    margin-top: 5px;
-    margin-right: 5px;
-    border-radius: 14px;
+    color: <sub<dwm-fgcolor>>;
+    margin-top: 0px;
+    margin-right: 0px;
+    border-radius: 0px;
     background: rgb(0, 0, 0);
-    border: solid 2px <sub<waybar-color>>;
-    font-weight: bold;
+}
+
+#tray,
+#custom-plstatus {
+    padding-left: 10px;
 }

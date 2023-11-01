@@ -39,7 +39,6 @@ The configuration files in this repository and the relative setup scripts are ta
 -   [fuzzel](https://archlinux.org/packages/community/x86_64/fuzzel/)
 -   [fontforge](https://archlinux.org/packages/extra/x86_64/fontforge/) [necessary for waybar glyphs]
 -   [waybar](https://archlinux.org/packages/extra/x86_64/waybar)
--   [foot](https://archlinux.org/packages/community/x86_64/foot/)
 -   [gsfonts](https://archlinux.org/packages/extra/x86_64/gsfonts/)
 -   [bat](https://archlinux.org/packages/extra/x86_64/bat/)
 -   [opendoas](https://archlinux.org/packages/extra/x86_64/opendoas/)

@@ -7,37 +7,9 @@
         "source": ".bash_profile",
         "target": "~/.bash_profile"
     },
-    "dunst-config-dwm": {
-        "source": ".config/dunst/dunstrc-dwm",
-        "target": "~/.config/dunst/dunstrc-dwm",
-        "subs": {
-            "main-color": "<sub<main-color>>",
-            "dunst-low-bg": "<sub<dunst-low-bg>>",
-            "dunst-low-fg": "<sub<dunst-low-fg>>",
-            "dunst-normal-bg": "<sub<dunst-normal-bg>>",
-            "dunst-normal-fg": "<sub<dunst-normal-fg>>",
-            "dunst-critical-bg": "<sub<dunst-critical-bg>>",
-            "dunst-critical-fg": "<sub<dunst-critical-fg>>",
-            "dunst-critical-frame": "<sub<dunst-critical-frame>>"
-        }
-    },
-    "dunst-config-hyprland": {
-        "source": ".config/dunst/dunstrc-hyprland",
-        "target": "~/.config/dunst/dunstrc-hyprland",
-        "subs": {
-            "main-color": "<sub<main-color>>",
-            "dunst-low-bg": "<sub<dunst-low-bg>>",
-            "dunst-low-fg": "<sub<dunst-low-fg>>",
-            "dunst-normal-bg": "<sub<dunst-normal-bg>>",
-            "dunst-normal-fg": "<sub<dunst-normal-fg>>",
-            "dunst-critical-bg": "<sub<dunst-critical-bg>>",
-            "dunst-critical-fg": "<sub<dunst-critical-fg>>",
-            "dunst-critical-frame": "<sub<dunst-critical-frame>>"
-        }
-    },
-    "dunst-config-qtile": {
-        "source": ".config/dunst/dunstrc-qtile",
-        "target": "~/.config/dunst/dunstrc-qtile",
+    "dunst-config": {
+        "source": ".config/dunst/dunstrc",
+        "target": "~/.config/dunst/dunstrc",
         "subs": {
             "main-color": "<sub<main-color>>",
             "dunst-low-bg": "<sub<dunst-low-bg>>",
@@ -145,7 +117,11 @@
         "source": ".config/fuzzel/fuzzel.ini",
         "target": "~/.config/fuzzel/fuzzel.ini",
         "subs": {
-            "main-color-no-hash": "<sub<fuzzel-color>>"
+            "main-color-no-hash": "<sub<fuzzel-color>>",
+            "fuzzel-background": "<sub<fuzzel-background>>",
+            "fuzzel-foreground": "<sub<fuzzel-foreground>>",
+            "fuzzel-match": "<sub<fuzzel-match>>",
+            "fuzzel-selection-match": "<sub<fuzzel-selection-match>>"
         }
     },
     "waybar-config": {
@@ -156,15 +132,9 @@
         "source": ".config/waybar/style.css",
         "target": "~/.config/waybar/style.css",
         "subs": {
-            "main-color": "<sub<waybar-color>>"
-        }
-    },
-    "foot-config": {
-        "source": ".config/foot/foot.ini",
-        "target": "~/.config/foot/foot.ini",
-        "subs": {
-            "main-color-no-hash": "<sub<foot-main-color>>",
-            "secondary-color-no-hash": "<sub<foot-secondary-color>>"
+            "main-color": "<sub<main-color>>",
+            "dwm-bgcolor": "<sub<dwm-bgcolor>>",
+            "dwm-fgcolor": "<sub<dwm-fgcolor>>"
         }
     },
     "firefox-userchrome": {

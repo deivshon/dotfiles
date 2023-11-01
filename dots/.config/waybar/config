@@ -1,87 +1,28 @@
 {
     "layer": "top",
+    "position": "bottom",
     "modules-left": [
-        "hyprland/workspaces"
-    ],
-    "modules-center": [
-        "clock"
+        "hyprland/workspaces",
+        "hyprland/window"
     ],
     "modules-right": [
-        "custom/ram",
-        "custom/disk",
-        "custom/cpu",
-        "custom/battery",
-        "custom/eth",
-        "custom/wifi",
-        "custom/mullvad",
+        "custom/plstatus",
         "tray"
     ],
     "hyprland/workspaces": {
         "disable-scroll": true,
         "all-outputs": true,
         "on-click": "activate",
-        "format": "{icon}",
-        "format-icons": {
-            "default": "",
-            "urgent": "",
-            "active": ""
-        }
+        "format": "{name}"
     },
     "tray": {
         "spacing": 10
     },
-    "clock": {
-        "format": "{:  %Y-%m-%d/%H:%M:%S}",
-        "interval": 1
-    },
-    "custom/mullvad": {
+    "custom/plstatus": {
         "format": "{}",
-        "exec": "command-cache -p 100 -c \"mullvad-status -u ' %h' -d ' %c'\"",
-        "interval": 30,
+        "exec": "plstatus -s",
         "tooltip": false,
         "on-click": "",
         "exec-on-event": true
-    },
-    "custom/wifi": {
-        "format": "{}",
-        "exec": "command-cache -p 100 -c \"wifi-status -u ' %p% %s' -d ''\"",
-        "interval": 1,
-        "tooltip": false
-    },
-    "custom/cpu": {
-        "format": "{}",
-        "exec": "command-cache -p 100 -c \"cpu-status -f ' %p%'\"",
-        "interval": 1,
-        "tooltip": false
-    },
-    "custom/ram": {
-        "format": "{}",
-        "exec": "command-cache -p 100 -c \"ram-status -f '  %u/%t'\"",
-        "interval": 1,
-        "tooltip": false
-    },
-    "custom/disk": {
-        "format": "{}",
-        "exec": "command-cache -p 100 -c \"disk-status -f '  %u'\"",
-        "interval": 1,
-        "tooltip": false
-    },
-    "custom/battery": {
-        "format": "{}",
-        "exec": "command-cache -p 100 -c \"battery-status -f '   %p%' -c ' %p%' -n ''\"",
-        "interval": 1,
-        "tooltip": false
-    },
-    "custom/eth": {
-        "format": "{}",
-        "exec": "command-cache -p 100 -c \"eth-status -u ' %i' -d ''\"",
-        "interval": 1,
-        "tooltip": false
-    },
-    "custom/kernel": {
-        "format": " {}",
-        "exec": "uname -r",
-        "interval": 0,
-        "tooltip": false
     }
 }

@@ -6,34 +6,39 @@
             "label": " "
         },
         {
-            "binary": "ram-status",
-            "arguments": ["-f", " %u/%t (%p%)"],
+            "binary": "command-cache",
+            "arguments": ["-p", "100", "-c", "ram-status -f ' %u/%t (%p%)'"],
             "period": 1000
         },
         {
-            "binary": "disk-status",
-            "arguments": ["-f", " %u"],
+            "binary": "command-cache",
+            "arguments": ["-p", "100", "-c", "disk-status -f ' %u'"],
             "period": 1000
         },
         {
-            "binary": "cpu-status",
-            "arguments": ["-f", " %p%"],
+            "binary": "command-cache",
+            "arguments": ["-p", "100", "-c", "cpu-status -f ' %p%'"],
             "period": 1000
         },
         {
-            "binary": "battery-status",
-            "arguments": ["-n", "", "-f", "   %p%", "-c", " %p%"],
+            "binary": "command-cache",
+            "arguments": [
+                "-p",
+                "100",
+                "-c",
+                "battery-status -n '' -f '   %p%' -c ' %p%'"
+            ],
             "period": 1000
         },
         {
-            "binary": "eth-status",
-            "arguments": ["-d", "", "-u", "󰈀 %i"],
+            "binary": "command-cache",
+            "arguments": ["-p", "100", "-c", "eth-status -d '' -u '󰈀 %i'"],
             "period": 1000
         },
         {
-            "binary": "wifi-status",
+            "binary": "command-cache",
             "period": 1000,
-            "arguments": ["-u", "  %s", "-d", ""]
+            "arguments": ["-p", "100", "-c", "wifi-status -u '  %s' -d ''"]
         },
         {
             "binary": "command-cache",
@@ -48,8 +53,8 @@
             "period": 1000
         },
         {
-            "binary": "date",
-            "arguments": ["+ %Y-%m-%d 󰥔   %H:%M:%S"],
+            "binary": "command-cache",
+            "arguments": ["-p", "100", "-c", "date '+ %Y-%m-%d 󰥔   %H:%M:%S'"],
             "period": 1000
         }
     ],

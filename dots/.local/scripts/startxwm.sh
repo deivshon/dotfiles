@@ -1,14 +1,14 @@
 #!/bin/sh
 
 start_dwm() {
-    dunst -config ~/.config/dunst/dunstrc-dwm &
+    dunst &
     plstatus &
     feh --bg-fill <sub<xwms-wallpaper-path>> &
     ~/.startup/dwm/startops.sh && exec dwm
 }
 
 start_qtile() {
-    dunst -config ~/.config/dunst/dunstrc-qtile &
+    dunst &
     ~/.startup/qtile/startops.sh && exec qtile start
 }
 
