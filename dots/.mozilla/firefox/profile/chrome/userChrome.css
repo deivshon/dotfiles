@@ -31,13 +31,8 @@ html#main-window {
 	--toolbar-field-focus-color: <sub<ffx--toolbar-field-focus-color>> !important;
 	--toolbar-color: <sub<ffx--toolbar-color>> !important;
 	--tab-icon-overlay-fill: <sub<ffx--tab-icon-overlay-fill>> !important;
-
 }
 
 .tabbrowser-tab:not([selected]):hover .tab-background {
 	background-color: <sub<ffx--background-tab-hover-brackgroud>> !important;
-}
-
-toolbarbutton.subviewbutton:not([disabled], [open], :active):is(:hover) {
-    background-color: <sub<ffx--toolbarbutton-select-hover-background>> !important;
 }

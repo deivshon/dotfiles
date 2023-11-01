@@ -164,7 +164,6 @@
             "ffx--lwt-selected-tab-background-color": "<sub<ffx--lwt-selected-tab-background-color>>",
             "ffx--autocomplete-popup-highlight-background": "<sub<ffx--autocomplete-popup-highlight-background>>",
             "ffx--background-tab-hover-brackgroud": "<sub<ffx--background-tab-hover-brackgroud>>",
-            "ffx--toolbarbutton-select-hover-background": "<sub<ffx--toolbarbutton-select-hover-background>>",
             "ffx--lwt-text-color": "<sub<ffx--lwt-text-color>>",
             "ffx--lwt-tab-text": "<sub<ffx--lwt-tab-text>>",
             "ffx--toolbar-field-color": "<sub<ffx--toolbar-field-color>>",

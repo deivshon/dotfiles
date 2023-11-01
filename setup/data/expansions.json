@@ -31,8 +31,7 @@
         "ffx--toolbarbutton-icon-fill": "#FFFFFF",
         "ffx--lwt-selected-tab-background-color": "#792020BB",
         "ffx--autocomplete-popup-highlight-background": "#792020BB",
-        "ffx--background-tab-hover-brackgroud": "#282B2D",
-        "ffx--toolbarbutton-select-hover-background": "#362B21"
+        "ffx--background-tab-hover-brackgroud": "#282B2D"
     },
     "swaylock": {
         "swl--inside-color": "#1D1F21",
