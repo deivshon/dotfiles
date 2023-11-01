@@ -195,5 +195,10 @@
         "preset": "darkbox-blue-accent",
         "wallpaper-link": "https://i.ibb.co/c6bBj6P/arch-darkbox-minimal.png",
         "wallpaper-name": "arch-darkbox-minimal.png"
+    },
+    "endeavouros-darkbox-minimal": {
+        "preset": "darkbox-blue-accent",
+        "wallpaper-link": "https://i.ibb.co/G7sgrZN/endeavouros-darkbox-minimal.png",
+        "wallpaper-name": "endeavouros-darkbox-minimal.png"
     }
 }
