@@ -66,7 +66,7 @@
     "ffx--toolbarbutton-icon-fill": "#DDC9AD",
     "ffx--lwt-selected-tab-background-color": "#0E4345",
     "ffx--autocomplete-popup-hover-background": "#0E434533",
-    "ffx--autocomplete-popup-highlight-background": "#0E434533",
+    "ffx--autocomplete-popup-highlight-background": "#0E4345BB",
     "ffx--autocomplete-popup-highlight-color": "#DDC9AD",
     "ffx--lwt-text-color": "#DDC9AD",
     "ffx--lwt-tab-text": "#DDC9AD",
