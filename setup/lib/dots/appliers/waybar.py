@@ -122,6 +122,8 @@ def __waybar_applier(_: Dict) -> None:
             if name not in waybar_config[__HYPRLAND_WORKSPACES][__PERSISTENT][workspace]:
                 waybar_config[__HYPRLAND_WORKSPACES][__PERSISTENT][workspace].append(
                     name)
+        waybar_config[__HYPRLAND_WORKSPACES][__PERSISTENT][workspace] = sorted(
+            waybar_config[__HYPRLAND_WORKSPACES][__PERSISTENT][workspace])
 
     with open(__WAYBAR_CONFIG_FILE, "w") as f:
         f.write(json.dumps(waybar_config, indent=4))
