@@ -2,11 +2,11 @@
     "aliases": [
         {
             "alias": "ls",
-            "equals": "exa --icons"
+            "equals": "eza --icons"
         },
         {
             "alias": "ll",
-            "equals": "exa --icons -laF"
+            "equals": "eza --icons -la"
         },
         {
             "alias": "grep",
