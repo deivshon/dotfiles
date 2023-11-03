@@ -6,8 +6,9 @@ import configparser
 from typing import Dict, List, Optional
 
 from setup.lib import log
-from setup.lib.dots.appliers.applier import Applier
 from setup.lib.utils import HOME_DIR
+from setup.lib.utils.path import replace_in_file
+from setup.lib.dots.appliers.applier import Applier
 
 __GTK_THEME = "gtk-theme"
 __GTK_ICONS = "gtk-icon-theme"
@@ -20,6 +21,9 @@ __GTK_SETTINGS_FILE = os.path.join(
     HOME_DIR, ".config", "gtk-3.0", "settings.ini")
 __GTK_XSETTINGS_FILE = os.path.join(
     HOME_DIR, ".config", "xsettingsd", "xsettingsd.conf")
+__GTK2_SETTINGS_FILE = os.path.join(
+    HOME_DIR, ".gtkrc-2.0"
+)
 
 __GTK_SETTINGS_SECTION = "Settings"
 __GTK_SETTINGS_THEME = "gtk-theme-name"
@@ -65,6 +69,18 @@ def __apply_gtk(config_theme: str, config_icons: str) -> None:
     with open(__GTK_SETTINGS_FILE, "w") as f:
         config.write(f)
 
+    if not os.path.isfile(__GTK2_SETTINGS_FILE):
+        return
+
+    log.info(
+        f"Applying GTK theme {log.YELLOW}{config_theme}{log.NORMAL} ({__GTK2_SETTINGS_FILE})")
+    replace_in_file(__GTK2_SETTINGS_FILE, r"gtk-theme-name=.*",
+                    f"gtk-theme-name=\"{config_theme}\"")
+    log.info(
+        f"Applying GTK icons {log.YELLOW}{config_icons}{log.NORMAL} ({__GTK2_SETTINGS_FILE})")
+    replace_in_file(__GTK2_SETTINGS_FILE, r"gtk-icon-theme-name=.*",
+                    f"gtk-icon-theme-name=\"{config_icons}\"")
+
 
 def __apply_gtk_wayland(config_theme: str, config_icons: str) -> None:
     theme_setting_err = __gsetting_cmd(__GSETTINGS_GTK_THEME, config_theme)
@@ -91,12 +107,12 @@ def __apply_gtk_xwayland(config_theme: str, config_icons: str) -> None:
 
     log.info(
         f"Applying GTK theme {log.YELLOW}{config_theme}{log.NORMAL} ({__GTK_XSETTINGS_FILE})")
-    subprocess.run(["sed", "-iE", "s/Net\\/ThemeName .*/" +
-                   f"Net\\/ThemeName {config_theme}" + "/g", __GTK_XSETTINGS_FILE])
+    replace_in_file(__GTK_XSETTINGS_FILE, r"Net\/ThemeName .*",
+                    f"Net\\/ThemeName {config_theme}")
     log.info(
         f"Applying GTK icons {log.YELLOW}{config_icons}{log.NORMAL} ({__GTK_XSETTINGS_FILE})")
-    subprocess.run(["sed", "-iE", "s/Net\\/IconThemeName .*/" +
-                   f"Net\\/IconThemeName {config_icons}" + "/g", __GTK_XSETTINGS_FILE])
+    replace_in_file(__GTK_XSETTINGS_FILE, r"Net\/IconThemeName .*",
+                    f"Net\\/IconThemeName {config_icons}")
 
 
 def __gtk_applier(config_substitutions: Dict) -> None:
