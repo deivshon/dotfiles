@@ -18,6 +18,10 @@ def sed_escape_path(str):
     return str.replace("/", "\x5c/")
 
 
+def replace_in_file(filePath: str, regex: str, new: str) -> None:
+    subprocess.run(["sed", "-iE", f"s/{regex}/{new}/g", filePath])
+
+
 def make_executable(path: str, sudo: bool = False):
     if not os.path.isfile(path):
         log.error(f"Can't make {path} executable, not a file")

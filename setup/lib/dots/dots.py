@@ -11,6 +11,7 @@ from setup.lib import LIB_DIR
 from setup.lib.dots import LINKS_FILE
 from setup.lib.dots.names import DotsNames
 from setup.lib.dots.appliers import APPLIERS
+from setup.lib.utils.path import replace_in_file
 from setup.lib.install.handler import InstallHandler
 from setup.lib.dots.targets.firefox import FirefoxVariableTarget
 from setup.lib.dots.flags import DEVICE_SPECIFIC_FLAG, SUDO_FLAG, VAR_TARGET_FLAG, EXECUTABLE_FLAG
@@ -152,8 +153,7 @@ def substitute(config, substitutions_dir):
         if len(subs) > 0:
             substitution_vals = config[__CONFIG_SUBS]
             for id in subs:
-                subprocess.run(["sed", "-i", "s/" + subs[id] +
-                               "/" + substitution_vals[id] + "/g", source])
+                replace_in_file(source, subs[id], substitution_vals[id])
 
 
 def remove(homedir):
