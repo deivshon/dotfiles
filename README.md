@@ -62,6 +62,8 @@ The configuration files in this repository and the relative setup scripts are ta
 
 ## **AUR**
 
+-   [paru](https://aur.archlinux.org/packages/paru)
+-   [pikaur](https://aur.archlinux.org/packages/pikaur)
 -   [pfetch-rs](https://aur.archlinux.org/packages/pfetch-rs/)
 -   [visual-studio-code-bin](https://aur.archlinux.org/packages/visual-studio-code-bin)
 -   [gksu](https://aur.archlinux.org/packages/gksu) [root privileges for rofi launched applications]
