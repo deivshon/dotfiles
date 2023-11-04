@@ -78,6 +78,10 @@
             "shells": {
                 "whitelist": ["fish"]
             }
+        },
+        {
+            "alias": "yay",
+            "equals": "pikaur"
         }
     ]
 }
