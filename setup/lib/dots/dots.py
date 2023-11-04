@@ -10,7 +10,8 @@ from setup.lib import utils
 from setup.lib import LIB_DIR
 from setup.lib.dots import LINKS_FILE
 from setup.lib.dots.names import DotsNames
-from setup.lib.dots.appliers import APPLIERS
+from setup.lib.dots.appliers.applier import DotApplier
+from setup.lib.dots.appliers import APPLIERS, DOT_APPLIERS
 from setup.lib.utils.path import replace_in_file
 from setup.lib.install.handler import InstallHandler
 from setup.lib.dots.targets.firefox import FirefoxVariableTarget
@@ -34,6 +35,7 @@ class DotLink:
     target: Optional[str] = None
     subs: Dict[str, str] = field(default_factory=dict)
     flags: List[str] = field(default_factory=list)
+    dot_applier: Optional[DotApplier] = None
 
 
 class InvalidDotLink(Exception):
@@ -49,7 +51,8 @@ with open(LINKS_FILE, "r") as file:
             log.failure(
                 f"Naming inconsistency: \"{key}\" does not appear in allowed names")
 
-        __DOT_LINKS.append(DotLink(name=key, **__configs_list[key]))
+        __DOT_LINKS.append(DotLink(
+            name=key, **__configs_list[key], dot_applier=DOT_APPLIERS[key] if key in DOT_APPLIERS else None))
 
 __TARGET_SEARCH = {
     __FIREFOX: FirefoxVariableTarget()
@@ -63,6 +66,7 @@ def link(config, user, keep_expansion=False, force=False, compilationMap: Dict[s
 
     no_target_dots = []
 
+    print("\n", end="")
     for dot_link in __DOT_LINKS:
         source = os.path.abspath(
             f"{SUBSTITUTIONS_DIR}/{dot_link.source}")
@@ -125,6 +129,7 @@ def link(config, user, keep_expansion=False, force=False, compilationMap: Dict[s
     if not keep_expansion and os.path.isdir(SUBSTITUTIONS_DIR):
         shutil.rmtree(SUBSTITUTIONS_DIR)
 
+    print("\n", end="")
     for target in no_target_dots:
         log.error(f"Could not find any target for {target}")
 
@@ -154,6 +159,11 @@ def substitute(config, substitutions_dir):
             substitution_vals = config[__CONFIG_SUBS]
             for id in subs:
                 replace_in_file(source, subs[id], substitution_vals[id])
+
+        if dot_link.dot_applier is not None:
+            log.info(
+                f"Running dot applier {log.GREEN}{dot_link.dot_applier.name}")
+            dot_link.dot_applier.run(source)
 
 
 def remove(homedir):

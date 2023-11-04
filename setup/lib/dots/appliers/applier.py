@@ -8,3 +8,9 @@ class Applier():
     run: Callable[[Dict], None]
     apply_once: bool
     required: List[str]
+
+
+@dataclass
+class DotApplier():
+    name: str
+    run: Callable[[str], None]
