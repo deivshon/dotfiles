@@ -371,5 +371,9 @@
     "paru-config": {
         "source": ".config/paru/paru.conf",
         "target": "~/.config/paru/paru.conf"
+    },
+    "pikaur-config": {
+        "source": ".config/pikaur.conf",
+        "target": "~/.config/pikaur.conf"
     }
 }

@@ -64,6 +64,7 @@
         "swaylock-effects",
         "i3lock-color",
         "gruvbox-dark-gtk",
-        "gruvbox-dark-icons-gtk"
+        "gruvbox-dark-icons-gtk",
+        "pikaur"
     ]
 }
