@@ -72,7 +72,6 @@ def apply_preset(config: Dict, preset_name: str) -> None:
     if not os.path.isfile(preset_path):
         log.failure(f"Preset {preset_name} does not exist")
 
-    log.info(f"Applying preset {log.GREEN}{preset_name}")
     with open(preset_path) as f:
         preset = json.loads(f.read())
 

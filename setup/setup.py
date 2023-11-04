@@ -118,7 +118,9 @@ def main():
     config.initialize(selected_config)
 
     if PRESET in selected_config:
+        log.info(f"Applying preset {log.GREEN}{selected_config[PRESET]}")
         config.apply_preset(selected_config, selected_config[PRESET])
+        print("\n", end="")
 
     config.apply_defaults(selected_config)
     config.expand(selected_config)
