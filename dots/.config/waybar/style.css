@@ -22,10 +22,6 @@ button:hover {
     background: inherit;
 }
 
-#workspaces {
-    background: rgb(0, 0, 0);
-}
-
 #workspaces button {
     padding: 1px 4px;
     color: <sub<dwm-fgcolor>>;
@@ -41,6 +37,7 @@ button:hover {
     font-weight: bold;
 }
 
+#workspaces,
 #clock,
 #custom-plstatus,
 #tray {
@@ -48,7 +45,7 @@ button:hover {
     margin-top: 0px;
     margin-right: 0px;
     border-radius: 0px;
-    background: rgb(0, 0, 0);
+    background: <sub<dwm-bgcolor>>;
 }
 
 #tray,
