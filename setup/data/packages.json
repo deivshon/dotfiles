@@ -65,6 +65,8 @@
         "i3lock-color",
         "gruvbox-dark-gtk",
         "gruvbox-dark-icons-gtk",
-        "pikaur"
+        "pikaur",
+        "nordic-theme-git",
+        "papirus-folders-nordic"
     ]
 }

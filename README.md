@@ -73,3 +73,5 @@ The configuration files in this repository and the relative setup scripts are ta
 -   [i3lock-color](https://aur.archlinux.org/packages/i3lock-color)
 -   [gruvbox-dark-gtk](https://aur.archlinux.org/packages/gruvbox-dark-gtk)
 -   [gruvbox-dark-icons-gtk](https://aur.archlinux.org/packages/gruvbox-dark-icons-gtk)
+-   [nordic-theme-git](https://aur.archlinux.org/packages/nordic-theme-git)
+-   [papirus-folders-nordic](https://aur.archlinux.org/packages/papirus-folders-nordic)

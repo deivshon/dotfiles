@@ -200,5 +200,10 @@
         "preset": "darkbox-blue-accent",
         "wallpaper-link": "https://i.ibb.co/G7sgrZN/endeavouros-darkbox-minimal.png",
         "wallpaper-name": "endeavouros-darkbox-minimal.png"
+    },
+    "waves-nord-minimal": {
+        "preset": "nord-blue-accent",
+        "wallpaper-link": "https://i.ibb.co/bKG8bNR/waves-nord-minimal.png",
+        "wallpaper-name": "waves-nord-minimal.png"
     }
 }
