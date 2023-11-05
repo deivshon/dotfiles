@@ -1,6 +1,6 @@
 #!/bin/sh
 
-pikaur -Syu
+paru -Syu
 EXIT_CODE=$?
 
 rm -rf /tmp/command-cache/aus/
