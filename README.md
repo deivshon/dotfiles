@@ -59,6 +59,8 @@ The configuration files in this repository and the relative setup scripts are ta
 -   [hyprpaper](https://archlinux.org/packages/extra/x86_64/hyprpaper/)
 -   [tldr](https://archlinux.org/packages/extra/any/tldr/)
 -   [linux-headers](https://archlinux.org/packages/core/x86_64/linux-headers/)
+-   [grim](https://archlinux.org/packages/extra/x86_64/grim/)
+-   [slurp](https://archlinux.org/packages/extra/x86_64/slurp/)
 
 ## **AUR**
 

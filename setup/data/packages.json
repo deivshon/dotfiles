@@ -53,7 +53,9 @@
         "hyprland",
         "hyprpaper",
         "tldr",
-        "linux-headers"
+        "linux-headers",
+        "grim",
+        "slurp"
     ],
     "paru": [
         "pfetch-rs",
