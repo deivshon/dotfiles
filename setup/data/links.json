@@ -321,7 +321,7 @@
         "flags": ["sudo", "x"]
     },
     "update-script": {
-        "source": ".local/scripts/up.sh",
+        "source": ".local/scripts/up.bash",
         "target": "~/.local/scripts/up",
         "flags": ["x"]
     },
