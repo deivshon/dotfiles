@@ -107,4 +107,13 @@ function exit_cleanup
 end
 trap exit_cleanup EXIT
 
+function fishenv
+    for file in $argv
+        for line in (cat $file)
+            set -l 'key_value' (string split -m 1 "=" -- $line)
+            set -gx $key_value[1] $key_value[2]
+        end
+    end
+end
+
 pfetch
