@@ -378,5 +378,9 @@
     "pikaur-config": {
         "source": ".config/pikaur.conf",
         "target": "~/.config/pikaur.conf"
+    },
+    "vscode-keybindings": {
+        "source": ".config/Code/User/keybindings.json",
+        "target": "~/.config/Code/User/keybindings.json"
     }
 }

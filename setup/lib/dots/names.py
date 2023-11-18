@@ -52,3 +52,4 @@ class DotsNames():
     ALIAS_RS_CONFIG_DEVICE = "alias-rs-config-device"
     PARU_CONFIG = "paru-config"
     PIKAUR_CONFIG = "pikaur-config"
+    VSCODE_KEYBINDINGS = "vscode-keybindings"
