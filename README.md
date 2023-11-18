@@ -77,3 +77,4 @@ The configuration files in this repository and the relative setup scripts are ta
 -   [gruvbox-dark-icons-gtk](https://aur.archlinux.org/packages/gruvbox-dark-icons-gtk)
 -   [nordic-theme-git](https://aur.archlinux.org/packages/nordic-theme-git)
 -   [papirus-folders-nordic](https://aur.archlinux.org/packages/papirus-folders-nordic)
+-   [ueberzugpp](https://aur.archlinux.org/packages/ueberzugpp)

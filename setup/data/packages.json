@@ -11,7 +11,6 @@
         "eza",
         "iw",
         "ranger",
-        "ueberzug",
         "polkit",
         "network-manager-applet",
         "noto-fonts",
@@ -69,6 +68,7 @@
         "gruvbox-dark-icons-gtk",
         "pikaur",
         "nordic-theme-git",
-        "papirus-folders-nordic"
+        "papirus-folders-nordic",
+        "ueberzugpp"
     ]
 }
