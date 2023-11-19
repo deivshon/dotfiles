@@ -50,8 +50,11 @@ def failure(msg: str):
     sys.exit(1)
 
 
-def subprocess_line(line: str):
-    print(f" {BLUE}-->{NORMAL} {line}")
+def subprocess_line(line: str, is_stderr: bool):
+    if is_stderr:
+        print(f" {RED}-->{NORMAL} {line}")
+    else:
+        print(f" {BLUE}-->{NORMAL} {line}")
 
 
 if __tput_warning:

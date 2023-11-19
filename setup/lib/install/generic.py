@@ -20,7 +20,7 @@ def git_download(path: str, link: str, pull: bool) -> bool:
                 log.info(f"{path} already exists, pulling")
                 try:
                     output = process.exec(["git", "-C", path, "pull"])
-                    return output != __PULL_NO_CHANGES
+                    return output[process.EXEC_STDOUT] != __PULL_NO_CHANGES
                 except Exception as e:
                     log.warning(
                         f"An error occurred while trying to pull repository at {link}: {e}")
