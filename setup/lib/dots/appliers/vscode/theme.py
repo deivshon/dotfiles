@@ -34,5 +34,5 @@ def __theme_applier(config_substitutions: Dict) -> None:
         f.write(json.dumps(vscode_settings, indent=4))
 
 
-VSCODE_APPLIER = Applier(name="vscode", required=__VSCODE_REQUIRED,
-                         apply_once=False, run=__theme_applier)
+VSCODE_THEME_APPLIER = Applier(name="vscode-theme", required=__VSCODE_REQUIRED,
+                               apply_once=False, run=__theme_applier)
