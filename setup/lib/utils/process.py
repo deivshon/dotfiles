@@ -1,3 +1,4 @@
+import select
 import subprocess
 
 from typing import List, Tuple
@@ -19,11 +20,16 @@ def __exec(command: List[str]):
         if process.stdout is None or process.stderr is None:
             return
 
-        for line in iter(process.stdout.readline, ""):
-            yield line.rstrip(), False
+        read_streams = [process.stdout, process.stderr]
 
-        for line in iter(process.stderr.readline, ""):
-            yield line.rstrip(), True
+        while read_streams:
+            readable, _, _ = select.select(read_streams, [], [])
+            for stream in readable:
+                line = stream.readline().rstrip()
+                if not line:
+                    read_streams.remove(stream)
+                else:
+                    yield line, stream == process.stderr
 
 
 def exec(command: List[str]) -> Tuple[str, str]:
