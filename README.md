@@ -78,3 +78,5 @@ The configuration files in this repository and the relative setup scripts are ta
 -   [nordic-theme-git](https://aur.archlinux.org/packages/nordic-theme-git)
 -   [papirus-folders-nordic](https://aur.archlinux.org/packages/papirus-folders-nordic)
 -   [ueberzugpp](https://aur.archlinux.org/packages/ueberzugpp)
+-   [dracula-gtk-theme](https://aur.archlinux.org/packages/dracula-gtk-theme)
+-   [dracula-icons-git](https://aur.archlinux.org/packages/dracula-icons-git)

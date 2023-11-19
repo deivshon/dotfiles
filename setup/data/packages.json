@@ -69,6 +69,8 @@
         "pikaur",
         "nordic-theme-git",
         "papirus-folders-nordic",
-        "ueberzugpp"
+        "ueberzugpp",
+        "dracula-gtk-theme",
+        "dracula-icons-git"
     ]
 }
