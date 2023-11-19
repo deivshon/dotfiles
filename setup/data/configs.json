@@ -205,5 +205,10 @@
         "preset": "nord-blue-accent",
         "wallpaper-link": "https://i.ibb.co/bKG8bNR/waves-nord-minimal.png",
         "wallpaper-name": "waves-nord-minimal.png"
+    },
+    "arch-dracula-minimal": {
+        "preset": "dracula",
+        "wallpaper-link": "https://i.ibb.co/BLh5xfG/arch-dracula-minimal.png",
+        "wallpaper-name": "arch-dracula-minimal.png"
     }
 }
