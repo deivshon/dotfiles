@@ -8,5 +8,6 @@
     "ffx--urlbarView-result-button-selected-color": "#FFFFFF",
     "ffx--toolbar-field-focus-color": "#FFFFFF",
     "ffx--toolbar-color": "#FFFFFF",
-    "ffx--tab-icon-overlay-fill": "#FFFFFF"
+    "ffx--tab-icon-overlay-fill": "#FFFFFF",
+    "ffx--tab-selected-textcolor": "#FFFFFF"
 }

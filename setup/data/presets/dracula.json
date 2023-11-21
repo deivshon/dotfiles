@@ -78,6 +78,7 @@
     "ffx--toolbar-field-focus-color": "#F8F8F2",
     "ffx--toolbar-color": "#F8F8F2",
     "ffx--tab-icon-overlay-fill": "#F8F8F2",
+    "ffx--tab-selected-textcolor": "#F8F8F2",
     "swl--inside-color": "#18181F",
     "swl--inside-clear-color": "#18181F",
     "swl--inside-ver-color": "#18181F",

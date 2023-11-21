@@ -79,6 +79,7 @@
     "ffx--toolbar-color": "#E5E9F0",
     "ffx--tab-icon-overlay-fill": "#E5E9F0",
     "ffx--background-tab-hover-brackgroud": "#7BA2A133",
+    "ffx--tab-selected-textcolor": "#E5E9F0",
     "swl--inside-color": "#1B1F26",
     "swl--inside-clear-color": "#1B1F26",
     "swl--inside-ver-color": "#1B1F26",

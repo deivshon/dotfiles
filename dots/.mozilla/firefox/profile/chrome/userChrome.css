@@ -31,6 +31,7 @@ html#main-window {
 	--toolbar-field-focus-color: <sub<ffx--toolbar-field-focus-color>> !important;
 	--toolbar-color: <sub<ffx--toolbar-color>> !important;
 	--tab-icon-overlay-fill: <sub<ffx--tab-icon-overlay-fill>> !important;
+	--tab-selected-textcolor: <sub<ffx--tab-selected-textcolor>> !important;
 }
 
 .tabbrowser-tab:not([selected]):hover .tab-background {

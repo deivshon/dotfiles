@@ -173,7 +173,8 @@
             "ffx--urlbarView-result-button-selected-color": "<sub<ffx--urlbarView-result-button-selected-color>>",
             "ffx--toolbar-field-focus-color": "<sub<ffx--toolbar-field-focus-color>>",
             "ffx--toolbar-color": "<sub<ffx--toolbar-color>>",
-            "ffx--tab-icon-overlay-fill": "<sub<ffx--tab-icon-overlay-fill>>"
+            "ffx--tab-icon-overlay-fill": "<sub<ffx--tab-icon-overlay-fill>>",
+            "ffx--tab-selected-textcolor": "<sub<ffx--tab-selected-textcolor>>"
         }
     },
     "tmux-config": {
