@@ -53,3 +53,4 @@ class DotsNames():
     PARU_CONFIG = "paru-config"
     PIKAUR_CONFIG = "pikaur-config"
     VSCODE_KEYBINDINGS = "vscode-keybindings"
+    INTERACTIVE_SHELLS_ENV = "interactive-shells-env"

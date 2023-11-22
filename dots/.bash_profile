@@ -4,12 +4,8 @@ source ~/.bash_profile_device
 
 export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
-
 export SHELL=/bin/fish
 export EDITOR=nano
-
-export PF_SOURCE=~/.config/pfetch/pfetch-config.sh
-export EXA_COLORS="xx=37"
 
 PATH=${PATH}:/usr/lib/polkit-gnome/:~/.local/scripts:~/.local/bin
 

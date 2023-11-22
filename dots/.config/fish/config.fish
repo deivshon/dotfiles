@@ -116,4 +116,13 @@ function fishenv
     end
 end
 
+set INTERACTIVE_ENV ~/.config/shells/interactive.env
+if test -f $INTERACTIVE_ENV
+    fishenv $INTERACTIVE_ENV
+else
+    printf 1>&2 "Could not find %s to load interactive env from\n" $INTERACTIVE_ENV
+end
+set -e INTERACTIVE_ENV
+
+
 pfetch

@@ -4,7 +4,15 @@
 
 source ~/.bashrc_device
 
-eval $(/usr/local/bin/alias-rs -c $HOME/.config/alias-rs/config.device.json -s bash -a)
+INTERACTIVE_ENV=~/.config/shells/interactive.env
+if [ -f "$INTERACTIVE_ENV" ]; then
+    export $(cat $INTERACTIVE_ENV)
+else
+    printf 1>&2 "Could not find %s to load interactive env from\n" "$INTERACTIVE_ENV"
+fi
+unset INTERACTIVE_ENV
+
+eval "$(/usr/local/bin/alias-rs -c "$HOME"/.config/alias-rs/config.device.json -s bash -a)"
 
 [ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
 

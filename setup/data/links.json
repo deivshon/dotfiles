@@ -383,5 +383,12 @@
     "vscode-keybindings": {
         "source": ".config/Code/User/keybindings.json",
         "target": "~/.config/Code/User/keybindings.json"
+    },
+    "interactive-shells-env": {
+        "source": ".config/shells/interactive.env",
+        "target": "~/.config/shells/interactive.env",
+        "subs": {
+            "setup-user": "<sub<user>>"
+        }
     }
 }
