@@ -3,5 +3,4 @@
 # Device specific bash_profile
 
 TTY1_WM=dwm
-TTY2_WM=qtile
-TTY3_WM=hyprland
+TTY2_WM=hyprland

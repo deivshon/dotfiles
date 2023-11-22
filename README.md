@@ -44,8 +44,6 @@ The configuration files in this repository and the relative setup scripts are ta
 -   [opendoas](https://archlinux.org/packages/extra/x86_64/opendoas/)
 -   [micro](https://archlinux.org/packages/extra/x86_64/micro/)
 -   [dash](https://archlinux.org/packages/core/x86_64/dash/)
--   [python-psutil](https://archlinux.org/packages/extra/x86_64/python-psutil/) [qtile graphs requirement]
--   [qtile](https://archlinux.org/packages/?name=qtile)
 -   [pacman-contrib](https://archlinux.org/packages/extra/x86_64/pacman-contrib/) [provides checkupdates]
 -   [fish](https://archlinux.org/packages/extra/x86_64/fish/)
 -   [ttf-jetbrains-mono-nerd](https://archlinux.org/packages/extra/any/ttf-jetbrains-mono-nerd/)

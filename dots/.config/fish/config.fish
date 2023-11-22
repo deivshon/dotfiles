@@ -1,6 +1,6 @@
 #!/bin/fish
 
-if tty | grep -q "/dev/tty[1-3]"
+if tty | grep -q "/dev/tty[1-2]"
     exec bash -l
 end
 

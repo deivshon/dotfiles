@@ -39,7 +39,6 @@
         "micro",
         "dash",
         "python-psutil",
-        "qtile",
         "pacman-contrib",
         "fish",
         "ttf-jetbrains-mono-nerd",

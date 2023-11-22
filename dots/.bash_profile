@@ -21,18 +21,9 @@ launch_dwm() {
     startx dwm
 }
 
-launch_qtile() {
-    startx qtile
-}
-
-launch_wm() {
-    launch_"$1"
-}
-
 if [ -z "$DISPLAY" ]; then
     case $(tty) in
-        /dev/tty1) launch_wm "$TTY1_WM";;
-        /dev/tty2) launch_wm "$TTY2_WM";;
-        /dev/tty3) launch_wm "$TTY3_WM";;
+        /dev/tty1) launch_"$TTY1_WM";;
+        /dev/tty2) launch_"$TTY2_WM";;
     esac
 fi
