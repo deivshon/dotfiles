@@ -26,8 +26,7 @@ bs-hl-color=<sub<swl--bs-hl-color>>
 
 separator-color=<sub<swl--separator-color>>
 
-line-color=<sub<swl--line-color>>
-line-uses-ring
+line-uses-inside
 
 text-color=<sub<swl--text-color>>
 text-clear-color=<sub<swl--text-clear-color>>
