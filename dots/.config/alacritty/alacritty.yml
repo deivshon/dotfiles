@@ -4,7 +4,7 @@ env:
 
 font:
     normal:
-        family: JetBrainsMono Nerd Font
+        family: JetBrainsMono NF
         style: regular
     size: 10
 
