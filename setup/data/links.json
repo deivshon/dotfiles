@@ -388,7 +388,8 @@
         "source": ".config/shells/interactive.env",
         "target": "~/.config/shells/interactive.env",
         "subs": {
-            "setup-user": "<sub<user>>"
+            "setup-user": "<sub<user>>",
+            "bat-theme": "<sub<bat-theme>>"
         }
     }
 }

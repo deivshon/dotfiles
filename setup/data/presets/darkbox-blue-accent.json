@@ -21,6 +21,7 @@
     "terminal-bright-white": "#DDC9AD",
     "dwm-fgcolor": "#DDC9AD",
     "btop-theme": "\\/usr\\/share\\/btop\\/themes\\/gruvbox_dark_v2.theme",
+    "bat-theme": "gruvbox-dark",
     "rofi-background": "#0C0D0E",
     "rofi-foreground": "#DDC9AD",
     "fuzzel-background": "0C0D0E",
