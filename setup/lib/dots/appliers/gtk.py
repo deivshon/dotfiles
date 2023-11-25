@@ -107,12 +107,12 @@ def __apply_gtk_xwayland(config_theme: str, config_icons: str) -> None:
 
     log.info(
         f"Applying GTK theme {log.YELLOW}{config_theme}{log.NORMAL} ({__GTK_XSETTINGS_FILE})")
-    replace_in_file(__GTK_XSETTINGS_FILE, r"Net\/ThemeName .*",
-                    f"Net\\/ThemeName {config_theme}")
+    replace_in_file(__GTK_XSETTINGS_FILE, r"Net/ThemeName .*",
+                    f"Net/ThemeName {config_theme}")
     log.info(
         f"Applying GTK icons {log.YELLOW}{config_icons}{log.NORMAL} ({__GTK_XSETTINGS_FILE})")
-    replace_in_file(__GTK_XSETTINGS_FILE, r"Net\/IconThemeName .*",
-                    f"Net\\/IconThemeName {config_icons}")
+    replace_in_file(__GTK_XSETTINGS_FILE, r"Net/IconThemeName .*",
+                    f"Net/IconThemeName {config_icons}")
 
 
 def __gtk_applier(config_substitutions: Dict) -> None:

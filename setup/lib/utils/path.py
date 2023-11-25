@@ -1,25 +1,25 @@
 import os
+import re
 import stat
+import mmap
+import shutil
 import subprocess
 
 from setup.lib import log
-
-
-def get_last_node(path):
-    return path[::-1][0:path[::-1].index("/")][::-1]
 
 
 def get_wallpaper_path(wallpaper_name):
     return f"{os.path.expanduser('~')}/Pictures/wallpapers/{wallpaper_name}"
 
 
-def sed_escape_path(str):
-    # "\x5c/" = "\/", to avoid unnecessary warning
-    return str.replace("/", "\x5c/")
+def replace_in_file(file_path: str, regex: str, new: str) -> None:
+    with open(file_path, 'r') as f:
+        file_content = f.read()
 
+    new_content = re.sub(regex, new, file_content)
 
-def replace_in_file(filePath: str, regex: str, new: str) -> None:
-    subprocess.run(["sed", "-iE", f"s/{regex}/{new}/g", filePath])
+    with open(file_path, "w") as f:
+        f.write(new_content)
 
 
 def make_executable(path: str, sudo: bool = False):
@@ -49,3 +49,19 @@ def makedirs(path: str):
         os.makedirs(path)
     except PermissionError:
         subprocess.run(["sudo", "mkdir", "-p", path])
+
+
+def copy(source: str, target: str, force: bool, needs_sudo: bool) -> bool:
+    if needs_sudo:
+        subprocess.run(["sudo", "cp", "-f" if force else "-i", source, target])
+        return True
+    else:
+        if os.path.isfile(target) and not force:
+            print(
+                f"{target} already exists. Proceed with copy? [y/N]", end=" ")
+            user_response = input().lower()
+            if user_response != "y":
+                return False
+
+        shutil.copy(source, target)
+        return True

@@ -21,7 +21,7 @@
     "terminal-bright-white": "#FFFFFF",
     "dwm-bgcolor": "#18181F",
     "dwm-fgcolor": "#F8F8F2",
-    "btop-theme": "\\/usr\\/share\\/btop\\/themes\\/dracula.theme",
+    "btop-theme": "/usr/share/btop/themes/dracula.theme",
     "bat-theme": "Dracula",
     "rofi-background": "#1D1E27",
     "rofi-foreground": "#F8F8F2",

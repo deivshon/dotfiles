@@ -151,7 +151,7 @@ def main():
 
     dots.link(selected_config,
               keep_expansion=args.keep,
-              force=args.force,
+              force_copy=args.force,
               compilationMap=compilationMap)
 
     setup_status.config = args.config

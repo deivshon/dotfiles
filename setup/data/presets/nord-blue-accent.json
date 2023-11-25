@@ -21,7 +21,7 @@
     "terminal-bright-white": "#ECEFF4",
     "dwm-bgcolor": "#14171C",
     "dwm-fgcolor": "#E5E9F0",
-    "btop-theme": "\\/usr\\/share\\/btop\\/themes\\/nord.theme",
+    "btop-theme": "/usr/share/btop/themes/nord.theme",
     "bat-theme": "Nord",
     "rofi-background": "#1B1F26",
     "rofi-foreground": "#E5E9F0",
