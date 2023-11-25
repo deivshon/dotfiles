@@ -1,7 +1,8 @@
 import os
-import subprocess
 import json
+import time
 import shutil
+import subprocess
 from typing import Dict, Optional, List
 from dataclasses import dataclass, field
 
@@ -10,10 +11,10 @@ from setup.lib import utils
 from setup.lib import LIB_DIR
 from setup.lib.dots import LINKS_FILE
 from setup.lib.dots.names import DotsNames
-from setup.lib.dots.appliers.applier import DotApplier
-from setup.lib.dots.appliers import APPLIERS, DOT_APPLIERS
 from setup.lib.utils.path import replace_in_file
 from setup.lib.install.handler import InstallHandler
+from setup.lib.dots.appliers.applier import DotApplier
+from setup.lib.dots.appliers import APPLIERS, DOT_APPLIERS
 from setup.lib.dots.targets.firefox import FirefoxVariableTarget
 from setup.lib.dots.flags import DEVICE_SPECIFIC_FLAG, SUDO_FLAG, VAR_TARGET_FLAG, EXECUTABLE_FLAG
 
@@ -36,6 +37,32 @@ class DotLink:
     subs: Dict[str, str] = field(default_factory=dict)
     flags: List[str] = field(default_factory=list)
     dot_applier: Optional[DotApplier] = None
+
+
+@dataclass
+class __CopyCommand:
+    copy_flags: str
+    source: str
+    needs_sudo: bool
+    executable: bool
+
+    def run(self, target: str):
+        command = ["cp", self.copy_flags, self.source, target]
+        if self.needs_sudo:
+            command.insert(0, "sudo")
+
+        if os.path.isfile(target):
+            backup_target = os.path.join(os.path.dirname(
+                target), f"{time.time_ns()}_{os.path.basename(target)}.bkp")
+            backup_command = command[:len(
+                command) - 2] + [target, backup_target]
+
+            subprocess.run(backup_command)
+            utils.path.make_non_executable(backup_target, sudo=self.needs_sudo)
+
+        subprocess.run(command)
+        if self.executable:
+            utils.path.make_executable(target, sudo=self.needs_sudo)
 
 
 class InvalidDotLink(Exception):
@@ -123,12 +150,8 @@ def __link_single_target(dot_link: DotLink, target: str, compilationMap: Dict[st
     if not os.path.isdir(os.path.dirname(target)):
         utils.path.makedirs(os.path.dirname(target))
 
-    command = ["cp", copy_flags, source, target]
-
-    if needs_sudo:
-        subprocess.run(["sudo"] + command)
-    else:
-        subprocess.run(command)
+    copy_command = __CopyCommand(copy_flags, source, needs_sudo, executable)
+    copy_command.run(target)
 
     if device_specific:
         log.info(
@@ -136,9 +159,6 @@ def __link_single_target(dot_link: DotLink, target: str, compilationMap: Dict[st
     else:
         log.info(
             f"{log.BLUE}{source_hash[0:4]}...{source_hash[-4:]}{log.NORMAL} | {log.GREEN}installed in path{log.NORMAL} {log.YELLOW}{target}")
-
-    if executable:
-        utils.path.make_executable(target, sudo=needs_sudo)
 
     if dot_link.name in compilationMap:
         compilationMap[dot_link.name].needsCompilation = True

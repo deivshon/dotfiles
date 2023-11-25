@@ -33,6 +33,17 @@ def make_executable(path: str, sudo: bool = False):
         os.chmod(path, os.stat(path).st_mode | stat.S_IEXEC)
 
 
+def make_non_executable(path: str, sudo: bool = False):
+    if not os.path.isfile(path):
+        log.error(f"Can't make {path} non executable, not a file")
+        return
+
+    if sudo:
+        subprocess.run(["sudo", "chmod", "-x", path])
+    else:
+        os.chmod(path, os.stat(path).st_mode & ~stat.S_IEXEC)
+
+
 def makedirs(path: str):
     try:
         os.makedirs(path)
