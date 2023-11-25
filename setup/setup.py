@@ -149,7 +149,7 @@ def main():
     for inst in installers:
         inst.download(args.git_pull)
 
-    dots.link(selected_config, HOME_DIR,
+    dots.link(selected_config,
               keep_expansion=args.keep,
               force=args.force,
               compilationMap=compilationMap)

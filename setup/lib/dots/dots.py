@@ -59,7 +59,7 @@ __TARGET_SEARCH = {
 }
 
 
-def link(config, user, keep_expansion=False, force=False, compilationMap: Dict[str, InstallHandler] = {}):
+def link(config, keep_expansion=False, force=False, compilationMap: Dict[str, InstallHandler] = {}):
     copy_flags = "-f" if force else "-i"
 
     substitute(config, SUBSTITUTIONS_DIR)
@@ -68,13 +68,7 @@ def link(config, user, keep_expansion=False, force=False, compilationMap: Dict[s
 
     print("\n", end="")
     for dot_link in __DOT_LINKS:
-        source = os.path.abspath(
-            f"{SUBSTITUTIONS_DIR}/{dot_link.source}")
-        flags = dot_link.flags
-
-        device_specific = DEVICE_SPECIFIC_FLAG in flags
-
-        if VAR_TARGET_FLAG in flags:
+        if VAR_TARGET_FLAG in dot_link.flags:
             targets = __TARGET_SEARCH[dot_link.name].get_targets()
         elif dot_link.target is not None:
             targets = dot_link.target
@@ -88,43 +82,7 @@ def link(config, user, keep_expansion=False, force=False, compilationMap: Dict[s
             no_target_dots.append(dot_link.name)
 
         for target in targets:
-            target = target.replace("~", user)
-
-            if device_specific and os.path.exists(target):
-                continue
-
-            source_hash = utils.hash.sha256_checksum(source)
-            target_hash = None
-            if os.path.isfile(target):
-                target_hash = utils.hash.sha256_checksum(target)
-
-            if source_hash == target_hash:
-                log.info(
-                    f"{log.BLUE}{source_hash[0:4]}...{source_hash[-4:]}{log.NORMAL} | {log.RED}already installed{log.NORMAL} {log.YELLOW}{target}{log.NORMAL}")
-                continue
-
-            if not os.path.isdir(os.path.dirname(target)):
-                utils.path.makedirs(os.path.dirname(target))
-
-            command = ["cp", copy_flags, source, target]
-
-            if SUDO_FLAG in flags:
-                subprocess.run(["sudo"] + command)
-            else:
-                subprocess.run(command)
-
-            if device_specific:
-                log.info(
-                    f"{log.BLUE}{source_hash[0:4]}...{source_hash[-4:]}{log.NORMAL} | {log.GREEN}only ever install{log.NORMAL} {log.YELLOW}{target}")
-            else:
-                log.info(
-                    f"{log.BLUE}{source_hash[0:4]}...{source_hash[-4:]}{log.NORMAL} | {log.GREEN}installed in path{log.NORMAL} {log.YELLOW}{target}")
-
-            if EXECUTABLE_FLAG in flags:
-                utils.path.make_executable(target, sudo=SUDO_FLAG in flags)
-
-            if dot_link.name in compilationMap:
-                compilationMap[dot_link.name].needsCompilation = True
+            __link_single_target(dot_link, target, compilationMap, copy_flags)
 
     if not keep_expansion and os.path.isdir(SUBSTITUTIONS_DIR):
         shutil.rmtree(SUBSTITUTIONS_DIR)
@@ -138,6 +96,52 @@ def link(config, user, keep_expansion=False, force=False, compilationMap: Dict[s
         applier.run(config[__CONFIG_SUBS])
 
     print("\n", end="")
+
+
+def __link_single_target(dot_link: DotLink, target: str, compilationMap: Dict[str, InstallHandler], copy_flags: str):
+    source = os.path.abspath(
+        f"{SUBSTITUTIONS_DIR}/{dot_link.source}")
+    device_specific = DEVICE_SPECIFIC_FLAG in dot_link.flags
+    executable = EXECUTABLE_FLAG in dot_link.flags
+    needs_sudo = SUDO_FLAG in dot_link.flags
+
+    target = target.replace("~", utils.HOME_DIR)
+
+    if device_specific and os.path.exists(target):
+        return
+
+    source_hash = utils.hash.sha256_checksum(source)
+    target_hash = None
+    if os.path.isfile(target):
+        target_hash = utils.hash.sha256_checksum(target)
+
+    if source_hash == target_hash:
+        log.info(
+            f"{log.BLUE}{source_hash[0:4]}...{source_hash[-4:]}{log.NORMAL} | {log.RED}already installed{log.NORMAL} {log.YELLOW}{target}{log.NORMAL}")
+        return
+
+    if not os.path.isdir(os.path.dirname(target)):
+        utils.path.makedirs(os.path.dirname(target))
+
+    command = ["cp", copy_flags, source, target]
+
+    if needs_sudo:
+        subprocess.run(["sudo"] + command)
+    else:
+        subprocess.run(command)
+
+    if device_specific:
+        log.info(
+            f"{log.BLUE}{source_hash[0:4]}...{source_hash[-4:]}{log.NORMAL} | {log.GREEN}only ever install{log.NORMAL} {log.YELLOW}{target}")
+    else:
+        log.info(
+            f"{log.BLUE}{source_hash[0:4]}...{source_hash[-4:]}{log.NORMAL} | {log.GREEN}installed in path{log.NORMAL} {log.YELLOW}{target}")
+
+    if executable:
+        utils.path.make_executable(target, sudo=needs_sudo)
+
+    if dot_link.name in compilationMap:
+        compilationMap[dot_link.name].needsCompilation = True
 
 
 def substitute(config, substitutions_dir):
