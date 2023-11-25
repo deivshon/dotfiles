@@ -44,7 +44,7 @@ class __DotCopyCommand:
     executable: bool
 
     def run(self, target: str):
-        if os.path.isfile(target) and not utils.hash.sha512(target) in DOTFILES_HASHES:
+        if os.path.isfile(target) and utils.hash.sha512(target) not in DOTFILES_HASHES:
             backup_target = os.path.join(os.path.dirname(
                 target), f"{time.time_ns()}_{os.path.basename(target)}.bkp")
 
