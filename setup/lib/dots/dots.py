@@ -59,7 +59,7 @@ class _DotApplyCommand:
     executable: bool
 
     def run(self, target: str):
-        if os.path.isfile(target) and utils.hash.sha512_file(target) not in _DOTFILES_HASHES:
+        if os.path.isfile(target) and utils.hash.sha256_file(target) not in _DOTFILES_HASHES:
             backup_target = os.path.join(os.path.dirname(
                 target), f"{time.time_ns()}_{os.path.basename(target)}.bkp")
 
@@ -101,10 +101,10 @@ class _BinaryDotLink():
             target = f"{path_prefix}{target}"
 
         needs_sudo = SUDO_FLAG in self.flags
-        content_hash = utils.hash.sha512(self.content)
+        content_hash = utils.hash.sha256(self.content)
         target_hash = None
         if os.path.isfile(target):
-            target_hash = utils.hash.sha512_file(target)
+            target_hash = utils.hash.sha256_file(target)
 
         if content_hash == target_hash:
             _log_already_installed(content_hash, target)
@@ -217,11 +217,11 @@ class _ComputedDotLink():
         else:
             content = self.content[config_name]
 
-        content_hash = utils.hash.sha512(content)
+        content_hash = utils.hash.sha256(content)
 
         target_hash: Optional[str] = None
         if os.path.isfile(target):
-            target_hash = utils.hash.sha512_file(target)
+            target_hash = utils.hash.sha256_file(target)
 
         if content_hash == target_hash:
             _log_already_installed(content_hash, target)
@@ -265,14 +265,14 @@ def __get_all_hashes() -> Set[str]:
     hashes = set()
     for computed_link in _COMPUTED_DOT_LINKS:
         if isinstance(computed_link.content, str):
-            hashes.add(utils.hash.sha512(computed_link.content))
+            hashes.add(utils.hash.sha256(computed_link.content))
         else:
             for config_name in computed_link.content:
                 config_content = computed_link.content[config_name]
-                hashes.add(utils.hash.sha512(config_content))
+                hashes.add(utils.hash.sha256(config_content))
 
     for binary_link in _BINARY_DOT_LINKS:
-        hashes.add(utils.hash.sha512(binary_link.content))
+        hashes.add(utils.hash.sha256(binary_link.content))
 
     return hashes
 
