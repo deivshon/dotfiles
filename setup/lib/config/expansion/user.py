@@ -1,6 +1,6 @@
 import os
 
-from setup.lib.config import SUBSTITUTIONS
+from setup.lib.const.config import CONFIG_SUBSTITUTIONS
 from setup.lib.config.expansion.handler import ExpansionHandler
 
 
@@ -9,4 +9,4 @@ class SetupUser(ExpansionHandler):
 
     @staticmethod
     def expand(color_data, _):
-        color_data[SUBSTITUTIONS][SetupUser.__SETUP_USER_KEY] = os.getlogin()
+        color_data[CONFIG_SUBSTITUTIONS][SetupUser.__SETUP_USER_KEY] = os.getlogin()

@@ -11,12 +11,13 @@ from setup.lib.dots.appliers import APPLIERS
 from setup.lib.config.expansion.efy import EfyColors
 from setup.lib.config.expansion.user import SetupUser
 from setup.lib.config.expansion import EXPANSION_DATA
+from setup.lib.const.config import CONFIG_SUBSTITUTIONS
+from setup.lib.const.dots import DOT_LINKS_FILE, LINK_SUBS
 from setup.lib.config.expansion.wallpaper import WallpaperPath
 from setup.lib.config.expansion.firefox import FirefoxColors
 from setup.lib.config.expansion.swaylock import SwayLockColors
 from setup.lib.config.expansion.handler import ExpansionHandler
 from setup.lib.config.expansion.colors_no_hash import ColorsNoHash
-from setup.lib.config import SUBSTITUTIONS, EXPECTED_SUBSTITUTIONS
 
 __CONFIG_FILE = f"{LIB_DIR}/../data/configFields.json"
 __PRESETS_DIRECTORY = f"./data/presets"
@@ -29,6 +30,20 @@ __EXPANSIONS: List[ExpansionHandler] = [
     SwayLockColors(),
     SetupUser(),
 ]
+
+with open(DOT_LINKS_FILE, "r") as file:
+    links_list = json.loads(file.read())
+
+__EXPECTED_SUBSTITUTIONS = []
+for link in links_list:
+    if LINK_SUBS not in links_list[link]:
+        continue
+
+    for sub in links_list[link][LINK_SUBS]:
+        if sub in __EXPECTED_SUBSTITUTIONS:
+            continue
+
+        __EXPECTED_SUBSTITUTIONS += [sub]
 
 __DEFAULT_FIELDS: Dict[str, str] = {}
 for defaults_filename in os.listdir(__DEFAULTS_DIRECTORY):
@@ -60,13 +75,13 @@ def check(config):
         if field not in config.keys():
             log.failure("Field missing in config: " + field)
 
-    for field in EXPECTED_SUBSTITUTIONS:
-        if field not in config[SUBSTITUTIONS].keys():
+    for field in __EXPECTED_SUBSTITUTIONS:
+        if field not in config[CONFIG_SUBSTITUTIONS].keys():
             log.failure("Sub-field missing in substitutions field: " + field)
 
     for applier in APPLIERS:
         for field in applier.required:
-            if field not in config[SUBSTITUTIONS].keys():
+            if field not in config[CONFIG_SUBSTITUTIONS].keys():
                 log.failure(
                     f"Field missing for applier {log.BLUE}{applier.name}{log.NORMAL}: {log.RED}{field}")
 
@@ -78,8 +93,8 @@ def expand(config):
 
 def apply_defaults(config: Dict) -> None:
     for key, value in __DEFAULT_FIELDS.items():
-        if key not in config[SUBSTITUTIONS]:
-            config[SUBSTITUTIONS][key] = value
+        if key not in config[CONFIG_SUBSTITUTIONS]:
+            config[CONFIG_SUBSTITUTIONS][key] = value
 
 
 def apply_preset(config: Dict, preset_name: str) -> None:
@@ -87,10 +102,10 @@ def apply_preset(config: Dict, preset_name: str) -> None:
         log.failure(f"Preset {preset_name} does not exist")
 
     for key, value in __PRESETS[preset_name].items():
-        if key not in config[SUBSTITUTIONS]:
-            config[SUBSTITUTIONS][key] = value
+        if key not in config[CONFIG_SUBSTITUTIONS]:
+            config[CONFIG_SUBSTITUTIONS][key] = value
 
 
 def initialize(config: Dict):
-    if SUBSTITUTIONS not in config:
-        config[SUBSTITUTIONS] = {}
+    if CONFIG_SUBSTITUTIONS not in config:
+        config[CONFIG_SUBSTITUTIONS] = {}

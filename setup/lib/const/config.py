@@ -1,0 +1,5 @@
+CONFIG_SUBSTITUTIONS = "substitutions"
+EXPANDED_SUBSTITUTIONS = "setup-expanded-substitutions"
+MAIN_COLOR = "main-color"
+SECONDARY_COLOR = "secondary-color"
+PRESET = "preset"

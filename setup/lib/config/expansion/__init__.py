@@ -2,9 +2,9 @@ import json
 from typing import Tuple
 
 from setup.lib import log
+from setup.lib import utils
 from setup.lib import LIB_DIR
-from setup.lib.config import SUBSTITUTIONS, MAIN_COLOR
-from setup.lib import utils as genutils
+from setup.lib.const.config import MAIN_COLOR, CONFIG_SUBSTITUTIONS
 
 EXPANSIONS_FILE = f"{LIB_DIR}/../data/expansions.json"
 
@@ -20,7 +20,7 @@ with open(EXPANSIONS_FILE) as file:
 
 def expand_hue(config, color_fields, base_color=None):
     if base_color is None:
-        base_color = config[SUBSTITUTIONS][MAIN_COLOR]
+        base_color = config[CONFIG_SUBSTITUTIONS][MAIN_COLOR]
     new_fields = {}
 
     for field, color in color_fields.items():
@@ -29,13 +29,13 @@ def expand_hue(config, color_fields, base_color=None):
             continue
 
         alpha, color = __remove_alpha(color)
-        _, _, v = genutils.hue.hex_to_divided_hsv(color)
-        new_fields[field] = genutils.hue.apply_hue_saturation(
+        _, _, v = utils.hue.hex_to_divided_hsv(color)
+        new_fields[field] = utils.hue.apply_hue_saturation(
             v, base_color) + alpha
 
     for field, value in new_fields.items():
-        if field not in config[SUBSTITUTIONS]:
-            config[SUBSTITUTIONS][field] = value
+        if field not in config[CONFIG_SUBSTITUTIONS]:
+            config[CONFIG_SUBSTITUTIONS][field] = value
 
 
 def __remove_alpha(color: str) -> Tuple[str, str]:
