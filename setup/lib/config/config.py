@@ -3,6 +3,7 @@ import json
 
 from typing import List
 from typing import Dict
+from pathlib import Path
 
 from setup.lib import log
 from setup.lib import LIB_DIR
@@ -18,6 +19,7 @@ from setup.lib.config.expansion.colors_no_hash import ColorsNoHash
 from setup.lib.config import SUBSTITUTIONS, EXPECTED_SUBSTITUTIONS
 
 __CONFIG_FILE = f"{LIB_DIR}/../data/configFields.json"
+__PRESETS_DIRECTORY = f"./data/presets"
 __DEFAULTS_DIRECTORY = "./data/defaults"
 __EXPANSIONS: List[ExpansionHandler] = [
     EfyColors(),
@@ -27,6 +29,27 @@ __EXPANSIONS: List[ExpansionHandler] = [
     SwayLockColors(),
     SetupUser(),
 ]
+
+__DEFAULT_FIELDS: Dict[str, str] = {}
+for defaults_filename in os.listdir(__DEFAULTS_DIRECTORY):
+    defaults_path = f"{__DEFAULTS_DIRECTORY}/{defaults_filename}"
+    if not os.path.isfile(defaults_path) or not defaults_path.endswith(".json"):
+        continue
+
+    with open(defaults_path) as f:
+        current_default = json.loads(f.read())
+    __DEFAULT_FIELDS.update(current_default)
+
+__PRESETS: Dict[str, Dict[str, str]] = {}
+for preset_filename in os.listdir(__PRESETS_DIRECTORY):
+    preset_name = Path(preset_filename).stem
+    preset_path = f"{__PRESETS_DIRECTORY}/{preset_filename}"
+    if not os.path.isfile(preset_path) or not preset_path.endswith(".json"):
+        continue
+
+    with open(preset_path) as f:
+        current_preset = json.loads(f.read())
+    __PRESETS[preset_name] = current_preset
 
 
 def check(config):
@@ -54,28 +77,16 @@ def expand(config):
 
 
 def apply_defaults(config: Dict) -> None:
-    for file_path in os.listdir(__DEFAULTS_DIRECTORY):
-        path = f"{__DEFAULTS_DIRECTORY}/{file_path}"
-        if not os.path.isfile(path) or not path.endswith(".json"):
-            continue
-
-        with open(path) as f:
-            current_fields = json.loads(f.read())
-
-        for key, value in current_fields.items():
-            if key not in config[SUBSTITUTIONS]:
-                config[SUBSTITUTIONS][key] = value
+    for key, value in __DEFAULT_FIELDS.items():
+        if key not in config[SUBSTITUTIONS]:
+            config[SUBSTITUTIONS][key] = value
 
 
 def apply_preset(config: Dict, preset_name: str) -> None:
-    preset_path = f"./data/presets/{preset_name}.json"
-    if not os.path.isfile(preset_path):
+    if preset_name not in __PRESETS:
         log.failure(f"Preset {preset_name} does not exist")
 
-    with open(preset_path) as f:
-        preset = json.loads(f.read())
-
-    for key, value in preset.items():
+    for key, value in __PRESETS[preset_name].items():
         if key not in config[SUBSTITUTIONS]:
             config[SUBSTITUTIONS][key] = value
 
