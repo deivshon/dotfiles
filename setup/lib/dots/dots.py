@@ -161,8 +161,7 @@ class _ComputedDotLink():
             self.targets = [dot_link.target]
 
         if len(self.targets) == 0:
-            log.error(f"Could not find any target for {self.targets}")
-            return
+            log.error(f"Could not find any target for {self.name}")
 
         source = f"{_DOTFILES_DIR}/{dot_link.source}"
         if not os.path.isfile(source):
