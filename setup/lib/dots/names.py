@@ -41,8 +41,6 @@ class DotsNames():
     ALACRITTY_START_SCRIPT = "alacritty-start-script"
     UPDATE_SCRIPT = "update-script"
     BATTER_GRAPH_TILE = "battery-graph-qtile"
-    QTILE_MONADTALL_LAYOUT_ICON = "qtile-monadtall-layout-icon"
-    QTILE_MAX_LAYOUT_ICON = "qtile-max-layout-icon"
     GDIFF_SCRIPT = "gdiff-script"
     EXTRACT_SCRIPT = "extract-script"
     FISH_CONFIG = "fish-config"
@@ -54,3 +52,9 @@ class DotsNames():
     PIKAUR_CONFIG = "pikaur-config"
     VSCODE_KEYBINDINGS = "vscode-keybindings"
     INTERACTIVE_SHELLS_ENV = "interactive-shells-env"
+
+
+@dataclass
+class BinaryDotsNames():
+    QTILE_MONADTALL_LAYOUT_ICON = "qtile-monadtall-layout-icon"
+    QTILE_MAX_LAYOUT_ICON = "qtile-max-layout-icon"

@@ -1,9 +1,12 @@
 import os
+import json
+import time
 import argparse
 
-from time import time
-from setup.lib.dots import dots
+
 from setup.lib import log
+from setup.lib import utils
+from setup.lib.dots import dots
 from setup.lib.config import AVAILABLE_CONFIGS, PRESET, config
 
 
@@ -33,11 +36,12 @@ def main():
     old_cwd = os.getcwd()
     os.chdir(__FILE_DIR)
 
-    # Store config content
     if args.config not in AVAILABLE_CONFIGS:
-        log.failure("Select a valid config")
+        log.failure(
+            f"{log.WHITE}{args.config} is not a valid config{log.NORMAL}\nValid configs: {json.dumps(list(AVAILABLE_CONFIGS.keys()), indent=4)}")
 
-    selected_config = AVAILABLE_CONFIGS[args.config]
+    config_name = args.config
+    selected_config = AVAILABLE_CONFIGS[config_name]
     config.initialize(selected_config)
 
     if PRESET in selected_config:
@@ -48,15 +52,15 @@ def main():
     config.check(selected_config)
 
     if args.output_dir is None:
-        substitutions_dir = f"{dots.SUBSTITUTIONS_DIR}_{args.config}_{time():.0f}"
-
-        # Ensure substitutions directory does not exist already
-        i = 2
-        while os.path.exists(substitutions_dir):
-            substitutions_dir = f"{dots.SUBSTITUTIONS_DIR}_{args.config}_{time():.0f}_{i}"
-            i += 1
+        substitutions_dir = os.path.join(
+            "..", f"substitutions_{config_name}_{time.time_ns()}")
     else:
         substitutions_dir = args.output_dir
 
+    substitutions_dir = os.path.abspath(substitutions_dir)
+    if not os.path.isdir(substitutions_dir):
+        utils.path.makedirs(substitutions_dir)
+
     os.chdir(old_cwd)
-    dots.substitute(selected_config, substitutions_dir)
+    dots.link(selected_config, config_name,
+              force_copy=True, compilation_map={}, path_prefix=substitutions_dir, run_appliers=False)

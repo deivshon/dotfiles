@@ -13,4 +13,4 @@ class Applier():
 @dataclass
 class DotApplier():
     name: str
-    run: Callable[[str], None]
+    run: Callable[[str], str]

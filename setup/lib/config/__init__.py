@@ -1,8 +1,8 @@
 import json
 
 from setup.lib import LIB_DIR
-from setup.lib.dots import LINKS_FILE
-from setup.lib.dots.dots import LINK_SUBS
+from setup.lib.dots import DOT_LINKS_FILE
+from setup.lib.dots import LINK_SUBS
 
 SUBSTITUTIONS = "substitutions"
 EXPANDED_SUBSTITUTIONS = "setup-expanded-substitutions"
@@ -11,7 +11,7 @@ MAIN_COLOR = "main-color"
 SECONDARY_COLOR = "secondary-color"
 PRESET = "preset"
 
-with open(LINKS_FILE, "r") as file:
+with open(DOT_LINKS_FILE, "r") as file:
     links_list = json.loads(file.read())
 
 EXPECTED_SUBSTITUTIONS = []

@@ -91,21 +91,14 @@ def __get_wlr_randr_monitors() -> Optional[Set[str]]:
     return wlr_randr_monitors
 
 
-def __waybar_applier(waybar_config_file: str) -> None:
-    if not os.path.isfile(waybar_config_file):
-        log.error(
-            f"Could not find waybar configuration file at {log.RED}{waybar_config_file}")
-        return
-
+def __waybar_applier(waybar_config_str: str) -> str:
     monitor_names = __generate_names().union(__EXISTING_MONITORS)
-
-    with open(waybar_config_file) as f:
-        waybar_config = json.loads(f.read())
+    waybar_config = json.loads(waybar_config_str)
 
     if __HYPRLAND_WORKSPACES not in waybar_config:
         log.error(
             f"No `{__HYPRLAND_WORKSPACES}` key in waybar configuration file")
-        return
+        return waybar_config_str
 
     if __PERSISTENT not in waybar_config[__HYPRLAND_WORKSPACES]:
         waybar_config[__HYPRLAND_WORKSPACES][__PERSISTENT] = __EMPTY_PERSISTENT_DATA
@@ -125,8 +118,7 @@ def __waybar_applier(waybar_config_file: str) -> None:
         waybar_config[__HYPRLAND_WORKSPACES][__PERSISTENT][workspace] = sorted(
             waybar_config[__HYPRLAND_WORKSPACES][__PERSISTENT][workspace])
 
-    with open(waybar_config_file, "w") as f:
-        f.write(json.dumps(waybar_config, indent=4))
+    return json.dumps(waybar_config, indent=4)
 
 
 WAYBAR_APPLIER: DotApplier = DotApplier(

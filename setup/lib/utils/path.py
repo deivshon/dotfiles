@@ -1,7 +1,7 @@
 import os
 import re
 import stat
-import mmap
+import time
 import shutil
 import subprocess
 
@@ -64,4 +64,29 @@ def copy(source: str, target: str, force: bool, needs_sudo: bool) -> bool:
                 return False
 
         shutil.copy(source, target)
+        return True
+
+
+def write_to_file(content: str | bytes, target: str, force: bool, needs_sudo: bool) -> bool:
+    write_mode = "w" if isinstance(content, str) else "wb"
+    if needs_sudo:
+        tmp_file = os.path.join("/tmp", str(time.time_ns()))
+        with open(tmp_file, write_mode) as f:
+            f.write(content)
+
+        subprocess.run(
+            ["sudo", "cp", "-f" if force else "-i", tmp_file, target])
+        os.remove(tmp_file)
+        return True
+    else:
+        if os.path.isfile(target) and not force:
+            print(
+                f"{target} already exists. Proceed with overwriting? [y/N]", end=" ")
+            user_response = input().lower()
+            if user_response != "y":
+                return False
+
+        with open(target, write_mode) as f:
+            f.write(content)
+
         return True

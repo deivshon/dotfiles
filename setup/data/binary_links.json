@@ -1,0 +1,10 @@
+{
+    "qtile-monadtall-layout-icon": {
+        "source": ".icons/qtile/layout-monadtall.png",
+        "target": "~/.icons/qtile/layout-monadtall.png"
+    },
+    "qtile-max-layout-icon": {
+        "source": ".icons/qtile/layout-max.png",
+        "target": "~/.icons/qtile/layout-max.png"
+    }
+}

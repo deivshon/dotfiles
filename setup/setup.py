@@ -60,11 +60,6 @@ def main():
         help="Keep directory containing expanded configurations"
     )
     parser.add_argument(
-        "-rm", "--remove",
-        action="store_true",
-        help="Remove existing configuration files"
-    )
-    parser.add_argument(
         "-p", "--packages",
         action="store_true",
         help="Force packages installation"
@@ -114,7 +109,8 @@ def main():
         log.failure(
             f"{log.WHITE}{args.config} is not a valid config{log.NORMAL}\nValid configs: {json.dumps(list(AVAILABLE_CONFIGS.keys()), indent=4)}")
 
-    selected_config = AVAILABLE_CONFIGS[args.config]
+    config_name = args.config
+    selected_config = AVAILABLE_CONFIGS[config_name]
     config.initialize(selected_config)
 
     if PRESET in selected_config:
@@ -134,11 +130,6 @@ def main():
         setup_status.packages_installed = True
         installed_in_run = True
 
-    if args.remove:
-        symlinks.remove()
-        dots.remove(HOME_DIR)
-        sys.exit(0)
-
     # Package installation if it's been explicitly requested but not performed
     # because the setup has been run before
     if not installed_in_run and args.packages:
@@ -150,9 +141,9 @@ def main():
         inst.download(args.git_pull)
 
     dots.link(selected_config,
-              keep_expansion=args.keep,
+              config_name,
               force_copy=args.force,
-              compilationMap=compilationMap)
+              compilation_map=compilationMap)
 
     setup_status.config = args.config
 
