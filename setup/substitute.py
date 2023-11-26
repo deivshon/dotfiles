@@ -3,7 +3,6 @@ import json
 import time
 import argparse
 
-
 from setup.lib import log
 from setup.lib import utils
 from setup.lib.dots import dots

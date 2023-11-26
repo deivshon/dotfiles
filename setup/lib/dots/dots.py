@@ -1,5 +1,4 @@
 import os
-import re
 import json
 import time
 
@@ -185,8 +184,8 @@ class _ComputedDotLink():
                 substitution_vals = selected_config[_CONFIG_SUBS]
                 current_content = base_content
                 for key in dot_link.subs:
-                    current_content = re.sub(
-                        dot_link.subs[key], substitution_vals[key], current_content)
+                    current_content = current_content.replace(
+                        dot_link.subs[key], substitution_vals[key])
 
                 if dot_link.dot_applier is not None:
                     log.info(
@@ -245,7 +244,6 @@ class _ComputedDotLink():
 
 
 def link(config, config_name: str, force_copy=False, compilation_map: Dict[str, InstallHandler] = {}, path_prefix: Optional[str] = None, run_appliers: bool = True):
-    print("\n", end="")
     for computed_link in _COMPUTED_DOT_LINKS:
         computed_link.apply(config_name, force_copy,
                             compilation_map, path_prefix)

@@ -1,7 +1,4 @@
-import os
 import hashlib
-
-from typing import Set
 
 
 def sha512(content: str | bytes) -> str:

@@ -1,5 +1,4 @@
 import os
-import re
 import stat
 import time
 import shutil
@@ -12,11 +11,11 @@ def get_wallpaper_path(wallpaper_name):
     return f"{os.path.expanduser('~')}/Pictures/wallpapers/{wallpaper_name}"
 
 
-def replace_in_file(file_path: str, regex: str, new: str) -> None:
+def replace_in_file(file_path: str, old: str, new: str) -> None:
     with open(file_path, 'r') as f:
         file_content = f.read()
 
-    new_content = re.sub(regex, new, file_content)
+    new_content = file_content.replace(old, new)
 
     with open(file_path, "w") as f:
         f.write(new_content)
