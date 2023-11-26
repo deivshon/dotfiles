@@ -82,6 +82,10 @@
         {
             "alias": "yay",
             "equals": "paru"
+        },
+        {
+            "alias": "sfind",
+            "equals": "sudo find 2>/dev/null / -name"
         }
     ]
 }
