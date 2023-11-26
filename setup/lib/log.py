@@ -1,5 +1,6 @@
 import sys
 import subprocess
+from typing import NoReturn
 
 
 __tput_warning = False
@@ -44,7 +45,7 @@ def error(msg: str):
     print(f"{WHITE}[{RED}!{WHITE}]{NORMAL} {msg}{NORMAL}")
 
 
-def failure(msg: str):
+def failure(msg: str) -> NoReturn:
     error(f"{RED}FATAL ERROR OCCURRED{NORMAL}")
     error(msg)
     sys.exit(1)

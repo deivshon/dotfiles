@@ -1,4 +1,5 @@
 import json
+from typing import Tuple
 
 from setup.lib import log
 from setup.lib import LIB_DIR
@@ -22,23 +23,28 @@ def expand_hue(config, color_fields, base_color=None):
         base_color = config[SUBSTITUTIONS][MAIN_COLOR]
     new_fields = {}
 
-    for col in color_fields.keys():
-        if color_fields[col].startswith("#FFFFFF"):
-            new_fields[col] = color_fields[col]
+    for field, color in color_fields.items():
+        if color.startswith("#FFFFFF"):
+            new_fields[field] = color
             continue
 
-        alpha = ""
-        if len(color_fields[col]) == 9:
-            alpha = color_fields[col][-2:]
-            color_fields[col] = color_fields[col][:-2]
-        elif len(color_fields[col]) != 7:
-            log.failure(
-                f"Malformed hex color passed to hue expansion: {color_fields[col]}")
-
-        _, _, v = genutils.hue.hex_to_divided_hsv(color_fields[col])
-        new_fields[col] = genutils.hue.apply_hue_saturation(
+        alpha, color = __remove_alpha(color)
+        _, _, v = genutils.hue.hex_to_divided_hsv(color)
+        new_fields[field] = genutils.hue.apply_hue_saturation(
             v, base_color) + alpha
 
     for field, value in new_fields.items():
         if field not in config[SUBSTITUTIONS]:
             config[SUBSTITUTIONS][field] = value
+
+
+def __remove_alpha(color: str) -> Tuple[str, str]:
+    if len(color) == 9:
+        alpha = color[-2:]
+        color = color[:-2]
+        return alpha, color
+    elif len(color) != 7:
+        log.failure(
+            f"Malformed hex color passed to hue expansion: {color}")
+    else:
+        return "", color
