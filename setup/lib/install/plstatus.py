@@ -20,7 +20,7 @@ class PlstatusInstaller(InstallHandler):
 
     def _compile_impl(self):
         try:
-            process.exec(["make", "-C", self.DEST_PATH, "clean", "all"])
+            process.exec(["make", "-C", self.DEST_PATH, "clean", "release"])
         except Exception as e:
             log.error(
                 f"Could not compile {self.name()}: {e}")
