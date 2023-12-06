@@ -52,6 +52,7 @@ class DotsNames():
     PIKAUR_CONFIG = "pikaur-config"
     VSCODE_KEYBINDINGS = "vscode-keybindings"
     INTERACTIVE_SHELLS_ENV = "interactive-shells-env"
+    SWAYLOCK_PLAIN_CONFIG="swaylock-plain-config"
 
 
 @dataclass

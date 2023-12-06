@@ -382,5 +382,28 @@
             "setup-user": "<sub<user>>",
             "bat-theme": "<sub<bat-theme>>"
         }
+    },
+    "swaylock-plain-config": {
+        "source": ".config/swaylock/config-plain",
+        "target": "~/.config/swaylock/config-plain",
+        "subs": {
+            "main-color": "<sub<swl--background-color>>",
+            "swl--inside-color": "<sub<swl--inside-color>>",
+            "swl--inside-clear-color": "<sub<swl--inside-clear-color>>",
+            "swl--inside-ver-color": "<sub<swl--inside-ver-color>>",
+            "swl--inside-wrong-color": "<sub<swl--inside-wrong-color>>",
+            "swl--key-hl-color": "<sub<swl--key-hl-color>>",
+            "swl--bs-hl-color": "<sub<swl--bs-hl-color>>",
+            "swl--separator-color": "<sub<swl--separator-color>>",
+            "swl--text-color": "<sub<swl--text-color>>",
+            "swl--text-clear-color": "<sub<swl--text-clear-color>>",
+            "swl--text-caps-lock-color": "<sub<swl--text-caps-lock-color>>",
+            "swl--text-ver-color": "<sub<swl--text-ver-color>>",
+            "swl--text-wrong-color": "<sub<swl--text-wrong-color>>",
+            "swl--ring-color": "<sub<swl--ring-color>>",
+            "swl--ring-ver-color": "<sub<swl--ring-ver-color>>",
+            "swl--ring-clear-color": "<sub<swl--ring-clear-color>>",
+            "swl--ring-wrong-color": "<sub<swl--ring-wrong-color>>"
+        }
     }
 }
