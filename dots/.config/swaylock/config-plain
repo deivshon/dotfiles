@@ -32,3 +32,4 @@ disable-caps-lock-text
 font=JetBrainsMono NF
 color=<sub<swl--background-color>>
 indicator-idle-visible
+show-failed-attempts
