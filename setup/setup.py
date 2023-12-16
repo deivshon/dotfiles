@@ -53,11 +53,7 @@ def main():
         action="store_true",
         help="Overwrite existing configuration targets without asking"
     )
-    parser.add_argument(
-        "-k", "--keep",
-        action="store_true",
-        help="Keep directory containing expanded configurations"
-    )
+
     parser.add_argument(
         "-p", "--packages",
         action="store_true",
