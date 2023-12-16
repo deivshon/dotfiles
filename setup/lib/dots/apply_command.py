@@ -1,7 +1,7 @@
 import os
 import time
 
-from typing import Set
+from typing import Optional, Set
 from dataclasses import dataclass
 
 from setup.lib import utils
@@ -15,15 +15,26 @@ class DotApplyCommand:
     executable: bool
 
     def run(self, target: str, possible_config_hashes: Set[str]):
-        if os.path.isfile(target) and utils.hash.sha256_file(target) not in possible_config_hashes:
-            backup_target = os.path.join(os.path.dirname(
-                target), f"{time.time_ns()}_{os.path.basename(target)}.bkp")
+        old_content: Optional[bytes] = None
+        if os.path.isfile(target):
+            with open(target, "rb") as f:
+                old_content = f.read()
 
-            utils.path.copy(target, backup_target, force=True,
-                            needs_sudo=self.needs_sudo)
-            utils.path.make_non_executable(backup_target, sudo=self.needs_sudo)
+        applied: bool = False
+        try:
+            applied = utils.path.write_to_file(self.content, target, force=self.force_copy,
+                                               needs_sudo=self.needs_sudo)
+            if self.executable:
+                utils.path.make_executable(target, sudo=self.needs_sudo)
+        finally:
+            if not applied or old_content is None:
+                return
 
-        utils.path.write_to_file(self.content, target, force=self.force_copy,
-                                 needs_sudo=self.needs_sudo)
-        if self.executable:
-            utils.path.make_executable(target, sudo=self.needs_sudo)
+            if utils.hash.sha256(old_content) not in possible_config_hashes:
+                backup_target = os.path.join(os.path.dirname(
+                    target), f"{os.path.basename(target)}.{time.time_ns()}.bak")
+
+                utils.path.write_to_file(
+                    old_content, backup_target, force=True, needs_sudo=self.needs_sudo)
+                utils.path.make_non_executable(
+                    backup_target, sudo=self.needs_sudo)
