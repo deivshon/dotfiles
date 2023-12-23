@@ -22,7 +22,7 @@ html#main-window {
 	--toolbar-bgcolor: <sub<ffx--toolbar-bgcolor>> !important;
 	--toolbar-field-color: <sub<ffx--toolbar-field-color>> !important;
 	--toolbarbutton-icon-fill: <sub<ffx--toolbarbutton-icon-fill>> !important;
-	--lwt-selected-tab-background-color: <sub<ffx--lwt-selected-tab-background-color>> !important;
+	--tab-selected-bgcolor: <sub<ffx--tab-selected-bgcolor>> !important;
 	--autocomplete-popup-highlight-background: <sub<ffx--autocomplete-popup-highlight-background>> !important;
 	--autocomplete-popup-highlight-color: <sub<ffx--autocomplete-popup-highlight-color>> !important;
 	--arrowpanel-color: <sub<ffx--arrowpanel-color>> !important;

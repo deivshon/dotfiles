@@ -161,7 +161,7 @@
             "ffx--toolbar-field-focus-background-color": "<sub<ffx--toolbar-field-focus-background-color>>",
             "ffx--toolbar-bgcolor": "<sub<ffx--toolbar-bgcolor>>",
             "ffx--toolbarbutton-icon-fill": "<sub<ffx--toolbarbutton-icon-fill>>",
-            "ffx--lwt-selected-tab-background-color": "<sub<ffx--lwt-selected-tab-background-color>>",
+            "ffx--tab-selected-bgcolor": "<sub<ffx--tab-selected-bgcolor>>",
             "ffx--autocomplete-popup-highlight-background": "<sub<ffx--autocomplete-popup-highlight-background>>",
             "ffx--background-tab-hover-brackgroud": "<sub<ffx--background-tab-hover-brackgroud>>",
             "ffx--lwt-text-color": "<sub<ffx--lwt-text-color>>",

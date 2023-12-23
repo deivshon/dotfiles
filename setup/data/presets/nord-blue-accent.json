@@ -66,7 +66,7 @@
     "ffx--toolbar-field-focus-background-color": "#3B4252",
     "ffx--toolbar-bgcolor": "#1B1F26",
     "ffx--toolbarbutton-icon-fill": "#E5E9F0",
-    "ffx--lwt-selected-tab-background-color": "#7BA2A1AA",
+    "ffx--tab-selected-bgcolor": "#7BA2A1AA",
     "ffx--autocomplete-popup-hover-background": "#7BA2A133",
     "ffx--autocomplete-popup-highlight-background": "#7BA2A1BB",
     "ffx--autocomplete-popup-highlight-color": "#E5E9F0",
