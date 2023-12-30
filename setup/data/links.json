@@ -22,8 +22,8 @@
         }
     },
     "alacritty-config": {
-        "source": ".config/alacritty/alacritty.yml",
-        "target": "~/.config/alacritty/alacritty.yml",
+        "source": ".config/alacritty/alacritty.toml",
+        "target": "~/.config/alacritty/alacritty.toml",
         "subs": {
             "terminal-background": "<sub<terminal-background>>",
             "terminal-foreground": "<sub<terminal-foreground>>",

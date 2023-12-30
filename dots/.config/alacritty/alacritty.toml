@@ -1,0 +1,33 @@
+[colors.bright]
+black = "<sub<terminal-bright-black>>"
+blue = "<sub<terminal-bright-blue>>"
+cyan = "<sub<terminal-bright-cyan>>"
+green = "<sub<terminal-bright-green>>"
+magenta = "<sub<terminal-bright-magenta>>"
+red = "<sub<terminal-bright-red>>"
+white = "<sub<terminal-bright-white>>"
+yellow = "<sub<terminal-bright-yellow>>"
+
+[colors.normal]
+black = "<sub<terminal-normal-black>>"
+blue = "<sub<terminal-normal-blue>>"
+cyan = "<sub<terminal-normal-cyan>>"
+green = "<sub<terminal-normal-green>>"
+magenta = "<sub<terminal-normal-magenta>>"
+red = "<sub<terminal-normal-red>>"
+white = "<sub<terminal-normal-white>>"
+yellow = "<sub<terminal-normal-yellow>>"
+
+[colors.primary]
+background = "<sub<terminal-background>>"
+foreground = "<sub<terminal-foreground>>"
+
+[env]
+WINIT_X11_SCALE_FACTOR = "1"
+
+[font]
+size = 10
+
+[font.normal]
+family = "JetBrainsMono NF"
+style = "regular"
