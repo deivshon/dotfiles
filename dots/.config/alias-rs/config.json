@@ -90,6 +90,14 @@
         {
             "alias": "code",
             "equals": "code ."
+        },
+        {
+            "alias": "ssh",
+            "equals": "env TERM=linux ssh"
+        },
+        {
+            "alias": "vagrant",
+            "equals": "env TERM=LINUX vagrant"
         }
     ]
 }

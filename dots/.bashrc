@@ -42,6 +42,4 @@ ssh-start() {
     done
 }
 
-[ "${TERM}" == "foot" ] && alias ssh="TERM=linux ssh" && alias vagrant="TERM=linux vagrant"
-
 pfetch

@@ -21,11 +21,6 @@ function ssh-start
     end
 end
 
-if test "$TERM" = "foot"
-    alias ssh "TERM=linux ssh"
-    alias vagrant "TERM=linux vagrant"
-end
-
 function set_theme
     set -U fish_color_normal normal
     set -U fish_color_command green
