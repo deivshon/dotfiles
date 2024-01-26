@@ -403,5 +403,10 @@
             "swl--ring-clear-color": "<sub<swl--ring-clear-color>>",
             "swl--ring-wrong-color": "<sub<swl--ring-wrong-color>>"
         }
+    },
+    "dirsize-script": {
+        "source": ".local/scripts/dirsize.sh",
+        "target": "~/.local/scripts/dirsize",
+        "flags": ["x"]
     }
 }
