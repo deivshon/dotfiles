@@ -54,6 +54,7 @@ class DotsNames():
     INTERACTIVE_SHELLS_ENV = "interactive-shells-env"
     SWAYLOCK_PLAIN_CONFIG = "swaylock-plain-config"
     DIRSIZE_SCRIPT = "dirsize-script"
+    YOUTUBE_AUDIO_DOWNLOAD_SCRIPT = "yt-adl"
 
 
 @dataclass

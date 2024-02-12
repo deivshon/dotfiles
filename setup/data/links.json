@@ -408,5 +408,10 @@
         "source": ".local/scripts/dirsize.sh",
         "target": "~/.local/scripts/dirsize",
         "flags": ["x"]
+    },
+    "yt-adl": {
+        "source": ".local/scripts/yt-adl.sh",
+        "target": "~/.local/scripts/yt-adl",
+        "flags": ["x"]
     }
 }
