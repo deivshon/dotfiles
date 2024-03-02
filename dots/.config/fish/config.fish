@@ -119,5 +119,22 @@ else
 end
 set -e INTERACTIVE_ENV
 
+function check
+    set line $(commandline)
+    set cmd (string split " " $line)[1]
+    set first_arg (string split " " $line)[2]
+
+    if test "$cmd" = git -o "$cmd" = /usr/bin/git -o "$cmd" = /usr/local/bin/git
+        if test "$first_arg" = push
+            printf 1>&2 "\nDon't git push from the command line\n"
+            commandline -f repaint
+            return
+        end
+    end
+
+    commandline -f execute
+end
+
+bind \r check
 
 pfetch
