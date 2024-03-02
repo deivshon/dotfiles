@@ -42,4 +42,15 @@ ssh-start() {
     done
 }
 
+shopt -s extdebug
+
+command_check() {
+    if [[ "$BASH_COMMAND" == "git push"* ]]; then
+        printf 2>&1 "Don't git push from the command line\n"
+        false
+    fi
+}
+
+trap 'command_check' DEBUG
+
 pfetch
