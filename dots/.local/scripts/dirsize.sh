@@ -1,9 +1,23 @@
 #!/bin/sh
 
-REQUESTED_DIR="$1"
+dir_count=0
+for _ in "$@"; do
+    dir_count=$((dir_count + 1))
+done
 
-[ -z "$REQUESTED_DIR" ] && printf 1>&2 "Provide a directory\n" && exit 1
-[ -e "$REQUESTED_DIR" ] || { printf 1>&2 "%s does not exist\n" "$REQUESTED_DIR"; exit 1; }
-[ -d "$REQUESTED_DIR" ] || { printf 1>&2 "%s does not seem to be a directory\n" "$REQUESTED_DIR"; exit 1; }
+for requested_dir in "$@"; do
+    [ -z "$requested_dir" ] && {
+        [ $dir_count -eq 1 ] && printf 1>&2 "Received empty directory\n"
+        continue
+    }
+    [ -e "$requested_dir" ] || {
+        [ $dir_count -eq 1 ] && printf 1>&2 "%s does not exist\n" "$requested_dir"
+        continue
+    }
+    [ -d "$requested_dir" ] || {
+        [ $dir_count -eq 1 ] && printf 1>&2 "%s does not seem to be a directory\n" "$requested_dir"
+        continue
+    }
 
-du -h "$REQUESTED_DIR" | tail -n1
+    du -h "$requested_dir" | tail -n1
+done
