@@ -134,7 +134,6 @@ colorsTmp
 
 *.o
 *.out
-.vscode
 substitutions*
 setup_status.json
 *-venv
