@@ -1,0 +1,10 @@
+conditions:
+  - id: git-push-command
+    select:
+      command: true
+    evaluate:
+      regex: git.*push
+rules:
+  - name: prevent-git-push
+    rule:
+      conditionId: git-push-command

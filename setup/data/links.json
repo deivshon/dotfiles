@@ -413,5 +413,13 @@
         "source": ".local/scripts/yt-adl.sh",
         "target": "~/.local/scripts/yt-adl",
         "flags": ["x"]
+    },
+    "roadblock-global-config": {
+        "source": ".config/roadblock/roadblock.yml",
+        "target": "~/.config/roadblock/roadblock.yml"
+    },
+    "roadblock-rule-config": {
+        "source": ".config/roadblock/config.yml",
+        "target": "~/.config/roadblock/config.yml"
     }
 }

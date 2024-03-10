@@ -45,9 +45,18 @@ ssh-start() {
 shopt -s extdebug
 
 command_check() {
-    if [[ "$BASH_COMMAND" == "git push"* ]]; then
-        printf 2>&1 "Don't git push from the command line\n"
-        false
+    if ! which roadblock &>/dev/null; then
+        printf "\ncommand_check: roadblock can't be found in PATH: commands will not be checked\n"
+        exit 0
+    fi
+
+
+    roadblock_output=$(roadblock -t "$BASH_COMMAND" 2>&1)
+    roadblock_status=$?
+
+    if [[ $roadblock_status -ne 0 ]]; then
+        printf 1>&2 "%s\n" "$roadblock_output"
+        exit 1
     fi
 }
 

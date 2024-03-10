@@ -55,6 +55,8 @@ class DotsNames():
     SWAYLOCK_PLAIN_CONFIG = "swaylock-plain-config"
     DIRSIZE_SCRIPT = "dirsize-script"
     YOUTUBE_AUDIO_DOWNLOAD_SCRIPT = "yt-adl"
+    ROADBLOCK_GLOBAL_CONFIG = "roadblock-global-config"
+    ROADBLOCK_RULE_CONFIG = "roadblock-rule-config"
 
 
 @dataclass

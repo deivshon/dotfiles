@@ -119,22 +119,25 @@ else
 end
 set -e INTERACTIVE_ENV
 
-function check
-    set line $(commandline)
-    set cmd (string split " " $line)[1]
-    set first_arg (string split " " $line)[2]
+function command_check
+    if not which &>/dev/null roadblock
+        printf 2>&1 "\ncommand_check: roadblock can't be found in PATH: commands will not be checked"
+        commandline -f execute
+        return
+    end
 
-    if test "$cmd" = git -o "$cmd" = /usr/bin/git -o "$cmd" = /usr/local/bin/git
-        if test "$first_arg" = push
-            printf 1>&2 "\nDon't git push from the command line\n"
-            commandline -f repaint
-            return
-        end
+    set -l roadblock_output (roadblock -t $(commandline) 2>&1)
+    set -l roadblock_status $status
+
+    if test $roadblock_status -ne 0
+        printf 1>&2 "\n%s\n" "$roadblock_output"
+        commandline -f repaint
+        return
     end
 
     commandline -f execute
 end
 
-bind \r check
+bind \r command_check
 
 pfetch
