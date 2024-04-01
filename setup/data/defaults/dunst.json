@@ -1,9 +1,9 @@
 {
-    "dunst-low-bg": "#000000",
-    "dunst-low-fg": "#FFFFFF",
-    "dunst-normal-bg": "#000000",
-    "dunst-normal-fg": "#FFFFFF",
-    "dunst-critical-bg": "#900000",
-    "dunst-critical-fg": "#FFFFFF",
-    "dunst-critical-frame": "#FF0000"
+    "dunst-low-bg": "#121212",
+    "dunst-low-fg": "#cccccc",
+    "dunst-normal-bg": "#121212",
+    "dunst-normal-fg": "#cccccc",
+    "dunst-critical-bg": "#d94545",
+    "dunst-critical-fg": "#cccccc",
+    "dunst-critical-frame": "#cccccc"
 }
