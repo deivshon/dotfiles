@@ -421,5 +421,10 @@
     "roadblock-rule-config": {
         "source": ".config/roadblock/config.yml",
         "target": "~/.config/roadblock/config.yml"
+    },
+    "fish-config-device": {
+        "source": ".config/fish/config.fish_device",
+        "target": "~/.config/fish/config.fish_device",
+        "flags": ["device-specific"]
     }
 }

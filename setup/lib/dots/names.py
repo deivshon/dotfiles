@@ -57,6 +57,7 @@ class DotsNames():
     YOUTUBE_AUDIO_DOWNLOAD_SCRIPT = "yt-adl"
     ROADBLOCK_GLOBAL_CONFIG = "roadblock-global-config"
     ROADBLOCK_RULE_CONFIG = "roadblock-rule-config"
+    FISH_CONFIG_DEVICE = "fish-config-device"
 
 
 @dataclass

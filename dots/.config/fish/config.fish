@@ -4,6 +4,8 @@ if tty | grep -q "/dev/tty[1-2]"
     exec bash -l
 end
 
+source ~/.config/fish/config.fish_device
+
 set -U fish_greeting
 
 eval (/usr/local/bin/alias-rs -c $HOME/.config/alias-rs/config.device.json -s fish -a)
