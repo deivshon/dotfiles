@@ -88,10 +88,6 @@
             "equals": "sudo find 2>/dev/null / -name"
         },
         {
-            "alias": "code",
-            "equals": "code ."
-        },
-        {
             "alias": "ssh",
             "equals": "env TERM=linux ssh"
         },
