@@ -162,5 +162,14 @@
         "preset": "dracula",
         "wallpaper-link": "https://i.ibb.co/BLh5xfG/arch-dracula-minimal.png",
         "wallpaper-name": "arch-dracula-minimal.png"
+    },
+    "arch-blue-minimal": {
+        "substitutions": {
+            "main-color": "#106793",
+            "secondary-color": "#062332",
+            "dwm-bgcolor": "#000000"
+        },
+        "wallpaper-link": "https://i.ibb.co/Xb8fGBt/arch-blue-minimal.png",
+        "wallpaper-name": "arch-blue-minimal.png"
     }
 }
