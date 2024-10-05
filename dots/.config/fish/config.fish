@@ -121,25 +121,4 @@ else
 end
 set -e INTERACTIVE_ENV
 
-function command_check
-    if not which &>/dev/null roadblock
-        printf 2>&1 "\ncommand_check: roadblock can't be found in PATH: commands will not be checked"
-        commandline -f execute
-        return
-    end
-
-    set -l roadblock_output (roadblock -t $(commandline) 2>&1)
-    set -l roadblock_status $status
-
-    if test $roadblock_status -ne 0
-        printf 1>&2 "\n%s\n" "$roadblock_output"
-        commandline -f repaint
-        return
-    end
-
-    commandline -f execute
-end
-
-bind \r command_check
-
 pfetch
