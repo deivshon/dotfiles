@@ -59,6 +59,8 @@ The configuration files in this repository and the relative setup scripts are ta
 -   [linux-headers](https://archlinux.org/packages/core/x86_64/linux-headers/)
 -   [grim](https://archlinux.org/packages/extra/x86_64/grim/)
 -   [slurp](https://archlinux.org/packages/extra/x86_64/slurp/)
+-   [handbrake](https://archlinux.org/packages/extra/x86_64/handbrake/)
+-   [filezilla](https://archlinux.org/packages/extra/x86_64/filezilla/)
 
 ## **AUR**
 

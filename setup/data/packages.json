@@ -53,7 +53,9 @@
         "tldr",
         "linux-headers",
         "grim",
-        "slurp"
+        "slurp",
+        "handbrake",
+        "filezilla"
     ],
     "paru": [
         "pfetch-rs",

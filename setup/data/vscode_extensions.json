@@ -28,5 +28,6 @@
     "vivaxy.vscode-conventional-commits",
     "yoavbls.pretty-ts-errors",
     "ziglang.vscode-zig",
-    "zxh404.vscode-proto3"
+    "zxh404.vscode-proto3",
+    "monokai.theme-monokai-pro-vscode"
 ]
