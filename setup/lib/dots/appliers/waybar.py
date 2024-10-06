@@ -37,7 +37,7 @@ __EMPTY_PERSISTENT_DATA: Dict[str, List[str]] = {
 
 
 def __get_existing_monitors() -> Set[str]:
-    existing_monitors = set()
+    existing_monitors: Set[str] = set()
     try:
         with open(__INSTALLED_WAYBAR_CONFIG_FILE) as f:
             waybar_config = json.loads(f.read())
