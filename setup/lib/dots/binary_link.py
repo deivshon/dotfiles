@@ -65,7 +65,8 @@ class BinaryDotLink():
         )
         apply_command.run(target, possible_config_hashes)
 
-        dot_log_installed(content_hash, target, installed_once=False)
+        dot_log_installed(content_hash, target,
+                          installed_once=False, has_non_theme_subs=False)
 
 
 def __binary_dot_links() -> List[BinaryDotLink]:
