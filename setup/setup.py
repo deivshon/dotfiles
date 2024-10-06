@@ -57,6 +57,12 @@ def main():
     )
 
     parser.add_argument(
+        "-F", "--full",
+        action="store_true",
+        help="Apply the full setup (use when no DE is installed)"
+    )
+
+    parser.add_argument(
         "-p", "--packages",
         action="store_true",
         help="Force packages installation"
@@ -74,6 +80,7 @@ def main():
     )
 
     args = parser.parse_args()
+    lite = not args.full
 
     if os.getuid() == 0:
         log.failure("Don't run the script as root!")
@@ -135,6 +142,9 @@ def main():
         setup_status.packages_installed = True
 
     for inst in installers:
+        if lite and not inst.needed_in_lite():
+            continue
+
         inst.download(args.git_pull)
 
     dots.link(selected_config,
@@ -152,6 +162,9 @@ def main():
 
     os.environ["PATH"] += ":" + os.path.expanduser("~/.local/scripts")
     for inst in installers:
+        if lite and not inst.needed_in_lite():
+            continue
+
         inst.compile()
 
     symlinks.apply()

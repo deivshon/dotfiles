@@ -4,11 +4,16 @@ from setup.lib import log
 
 
 class InstallHandler(ABC):
-    needsCompilation: bool = True
+    needs_compilation: bool = True
 
     @staticmethod
     @abstractmethod
     def name() -> str:
+        ...
+
+    @staticmethod
+    @abstractmethod
+    def needed_in_lite() -> bool:
         ...
 
     @abstractmethod
@@ -16,7 +21,7 @@ class InstallHandler(ABC):
         ...
 
     def compile(self):
-        if not self.needsCompilation:
+        if not self.needs_compilation:
             log.info(
                 f"{log.WHITE}Not compiling {self.name()} due to no changes")
             return

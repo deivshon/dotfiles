@@ -15,8 +15,12 @@ class StInstaller(InstallHandler):
         return "st"
 
     def _download_impl(self, pull: bool):
-        self.needsCompilation = git_download(
+        self.needs_compilation = git_download(
             self.DEST_PATH, self.REMOTE_URL, pull)
+
+    @staticmethod
+    def needed_in_lite() -> bool:
+        return False
 
     def _compile_impl(self):
         try:

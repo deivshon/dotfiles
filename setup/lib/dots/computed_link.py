@@ -115,7 +115,7 @@ class _ComputedDotLink():
             dot_log_installed(content_hash, target, installed_once=False)
 
         if self.name in compilation_map:
-            compilation_map[self.name].needsCompilation = True
+            compilation_map[self.name].needs_compilation = True
 
 
 class InvalidComputedDotLink(Exception):

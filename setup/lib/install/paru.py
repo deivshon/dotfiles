@@ -14,8 +14,12 @@ class ParuInstaller(InstallHandler):
     def name() -> str:
         return "paru"
 
+    @staticmethod
+    def needed_in_lite() -> bool:
+        return True
+
     def _download_impl(self, pull: bool):
-        self.needsCompilation = git_download(
+        self.needs_compilation = git_download(
             self.DEST_PATH, self.REMOTE_URL, pull)
 
     def _compile_impl(self):
