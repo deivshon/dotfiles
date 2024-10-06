@@ -429,5 +429,12 @@
         "source": ".config/fish/config.fish_device",
         "target": "~/.config/fish/config.fish_device",
         "flags": ["device-specific"]
+    },
+    "environment.d-env-vars": {
+        "source": ".config/environment.d/envvars.conf",
+        "target": "~/.config/environment.d/envvars.conf",
+        "subs": {
+            "setup-user": "<sub<user>>"
+        }
     }
 }

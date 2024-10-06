@@ -10,17 +10,19 @@ export DOTFILES_LITE=<sub<dotfiles-lite-mode>>
 
 PATH=${PATH}:/usr/lib/polkit-gnome/:~/.local/scripts:~/.local/bin
 
-launch_hyprland() {
-    Hyprland
-}
+if [ "$DOTFILES_LITE" = false]; then
+    launch_hyprland() {
+        Hyprland
+    }
 
-launch_dwm() {
-    startx dwm
-}
+    launch_dwm() {
+        startx dwm
+    }
 
-if [ -z "$DISPLAY" ]; then
-    case $(tty) in
-        /dev/tty1) launch_"$TTY1_WM";;
-        /dev/tty2) launch_"$TTY2_WM";;
-    esac
+    if [ -z "$DISPLAY" ]; then
+        case $(tty) in
+            /dev/tty1) launch_"$TTY1_WM";;
+            /dev/tty2) launch_"$TTY2_WM";;
+        esac
+    fi
 fi
