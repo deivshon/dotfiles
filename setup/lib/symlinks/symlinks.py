@@ -15,6 +15,7 @@ from setup.lib.symlinks.flags import SUDO_FLAG, FORCE_FLAG
 class Symlink():
     source: str
     target: str
+    needed_in_lite: bool
     flags: List[str] = field(default_factory=list)
 
 
@@ -40,8 +41,11 @@ __SYMLINKS_FILE = f"{LIB_DIR}/../data/symlinks.json"
 __SYMLINKS = __load_symlinks(__SYMLINKS_FILE)
 
 
-def apply():
+def apply(lite_mode: bool):
     for s in __SYMLINKS:
+        if lite_mode and not s.needed_in_lite:
+            continue
+
         ln_flags = "-s"
         if FORCE_FLAG in s.flags:
             ln_flags += "f"

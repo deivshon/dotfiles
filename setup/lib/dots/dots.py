@@ -22,9 +22,12 @@ def link(config, config_name: str, lite_mode: bool, force_copy=False, compilatio
     if run_appliers:
         for applier in APPLIERS:
             if lite_mode and not applier.needed_in_lite:
+                log.info(f"{log.CYAN}Skipping applier {log.WHITE}{
+                         applier.name}{log.CYAN} on lite mode")
                 continue
 
-            log.info(f"Running applier {log.GREEN}{applier.name}")
+            log.info(f"{log.WHITE}Running applier {
+                     log.GREEN}{applier.name}{log.NORMAL}")
             applier.run(config[CONFIG_SUBSTITUTIONS])
 
     print("\n", end="")

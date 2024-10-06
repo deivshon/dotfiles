@@ -14,6 +14,10 @@ class XinitrcPostOperations(PostOperationsHandler):
     def name() -> str:
         return "xinitrc"
 
+    @staticmethod
+    def needed_in_lite() -> bool:
+        return False
+
     @classmethod
     def _trigger_impl(cls, _):
         if os.path.isfile(USER_XINITRC):

@@ -79,7 +79,7 @@ def main():
     )
 
     args = parser.parse_args()
-    lite = not args.full
+    lite_mode = not args.full
 
     if os.getuid() == 0:
         log.failure("Don't run the script as root!")
@@ -121,7 +121,7 @@ def main():
         config.apply_preset(selected_config, selected_config[PRESET])
         print("\n", end="")
 
-    config.apply_defaults(selected_config, lite_mode=lite)
+    config.apply_defaults(selected_config, lite_mode=lite_mode)
     config.expand(selected_config)
     config.check(selected_config)
 
@@ -141,14 +141,14 @@ def main():
         setup_status.packages_installed = True
 
     for inst in installers:
-        if lite and not inst.needed_in_lite():
+        if lite_mode and not inst.needed_in_lite():
             continue
 
         inst.download(args.git_pull)
 
     dots.link(selected_config,
               config_name,
-              lite_mode=lite,
+              lite_mode=lite_mode,
               force_copy=args.force,
               compilation_map=compilationMap)
 
@@ -162,12 +162,12 @@ def main():
 
     os.environ["PATH"] += ":" + os.path.expanduser("~/.local/scripts")
     for inst in installers:
-        if lite and not inst.needed_in_lite():
+        if lite_mode and not inst.needed_in_lite():
             continue
 
         inst.compile()
 
-    symlinks.apply()
+    symlinks.apply(lite_mode)
 
     with open(SETUP_STATUS, "w") as file:
         file.write(setup_status.dumps())

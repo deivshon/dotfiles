@@ -1,10 +1,12 @@
 [
     {
+        "needed_in_lite": true,
         "source": "/usr/bin/doas",
         "target": "/usr/local/bin/sudo",
         "flags": ["sudo"]
     },
     {
+        "needed_in_lite": false,
         "source": "/usr/bin/dash",
         "target": "/usr/bin/sh",
         "flags": ["sudo", "force"]

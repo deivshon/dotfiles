@@ -1,5 +1,4 @@
 import os
-import subprocess
 
 from setup.lib import utils
 from setup.lib.utils import process
@@ -12,6 +11,10 @@ class WallpaperPostOperations(PostOperationsHandler):
     @staticmethod
     def name() -> str:
         return "wallpaper"
+
+    @staticmethod
+    def needed_in_lite() -> bool:
+        return True
 
     @classmethod
     def _trigger_impl(cls, config):

@@ -7,6 +7,10 @@ class ReflectorPostOperations(PostOperationsHandler):
     def name() -> str:
         return "reflector"
 
+    @staticmethod
+    def needed_in_lite() -> bool:
+        return True
+
     @classmethod
     def _trigger_impl(cls, _):
         process.exec(["sudo", "systemctl", "enable", "reflector.service"])

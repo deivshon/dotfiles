@@ -7,6 +7,10 @@ class RustupPostOperations(PostOperationsHandler):
     def name() -> str:
         return "rustup"
 
+    @staticmethod
+    def needed_in_lite() -> bool:
+        return True
+
     @classmethod
     def _trigger_impl(cls, _):
         process.exec(["rustup", "default", "stable"])
