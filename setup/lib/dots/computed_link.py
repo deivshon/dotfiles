@@ -10,7 +10,7 @@ from setup.lib.dots.appliers import DOT_APPLIERS
 from setup.lib.dots import DOTFILES_DIR, TARGET_SEARCH
 from setup.lib.const.config import CONFIG_SUBSTITUTIONS
 from setup.lib.dots.apply_command import DotApplyCommand
-from setup.lib.dots.dot_link import _DotLink, InvalidDotLink
+from setup.lib.dots.dot_link import DotLink, InvalidDotLink
 from setup.lib.dots.dots_log import dot_log_already_installed, dot_log_installed
 
 from setup.lib.dots.names import DotsNames
@@ -18,13 +18,13 @@ from setup.lib.install.handler import InstallHandler
 from setup.lib.dots.flags import DEVICE_SPECIFIC_FLAG, SUDO_FLAG, VAR_TARGET_FLAG, EXECUTABLE_FLAG
 
 
-class _ComputedDotLink():
+class ComputedDotLink():
     name: str
     targets: List[str]
     flags: List[str]
     content: Dict[str, str] | str
 
-    def __init__(self, dot_link: _DotLink):
+    def __init__(self, dot_link: DotLink):
         self.name = dot_link.name
         self.flags = dot_link.flags
         if VAR_TARGET_FLAG in self.flags:
@@ -122,8 +122,8 @@ class InvalidComputedDotLink(Exception):
     pass
 
 
-def __compute_dot_links() -> List[_ComputedDotLink]:
-    computed: List[_ComputedDotLink] = []
+def __compute_dot_links() -> List[ComputedDotLink]:
+    computed: List[ComputedDotLink] = []
     with open(DOT_LINKS_FILE, "r") as file:
         __links_dict = json.loads(file.read())
         for key in __links_dict:
@@ -131,9 +131,9 @@ def __compute_dot_links() -> List[_ComputedDotLink]:
                 log.failure(
                     f"Naming inconsistency: \"{key}\" does not appear in allowed names")
 
-            dot_link = _DotLink(
+            dot_link = DotLink(
                 name=key, **__links_dict[key], dot_applier=DOT_APPLIERS[key] if key in DOT_APPLIERS else None)
-            computed.append(_ComputedDotLink(dot_link))
+            computed.append(ComputedDotLink(dot_link))
     return computed
 
 

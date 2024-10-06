@@ -7,7 +7,7 @@ from typing import List, Optional, Set
 from setup.lib import log, utils
 from setup.lib.dots.appliers import DOT_APPLIERS
 from setup.lib.dots.apply_command import DotApplyCommand
-from setup.lib.dots.dot_link import _DotLink, InvalidDotLink
+from setup.lib.dots.dot_link import DotLink, InvalidDotLink
 from setup.lib.dots import DOTFILES_DIR, BINARY_DOT_LINKS_FILE
 from setup.lib.dots.dots_log import dot_log_already_installed, dot_log_installed
 
@@ -16,13 +16,13 @@ from setup.lib.dots.names import BinaryDotsNames
 
 
 @dataclass
-class _BinaryDotLink():
+class BinaryDotLink():
     name: str
     target: str
     flags: List[str]
     content: bytes
 
-    def __init__(self, dot_link: _DotLink):
+    def __init__(self, dot_link: DotLink):
         if dot_link.target is None:
             raise InvalidDotLink
 
@@ -62,8 +62,8 @@ class _BinaryDotLink():
         dot_log_installed(content_hash, target, installed_once=False)
 
 
-def __binary_dot_links() -> List[_BinaryDotLink]:
-    binary_links: List[_BinaryDotLink] = []
+def __binary_dot_links() -> List[BinaryDotLink]:
+    binary_links: List[BinaryDotLink] = []
     with open(BINARY_DOT_LINKS_FILE, "r") as file:
         __binary_links_dict = json.loads(file.read())
         for key in __binary_links_dict:
@@ -75,9 +75,9 @@ def __binary_dot_links() -> List[_BinaryDotLink]:
                 log.failure(
                     "Binary dot links can't have a related dot applier")
 
-            dot_link = _DotLink(
+            dot_link = DotLink(
                 name=key, **__binary_links_dict[key], dot_applier=None)
-            binary_links.append(_BinaryDotLink(dot_link))
+            binary_links.append(BinaryDotLink(dot_link))
     return binary_links
 
 

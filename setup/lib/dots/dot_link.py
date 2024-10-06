@@ -5,7 +5,7 @@ from setup.lib.dots.appliers.applier import DotApplier
 
 
 @dataclass
-class _DotLink():
+class DotLink():
     name: str
     source: str
     target: Optional[str] = None
