@@ -23,10 +23,10 @@ class ComputedDotLink():
     targets: List[str]
     flags: List[str]
     content: Dict[str, str] | str
-    content_with_non_theme_subs: Dict[str, str]
+    non_theme_subs: Dict[str, str]
 
     def __init__(self, dot_link: DotLink):
-        self.content_with_non_theme_subs = {}
+        self.non_theme_subs = dot_link.non_theme_subs
         self.name = dot_link.name
         self.flags = dot_link.flags
         if VAR_TARGET_FLAG in self.flags:
@@ -71,22 +71,13 @@ class ComputedDotLink():
                     print("\n", end="")
 
                 self.content[config_name] = current_content
-                if len(dot_link.non_theme_subs) == 0:
-                    continue
 
-                current_content_with_non_theme_subs = current_content
-                for key in dot_link.non_theme_subs:
-                    current_content_with_non_theme_subs = current_content_with_non_theme_subs.replace(
-                        dot_link.non_theme_subs[key], substitution_vals[key]
-                    )
-                self.content_with_non_theme_subs[config_name] = current_content_with_non_theme_subs
-
-    def apply(self, config_name: str, force_copy: bool, compilation_map: Dict[str, InstallHandler], possible_config_hashes: Set[str], path_prefix: Optional[str] = None) -> None:
+    def apply(self, config_name: str, config: Dict, force_copy: bool, compilation_map: Dict[str, InstallHandler], possible_config_hashes: Set[str], path_prefix: Optional[str] = None) -> None:
         for target in self.targets:
             self.__apply_single_target(
-                target, config_name, force_copy, compilation_map, possible_config_hashes, path_prefix)
+                target, config_name, config, force_copy, compilation_map, possible_config_hashes, path_prefix)
 
-    def __apply_single_target(self, target: str, config_name: str, force_copy: bool, compilation_map: Dict[str, InstallHandler], possible_config_hashes: Set[str], path_prefix: Optional[str]) -> None:
+    def __apply_single_target(self, target: str, config_name: str, config: Dict, force_copy: bool, compilation_map: Dict[str, InstallHandler], possible_config_hashes: Set[str], path_prefix: Optional[str]) -> None:
         executable = EXECUTABLE_FLAG in self.flags
         needs_sudo = SUDO_FLAG in self.flags
         device_specific = DEVICE_SPECIFIC_FLAG in self.flags
@@ -98,13 +89,17 @@ class ComputedDotLink():
         if os.path.isfile(target) and device_specific:
             return
 
-        has_non_theme_subs = len(self.content_with_non_theme_subs) != 0
+        has_non_theme_subs = len(self.non_theme_subs) != 0
         if isinstance(self.content, str):
             content = self.content
-        elif has_non_theme_subs:
-            content = self.content_with_non_theme_subs[config_name]
         else:
             content = self.content[config_name]
+
+        if has_non_theme_subs:
+            for key in self.non_theme_subs:
+                content = content.replace(
+                    self.non_theme_subs[key], config[CONFIG_SUBSTITUTIONS][key]
+                )
 
         content_hash = utils.hash.sha256(content)
 
@@ -129,9 +124,11 @@ class ComputedDotLink():
         apply_command.run(target, possible_config_hashes)
 
         if device_specific:
-            dot_log_installed(content_hash, target, installed_once=True)
+            dot_log_installed(content_hash, target, installed_once=True,
+                              has_non_theme_subs=has_non_theme_subs)
         else:
-            dot_log_installed(content_hash, target, installed_once=False)
+            dot_log_installed(content_hash, target, installed_once=False,
+                              has_non_theme_subs=has_non_theme_subs)
 
         if self.name in compilation_map:
             compilation_map[self.name].needs_compilation = True

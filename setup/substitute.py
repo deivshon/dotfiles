@@ -24,6 +24,12 @@ def main():
     )
 
     parser.add_argument(
+        "-F", "--full",
+        action="store_true",
+        help="Apply the full setup (use when no DE is installed)"
+    )
+
+    parser.add_argument(
         "-o", "--output-dir",
         action="store",
         help="Output directory",
@@ -31,6 +37,7 @@ def main():
     )
 
     args = parser.parse_args()
+    lite = not args.full
 
     old_cwd = os.getcwd()
     os.chdir(__FILE_DIR)
@@ -46,7 +53,7 @@ def main():
     if PRESET in selected_config:
         config.apply_preset(selected_config, selected_config[PRESET])
 
-    config.apply_defaults(selected_config)
+    config.apply_defaults(selected_config, lite)
     config.expand(selected_config)
     config.check(selected_config)
 
