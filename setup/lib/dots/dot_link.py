@@ -10,6 +10,7 @@ class DotLink():
     source: str
     target: Optional[str] = None
     subs: Dict[str, str] = field(default_factory=dict)
+    non_theme_subs: Dict[str, str] = field(default_factory=dict)
     flags: List[str] = field(default_factory=list)
     dot_applier: Optional[DotApplier] = None
 

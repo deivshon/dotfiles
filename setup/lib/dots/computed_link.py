@@ -23,8 +23,10 @@ class ComputedDotLink():
     targets: List[str]
     flags: List[str]
     content: Dict[str, str] | str
+    content_with_non_theme_subs: Dict[str, str]
 
     def __init__(self, dot_link: DotLink):
+        self.content_with_non_theme_subs = {}
         self.name = dot_link.name
         self.flags = dot_link.flags
         if VAR_TARGET_FLAG in self.flags:
@@ -44,7 +46,7 @@ class ComputedDotLink():
         with open(source, "r") as f:
             base_content = f.read()
 
-        if len(dot_link.subs) == 0:
+        if len(dot_link.subs) == 0 and len(dot_link.non_theme_subs) == 0:
             self.content = base_content
             if dot_link.dot_applier is not None:
                 log.info(
@@ -69,6 +71,15 @@ class ComputedDotLink():
                     print("\n", end="")
 
                 self.content[config_name] = current_content
+                if len(dot_link.non_theme_subs) == 0:
+                    continue
+
+                current_content_with_non_theme_subs = current_content
+                for key in dot_link.non_theme_subs:
+                    current_content_with_non_theme_subs = current_content_with_non_theme_subs.replace(
+                        dot_link.non_theme_subs[key], substitution_vals[key]
+                    )
+                self.content_with_non_theme_subs[config_name] = current_content_with_non_theme_subs
 
     def apply(self, config_name: str, force_copy: bool, compilation_map: Dict[str, InstallHandler], possible_config_hashes: Set[str], path_prefix: Optional[str] = None) -> None:
         for target in self.targets:
@@ -87,8 +98,11 @@ class ComputedDotLink():
         if os.path.isfile(target) and device_specific:
             return
 
+        has_non_theme_subs = len(self.content_with_non_theme_subs) != 0
         if isinstance(self.content, str):
             content = self.content
+        elif has_non_theme_subs:
+            content = self.content_with_non_theme_subs[config_name]
         else:
             content = self.content[config_name]
 
@@ -99,14 +113,19 @@ class ComputedDotLink():
             target_hash = utils.hash.sha256_file(target)
 
         if content_hash == target_hash:
-            dot_log_already_installed(content_hash, target)
+            dot_log_already_installed(content_hash, target, has_non_theme_subs)
             return
 
         if not os.path.isdir(os.path.dirname(target)):
             utils.path.makedirs(os.path.dirname(target))
 
         apply_command = DotApplyCommand(
-            force_copy, content, needs_sudo, executable)
+            force_copy=force_copy,
+            content=content,
+            has_non_theme_subs=has_non_theme_subs,
+            needs_sudo=needs_sudo,
+            executable=executable
+        )
         apply_command.run(target, possible_config_hashes)
 
         if device_specific:

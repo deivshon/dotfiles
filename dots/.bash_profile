@@ -6,6 +6,7 @@ export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export SHELL=/bin/fish
 export EDITOR=nano
+export DOTFILES_LITE=<sub<dotfiles-lite-mode>>
 
 PATH=${PATH}:/usr/lib/polkit-gnome/:~/.local/scripts:~/.local/bin
 

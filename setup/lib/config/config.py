@@ -11,7 +11,7 @@ from setup.lib.dots.appliers import APPLIERS
 from setup.lib.config.expansion.efy import EfyColors
 from setup.lib.config.expansion.user import SetupUser
 from setup.lib.config.expansion import EXPANSION_DATA
-from setup.lib.const.config import CONFIG_SUBSTITUTIONS
+from setup.lib.const.config import CONFIG_SUBSTITUTIONS, DOTFILES_LITE_MODE_KEY
 from setup.lib.const.dots import DOT_LINKS_FILE, LINK_SUBS
 from setup.lib.config.expansion.wallpaper import WallpaperPath
 from setup.lib.config.expansion.firefox import FirefoxColors
@@ -91,7 +91,9 @@ def expand(config):
         expansion.expand(config, EXPANSION_DATA)
 
 
-def apply_defaults(config: Dict) -> None:
+def apply_defaults(config: Dict, lite_mode: bool) -> None:
+    config[CONFIG_SUBSTITUTIONS][DOTFILES_LITE_MODE_KEY] = str(
+        lite_mode).lower()
     for key, value in __DEFAULT_FIELDS.items():
         if key not in config[CONFIG_SUBSTITUTIONS]:
             config[CONFIG_SUBSTITUTIONS][key] = value

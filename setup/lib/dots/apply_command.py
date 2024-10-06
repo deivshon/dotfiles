@@ -11,6 +11,7 @@ from setup.lib import utils
 class DotApplyCommand:
     force_copy: bool
     content: str | bytes
+    has_non_theme_subs: bool
     needs_sudo: bool
     executable: bool
 
@@ -27,7 +28,7 @@ class DotApplyCommand:
             if self.executable:
                 utils.path.make_executable(target, sudo=self.needs_sudo)
         finally:
-            if not applied or old_content is None:
+            if not applied or old_content is None or self.has_non_theme_subs:
                 return
 
             if utils.hash.sha256(old_content) not in possible_config_hashes:

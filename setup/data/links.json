@@ -5,7 +5,10 @@
     },
     "bash-profile": {
         "source": ".bash_profile",
-        "target": "~/.bash_profile"
+        "target": "~/.bash_profile",
+        "non_theme_subs": {
+            "dotfiles-lite-mode": "<sub<dotfiles-lite-mode>>"
+        }
     },
     "dunst-config": {
         "source": ".config/dunst/dunstrc",

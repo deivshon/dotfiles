@@ -7,7 +7,6 @@ from setup.lib import log
 from setup.lib import symlinks
 from setup.lib.post import post
 from setup.lib.dots import dots
-from setup.lib.utils import HOME_DIR
 from setup.lib.install import install
 from setup.lib.dots.names import DotsNames
 from setup.lib.config import PRESET, config
@@ -122,7 +121,7 @@ def main():
         config.apply_preset(selected_config, selected_config[PRESET])
         print("\n", end="")
 
-    config.apply_defaults(selected_config)
+    config.apply_defaults(selected_config, lite_mode=lite)
     config.expand(selected_config)
     config.check(selected_config)
 

@@ -3,7 +3,6 @@ from typing import Dict
 
 from setup.lib import LIB_DIR
 from setup.lib.const.config import PRESET
-from setup.lib.const.dots import LINK_SUBS, DOT_LINKS_FILE
 from setup.lib.config.config import apply_defaults, apply_preset, check, expand, initialize
 
 
@@ -20,7 +19,10 @@ for config_name in AVAILABLE_CONFIGS:
         apply_preset(
             selected_config, selected_config[PRESET])
 
-    apply_defaults(selected_config)
+    # Set lite mode do whatever value since files with
+    # non theme substitutions can't use the backup features
+    # anyway
+    apply_defaults(selected_config, lite_mode=True)
     expand(selected_config)
     check(selected_config)
     CONFIGS[config_name] = selected_config

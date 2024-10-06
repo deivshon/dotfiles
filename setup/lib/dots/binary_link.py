@@ -49,14 +49,20 @@ class BinaryDotLink():
             target_hash = utils.hash.sha256_file(target)
 
         if content_hash == target_hash:
-            dot_log_already_installed(content_hash, target)
+            dot_log_already_installed(
+                content_hash, target, has_non_theme_subs=False)
             return
 
         target_dir = os.path.dirname(target)
         if not os.path.isdir(target_dir):
             utils.path.makedirs(target_dir)
         apply_command = DotApplyCommand(
-            force_copy, self.content, needs_sudo, executable=False)
+            force_copy=force_copy,
+            content=self.content,
+            has_non_theme_subs=False,
+            needs_sudo=needs_sudo,
+            executable=False
+        )
         apply_command.run(target, possible_config_hashes)
 
         dot_log_installed(content_hash, target, installed_once=False)
