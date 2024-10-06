@@ -37,6 +37,7 @@ def __gsetting_cmd(setting: str, value: str) -> Optional[Exception]:
     try:
         subprocess.run(
             ["gsettings", "set", "org.gnome.desktop.interface", setting, value], capture_output=True)
+        return None
     except Exception as e:
         return e
 
