@@ -10,7 +10,7 @@ export DOTFILES_LITE=<sub<dotfiles-lite-mode>>
 
 PATH=${PATH}:/usr/lib/polkit-gnome/:~/.local/scripts:~/.local/bin
 
-if [ "$DOTFILES_LITE" = false]; then
+if [ "$DOTFILES_LITE" = false ]; then
     launch_hyprland() {
         Hyprland
     }
