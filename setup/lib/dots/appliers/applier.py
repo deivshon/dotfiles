@@ -8,6 +8,7 @@ class Applier():
     run: Callable[[Dict], None]
     apply_once: bool
     required: List[str]
+    needed_in_lite: bool
 
 
 @dataclass

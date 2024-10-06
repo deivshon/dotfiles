@@ -126,4 +126,4 @@ def __gtk_applier(config_substitutions: Dict) -> None:
 
 
 GTK_APPLIER = Applier(name="gtk", run=__gtk_applier,
-                      apply_once=False, required=__GTK_REQUIRED)
+                      apply_once=False, required=__GTK_REQUIRED, needed_in_lite=False)

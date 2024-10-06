@@ -149,6 +149,7 @@ def main():
 
     dots.link(selected_config,
               config_name,
+              lite_mode=lite,
               force_copy=args.force,
               compilation_map=compilationMap)
 

@@ -63,6 +63,6 @@ def __settings_applier(_) -> None:
 
 
 VSCODE_THEME_APPLIER = Applier(name="vscode-theme", required=__VSCODE_REQUIRED,
-                               apply_once=False, run=__theme_applier)
+                               apply_once=False, run=__theme_applier, needed_in_lite=True)
 VSCODE_SETTINGS_APPLIER = Applier(name="vscode-settings", required=[],
-                                  apply_once=False, run=__settings_applier)
+                                  apply_once=False, run=__settings_applier, needed_in_lite=True)

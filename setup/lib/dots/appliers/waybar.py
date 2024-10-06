@@ -6,7 +6,6 @@ from typing import Dict, List, Optional, Set
 
 from setup.lib import log
 from setup.lib.utils import HOME_DIR
-from setup.lib.dots.names import DotsNames
 from setup.lib.dots.appliers.applier import DotApplier
 
 __MONITOR_PREFIXES: List[str] = [

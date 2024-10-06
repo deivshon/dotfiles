@@ -89,4 +89,4 @@ def __extensions_applier(_: Dict) -> None:
 
 
 VSCODE_EXTENSIONS_APPLIER = Applier(name="vscode-extensions", required=[],
-                                    apply_once=False, run=__extensions_applier)
+                                    apply_once=False, run=__extensions_applier, needed_in_lite=True)

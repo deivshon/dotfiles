@@ -61,5 +61,5 @@ def main():
         utils.path.makedirs(substitutions_dir)
 
     os.chdir(old_cwd)
-    dots.link(selected_config, config_name,
+    dots.link(selected_config, config_name, lite_mode=False,
               force_copy=True, compilation_map={}, path_prefix=substitutions_dir, run_appliers=False)
