@@ -6,12 +6,13 @@ from typing import Dict, List, Optional, Set
 from setup.lib import log, utils
 from setup.lib.config import CONFIGS
 from setup.lib.const.dots import DOT_LINKS_FILE
+from setup.lib.config.config import get_lite_mode_bool
 from setup.lib.dots.appliers import DOT_APPLIERS
 from setup.lib.dots import DOTFILES_DIR, TARGET_SEARCH
 from setup.lib.const.config import CONFIG_SUBSTITUTIONS
 from setup.lib.dots.apply_command import DotApplyCommand
 from setup.lib.dots.dot_link import DotLink, InvalidDotLink
-from setup.lib.dots.dots_log import dot_log_already_installed, dot_log_installed
+from setup.lib.dots.dots_log import dot_log_already_installed, dot_log_installed, dot_log_skipping_because_lite
 
 from setup.lib.dots.names import DotsNames
 from setup.lib.install.handler import InstallHandler
@@ -24,9 +25,11 @@ class ComputedDotLink():
     flags: List[str]
     content: Dict[str, str] | str
     non_theme_subs: Dict[str, str]
+    needed_in_lite: bool
 
     def __init__(self, dot_link: DotLink):
         self.non_theme_subs = dot_link.non_theme_subs
+        self.needed_in_lite = dot_link.needed_in_lite
         self.name = dot_link.name
         self.flags = dot_link.flags
         if VAR_TARGET_FLAG in self.flags:
@@ -82,6 +85,9 @@ class ComputedDotLink():
         needs_sudo = SUDO_FLAG in self.flags
         device_specific = DEVICE_SPECIFIC_FLAG in self.flags
 
+        config_lite_mode = get_lite_mode_bool(config)
+        needs_apply_on_mode = self.needed_in_lite or (not config_lite_mode)
+
         target = os.path.abspath(target.replace("~", utils.HOME_DIR))
         if path_prefix is not None:
             target = f"{path_prefix}{target}"
@@ -106,6 +112,11 @@ class ComputedDotLink():
         target_hash: Optional[str] = None
         if os.path.isfile(target):
             target_hash = utils.hash.sha256_file(target)
+
+        if not needs_apply_on_mode:
+            dot_log_skipping_because_lite(content_hash, target,
+                                          has_non_theme_subs=has_non_theme_subs)
+            return
 
         if content_hash == target_hash:
             dot_log_already_installed(content_hash, target, has_non_theme_subs)

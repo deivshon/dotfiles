@@ -1,9 +1,11 @@
 {
     "bashrc": {
+        "needed_in_lite": true,
         "source": ".bashrc",
         "target": "~/.bashrc"
     },
     "bash-profile": {
+        "needed_in_lite": true,
         "source": ".bash_profile",
         "target": "~/.bash_profile",
         "non_theme_subs": {
@@ -11,6 +13,7 @@
         }
     },
     "dunst-config": {
+        "needed_in_lite": false,
         "source": ".config/dunst/dunstrc",
         "target": "~/.config/dunst/dunstrc",
         "subs": {
@@ -25,6 +28,7 @@
         }
     },
     "alacritty-config": {
+        "needed_in_lite": true,
         "source": ".config/alacritty/alacritty.toml",
         "target": "~/.config/alacritty/alacritty.toml",
         "subs": {
@@ -49,6 +53,7 @@
         }
     },
     "btop-config": {
+        "needed_in_lite": true,
         "source": ".config/btop/btop.conf",
         "target": "~/.config/btop/btop.conf",
         "subs": {
@@ -56,6 +61,7 @@
         }
     },
     "rofi-config": {
+        "needed_in_lite": false,
         "source": ".config/rofi/config.rasi",
         "target": "~/.config/rofi/config.rasi",
         "subs": {
@@ -65,10 +71,12 @@
         }
     },
     "ranger-config": {
+        "needed_in_lite": true,
         "source": ".config/ranger/rc.conf",
         "target": "~/.config/ranger/rc.conf"
     },
     "dwm-config": {
+        "needed_in_lite": false,
         "source": ".config/dwm/config.h",
         "target": "~/.local/repos/dwm/config.h",
         "subs": {
@@ -80,10 +88,12 @@
         }
     },
     "plstatus-config": {
+        "needed_in_lite": false,
         "source": ".config/plstatus/config.json",
         "target": "~/.config/plstatus/config.json"
     },
     "enhancer-for-youtube-config": {
+        "needed_in_lite": true,
         "source": ".config/enhancer-for-youtube/efy.json",
         "target": "~/.config/enhancer-for-youtube/efy.json",
         "subs": {
@@ -97,11 +107,13 @@
         }
     },
     "reflector-config": {
+        "needed_in_lite": true,
         "source": "etc/xdg/reflector/reflector.conf",
         "target": "/etc/xdg/reflector/reflector.conf",
         "flags": ["sudo"]
     },
     "hyprland-config": {
+        "needed_in_lite": false,
         "source": ".config/hypr/hyprland.conf",
         "target": "~/.config/hypr/hyprland.conf",
         "subs": {
@@ -110,6 +122,7 @@
         }
     },
     "hyprpaper-config": {
+        "needed_in_lite": false,
         "source": ".config/hypr/hyprpaper.conf",
         "target": "~/.config/hypr/hyprpaper.conf",
         "subs": {
@@ -117,6 +130,7 @@
         }
     },
     "fuzzel-config": {
+        "needed_in_lite": false,
         "source": ".config/fuzzel/fuzzel.ini",
         "target": "~/.config/fuzzel/fuzzel.ini",
         "subs": {
@@ -128,10 +142,12 @@
         }
     },
     "waybar-config": {
+        "needed_in_lite": false,
         "source": ".config/waybar/config",
         "target": "~/.config/waybar/config"
     },
     "waybar-style": {
+        "needed_in_lite": false,
         "source": ".config/waybar/style.css",
         "target": "~/.config/waybar/style.css",
         "subs": {
@@ -141,6 +157,7 @@
         }
     },
     "firefox-userchrome": {
+        "needed_in_lite": false,
         "source": ".mozilla/firefox/profile/chrome/userChrome.css",
         "flags": ["variable-target"],
         "subs": {
@@ -181,10 +198,12 @@
         }
     },
     "tmux-config": {
+        "needed_in_lite": true,
         "source": ".tmux.conf",
         "target": "~/.tmux.conf"
     },
     "swaylock-config": {
+        "needed_in_lite": false,
         "source": ".config/swaylock/config",
         "target": "~/.config/swaylock/config",
         "subs": {
@@ -207,6 +226,7 @@
         }
     },
     "battery-notifier-service": {
+        "needed_in_lite": false,
         "source": "/etc/systemd/system/battery-notifier.service",
         "target": "/etc/systemd/system/battery-notifier.service",
         "subs": {
@@ -215,6 +235,7 @@
         "flags": ["sudo"]
     },
     "doas-config": {
+        "needed_in_lite": true,
         "source": "/etc/doas.conf",
         "target": "/etc/doas.conf",
         "subs": {
@@ -223,18 +244,22 @@
         "flags": ["sudo"]
     },
     "micro-bindings": {
+        "needed_in_lite": true,
         "source": ".config/micro/bindings.json",
         "target": "~/.config/micro/bindings.json"
     },
     "micro-config": {
+        "needed_in_lite": true,
         "source": ".config/micro/settings.json",
         "target": "~/.config/micro/settings.json"
     },
     "nano-config": {
+        "needed_in_lite": true,
         "source": ".config/nano/nanorc",
         "target": "~/.config/nano/nanorc"
     },
     "sudoedit": {
+        "needed_in_lite": true,
         "source": "/usr/local/bin/nanowrap.sh",
         "target": "/usr/local/bin/nanowrap",
         "flags": ["sudo", "x"],
@@ -243,11 +268,13 @@
         }
     },
     "dash-sh-hook": {
+        "needed_in_lite": false,
         "source": "/etc/pacman.d/hooks/dashsh.hook",
         "target": "/etc/pacman.d/hooks/dashsh.hook",
         "flags": ["sudo"]
     },
     "qtile-config": {
+        "needed_in_lite": false,
         "source": ".config/qtile/config.py",
         "target": "~/.config/qtile/config.py",
         "subs": {
@@ -257,36 +284,43 @@
         }
     },
     "dwm-startup": {
+        "needed_in_lite": false,
         "source": ".startup/dwm/startops.sh",
         "target": "~/.startup/dwm/startops.sh",
         "flags": ["device-specific", "x"]
     },
     "qtile-startup": {
+        "needed_in_lite": false,
         "source": ".startup/qtile/startops.sh",
         "target": "~/.startup/qtile/startops.sh",
         "flags": ["device-specific", "x"]
     },
     "bashrc-device": {
+        "needed_in_lite": true,
         "source": ".bashrc_device",
         "target": "~/.bashrc_device",
         "flags": ["device-specific"]
     },
     "bash-profile-device": {
+        "needed_in_lite": true,
         "source": ".bash_profile_device",
         "target": "~/.bash_profile_device",
         "flags": ["device-specific"]
     },
     "hyprland-config-device": {
+        "needed_in_lite": false,
         "source": ".config/hypr/hyprsetup.conf",
         "target": "~/.config/hypr/hyprsetup.conf",
         "flags": ["device-specific"]
     },
     "qtile-config-device": {
+        "needed_in_lite": false,
         "source": ".config/qtile/config_device.py",
         "target": "~/.config/qtile/config_device.py",
         "flags": ["device-specific"]
     },
     "xlock": {
+        "needed_in_lite": false,
         "source": ".local/scripts/xlock.sh",
         "target": "~/.local/scripts/xlock",
         "flags": ["x"],
@@ -309,6 +343,7 @@
         }
     },
     "start-x-wm": {
+        "needed_in_lite": false,
         "source": ".local/scripts/startxwm.sh",
         "target": "~/.local/scripts/startxwm",
         "flags": ["x"],
@@ -317,38 +352,46 @@
         }
     },
     "alacritty-start-script": {
+        "needed_in_lite": false,
         "source": "/usr/local/bin/alacritty.sh",
         "target": "/usr/local/bin/alacritty",
         "flags": ["sudo", "x"]
     },
     "update-script": {
+        "needed_in_lite": false,
         "source": ".local/scripts/up.bash",
         "target": "~/.local/scripts/up",
         "flags": ["x"]
     },
     "battery-graph-qtile": {
+        "needed_in_lite": false,
         "source": ".config/qtile/battery_graph.py",
         "target": "~/.config/qtile/battery_graph.py"
     },
     "gdiff-script": {
+        "needed_in_lite": true,
         "source": ".local/scripts/gdiff.sh",
         "target": "~/.local/scripts/gdiff",
         "flags": ["x"]
     },
     "extract-script": {
+        "needed_in_lite": true,
         "source": ".local/scripts/extract.sh",
         "target": "~/.local/scripts/extract",
         "flags": ["x"]
     },
     "fish-config": {
+        "needed_in_lite": true,
         "source": ".config/fish/config.fish",
         "target": "~/.config/fish/config.fish"
     },
     "pfetch-custom-logos": {
+        "needed_in_lite": true,
         "source": ".config/pfetch/custom-logos",
         "target": "~/.config/pfetch/custom-logos"
     },
     "pfetch-config": {
+        "needed_in_lite": true,
         "source": ".config/pfetch/pfetch-config.sh",
         "target": "~/.config/pfetch/pfetch-config.sh",
         "subs": {
@@ -356,27 +399,33 @@
         }
     },
     "alias-rs-config": {
+        "needed_in_lite": true,
         "source": ".config/alias-rs/config.json",
         "target": "~/.config/alias-rs/config.json"
     },
     "alias-rs-config-device": {
+        "needed_in_lite": true,
         "source": ".config/alias-rs/config.device.json",
         "target": "~/.config/alias-rs/config.device.json",
         "flags": ["device-specific"]
     },
     "paru-config": {
+        "needed_in_lite": true,
         "source": ".config/paru/paru.conf",
         "target": "~/.config/paru/paru.conf"
     },
     "pikaur-config": {
+        "needed_in_lite": false,
         "source": ".config/pikaur.conf",
         "target": "~/.config/pikaur.conf"
     },
     "vscode-keybindings": {
+        "needed_in_lite": true,
         "source": ".config/Code/User/keybindings.json",
         "target": "~/.config/Code/User/keybindings.json"
     },
     "interactive-shells-env": {
+        "needed_in_lite": true,
         "source": ".config/shells/interactive.env",
         "target": "~/.config/shells/interactive.env",
         "subs": {
@@ -385,6 +434,7 @@
         }
     },
     "swaylock-plain-config": {
+        "needed_in_lite": false,
         "source": ".config/swaylock/config-plain",
         "target": "~/.config/swaylock/config-plain",
         "subs": {
@@ -408,29 +458,35 @@
         }
     },
     "dirsize-script": {
+        "needed_in_lite": true,
         "source": ".local/scripts/dirsize.sh",
         "target": "~/.local/scripts/dirsize",
         "flags": ["x"]
     },
     "yt-adl": {
+        "needed_in_lite": true,
         "source": ".local/scripts/yt-adl.sh",
         "target": "~/.local/scripts/yt-adl",
         "flags": ["x"]
     },
     "roadblock-global-config": {
+        "needed_in_lite": false,
         "source": ".config/roadblock/roadblock.yml",
         "target": "~/.config/roadblock/roadblock.yml"
     },
     "roadblock-rule-config": {
+        "needed_in_lite": false,
         "source": ".config/roadblock/config.yml",
         "target": "~/.config/roadblock/config.yml"
     },
     "fish-config-device": {
+        "needed_in_lite": true,
         "source": ".config/fish/config.fish_device",
         "target": "~/.config/fish/config.fish_device",
         "flags": ["device-specific"]
     },
     "environment.d-env-vars": {
+        "needed_in_lite": true,
         "source": ".config/environment.d/envvars.conf",
         "target": "~/.config/environment.d/envvars.conf",
         "subs": {

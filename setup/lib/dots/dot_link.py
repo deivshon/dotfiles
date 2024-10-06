@@ -8,6 +8,7 @@ from setup.lib.dots.appliers.applier import DotApplier
 class DotLink():
     name: str
     source: str
+    needed_in_lite: bool
     target: Optional[str] = None
     subs: Dict[str, str] = field(default_factory=dict)
     non_theme_subs: Dict[str, str] = field(default_factory=dict)

@@ -1,9 +1,11 @@
 {
     "qtile-monadtall-layout-icon": {
+        "needed_in_lite": false,
         "source": ".icons/qtile/layout-monadtall.png",
         "target": "~/.icons/qtile/layout-monadtall.png"
     },
     "qtile-max-layout-icon": {
+        "needed_in_lite": false,
         "source": ".icons/qtile/layout-max.png",
         "target": "~/.icons/qtile/layout-max.png"
     }

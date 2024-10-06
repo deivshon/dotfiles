@@ -2,14 +2,15 @@ import json
 import os
 
 from dataclasses import dataclass
-from typing import List, Optional, Set
+from typing import Dict, List, Optional, Set
 
 from setup.lib import log, utils
+from setup.lib.config.config import get_lite_mode_bool
 from setup.lib.dots.appliers import DOT_APPLIERS
 from setup.lib.dots.apply_command import DotApplyCommand
 from setup.lib.dots.dot_link import DotLink, InvalidDotLink
 from setup.lib.dots import DOTFILES_DIR, BINARY_DOT_LINKS_FILE
-from setup.lib.dots.dots_log import dot_log_already_installed, dot_log_installed
+from setup.lib.dots.dots_log import dot_log_already_installed, dot_log_installed, dot_log_skipping_because_lite
 
 from setup.lib.dots.flags import SUDO_FLAG
 from setup.lib.dots.names import BinaryDotsNames
@@ -21,11 +22,13 @@ class BinaryDotLink():
     target: str
     flags: List[str]
     content: bytes
+    needed_in_lite: bool
 
     def __init__(self, dot_link: DotLink):
         if dot_link.target is None:
             raise InvalidDotLink
 
+        self.needed_in_lite = dot_link.needed_in_lite
         self.target = os.path.abspath(
             dot_link.target.replace("~", utils.HOME_DIR))
         self.name = dot_link.name
@@ -37,16 +40,24 @@ class BinaryDotLink():
         with open(source, "rb") as f:
             self.content = f.read()
 
-    def apply(self, force_copy: bool, possible_config_hashes: Set[str], path_prefix: Optional[str] = None):
+    def apply(self, config: Dict, force_copy: bool, possible_config_hashes: Set[str], path_prefix: Optional[str] = None):
         target = self.target
         if path_prefix is not None:
             target = f"{path_prefix}{target}"
+
+        config_lite_mode = get_lite_mode_bool(config)
+        needs_apply_on_mode = self.needed_in_lite or (not config_lite_mode)
 
         needs_sudo = SUDO_FLAG in self.flags
         content_hash = utils.hash.sha256(self.content)
         target_hash = None
         if os.path.isfile(target):
             target_hash = utils.hash.sha256_file(target)
+
+        if not needs_apply_on_mode:
+            dot_log_skipping_because_lite(
+                content_hash, target, has_non_theme_subs=False)
+            return
 
         if content_hash == target_hash:
             dot_log_already_installed(

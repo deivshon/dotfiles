@@ -91,6 +91,10 @@ def expand(config):
         expansion.expand(config, EXPANSION_DATA)
 
 
+def get_lite_mode_bool(config):
+    return config[CONFIG_SUBSTITUTIONS][DOTFILES_LITE_MODE_KEY] == str(True).lower()
+
+
 def apply_defaults(config: Dict, lite_mode: bool) -> None:
     config[CONFIG_SUBSTITUTIONS][DOTFILES_LITE_MODE_KEY] = str(
         lite_mode).lower()

@@ -15,7 +15,7 @@ def link(config, config_name: str, lite_mode: bool, force_copy=False, compilatio
                             compilation_map, DOTFILES_HASHES, path_prefix)
 
     for binary_link in BINARY_DOT_LINKS:
-        binary_link.apply(force_copy, DOTFILES_HASHES, path_prefix)
+        binary_link.apply(config, force_copy, DOTFILES_HASHES, path_prefix)
 
     print("\n", end="")
 
