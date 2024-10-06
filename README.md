@@ -61,6 +61,7 @@ The configuration files in this repository and the relative setup scripts are ta
 -   [slurp](https://archlinux.org/packages/extra/x86_64/slurp/)
 -   [handbrake](https://archlinux.org/packages/extra/x86_64/handbrake/)
 -   [filezilla](https://archlinux.org/packages/extra/x86_64/filezilla/)
+-   [mypy](https://archlinux.org/packages/extra/any/mypy/)
 
 ## **AUR**
 

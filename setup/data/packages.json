@@ -55,7 +55,8 @@
         "grim",
         "slurp",
         "handbrake",
-        "filezilla"
+        "filezilla",
+        "mypy"
     ],
     "paru": [
         "pfetch-rs",
