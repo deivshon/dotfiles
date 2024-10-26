@@ -71,7 +71,6 @@ The configuration files in this repository and the relative setup scripts are ta
 -   [visual-studio-code-bin](https://aur.archlinux.org/packages/visual-studio-code-bin)
 -   [gksu](https://aur.archlinux.org/packages/gksu) [root privileges for rofi launched applications]
 -   [wlr-randr](https://aur.archlinux.org/packages/wlr-randr)
--   [nwg-look-bin](https://aur.archlinux.org/packages/nwg-look-bin) [wayland lxappearance equivalent]
 -   [swaylock-effects](https://aur.archlinux.org/packages/swaylock-effects)
 -   [i3lock-color](https://aur.archlinux.org/packages/i3lock-color)
 -   [gruvbox-dark-gtk](https://aur.archlinux.org/packages/gruvbox-dark-gtk)
