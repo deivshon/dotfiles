@@ -8,5 +8,9 @@
         "key": "alt+`",
         "command": "workbench.action.terminal.toggleTerminal",
         "when": "panelMaximized"
+    },
+    {
+        "key": "ctrl+e",
+        "command": "-workbench.action.quickOpen"
     }
 ]
