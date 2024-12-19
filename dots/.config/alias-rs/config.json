@@ -94,6 +94,10 @@
         {
             "alias": "vagrant",
             "equals": "env TERM=LINUX vagrant"
+        },
+        {
+            "alias": "t",
+            "equals": "tmux a || tmux"
         }
     ]
 }
