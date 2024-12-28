@@ -56,7 +56,8 @@
         "slurp",
         "handbrake",
         "filezilla",
-        "mypy"
+        "mypy",
+        "zed"
     ],
     "paru": [
         "pfetch-rs",

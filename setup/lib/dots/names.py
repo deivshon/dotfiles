@@ -59,6 +59,8 @@ class DotsNames():
     ROADBLOCK_RULE_CONFIG = "roadblock-rule-config"
     FISH_CONFIG_DEVICE = "fish-config-device"
     ENVD_ENV_VARS = "environment.d-env-vars"
+    ZED_CONFIG = "zed-config"
+    ZED_KEYBINDINGS = "zed-keybindings"
 
 
 @dataclass

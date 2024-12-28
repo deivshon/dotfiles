@@ -492,5 +492,15 @@
         "subs": {
             "setup-user": "<sub<user>>"
         }
+    },
+    "zed-config": {
+        "needed_in_lite": true,
+        "source": ".config/zed/settings.json",
+        "target": "~/.config/zed/settings.json"
+    },
+    "zed-keybindings": {
+        "needed_in_lite": true,
+        "source": ".config/zed/keybindings.json",
+        "target": "~/.config/zed/keybindings.json"
     }
 }
