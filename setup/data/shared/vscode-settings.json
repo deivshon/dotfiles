@@ -1,5 +1,6 @@
 {
     "workbench.activityBar.location": "top",
     "window.customTitleBarVisibility": "auto",
-    "git.terminalAuthentication": false
+    "git.terminalAuthentication": false,
+    "terminal.integrated.tabs.enabled": false
 }
