@@ -1,0 +1,31 @@
+{
+    "name": "dotfiles",
+    "type": "module",
+    "scripts": {
+        "x": "tsx src/index.ts",
+        "typecheck": "tsc -b",
+        "lint": "oxlint --config oxlint.config.ts",
+        "lint:fix": "oxlint --config oxlint.config.ts --fix",
+        "fmt": "oxfmt",
+        "fmt:check": "oxfmt --check",
+        "checklist": "pnpm typecheck && pnpm lint:fix && pnpm fmt"
+    },
+    "dependencies": {
+        "es-toolkit": "^1.50.0"
+    },
+    "devDependencies": {
+        "@types/node": "^26.2.0",
+        "oxfmt": "^0.63.0",
+        "oxlint": "^1.78.0",
+        "oxlint-tsgolint": "^7.0.2001",
+        "tsx": "^4.23.12",
+        "typescript": "^7.0.2"
+    },
+    "devEngines": {
+        "packageManager": {
+            "name": "pnpm",
+            "version": "^11.3.0",
+            "onFail": "download"
+        }
+    }
+}

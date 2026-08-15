@@ -1,18 +1,18 @@
 {
     "editor.formatOnSave": true,
-    "editor.codeActionsOnSave": {
-        "source.organizeImports": "never"
-    },
-    "python.analysis.typeCheckingMode": "basic",
-    "[python]": {
-        "editor.defaultFormatter": "ms-python.autopep8"
-    },
     "[yaml]": {
         "editor.tabSize": 2,
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+        "editor.defaultFormatter": "oxc.oxc-vscode"
     },
     "[json]": {
         "editor.tabSize": 4,
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+        "editor.defaultFormatter": "oxc.oxc-vscode"
+    },
+    "[typescript]": {
+        "editor.tabSize": 4,
+        "editor.defaultFormatter": "oxc.oxc-vscode"
+    },
+    "editor.codeActionsOnSave": {
+        "source.fixAll": "always"
     }
 }

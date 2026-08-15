@@ -1,0 +1,17 @@
+{
+    "tabWidth": 4,
+    "arrowParens": "avoid",
+    "semi": false,
+    "singleQuote": false,
+    "trailingComma": "all",
+    "printWidth": 90,
+    "sortImports": {},
+    "sortPackageJson": true,
+    "ignorePatterns": [".worktrees/**/*"],
+    "overrides": [
+        {
+            "files": ["**/*.yaml"],
+            "options": { "tabWidth": 2 }
+        }
+    ]
+}

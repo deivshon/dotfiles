@@ -1,6 +1,0 @@
-#!/bin/bash
-
-# Device specific bash_profile
-
-TTY1_WM=dwm
-TTY2_WM=hyprland
