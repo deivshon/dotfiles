@@ -44,15 +44,15 @@
 
 #### JSDoc: how to write it
 
-**Allowed tags - closed set.**
+**Allowed tags - closed set. The order below is the order in the block, no exceptions.**
 
-| Tag            | When                                                                                        |
-| -------------- | ------------------------------------------------------------------------------------------- |
-| `@description` | **ALWAYS**, first, exactly one                                                              |
-| `@param`       | One per parameter, in order: name + **SMALL** description. **NO** types                     |
-| `@typeParam`   | One per type parameter, in order: name + **SMALL** description. **NO** re-stating `extends` |
-| `@remarks`     | **ONLY** a **REAL** caveat about using **this** declaration                                 |
-| `@example`     | **ONLY** when the call shape or output is genuinely non-obvious                             |
+| Order | Tag            | When                                                                                        |
+| ----- | -------------- | ------------------------------------------------------------------------------------------- |
+| 1     | `@template`    | One per type parameter, in order: name + **SMALL** description. **NO** re-stating `extends` |
+| 2     | `@param`       | One per parameter, in order: name + **SMALL** description. **NO** types                     |
+| 3     | `@description` | **ALWAYS**, exactly one                                                                     |
+| 4     | `@remarks`     | **ONLY** a **REAL** caveat about using **this** declaration                                 |
+| 5     | `@example`     | **ONLY** when the call shape or output is genuinely non-obvious                             |
 
 **Language - telegraphic:**
 

@@ -96,6 +96,7 @@ export default defineConfig({
         "unicorn/empty-brace-spaces": "off",
         "unicorn/prefer-export-from": "off",
         "unicorn/number-literal-case": "off",
+        "unicorn/max-nested-calls": "off",
         "unicorn/no-instanceof-builtins": [
             "error",
             { exclude: ["Function"], strategy: "loose" },
