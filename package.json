@@ -13,7 +13,8 @@
     "dependencies": {
         "better-result": "^3.0.1",
         "es-toolkit": "^1.50.0",
-        "ts-pattern": "^5.9.0"
+        "ts-pattern": "^5.9.0",
+        "zod": "^4.4.3"
     },
     "devDependencies": {
         "@types/node": "^26.2.0",
