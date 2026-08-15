@@ -137,3 +137,5 @@ colorsTmp
 substitutions*
 setup_status.json
 *-venv
+
+.worktrees
