@@ -11,7 +11,9 @@
         "checklist": "pnpm typecheck && pnpm lint:fix && pnpm fmt"
     },
     "dependencies": {
-        "es-toolkit": "^1.50.0"
+        "better-result": "^3.0.1",
+        "es-toolkit": "^1.50.0",
+        "ts-pattern": "^5.9.0"
     },
     "devDependencies": {
         "@types/node": "^26.2.0",
