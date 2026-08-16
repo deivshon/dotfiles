@@ -82,7 +82,7 @@ Use telegraphic (no filler, impersonal, same-term/same-concept) language in **AL
 - `.returnType<T>()` when: return type needs `as const`, or type already exists/is reusable.
 - `.returnType` set -> no `as const` in branches.
 
-### Results: better-result
+### Results
 
 - When a function can fail, use the `Result` type
 
