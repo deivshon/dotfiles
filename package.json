@@ -8,7 +8,9 @@
         "lint:fix": "oxlint --config oxlint.config.ts --fix",
         "fmt": "oxfmt",
         "fmt:check": "oxfmt --check",
-        "checklist": "pnpm typecheck && pnpm lint:fix && pnpm fmt"
+        "test": "vitest run",
+        "test:watch": "vitest",
+        "checklist": "pnpm typecheck && pnpm lint:fix && pnpm test && pnpm fmt"
     },
     "dependencies": {
         "commander": "^15.0.0",
@@ -20,10 +22,12 @@
     "devDependencies": {
         "@types/node": "^26.2.0",
         "esbuild": "^0.28.2",
+        "memfs": "^4.68.1",
         "oxfmt": "^0.63.0",
         "oxlint": "^1.78.0",
         "oxlint-tsgolint": "^7.0.2001",
-        "typescript": "^7.0.2"
+        "typescript": "^7.0.2",
+        "vitest": "^4.1.10"
     },
     "devEngines": {
         "packageManager": {

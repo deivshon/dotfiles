@@ -158,7 +158,7 @@ const reviewInEditor = (scriptPath: string) =>
 /**
  * @param url Address of the script
  * @description Asks the user to approve the script, and returns the answer.
- * @remarks Every answer other than `y` is a refusal.
+ * @remarks The answer loses its spaces and its case, and every answer other than `y` is a refusal.
  */
 const askForApproval = async (url: string): Promise<boolean> => {
     const readline = createInterface({ input: stdin, output: stdout })

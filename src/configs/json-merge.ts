@@ -90,14 +90,20 @@ export const mergeJson = (
         return destination
     }
 
-    return Result.ok(
-        leavesOf(source.value, []).reduce(
-            (text, leaf) =>
-                applyEdits(
-                    text,
-                    modify(text, leaf.path, leaf.value, MODIFICATION_OPTIONS),
-                ),
-            destinationText,
-        ),
+    return Result.try(
+        () =>
+            leavesOf(source.value, []).reduce(
+                (text, leaf) =>
+                    applyEdits(
+                        text,
+                        modify(text, leaf.path, leaf.value, MODIFICATION_OPTIONS),
+                    ),
+                destinationText,
+            ),
+        () =>
+            notMerged(
+                destinationPath,
+                `The values of "${sourcePath}" do not fit the shape of "${destinationPath}"`,
+            ),
     )
 }

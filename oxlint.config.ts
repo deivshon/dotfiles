@@ -9,6 +9,7 @@ const basePlugins = [
     "promise",
     "unicorn",
     "typescript",
+    "vitest",
 ] as const
 
 export default defineConfig({
@@ -143,31 +144,40 @@ export default defineConfig({
             },
         ],
 
-        "vitest/prefer-describe-function-title": "off",
-        "vitest/prefer-called-times": "off",
-        "vitest/prefer-to-be-truthy": "off",
-        "vitest/prefer-to-be-falsy": "off",
-        "vitest/no-importing-vitest-globals": "off",
-        "vitest/require-test-timeout": "off",
-        "vitest/max-expects": "off",
-        "vitest/prefer-expect-assertions": "off",
-        "vitest/prefer-lowercase-title": "off",
-        "vitest/prefer-expect-resolves": "off",
-        "vitest/no-hooks": "off",
-
         // nursery, remove once out
         "typescript/no-unnecessary-condition": "error",
     },
     overrides: [
         {
-            files: ["oxlint.config.ts"],
+            files: ["oxlint.config.ts", "vitest.config.ts"],
             rules: {
                 "import/no-default-export": "off",
             },
         },
         {
-            files: [`**/*/{test|spec}.${anyExtension}`],
+            files: [`**/*.{test,spec}.${anyExtension}`],
             rules: {
+                "oxc/no-rest-spread-properties": "off",
+
+                "eslint/require-await": "off",
+                "eslint/no-throw-literal": "off",
+
+                "typescript/no-unsafe-assignment": "off",
+                "typescript/no-unsafe-argument": "off",
+                "typescript/no-unsafe-call": "off",
+                "typescript/no-unsafe-member-access": "off",
+                "typescript/no-unsafe-return": "off",
+                "typescript/consistent-type-imports": "off",
+                "typescript/require-await": "off",
+                "typescript/only-throw-error": "off",
+
+                "vitest/require-mock-type-parameters": "off",
+                "vitest/prefer-import-in-mock": "off",
+                "vitest/no-conditional-expect": "off",
+                "vitest/prefer-mock-return-shorthand": "off",
+                "vitest/no-conditional-in-test": "off",
+                "vitest/require-top-level-describe": "off",
+                "vitest/prefer-strict-equal": "off",
                 "vitest/prefer-describe-function-title": "off",
                 "vitest/prefer-called-times": "off",
                 "vitest/prefer-to-be-truthy": "off",
