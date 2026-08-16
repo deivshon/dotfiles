@@ -1,1 +1,1 @@
-export type ExtensionId = "oxc.oxc-vscode"
+export type ExtensionId = "oxc-vscode"

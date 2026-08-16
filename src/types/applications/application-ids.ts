@@ -12,7 +12,7 @@ export type UserApplicationId =
     | "btop"
     | "rustup"
     | "bat"
-    | "opendoas"
+    | "doas"
     | "dash"
     | "fish"
     | "go"
@@ -20,7 +20,7 @@ export type UserApplicationId =
     | "hyprland"
     | "zed"
     | "pfetch-rs"
-    | "visual-studio-code-bin"
+    | "visual-studio-code"
     | "ccommit"
     | "claude-code"
 

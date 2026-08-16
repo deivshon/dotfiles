@@ -4,4 +4,4 @@ export type LibraryId =
     | "bash-completion"
     | "noto-fonts"
     | "noto-fonts-cjk"
-    | "ttf-jetbrains-mono-nerd"
+    | "jetbrains-mono-nerd"

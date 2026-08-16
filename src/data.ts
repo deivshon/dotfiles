@@ -143,7 +143,7 @@ export const userApplications: {
         "mac-os": null,
         windows: null,
     }),
-    opendoas: userApplication("opendoas", {
+    doas: userApplication("doas", {
         "arch-linux": pacmanPackage("opendoas"),
         "mac-os": null,
         windows: null,
@@ -183,7 +183,7 @@ export const userApplications: {
         "mac-os": null,
         windows: null,
     }),
-    "visual-studio-code-bin": userApplication("visual-studio-code-bin", {
+    "visual-studio-code": userApplication("visual-studio-code", {
         "arch-linux": paruPackage("visual-studio-code-bin"),
         "mac-os": null,
         windows: null,
@@ -239,7 +239,7 @@ export const applications: { [K in ApplicationId]: Application & { id: K } } = {
     btop: userApplications.btop,
     rustup: userApplications.rustup,
     bat: userApplications.bat,
-    opendoas: userApplications.opendoas,
+    doas: userApplications.doas,
     dash: userApplications.dash,
     fish: userApplications.fish,
     go: userApplications.go,
@@ -247,7 +247,7 @@ export const applications: { [K in ApplicationId]: Application & { id: K } } = {
     hyprland: userApplications.hyprland,
     zed: userApplications.zed,
     "pfetch-rs": userApplications["pfetch-rs"],
-    "visual-studio-code-bin": userApplications["visual-studio-code-bin"],
+    "visual-studio-code": userApplications["visual-studio-code"],
     ccommit: userApplications.ccommit,
     "claude-code": userApplications["claude-code"],
 }
@@ -278,7 +278,7 @@ export const libraries: { [K in LibraryId]: Library & { id: K } } = {
         "mac-os": null,
         windows: null,
     }),
-    "ttf-jetbrains-mono-nerd": library("ttf-jetbrains-mono-nerd", {
+    "jetbrains-mono-nerd": library("jetbrains-mono-nerd", {
         "arch-linux": pacmanPackage("ttf-jetbrains-mono-nerd"),
         "mac-os": null,
         windows: null,
@@ -307,11 +307,11 @@ export const toolchains: { [K in ToolchainId]: Toolchain & { id: K } } = {
 }
 
 export const extensions: { [K in ExtensionId]: Extension & { id: K } } = {
-    "oxc.oxc-vscode": extension("oxc.oxc-vscode", {
+    "oxc-vscode": extension("oxc-vscode", {
         "arch-linux": archLinuxCustomInstall({
             install: installVsCodeExtension("oxc.oxc-vscode"),
             isInstalled: isVsCodeExtensionInstalled("oxc.oxc-vscode"),
-            requires: [["application", "visual-studio-code-bin"]],
+            requires: [["application", "visual-studio-code"]],
         }),
         "mac-os": null,
         windows: null,
