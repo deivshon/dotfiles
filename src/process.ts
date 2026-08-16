@@ -4,6 +4,7 @@ import { pipe } from "es-toolkit/fp"
 import { exec } from "es-toolkit/server"
 
 import type { CommandError, CommandFailed, CommandNotRun } from "./errors"
+import { reportCommand } from "./report"
 import { Result } from "./shared/result"
 
 interface RunOptions {
@@ -56,14 +57,16 @@ const commandFailed = (
  * @param args Arguments of the command
  * @param options Working directory of the child process
  * @description Runs a command with the terminal attached to the child process.
- * @remarks The output of the command stays on the terminal and is not returned.
+ * @remarks Echoes the command first, then leaves the output of the command on the terminal.
  */
 export const runInteractively = async (
     command: string,
     args: string[],
     options: RunOptions = {},
-): Promise<Result<void, CommandError>> =>
-    pipe(
+): Promise<Result<void, CommandError>> => {
+    reportCommand(command, args)
+
+    return pipe(
         await spawnCommand(command, args, { stdio: "inherit", cwd: options.cwd }),
         Result.bind(result =>
             result.exitCode === 0
@@ -71,6 +74,7 @@ export const runInteractively = async (
                 : Result.err(commandFailed(command, args, result.exitCode, "")),
         ),
     )
+}
 
 /**
  * @param command Executable name

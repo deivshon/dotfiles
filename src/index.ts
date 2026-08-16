@@ -6,12 +6,25 @@ import { parseCliOptions } from "./cli"
 import type { InstallError } from "./errors"
 import { installableId, installableKey } from "./installables/installables"
 import { buildInstallPlan } from "./installs/plan"
-import type { InstallStep, PackageChannel, SystemPlanNode } from "./installs/plan"
+import type { InstallStep } from "./installs/plan"
+import {
+    nodesOfStep,
+    reportBaseSystem,
+    reportBaseSystemFailure,
+    reportBlocked,
+    reportDryRun,
+    reportInstallFailure,
+    reportInstalled,
+    reportNothingToInstall,
+    reportPlan,
+    reportPlatform,
+    reportStepStart,
+} from "./report"
 import { platform } from "./shared/platform"
 import type { Result } from "./shared/result"
 import type { Installable, InstallableKey } from "./types/installables"
 
-type OutcomeStatus = "installed" | "planned" | "already-installed" | "failed" | "blocked"
+type OutcomeStatus = "installed" | "already-installed" | "failed" | "blocked"
 
 interface Outcome {
     installable: Installable
@@ -25,13 +38,6 @@ interface TargetNode {
     skip: boolean
 }
 
-const CHANNEL_LABELS: Record<PackageChannel, string> = {
-    "arch-standard": "pacman",
-    "arch-aur": "paru",
-    "brew-formula": "brew",
-    "brew-cask": "brew --cask",
-}
-
 /**
  * @param node Node to install
  * @param failed Keys of the installables that did not install
@@ -42,63 +48,51 @@ const blockersOf = (node: TargetNode, failed: Set<InstallableKey>): Installable[
 
 /**
  * @param node Node that the plan skips
- * @description Reports a node that is present already, and returns its outcome.
+ * @description Returns the outcome of a node that is present already.
  */
-const toAlreadyInstalled = (node: TargetNode): Outcome => {
-    console.log(
-        colors.gray(`• ${installableId(node.installable)}: skipping, already installed`),
-    )
-    return {
-        installable: node.installable,
-        status: "already-installed",
-        detail: "",
-    }
-}
+const toAlreadyInstalled = (node: TargetNode): Outcome => ({
+    installable: node.installable,
+    status: "already-installed",
+    detail: "",
+})
 
 /**
- * @param node Node that the plan skips
+ * @param node Node that a failed dependency holds back
  * @param blockers Dependencies that did not install
- * @description Reports a node that its dependencies block, and returns its outcome.
+ * @description Reports a blocked node, and returns its outcome.
  */
 const toBlocked = (node: TargetNode, blockers: Installable[]): Outcome => {
-    const detail = `The dependencies failed: ${blockers.map(installableId).join(", ")}`
-    console.log(
-        colors.yellow(`• ${installableId(node.installable)}: skipping, ${detail}`),
-    )
+    reportBlocked(blockers, [node.installable])
+
     return {
         installable: node.installable,
         status: "blocked",
-        detail,
+        detail: `The dependencies failed: ${blockers.map(installableId).join(", ")}`,
     }
 }
 
 /**
- * @param label Name of the install on the terminal
+ * @param node Node of the step
+ * @param failed Keys of the installables that did not install
+ * @description True when the node is absent and no failed dependency blocks it.
+ */
+const isRunnable = (node: TargetNode, failed: Set<InstallableKey>): boolean =>
+    !node.skip && blockersOf(node, failed).length === 0
+
+/**
  * @param install Command that installs the nodes
  * @param nodes Nodes that the command covers
- * @param dryRun True when the command must not run
  * @description Runs one install command, and returns the outcome of every node it covers.
  */
 const runInstall = async (
-    label: string,
     install: () => Promise<Result<void, InstallError>>,
     nodes: TargetNode[],
-    dryRun: boolean,
 ): Promise<Outcome[]> => {
-    console.log(colors.cyan(`→ ${label}`))
-
-    if (dryRun) {
-        return nodes.map((node): Outcome => ({
-            installable: node.installable,
-            status: "planned",
-            detail: "",
-        }))
-    }
-
+    const installables = nodes.map(node => node.installable)
     const result = await install()
 
     if (!result.success) {
-        console.log(colors.red(`✗ ${label}`))
+        reportInstallFailure(installables, result.error.message)
         return nodes.map((node): Outcome => ({
             installable: node.installable,
             status: "failed",
@@ -106,7 +100,7 @@ const runInstall = async (
         }))
     }
 
-    console.log(colors.green(`✓ ${label}`))
+    reportInstalled(installables)
     return nodes.map((node): Outcome => ({
         installable: node.installable,
         status: "installed",
@@ -117,88 +111,46 @@ const runInstall = async (
 /**
  * @param step Step of the plan
  * @param failed Keys of the installables that did not install
- * @param dryRun True when no install must run
- * @description Runs one step of the plan, and returns the outcome of every node.
- * @remarks Skips the nodes that are present already, and the nodes that a failed dependency blocks.
+ * @description Runs one step of the plan, and returns the outcome of every absent node.
+ * @remarks Reports the nodes that a failed dependency blocks, and leaves them out of the command.
  */
 const runStep = async (
     step: InstallStep,
     failed: Set<InstallableKey>,
-    dryRun: boolean,
 ): Promise<Outcome[]> => {
-    if (step.type === "custom") {
-        if (step.node.skip) {
-            return [toAlreadyInstalled(step.node)]
-        }
-
-        const blockers = blockersOf(step.node, failed)
-        return blockers.length > 0
-            ? [toBlocked(step.node, blockers)]
-            : runInstall(
-                  installableId(step.node.installable),
-                  step.node.install,
-                  [step.node],
-                  dryRun,
-              )
-    }
-
-    const skipped = step.nodes.filter(node => node.skip).map(toAlreadyInstalled)
-    const pending = step.nodes.filter(node => !node.skip)
-    const blocked = pending
+    const nodes = nodesOfStep(step)
+    const blocked = nodes
+        .filter(node => !node.skip)
         .map(node => ({ node, blockers: blockersOf(node, failed) }))
         .filter(entry => entry.blockers.length > 0)
         .map(entry => toBlocked(entry.node, entry.blockers))
 
-    const runnable = pending.filter(node => blockersOf(node, failed).length === 0)
+    const runnable = nodes.filter(node => isRunnable(node, failed))
     if (runnable.length === 0) {
-        return [...skipped, ...blocked]
+        return blocked
     }
 
-    const label = `${runnable
-        .map(node => installableId(node.installable))
-        .join(", ")} (${CHANNEL_LABELS[step.channel]})`
-
     return [
-        ...skipped,
         ...blocked,
         ...(await runInstall(
-            label,
-            step.install(runnable.map(node => node.packageName)),
+            step.type === "custom"
+                ? step.node.install
+                : step.install(
+                      step.nodes
+                          .filter(node => isRunnable(node, failed))
+                          .map(node => node.packageName),
+                  ),
             runnable,
-            dryRun,
         )),
     ]
 }
 
 /**
- * @param nodes Nodes of the applications that the operating system provides
- * @description Reports the state of the base system, and returns one outcome per node.
- */
-const reportSystemApplications = (nodes: SystemPlanNode[]): Outcome[] => {
-    console.log(colors.bold("Base system"))
-
-    const outcomes = nodes.map((node): Outcome => {
-        const id = installableId(node.installable)
-        console.log(node.skip ? colors.green(`  ✓ ${id}`) : colors.red(`  ✗ ${id}`))
-        return {
-            installable: node.installable,
-            status: node.skip ? "already-installed" : "failed",
-            detail: node.skip ? "" : "The base system does not provide it",
-        }
-    })
-
-    console.log("")
-    return outcomes
-}
-
-/**
  * @param outcomes Outcome of every node of the plan
- * @param dryRun True when no install ran
  * @description Reports the totals of the run, and sets the exit code on a failure.
  */
-const reportOutcomes = (outcomes: Outcome[], dryRun: boolean): void => {
+const reportOutcomes = (outcomes: Outcome[]): void => {
     const installed = outcomes.filter(outcome => outcome.status === "installed")
-    const planned = outcomes.filter(outcome => outcome.status === "planned")
     const present = outcomes.filter(outcome => outcome.status === "already-installed")
     const failures = outcomes.filter(
         outcome => outcome.status === "failed" || outcome.status === "blocked",
@@ -206,9 +158,7 @@ const reportOutcomes = (outcomes: Outcome[], dryRun: boolean): void => {
 
     console.log(
         colors.green(
-            dryRun
-                ? `\n${planned.length} installable(s) to install, ${present.length} already present.`
-                : `\n${installed.length} installable(s) installed, ${present.length} already present.`,
+            `\n${installed.length} installable(s) installed, ${present.length} already present.`,
         ),
     )
     if (failures.length === 0) {
@@ -216,11 +166,13 @@ const reportOutcomes = (outcomes: Outcome[], dryRun: boolean): void => {
     }
 
     console.log(colors.red(`${failures.length} installable(s) not installed:`))
-    for (const failure of failures) {
-        console.log(
-            colors.red(`  ${installableId(failure.installable)}: ${failure.detail}`),
-        )
-    }
+    console.log(
+        failures
+            .map(failure =>
+                colors.red(`  ${installableId(failure.installable)}: ${failure.detail}`),
+            )
+            .join("\n"),
+    )
     process.exitCode = 1
 }
 
@@ -229,24 +181,48 @@ const reportOutcomes = (outcomes: Outcome[], dryRun: boolean): void => {
  */
 const main = async (): Promise<void> => {
     const { dryRun } = parseCliOptions(argv)
-    const plan = await buildInstallPlan(platform)
 
+    reportPlatform(platform)
+
+    const plan = await buildInstallPlan(platform)
     if (!plan.success) {
         console.error(colors.red(plan.error.message))
         process.exitCode = 1
         return
     }
 
-    const systemOutcomes = reportSystemApplications(plan.value.systemApplications)
-    const systemFailures = systemOutcomes.filter(outcome => outcome.status === "failed")
+    reportBaseSystem(plan.value.systemApplications)
+    const missing = plan.value.systemApplications.filter(node => !node.skip)
+    if (missing.length > 0) {
+        reportBaseSystemFailure(missing)
+        process.exitCode = 1
+        return
+    }
 
-    const failed = new Set(
-        systemFailures.map(outcome => installableKey(outcome.installable)),
+    reportPlan(plan.value.steps)
+
+    if (dryRun) {
+        reportDryRun()
+        return
+    }
+
+    const pendingSteps = plan.value.steps.filter(step =>
+        nodesOfStep(step).some(node => !node.skip),
     )
-    const outcomes: Outcome[] = [...systemFailures]
+    if (pendingSteps.length === 0) {
+        reportNothingToInstall()
+        return
+    }
 
-    for (const step of plan.value.steps) {
-        const stepOutcomes = await runStep(step, failed, dryRun)
+    const failed = new Set<InstallableKey>()
+    const outcomes: Outcome[] = plan.value.steps
+        .flatMap(nodesOfStep)
+        .filter(node => node.skip)
+        .map(toAlreadyInstalled)
+
+    for (const [index, step] of pendingSteps.entries()) {
+        reportStepStart(step, index, pendingSteps.length)
+        const stepOutcomes = await runStep(step, failed)
         for (const outcome of stepOutcomes) {
             if (outcome.status === "failed" || outcome.status === "blocked") {
                 failed.add(installableKey(outcome.installable))
@@ -255,7 +231,7 @@ const main = async (): Promise<void> => {
         outcomes.push(...stepOutcomes)
     }
 
-    reportOutcomes(outcomes, dryRun)
+    reportOutcomes(outcomes)
 }
 
 void main()
