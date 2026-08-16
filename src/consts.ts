@@ -13,6 +13,9 @@ export const BASH_EXECUTABLE = "bash"
 export const RUSTUP_EXECUTABLE = "rustup"
 export const VS_CODE_EXECUTABLE = "code"
 export const CARGO_EXECUTABLE = "cargo"
+export const CLAUDE_CODE_EXECUTABLE = "claude"
+
+export const CLAUDE_CODE_INSTALL_SCRIPT_URL = "https://claude.ai/install.sh"
 
 export const WHICH_EXECUTABLE = "which"
 export const WHERE_EXECUTABLE = "where"

@@ -1,6 +1,11 @@
 import path from "node:path"
 
-import { CARGO_EXECUTABLE, LOCAL_BIN_DIRECTORY } from "./consts"
+import {
+    CARGO_EXECUTABLE,
+    CLAUDE_CODE_EXECUTABLE,
+    CLAUDE_CODE_INSTALL_SCRIPT_URL,
+    LOCAL_BIN_DIRECTORY,
+} from "./consts"
 import {
     archLinuxCustomInstall,
     archLinuxSystemApplication,
@@ -201,6 +206,19 @@ export const userApplications: {
         "mac-os": null,
         windows: null,
     }),
+    "claude-code": userApplication("claude-code", {
+        "arch-linux": archLinuxCustomInstall({
+            install: installFromScript(CLAUDE_CODE_INSTALL_SCRIPT_URL),
+            isInstalled: isExecutableInPath(CLAUDE_CODE_EXECUTABLE),
+            requires: [],
+        }),
+        "mac-os": macOsCustomInstall({
+            install: installFromScript(CLAUDE_CODE_INSTALL_SCRIPT_URL),
+            isInstalled: isExecutableInPath(CLAUDE_CODE_EXECUTABLE),
+            requires: [],
+        }),
+        windows: null,
+    }),
 }
 
 export const applications: { [K in ApplicationId]: Application & { id: K } } = {
@@ -231,6 +249,7 @@ export const applications: { [K in ApplicationId]: Application & { id: K } } = {
     "pfetch-rs": userApplications["pfetch-rs"],
     "visual-studio-code-bin": userApplications["visual-studio-code-bin"],
     ccommit: userApplications.ccommit,
+    "claude-code": userApplications["claude-code"],
 }
 
 export const libraries: { [K in LibraryId]: Library & { id: K } } = {

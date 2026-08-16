@@ -22,6 +22,7 @@ export type UserApplicationId =
     | "pfetch-rs"
     | "visual-studio-code-bin"
     | "ccommit"
+    | "claude-code"
 
 export type ArchLinuxSystemApplicationId = "pacman" | "makepkg"
 export type MacOsSystemApplicationId = "curl"
