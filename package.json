@@ -2,7 +2,7 @@
     "name": "dotfiles",
     "type": "module",
     "scripts": {
-        "build": "esbuild src/index.ts --bundle --platform=node --target=node24 --format=cjs --outfile=dist/dotfiles.cjs --banner:js=\"#!/usr/bin/env node\"",
+        "build": "esbuild src/index.ts --bundle --platform=node --target=node24 --format=cjs --main-fields=module,main --outfile=dist/dotfiles.cjs --banner:js=\"#!/usr/bin/env node\"",
         "typecheck": "tsc -b",
         "lint": "oxlint --config oxlint.config.ts",
         "lint:fix": "oxlint --config oxlint.config.ts --fix",
@@ -13,6 +13,7 @@
     "dependencies": {
         "commander": "^15.0.0",
         "es-toolkit": "^1.50.0",
+        "jsonc-parser": "^3.3.1",
         "ts-pattern": "^5.9.0",
         "zod": "^4.4.3"
     },

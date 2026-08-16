@@ -13,6 +13,7 @@ import type {
     UserApplication,
     WindowsSystemApplication,
 } from "../types/applications/applications"
+import type { Configs, FileCopyConfig, JsonMergeConfig } from "../types/configs"
 import type { ExtensionId } from "../types/extensions/extension-ids"
 import type { Extension } from "../types/extensions/extensions"
 import type { Installable } from "../types/installables"
@@ -37,10 +38,12 @@ interface CustomInstanceOptions {
 /**
  * @template TId Literal identifier that the result keeps
  * @param id Identifier of the application, and name of its executable
+ * @param configs Config files of the application
  * @description Builds an Arch Linux application that the operating system provides.
  */
 export const archLinuxSystemApplication = <TId extends ArchLinuxSystemApplicationId>(
     id: TId,
+    configs: Configs = [],
 ): ArchLinuxSystemApplication & { id: TId } => ({
     kind: "application",
     type: "system",
@@ -50,15 +53,18 @@ export const archLinuxSystemApplication = <TId extends ArchLinuxSystemApplicatio
         platform: "arch-linux",
         isInstalled: isExecutableInPath(id),
     },
+    configs,
 })
 
 /**
  * @template TId Literal identifier that the result keeps
  * @param id Identifier of the application, and name of its executable
+ * @param configs Config files of the application
  * @description Builds a macOS application that the operating system provides.
  */
 export const macOsSystemApplication = <TId extends MacOsSystemApplicationId>(
     id: TId,
+    configs: Configs = [],
 ): MacOsSystemApplication & { id: TId } => ({
     kind: "application",
     type: "system",
@@ -68,15 +74,18 @@ export const macOsSystemApplication = <TId extends MacOsSystemApplicationId>(
         platform: "mac-os",
         isInstalled: isExecutableInPath(id),
     },
+    configs,
 })
 
 /**
  * @template TId Literal identifier that the result keeps
  * @param id Identifier of the application, and name of its executable
+ * @param configs Config files of the application
  * @description Builds a Windows application that the operating system provides.
  */
 export const windowsSystemApplication = <TId extends WindowsSystemApplicationId>(
     id: TId,
+    configs: Configs = [],
 ): WindowsSystemApplication & { id: TId } => ({
     kind: "application",
     type: "system",
@@ -86,22 +95,26 @@ export const windowsSystemApplication = <TId extends WindowsSystemApplicationId>
         platform: "windows",
         isInstalled: isExecutableInPath(id),
     },
+    configs,
 })
 
 /**
  * @template TId Literal identifier that the result keeps
  * @param id Identifier of the application
  * @param instances Instance of every platform, `null` where the application is unavailable
+ * @param configs Config files of the application
  * @description Builds an application that the user installs, with one instance per platform.
  */
 export const userApplication = <TId extends UserApplicationId>(
     id: TId,
     instances: Instances,
+    configs: Configs = [],
 ): UserApplication & { id: TId } => ({
     kind: "application",
     type: "user",
     id,
     instances,
+    configs,
 })
 
 /**
@@ -147,6 +160,29 @@ export const extension = <TId extends ExtensionId>(
     kind: "extension",
     id,
     instances,
+})
+
+/**
+ * @param source Segments of the path of the file, from the root of the repository
+ * @param destination Segments of the path of the file on this machine
+ * @description Builds a config file that the run copies as it is.
+ */
+export const fileCopy = (source: string[], destination: string[]): FileCopyConfig => ({
+    type: "file-copy",
+    source,
+    destination,
+})
+
+/**
+ * @param source Segments of the path of the file, from the root of the repository
+ * @param destination Segments of the path of the file on this machine
+ * @description Builds a config file that the run merges into the file of this machine.
+ * @remarks Both files must hold a JSON object. The values of the repository win.
+ */
+export const jsonMerge = (source: string[], destination: string[]): JsonMergeConfig => ({
+    type: "json-merge",
+    source,
+    destination,
 })
 
 /**

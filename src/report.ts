@@ -1,12 +1,13 @@
 import { colors } from "es-toolkit/server"
 
-import { installableId } from "./installables/installables"
+import { installableId, installableKey } from "./installables/installables"
 import type {
     InstallStep,
     PackageChannel,
     PlanNode,
     SystemPlanNode,
 } from "./installs/plan"
+import type { ConfigResult, ConfigTarget, ConfigType } from "./types/configs"
 import type { Installable, InstallableKind } from "./types/installables"
 import type { Platform } from "./types/platforms"
 
@@ -31,6 +32,11 @@ const KIND_LABELS: Record<InstallableKind, string> = {
 }
 
 const KIND_ORDER: InstallableKind[] = ["application", "library", "toolchain", "extension"]
+
+const CONFIG_TYPE_LABELS: Record<ConfigType, string> = {
+    "file-copy": "",
+    "json-merge": " (merge)",
+}
 
 /**
  * @param step Step of the plan
@@ -115,29 +121,103 @@ const planLineOfNode = (node: PlanNode): string => {
 }
 
 /**
- * @param steps Steps of the plan, in install order
- * @description Reports every installable of the plan, with one group per kind.
+ * @param target Config file of the plan
+ * @description Returns the line of the config file in the plan.
  */
-export const reportPlan = (steps: InstallStep[]): void => {
-    const nodes = steps.flatMap(nodesOfStep)
-    const pending = nodes.filter(node => !node.skip)
+const planLineOfConfig = (target: ConfigTarget): string =>
+    target.skip
+        ? colors.gray(`      ◦ ${target.destination} (already current)`)
+        : `      ◦ ${target.destination}${CONFIG_TYPE_LABELS[target.type]}`
 
-    console.log(
-        colors.bold(
-            `Plan: ${pending.length} to install, ${
-                nodes.length - pending.length
-            } already present`,
-        ),
+/**
+ * @param installable Kind and identifier of the installable
+ * @param targets Config files of the plan
+ * @description Returns the config files that the installable holds.
+ */
+const configsOf = (installable: Installable, targets: ConfigTarget[]): ConfigTarget[] =>
+    targets.filter(
+        target => installableKey(target.installable) === installableKey(installable),
     )
+
+/**
+ * @param nodes Nodes of the plan
+ * @param targets Config files of the plan
+ * @description Returns the lines of the plan, with one group per kind and the configs under their node.
+ */
+const kindLines = (nodes: PlanNode[], targets: ConfigTarget[]): string[] =>
+    KIND_ORDER.flatMap(kind => {
+        const ofKind = nodes.filter(node => node.installable[0] === kind)
+        return ofKind.length === 0
+            ? []
+            : [colors.bold(`  ${KIND_LABELS[kind]}`)].concat(
+                  ofKind.flatMap(node =>
+                      [planLineOfNode(node)].concat(
+                          configsOf(node.installable, targets).map(planLineOfConfig),
+                      ),
+                  ),
+              )
+    })
+
+/**
+ * @param nodes Nodes of the plan
+ * @param targets Config files of the plan
+ * @description Returns the lines of the config files that no node of the plan holds.
+ * @remarks Covers the applications that the operating system provides, because no node installs them.
+ */
+const looseConfigLines = (nodes: PlanNode[], targets: ConfigTarget[]): string[] => {
+    const covered = new Set(nodes.map(node => installableKey(node.installable)))
+    const loose = targets.filter(
+        target => !covered.has(installableKey(target.installable)),
+    )
+
+    return loose.length === 0
+        ? []
+        : [colors.bold("  configs")].concat(
+              [
+                  ...new Set(loose.map(target => installableId(target.installable))),
+              ].flatMap(id =>
+                  [`    • ${id}`].concat(
+                      loose
+                          .filter(target => installableId(target.installable) === id)
+                          .map(planLineOfConfig),
+                  ),
+              ),
+          )
+}
+
+/**
+ * @param steps Steps of the plan, in install order
+ * @param targets Config files of the plan, `null` when the run skips them
+ * @description Reports every installable and every config file of the plan.
+ */
+export const reportPlan = (
+    steps: InstallStep[],
+    targets: ConfigTarget[] | null,
+): void => {
+    const nodes = steps.flatMap(nodesOfStep)
+    const pendingNodes = nodes.filter(node => !node.skip)
+    const configs = targets ?? []
+    const pendingConfigs = configs.filter(target => !target.skip)
+
+    console.log(colors.bold("Plan"))
     console.log(
-        KIND_ORDER.flatMap(kind => {
-            const ofKind = nodes.filter(node => node.installable[0] === kind)
-            return ofKind.length === 0
-                ? []
-                : [colors.bold(`  ${KIND_LABELS[kind]}`)].concat(
-                      ofKind.map(planLineOfNode),
-                  )
-        }).join("\n"),
+        [
+            colors.bold(
+                `  installables: ${pendingNodes.length} to install, ${
+                    nodes.length - pendingNodes.length
+                } already present`,
+            ),
+            targets === null
+                ? colors.gray("  configs: skipped")
+                : colors.bold(
+                      `  configs: ${pendingConfigs.length} to copy, ${
+                          configs.length - pendingConfigs.length
+                      } already current`,
+                  ),
+            "",
+            ...kindLines(nodes, configs),
+            ...looseConfigLines(nodes, configs),
+        ].join("\n"),
     )
     console.log("")
 }
@@ -200,6 +280,52 @@ export const reportInstallFailure = (
 /** @description Reports that the dry run is complete. */
 export const reportDryRun = (): void => {
     console.log(colors.gray("Dry run: no install ran."))
+}
+
+/**
+ * @param result Outcome of one config file
+ * @description Reports a config file that reached its destination.
+ */
+export const reportConfigApplied = (result: ConfigResult): void => {
+    const destination = result.target.destination
+    if (result.status === "unchanged") {
+        console.log(colors.gray(`  = ${destination} (already current)`))
+        return
+    }
+
+    console.log(colors.green(`  ✓ ${destination}`))
+    if (result.backupPath !== null) {
+        console.log(colors.gray(`    backup: ${result.backupPath}`))
+    }
+}
+
+/**
+ * @param target Config file of the plan
+ * @param message Text of the error
+ * @description Reports a config file that did not reach its destination.
+ */
+export const reportConfigFailure = (target: ConfigTarget, message: string): void => {
+    console.log(colors.red(`  ✗ ${target.destination}: ${message}`))
+}
+
+/**
+ * @param targets Config files that the plan leaves out
+ * @description Reports the config files of the applications that did not install.
+ */
+export const reportConfigSkipped = (targets: ConfigTarget[]): void => {
+    console.log(
+        colors.yellow(
+            `  ⊘ ${targets
+                .map(target => target.destination)
+                .join(", ")}: the application did not install`,
+        ),
+    )
+}
+
+/** @description Reports the start of the config copy. */
+export const reportConfigsStart = (): void => {
+    console.log("")
+    console.log(colors.cyan(colors.bold("Configs")))
 }
 
 /**

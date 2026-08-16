@@ -36,6 +36,12 @@ export interface InstallRejected {
     message: string
 }
 
+export interface ConfigNotMerged {
+    type: "config-not-merged"
+    path: string
+    message: string
+}
+
 export interface InstallableUnavailable {
     type: "installable-unavailable"
     installable: Installable
@@ -62,6 +68,7 @@ export type InstallError =
     | FileSystemFailed
     | DownloadFailed
     | InstallRejected
+export type ConfigError = FileSystemFailed | ConfigNotMerged
 export type PlanError =
     | VerificationError
     | InstallableUnavailable

@@ -1,0 +1,5 @@
+font-size=10
+cursor-style=block
+shell-integration-features=no-cursor
+background=#000000
+unfocused-split-opacity=1

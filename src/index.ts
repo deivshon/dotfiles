@@ -3,7 +3,9 @@ import process, { argv } from "node:process"
 import { colors } from "es-toolkit/server"
 
 import { parseCliOptions } from "./cli"
-import type { InstallError } from "./errors"
+import { applyConfig } from "./configs/configs"
+import { buildConfigPlan } from "./configs/plan"
+import type { ConfigError, InstallError } from "./errors"
 import { installableId, installableKey } from "./installables/installables"
 import { buildInstallPlan } from "./installs/plan"
 import type { InstallStep } from "./installs/plan"
@@ -12,6 +14,10 @@ import {
     reportBaseSystem,
     reportBaseSystemFailure,
     reportBlocked,
+    reportConfigApplied,
+    reportConfigFailure,
+    reportConfigSkipped,
+    reportConfigsStart,
     reportDryRun,
     reportInstallFailure,
     reportInstalled,
@@ -22,6 +28,7 @@ import {
 } from "./report"
 import { platform } from "./shared/platform"
 import type { Result } from "./shared/result"
+import type { ConfigResult, ConfigTarget } from "./types/configs"
 import type { Installable, InstallableKey } from "./types/installables"
 
 type OutcomeStatus = "installed" | "already-installed" | "failed" | "blocked"
@@ -177,10 +184,50 @@ const reportOutcomes = (outcomes: Outcome[]): void => {
 }
 
 /**
+ * @param targets Config files of the plan
+ * @param failed Keys of the installables that did not install
+ * @description Copies every config file of an application that is present, and returns the count of failures.
+ * @remarks Leaves out the config files of an application that did not install.
+ */
+const runConfigs = async (
+    targets: ConfigTarget[],
+    failed: Set<InstallableKey>,
+): Promise<number> => {
+    const remaining = targets.filter(target => !target.skip)
+    const skipped = remaining.filter(target =>
+        failed.has(installableKey(target.installable)),
+    )
+    const pending = remaining.filter(
+        target => !failed.has(installableKey(target.installable)),
+    )
+    if (remaining.length === 0) {
+        return 0
+    }
+
+    reportConfigsStart()
+    if (skipped.length > 0) {
+        reportConfigSkipped(skipped)
+    }
+
+    const results: Array<Result<ConfigResult, ConfigError>> = []
+    for (const target of pending) {
+        const result = await applyConfig(target)
+        if (result.success) {
+            reportConfigApplied(result.value)
+        } else {
+            reportConfigFailure(target, result.error.message)
+        }
+        results.push(result)
+    }
+
+    return skipped.length + results.filter(result => !result.success).length
+}
+
+/**
  * @description Builds the plan of this platform, runs its steps in order, then reports the outcome.
  */
 const main = async (): Promise<void> => {
-    const { dryRun } = parseCliOptions(argv)
+    const { dryRun, configs } = parseCliOptions(argv)
 
     reportPlatform(platform)
 
@@ -199,7 +246,8 @@ const main = async (): Promise<void> => {
         return
     }
 
-    reportPlan(plan.value.steps)
+    const configTargets = configs ? await buildConfigPlan(platform) : null
+    reportPlan(plan.value.steps, configTargets)
 
     if (dryRun) {
         reportDryRun()
@@ -209,11 +257,6 @@ const main = async (): Promise<void> => {
     const pendingSteps = plan.value.steps.filter(step =>
         nodesOfStep(step).some(node => !node.skip),
     )
-    if (pendingSteps.length === 0) {
-        reportNothingToInstall()
-        return
-    }
-
     const failed = new Set<InstallableKey>()
     const outcomes: Outcome[] = plan.value.steps
         .flatMap(nodesOfStep)
@@ -231,7 +274,19 @@ const main = async (): Promise<void> => {
         outcomes.push(...stepOutcomes)
     }
 
-    reportOutcomes(outcomes)
+    if (pendingSteps.length === 0) {
+        reportNothingToInstall()
+    } else {
+        reportOutcomes(outcomes)
+    }
+
+    if (configTargets === null) {
+        return
+    }
+
+    if ((await runConfigs(configTargets, failed)) > 0) {
+        process.exitCode = 1
+    }
 }
 
 void main()

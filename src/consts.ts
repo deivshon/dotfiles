@@ -27,5 +27,11 @@ export const INSTALL_SCRIPT_FILE_NAME = "install.sh"
 
 export const LOCAL_BIN_DIRECTORY = path.join(homedir(), ".local", "bin")
 
+export const FILES_DIRECTORY = "files"
+export const HOME_PATH_PREFIX = "~"
+export const CONFIG_BACKUP_PREFIX = ".bkp-"
+export const CONFIG_HASH_ALGORITHM = "sha512"
+export const CONFIG_INDENT_SIZE = 4
+
 /** @remarks Owner reads, writes, and runs the file. Everyone else reads it and runs it. */
 export const EXECUTABLE_FILE_MODE = 0o755

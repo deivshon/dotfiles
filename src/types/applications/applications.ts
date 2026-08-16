@@ -1,3 +1,4 @@
+import type { Configs } from "../configs"
 import type { ApplicationKind } from "../installables"
 import type {
     ArchLinuxSystemInstance,
@@ -16,6 +17,7 @@ export interface UserApplication {
     type: UserApplicationType
     id: UserApplicationId
     instances: Instances
+    configs: Configs
 }
 
 export interface ArchLinuxSystemApplication {
@@ -24,6 +26,7 @@ export interface ArchLinuxSystemApplication {
     platform: ArchLinuxPlatform
     id: SystemApplicationId
     instance: ArchLinuxSystemInstance
+    configs: Configs
 }
 export interface MacOsSystemApplication {
     kind: ApplicationKind
@@ -31,6 +34,7 @@ export interface MacOsSystemApplication {
     platform: MacOsPlatform
     id: SystemApplicationId
     instance: MacOsSystemInstance
+    configs: Configs
 }
 export interface WindowsSystemApplication {
     kind: ApplicationKind
@@ -38,6 +42,7 @@ export interface WindowsSystemApplication {
     platform: WindowsPlatform
     id: SystemApplicationId
     instance: WindowsSystemInstance
+    configs: Configs
 }
 export type SystemApplication =
     | ArchLinuxSystemApplication

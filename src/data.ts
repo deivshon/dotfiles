@@ -4,6 +4,8 @@ import {
     CARGO_EXECUTABLE,
     CLAUDE_CODE_EXECUTABLE,
     CLAUDE_CODE_INSTALL_SCRIPT_URL,
+    FILES_DIRECTORY,
+    HOME_PATH_PREFIX,
     LOCAL_BIN_DIRECTORY,
 } from "./consts"
 import {
@@ -12,6 +14,8 @@ import {
     brewCask,
     brewFormula,
     extension,
+    fileCopy,
+    jsonMerge,
     library,
     macOsCustomInstall,
     macOsSystemApplication,
@@ -93,11 +97,20 @@ export const userApplications: {
         }),
         windows: null,
     }),
-    ghostty: userApplication("ghostty", {
-        "arch-linux": pacmanPackage("ghostty"),
-        "mac-os": brewCask("ghostty"),
-        windows: null,
-    }),
+    ghostty: userApplication(
+        "ghostty",
+        {
+            "arch-linux": pacmanPackage("ghostty"),
+            "mac-os": brewCask("ghostty"),
+            windows: null,
+        },
+        [
+            fileCopy(
+                [FILES_DIRECTORY, "ghostty", "config.ghostty"],
+                [HOME_PATH_PREFIX, ".config", "ghostty", "config.ghostty"],
+            ),
+        ],
+    ),
     sudo: userApplication("sudo", {
         "arch-linux": pacmanPackage("sudo"),
         "mac-os": null,
@@ -183,11 +196,36 @@ export const userApplications: {
         "mac-os": null,
         windows: null,
     }),
-    "visual-studio-code": userApplication("visual-studio-code", {
-        "arch-linux": paruPackage("visual-studio-code-bin"),
-        "mac-os": null,
-        windows: null,
-    }),
+    "visual-studio-code": userApplication(
+        "visual-studio-code",
+        {
+            "arch-linux": paruPackage("visual-studio-code-bin"),
+            "mac-os": null,
+            windows: null,
+        },
+        {
+            "arch-linux": [
+                jsonMerge(
+                    [FILES_DIRECTORY, "vs-code", "settings.json"],
+                    [HOME_PATH_PREFIX, ".config", "Code", "User", "settings.json"],
+                ),
+            ],
+            "mac-os": [
+                jsonMerge(
+                    [FILES_DIRECTORY, "vs-code", "settings.json"],
+                    [
+                        HOME_PATH_PREFIX,
+                        "Library",
+                        "Application Support",
+                        "Code",
+                        "User",
+                        "settings.json",
+                    ],
+                ),
+            ],
+            windows: [],
+        },
+    ),
     ccommit: userApplication("ccommit", {
         "arch-linux": archLinuxCustomInstall({
             install: installFromGit({
